@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+            Habit	Hábito
+Hair	Cabello
+Half	Mitad
+Hall	Pasillo
+Hand	Mano
+Happy	Feliz
+Hard	Duro
+Hat	Sombrero
+Have	Tener
+He	Él
+Head	Cabeza
+Health	Salud
+Hear	Oír
+Heart	Corazón
+Heat	Calor
+Heavy	Pesado
+Help	Ayudar
+Her	Su (de ella)
+Here	Aquí
+High	Alto
+Hill	Colina
+History	Historia
+Hit	Golpear
+Hold	Sostener
+Hope	Esperanza
+Hour	Hora
+House	Casa
+How	Cómo
+Hungry	Hambriento
+Hurt	Herir
+Husband	Esposo
+Hymn	Himno
+Hypothesis	Hipótesis
+Happen	Ocurrir
+Happy	Contento
+Honor	Honor
+Humble	Humilde
+Humor	Humor
+Hurry	Apresurarse
+Hazard	Peligro
+Hero	Héroe
+Horizon	Horizonte
+Hospital	Hospital
+Host	Anfitrión
+Hourglass	Reloj de arena
+Hopeful	Esperanzado
+Hunter	Cazador
+Heatwave	Ola de calor
+Haste	Prisa
+Hasty	Apresurado
+Hymnal	Himnario
+Hail	Granizo
+Hibernate	Hibernar
+Haphazard	Aleatorio
+Hasty	Apresurado
+Harm	Dañar
+Heap	Montón
+Heritage	Patrimonio
+Hiccup	Hipo
+Highlight	Resaltar
+Hollow	Hueco
+Honorary	Honorario
+Hologram	Holograma
+Homage	Homenaje
+Humidity	Humedad
+Hurdle	Obstáculo
+Hybrid	Híbrido
+Hymnbook	Himnario
+Habitual	Habitual
+Haul	Cargar
+Hub	Eje
+Haste	Prisa
+Hiccup	Hipo
+Handicap	Discapacidad
+Hide	Esconder
+Huddle	Acurrucarse
+Humorless	Sin humor
+Hustle	Apresurarse
+Hefty	Pesado
+Highlighter	Marcador
+Heatproof	Resistente al calor
+Hinge	Bisagra
+Hurdles	Obstáculos
+Herald	Heraldo
+Hospitalize	Hospitalizar
+Honeymoon	Luna de miel
+Headache	Dolor de cabeza
+Humdrum	Monótono
+Heed	Prestar atención
+Hallowed	Santificado
+Hallowed	Sagrado
+Hexagon	Hexágono
+Hinge	Bisagra
+Hone	Afilar
+Hinge	Bisagra
+Hull	Casco
+Hummus	Hummus
+Haphazardly	Aleatoriamente
+Happenstance	Casualidad
+Hodgepodge	Mezcolanza
+Homestead	Granja
+Hotshot	As del volante
+Humblebrag	Soberbia humilde
+Hysteria	Histeria
+Haunt	Aterrorizar
+Hysterical	Histerico
+Hearth	Hogar
+Horrid	Horrendo
+Hustler	Estafador
+Hubcap	Tapacubos
+Hooligan	Gamberro
+Holographic	Holográfico
+Housewarming	Fiesta de inauguración
+Highlight	Resaltar
+Homogeneous	Homogéneo
+Handyman	Manitas
+Hazmat	Material peligroso
+Helicopter	Helicóptero
+Hasty	Apresurado
+Heir	Heredero
+Hinge	Bisagra
+Hideous	Horrendo
+Hunch	Presentimiento
+Hunk	Trozo
+Humanoid	Humanoide
+Harpoon	Arpon
+Hover	Flotar
+Humble	Humilde
+Haughty	Altanero
+Hurdles	Obstáculos
+Hibernate	Hibernar
+Hologram	Holograma
+Hydration	Hidratación
+Holography	Holografía
+Hearthstone	Piedra del hogar
+Headlong	De frente
+Hazy	Nebuloso
+Homonym	Homónimo
+Hectic	Frenético
+Harmonious	Armonioso
+Holographic	Holográfico
+Hedonism	Hedonismo
+Highhanded	Altanero
+Hightail	Irse rápidamente
+Hotbed	Cuna
+Handshake	Apretón de manos
+Harmonize	Armonizar
+Hedge	Cubrir
+Harmonium	Armonio
+Hardship	Adversidad
+Habitually	Habitualmente
+Hurdle	Obstáculo
+Homeschooling	Educación en casa
+Hoard	Acumular
+Hunky	Atractivo
+Handout	Ayuda
+Haze	Bruma
+Hoax	Engaño
+Helix	Hélice
+Humongous	Enorme
+Haphazard	Desorganizado
+Hurdler	Saltador de obstáculos
+Hoot	Grito
+Headgear	Equipo de cabeza
+Handcuff	Grillete
+Hatch	Nacer
+Highfalutin	Pretencioso
+Handbag	Bolso
+Hallowed	Santificado
+Hooray	Hurra
+Haystack	Pajar
+Hearth	Hogar
+Heatwave	Ola de calor
+Handrail	Barandilla
+Heedless	Descuidadoso
+Humblebrag	Soberbia humilde
+Holographic	Holográfico
+Hallucination	Alucinación
+Hangover	Resaca
+Honeydew	Melón dulce
+Huddle	Acurrucarse
+Hysterical	Histerico
+Hierarchy	Jerarquía
+Humorist	Humorista
+Hooligan	Gamberro
+Handsome	Apuesto
+Heuristic	Heurístico
+Hurdles	Obstáculos
+Hellish	Infernal
+Haphazardly	Aleatoriamente
+Haunt	Aterrorizar
+Hefty	Pesado
+Haggard	Demacrado
+Haphazard	Desorganizado
+Harvest	Cosecha
+Healthful	Saludable
+Headstone	Tumba
+Harass	Acosar
+Hasty	Apresurado
+Hyphen	Guion
+Helm	Timón
+Hieroglyph	Jeroglífico
+Hallucinate	Alucinar
+Humanitarian	Humanitario
+Hovercraft	Aerodeslizador
+Hectic	Frenético
+Heraldry	Heráldica
+Highlight	Resaltar
+Hazy	Nebuloso
+Hectare	Hectárea
+Handsomely	Atractivamente
+Hooray	Hurra
+Hectic	Frenético
+Hoot	Grito
+Handkerchief	Pañuelo
+Habitual	Habitual
+Huddle	Aglomerar
+Halo	Halo
+Humidity	Humedad
+Holograph	Holografía
+Hinge	Bisagra
+Harsh	Severidad
+Hilarity	Alegría
+Hereditary	Hereditario
+Hop	Saltar
+Hurdle	Obstáculo
+Heroine	Heroína
+Hasten	Acelerar
+Harbinger	Presagio
+Hurdler	Saltador de obstáculos
+Handsome	Apuesto
+Heroic	Heroico
+Haphazardly	Desorganizado
+Hasty	Apresurado
+Haphazard	Caótico
+Hiatus	Hiato
+Halcyon	Halcyon
+Humble	Humilde
+Holography	Holografía
+Habitat	Hábitat
+Hibernate	Hibernar
+Harem	Harén
+Hectare	Hectárea
+Horticulture	Horticultura
+Handyman	Manitas
+Henhouse	Gallinero
+Heirloom	Herencia
+Hasty	Apresurado
+Humdinger	Algo impresionante
+Handshake	Apretón de manos
+Hierarchy	Jerarquía
+Hectic	Agitado
+Hooligan	Gamberro
+Holographic	Holográfico
+Horn	Cuerno
+Hiccup	Hipo
+Headwind	Viento en contra
+Homogeneous	Homogéneo
+Headline	Titular
+Habitual	Habitual
+Hearth	Hogar
+Haunting	Aterrorizar
+Hefty	Pesado
+Herbivore	Herbívoro
+Hooray	Hurra
+Herald	Heraldo
+Happenstance	Casualidad
+Hubris	Soberbia
+Hodgepodge	Mezcla
+Harvest	Cosecha
+Humility	Humildad
+Hail	Granizo
+Hedgehog	Erizo
+Hurdle	Salto de obstáculos
+Hotbed	Cuna
+Hallmark	Sello distintivo
+Hideaway	Refugio
+Hump	Joroba
+Hiss	Silbar
+Homily	Homilía
+Humongous	Gigantesco
+Hustle	Ajetreo
+Humdrum	Monótono
+Hydrangea	Hortensia
+Handcuff	Grillete
+Harass	Acosar
+Helpless	Desamparado
+Herb	Hierba
+Hubcap	Tapacubos
+Haze	Bruma
+Haste	Prisa
+Hurdler	Saltador
+Helical	Helicoidal
+Heed	Prestar atención
+Harshness	Dureza
+Homeward	Hacia casa
+Hospitality	Hospitalidad
+Haphazardly	Aleatoriamente
+Haphazardness	Desorganización
+Hideous	Horrendo
+Hoax	Engaño
+Halter	Correa
+Heir	Heredero
+Hopeful	Esperanzado
+Hypnotic	Hipnótico
+Horned	Cornudo
+Healthier	Más saludable
+Harmless	Inofensivo
+Hibernation	Hibernación
+Hopefulness	Esperanza
+Hearkening	Escuchar
+Hash	Hachís
+Hazardous	Peligroso
+Hijack	Secuestrar
+Hospitality	Hospitalidad
+Humanoid	Humanoide
+Hurdling	Saltando obstáculos
+Holographically	Holográficamente
+Hymnody	Himnología
+Honeycomb	Panal
+Hibernating	Hibernando
+Holiday	Vacaciones
+Harem	Harén
+Handcrafted	Artesanal
+Hecticness	Agitación
+Horsepower	Potencia
+Holograph	Holograma
+Honeymoon	Luna de miel
+Harmonization	Armonización
+Highbrow	Culto
+Hubris	Soberbia
+Hymn	Himno
+Hallucination	Alucinación
+Holography	Holografía
+Humanitarian	Humanitario
+Headstrong	Obstinado
+Hurdles	Obstáculos
+Handwriting	Escritura a mano
+Homeschool	Educación en casa
+Heredity	Herencia
+Highness	Alteza
+Haphazardly	Aleatoriamente
+Humorous	Humorístico
+Halfhearted	Desganado
+Handsomely	Atractivamente
+Hovering	Flotando
+Hoarding	Acaparamiento
+Hallucinatory	Alucinatorio
+Hallucinate	Alucinar
+Heuristic	Heurístico
+Hallowed	Santificado
+Handful	Puñado
+Heroism	Heroísmo
+Hegemony	Hegemonía
+Hushed	Silencioso
+Humiliate	Humillar
+Harrowing	Desgarrador
+Hush	Silencio
+Harmonious	Armonioso
+Hieroglyphs	Jeroglíficos
+Humility	Humildad
+Hotshot	As del volante
+Hitch	Enganche
+Horseman	Jinete
+Healthiness	Saludable
+Highlighted	Destacado
+Hitman	Asesino a sueldo
+Hurdler	Saltador de obstáculos
+Handkerchief	Pañuelo
+Hound	Perro de caza
+Harmonize	Armonizar
+Henpeck	Acribillar
+Houndstooth	Cuadros de perro
+Hinge	Bisagra
+Headset	Auriculares
+Homebody	Casero
+Helplessness	Desamparo
+Headlong	De frente
+Hinge	Bisagra
+Hectare	Hectárea
+Humus	Humus
+Hitched	Atrapado
+Helpmate	Compañero
+Haggling	Regateo
+Hobo	Vagabundo
+Humpback	Jorobado
+Handhold	Agarre
+Harp	Arpa
+Hiss	Silbar
+Hue	Matiz
+Histogram	Histograma
+Harrowing	Desgarrador
+Heedless	Descuidadoso
+Hindsight	Perspectiva
+Headache	Dolor de cabeza
+Heartfelt	Sincero
+Hallucinations	Alucinaciones
+Holidaying	Pasar las vacaciones
+Hogwash	Tontería
+Hotbed	Cuna
+Hearkening	Escuchar
+Heretic	Hereje
+Happenstance	Casualidad
+Heroically	Heroicamente
+Hydrophobic	Hidrofóbico
+Habitualness	Habitualidad
+Hazy	Nebuloso
+Hefty	Pesado
+Hilarious	Divertido
+Honeyed	Mielado
+Humped	Jorobado
+Haze	Bruma
+Hijinks	Diversión
+Handcraft	Artesanía
+Honeybunch	Querido
+Hiding	Escondido
+Harmlessness	Inofensividad
+Highroad	Camino elevado
+Hallway	Pasillo
+Hecticness	Agitación
+Hangover	Resaca
+Hubris	Soberbia
+Humble	Humilde
+Hotshot	As del volante
+Housekeeper	Ama de llaves
+Helix	Hélice
+Halter	Correa
+Headboard	Cabecera
+Hymnal	Himnario
+Heartwarming	Conmovedor
+Helpless	Desamparado
+Hearthstone	Piedra del hogar
+Harmonizer	Armonizador
+Hopscotch	Rayuela
+Harem	Harén
+Humorous	Humorístico
+Hymnody	Himnología
+Homeward	Hacia casa
+Hallucinogenic	Alucinógeno
+Humid	Húmedo
+Hairpin	Pasador
+Humblebrag	Soberbia humilde
+Haughtiness	Altivez
+Holiness	Santidad
+Hydroponics	Hidroponía
+Heartthrob	Rompecorazones
+Horrendous	Horrendo
+Hallowed	Santificado
+Holographic	Holográfico
+Hustle	Agitación
+Honeydew	Melón dulce
+Haphazardly	Aleatoriamente
+Headstrong	Terco
+Hearten	Animar
+Helplessness	Desamparo
+Hasty	Apresurado
+Hallucinations	Alucinaciones
+Holograph	Holograma
+Hightail	Huir rápidamente
+Hone	Afilar
+Headlight	Faro
+Harmonic	Armónico
+Heedfully	Con atención
+Handwriting	Escritura a mano
+Hectically	Frenéticamente
+Harness	Arnés
+Howler	Grito
+Humankind	Humanidad
+Healthfully	Saludablemente
+Honeypot	Tarro de miel
+Hallmark	Marca distintiva
+Honesty	Honestidad
+Hunky	Atractivo
+Habitual	Habitual
+Haphazard	Desorganizado
+Hail	Granizo
+Halcyon	Halcyon
+Hectare	Hectárea
+Hereditary	Hereditario
+Homeward	Hacia casa
+Harness	Arnés
+Highbrow	Culto
+Hubris	Soberbia
+Hiatus	Hiato
+Hologram	Holograma
+Hovercraft	Aerodeslizador
+Herbivore	Herbívoro
+Harassment	Acoso
+Hasty	Apresurado
+Homily	Homilía
+Handcrafted	Artesanal
+Humid	Húmedo
+Heedfully	Con atención
+Heritage	Patrimonio
+Hectically	Frenéticamente
+Handshake	Apretón de manos
+Humming	Zumbido
+Hubcap	Tapacubos
+Highfalutin	Pretencioso
+Hone	Afilar
+Hurdling	Saltando obstáculos
+Harmonization	Armonización
+Horticulture	Horticultura
+Handout	Ayuda
+Headstrong	Terco
+Hurdler	Saltador
+Homogeneous	Homogéneo
+Humble	Humilde
+Hilarity	Alegría
+Heterogeneous	Heterogéneo
+Hangover	Resaca
+Healthily	Saludablemente
+Hallowed	Santificado
+Hearth	Hogar
+Heroism	Heroísmo
+Homestead	Granja
+Honesty	Honestidad
+Hustler	Estafador
+Hazy	Nebuloso
+Harmonious	Armonioso
+Hierarchy	Jerarquía
+Hurdles	Obstáculos
+Honeymoon	Luna de miel
+Happenstance	Casualidad
+Hecticness	Agitación
+Heartfelt	Sincero
+Hi-tech	Alta tecnología
+Hush	Silencio
+Hallucination	Alucinación
+Heraldry	Heráldica
+Haphazardly	Aleatoriamente
+Heartthrob	Rompecorazones
+Harbinger	Presagio
+Hump	Joroba
+Headway	Progreso
+Handrail	Barandilla
+Headwind	Viento en contra
+Hound	Perro de caza
+Healthfulness	Saludable
+Headgear	Equipo de cabeza
+Hopscotch	Rayuela
+Hug	Abrazo
+Hiccup	Hipo
+Horticulturist	Horticultor
+Harshness	Dureza
+Humility	Humildad
+Hedonism	Hedonismo
+Heatwave	Ola de calor
+Hayloft	Desván
+Hideaway	Refugio
+Haziness	Nublosidad
+Heartstrings	Cuerdas del corazón
+Highness	Alteza
+Heaviness	Pesadez
+Historical	Histórico
+Housekeeper	Ama de llaves
+Holographic	Holográfico
+Howling	Aullido
+Harmoniously	Armoniosamente
+Hilarity	Alegría
+Hull	Casco
+Henhouse	Gallinero
+Handwriting	Escritura a mano
+Hallway	Pasillo
+Handhold	Agarre
+Houndstooth	Cuadros de perro
+Highlighter	Marcador
+Honeypot	Tarro de miel
+Helplessness	Desamparo
+Heroine	Heroína
+Hideous	Horrendo
+Honeycomb	Panal
+Healthier	Más saludable
+Henpeck	Acribillar
+Haughty	Altanero
+Heatproof	Resistente al calor
+Harmonic	Armónico
+Hushed	Silencioso
+Hilarity	Alegría
+Heartwarming	Conmovedor
+Homogeneous	Homogéneo
+Headlong	De frente
+Hectare	Hectárea
+Hopeless	Desesperado
+Handily	Con destreza
+Hyperbole	Hipérbole
+Hallucinatory	Alucinatorio
+Homegrown	Cultivado en casa
+Humpback	Jorobado
+Harassment	Acoso
+Handbag	Bolso
+Hieroglyphs	Jeroglíficos
+Heroically	Heroicamente
+Hexadecimal	Hexadecimal
+Hospitalization	Hospitalización
+Hoedown	Baile campestre
+Horticulture	Horticultura
+Homogenize	Homogeneizar
+Honeyed	Mielado
+Headliner	Titular
+Hibernation	Hibernación
+Hectic	Frenético
+Hook	Gancho
+Hushpuppy	Buñuelo
+Hurdler	Saltador de obstáculos
+Hasty	Apresurado
+Harvesting	Cosecha
+Harmonics	Armonías
+Headspace	Espacio mental
+Humdrum	Monótono
+Hectogram	Hectogramo
+Headstrong	Terco
+Heroics	Heroísmo
+Haphazardness	Desorganización
+Hightail	Irse rápidamente
+Homeless	Sin hogar
+Hightower	Torre alta
+Helicon	Helicon
+Holography	Holografía
+Heliport	Helipuerto
+Hustling	Ajetreo
+Handicapped	Discapacitado
+Helmsman	Timonel
+Henpecked	Acribillado
+Honorific	Honorífico
+Hectoliter	Hectolitro
+Halter	Correa
+Holograph	Holograma
+Hologram	Holograma
+Hotshot	As del volante
+Helical	Helicoidal
+Habitation	Habitación
+Honorarium	Honorario
+Homeopathic	Homeopático
+Headstrong	Obstinado
+Heuristic	Heurístico
+Handyman	Manitas
+Hitched	Atado
+Hummingbird	Colibrí
+Hurdles	Obstáculos
+Humming	Zumbido
+Hunk	Trozo
+Honeypot	Tarro de miel
+Helpfulness	Disposición a ayudar
+Hush	Silencio
+Horsepower	Potencia
+Humpbacked	Jorobado
+Harshly	Severamente
+Harmonization	Armonización
+Haughty	Altanero
+Helpline	Línea de ayuda
+Hectogram	Hectogramo
+Hurdling	Saltando obstáculos
+Hydraulics	Hidráulica
+Housewarming	Fiesta de inauguración
+Humming	Zumbido
+Hype	Hype
+Hiccups	Hipo
+Headstone	Tumba
+Hovering	Flotando
+Headlight	Faro
+Hodgepodge	Mezcla
+Hectic	Agitado
+Hatchery	Criadero
+Humorous	Humorístico
+Hoping	Esperando
+Hearthstone	Piedra del hogar
+Hi-tech	Alta tecnología
+Haze	Bruma
+Herald	Heraldo
+Humdrum	Monótono
+Horrifying	Horripilante
+Handshake	Apretón de manos
+Headwinds	Vientos en contra
+Hysteria	Histeria
+Helplessness	Desamparo
+Haggling	Regateo
+Haphazardly	Desorganizado
+Heighten	Aumentar
+Housekeeper	Ama de llaves
+Homophobic	Homofóbico
+Histrionics	Histriónico
+Harnessing	Aprovechamiento
+Haul	Cargar
+Hieroglyph	Jeroglífico
+Humiliation	Humillación
+Holographically	Holográficamente
+Holographic	Holográfico
+Habitually	Habitualmente
+Haphazard	Caótico
+Hectically	Frenéticamente
+Hover	Flotar
+Homogenization	Homogeneización
+Hodgepodge	Mezcolanza
+Heartfelt	Sincero
+Hedonistic	Hedonista
+Hopelessly	Desesperadamente
+Histrionic	Histriónico
+Hotly	Calurosamente
+Hideaway	Refugio
+Housebound	Aislado en casa
+Heavyset	Robusto
+Hugely	Enormemente
+Hexagonal	Hexagonal
+Heartland	Tierra natal
+Handily	Con destreza
+Headset	Auriculares
+Handful	Puñado
+Hounds	Perros de caza
+Hooting	Gritando
+Homing	Regreso
+Horticulturally	Horticulturalmente
+Humorousness	Humorismo
+Handcuffing	Esposar
+Heartbreaker	Rompecorazones
+Hecticness	Agitación
+Horseplay	Juegos de caballos
+Homily	Homilía
+Heterodoxy	Heterodoxia
+Hyphenation	Guionización
+Harmonizing	Armonizando
+Hightail	Escapar rápidamente
+Household	Hogar
+Humbling	Humillante
+Hominid	Hominido
+Heraldic	Heráldico
+Hallowed	Santificado
+Holocephalus	Holocefalus
+Hoax	Engaño
+Hallucinogenic	Alucinógeno
+Hectogram	Hectogramo
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1075 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translate and Speak</title>
+</head>
+<body>
+    <h1>Translate and Speak</h1>
+    <button onclick="processWords()">Translate and Speak</button>
+    <div id="results"></div>
+
+    <script>
+        const wordList = [
+            "Apple", // English
+            "Manzana", // Spanish
+            "Animal", // English
+            "Animal", // Spanish
+            "Area", // English
+            "Área", // Spanish
+            "Hello", // English
+            "Hola" // Spanish
+        ];
+
+        async function translateWord(word) {
+            const apiKey = 'YOUR_API_KEY'; // Replace with your API key
+            const translateUrl = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+
+            const response = await fetch(translateUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    q: word,
+                    target: 'es'
+                })
+            });
+
+            const data = await response.json();
+            return data.data.translations[0].translatedText;
+        }
+
+        function speakWord(word, lang) {
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.lang = lang;
+            speechSynthesis.speak(utterance);
+        }
+
+        async function processWords() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = ''; // Clear previous results
+
+            for (let word of wordList) {
+                let lang = 'en'; // Default to English
+                let translatedWord = '';
+
+                // Simple check for Spanish (could be improved)
+                if (/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/.test(word)) {
+                    if (wordList.includes(word)) {
+                        // If the word exists in the list, treat it as Spanish
+                        lang = 'es';
+                    }
+                } else {
+                    // Assume it's English if it doesn't match Spanish criteria
+                    translatedWord = await translateWord(word);
+                }
+
+                // Display and speak the word
+                const wordDisplay = document.createElement('p');
+                if (lang === 'en') {
+                    wordDisplay.innerText = `${word} (English)`;
+                    speakWord(word, 'en-US');
+                    if (translatedWord) {
+                        wordDisplay.innerText += ` => ${translatedWord} (Spanish)`;
+                        speakWord(translatedWord, 'es-ES');
+                    }
+                } else {
+                    wordDisplay.innerText = `${word} (Spanish)`;
+                    speakWord(word, 'es-ES');
+                }
+
+                resultsDiv.appendChild(wordDisplay);
+            }
+        }
+    </script>
+</body>
+</html> -->
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translate and Speak</title>
+</head>
+<body>
+    <h1>Translate and Speak</h1>
+    <button onclick="processWords()">Translate and Speak</button>
+    <div id="results"></div>
+
+    <script>
+        const wordsText = "Analyze - Analizar\nAttempt - Intento\nAcquire - Adquirir\nAllow - Permitir\nAppreciate - Apreciar\nAttain - Alcanzar\nAccept - Aceptar\nAvert - Evitar";
+        const wordPairs = wordsText.split('\n'); // Split the text by new lines
+
+        const translations = {};
+        wordPairs.forEach(pair => {
+            const [english, spanish] = pair.split(' - ');
+            translations[english.trim()] = spanish.trim();
+        });
+
+        function isSpanish(word) {
+            // Basic check for Spanish characters
+            return /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/.test(word);
+        }
+
+        function speakWord(word, lang) {
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.lang = lang;
+            speechSynthesis.speak(utterance);
+        }
+
+        async function processWords() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = ''; // Clear previous results
+
+            for (let [english, spanish] of Object.entries(translations)) {
+                // Display and speak English word
+                const wordDisplay = document.createElement('p');
+                wordDisplay.innerText = `${english} (English) => ${spanish} (Spanish)`;
+                speakWord(english, 'en-US'); // Speak in English
+                speakWord(spanish, 'es-ES'); // Speak translation in Spanish
+
+                resultsDiv.appendChild(wordDisplay);
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+
+<!-- ///////////////////////////////////////////////////////////////////////////////////// -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+baby	bebé
+back	atrás
+backpack	mochila
+background	fondo
+backrest	respaldo
+backward	hacia atrás
+badge	insignia
+badger	tejón
+bag	bolsa
+bake	hornear
+balance	equilibrio
+ball	pelota
+balloon	globo
+band	banda
+bank	banco
+bar	bar
+barbecue	barbacoa
+barrel	barril
+barrier	barrera
+base	base
+baseball	béisbol
+basement	sótano
+basis	base
+basket	cesta
+bat	murciélago
+battle	batalla
+beach	playa
+beam	haz
+bean	frijol
+bear	oso
+beat	latido
+beautiful	hermoso
+beauty	belleza
+because	porque
+become	convertirse
+bed	cama
+bedroom	dormitorio
+bee	abeja
+beef	carne de res
+before	antes
+begin	empezar
+beginning	comienzo
+behavior	comportamiento
+behind	detrás
+belief	creencia
+believe	creer
+bell	campana
+belong	pertenecer
+below	abajo
+belt	cinturón
+bench	banco
+benefit	beneficio
+bent	torcido
+berry	baya
+best	mejor
+better	mejor
+between	entre
+beyond	más allá
+big	grande
+bill	factura
+bind	atar
+biology	biología
+bird	pájaro
+birth	nacimiento
+birthday	cumpleaños
+biscuit	galleta
+black	negro
+blade	cuchilla
+blame	culpar
+blank	en blanco
+blanket	manta
+blast	explosión
+blaze	llama
+bleed	sangrar
+blind	ciego
+block	bloque
+blood	sangre
+bloom	florecer
+blow	soplar
+blue	azul
+board	tabla
+boat	bote
+body	cuerpo
+boil	hervir
+bold	audaz
+bomb	bomba
+bone	hueso
+book	libro
+boost	aumentar
+boot	bota
+border	frontera
+bore	aburrir
+borrow	pedir prestado
+boss	jefe
+bottle	botella
+bottom	fondo
+bounce	rebotar
+boundary	límite
+bowl	cuenco
+box	caja
+boy	niño
+brain	cerebro
+brave	valiente
+break	romper
+breakfast	desayuno
+breathe	respirar
+brick	ladrillo
+bridge	puente
+brief	breve
+bright	brillante
+brilliant	brillante
+bring	traer
+broad	amplio
+brother	hermano
+brown	marrón
+brush	cepillo
+bubble	burbuja
+bucket	cubo
+budget	presupuesto
+build	construir
+builder	constructor
+building	edificio
+bulb	bombilla
+bull	toro
+bullet	bala
+bunch	racimo
+bundle	paquete
+burden	carga
+burn	quemar
+burst	estallar
+bury	enterrar
+bus	autobús
+business	negocio
+busy	ocupado
+button	botón
+buy	comprar
+by	por
+bypass	desvío
+bye	adiós
+buzz	zumbido
+butcher	carnicero
+butter	mantequilla
+button	botón
+buzzard	buitre
+backache	dolor de espalda
+backyard	jardín trasero
+bad	malo
+balance	balance
+bald	calvo
+ballad	balada
+balloonist	globero
+ban	prohibir
+bandage	vendaje
+bang	golpe
+banner	pancarta
+banter	broma
+barista	barista
+barter	trueque
+bash	golpear
+bask	tomar el sol
+batch	lote
+battlefield	campo de batalla
+beacon	faro
+beanbag	bolsa de frijoles
+beard	barba
+beatitude	beatitud
+beckon	hacer señas
+bedrock	roca madre
+befriend	hacerse amigo
+beg	mendigar
+beige	beige
+belief	creencia
+belligerent	beligerante
+beneficial	beneficioso
+benevolent	benevolente
+bent	doblado
+bequest	legado
+beverage	bebida
+bewilder	desconcertar
+bison	bisonte
+bizarre	extraño
+blabber	chismoso
+blacksmith	herrero
+blade runner	corredor de cuchillas
+blank slate	pizarra en blanco
+blasphemy	blasfemia
+blaze	resplandor
+blizzard	tormenta de nieve
+blockhead	cabezón
+blush	sonrojarse
+boast	presumir
+bodyguard	guardaespaldas
+boisterous	bullicioso
+boldness	valentía
+bolt	perno
+bombshell	bomba
+bonfire	fogata
+bookcase	estante de libros
+bookkeeping	contabilidad
+bootstrap	inicio rápido
+borderline	límite
+bounty	recompensa
+bouquet	ramo
+boulevard	bulevar
+boundary	límite
+brainwash	lavado de cerebro
+brass	latón
+braveheart	corazón valiente
+breakout	ruptura
+bristle	cerda
+brochure	folleto
+brook	arroyo
+broom	escoba
+bruise	moretón
+bubblegum	chicle
+buck	dólar
+buffet	bufé
+bulwark	baluarte
+bungalow	bungalow
+buoy	boya
+butchered	sacrificado
+buzzword	palabra de moda
+bazaar	bazar
+bypass	desvío
+bay	bahía
+banquet	banquete
+barometer	barómetro
+brigade	brigada
+bangle	pulsera
+banister	barandilla
+ballet	ballet
+basin	cuenca
+bubble	burbuja
+buddy	amigo
+bushel	fanega
+blush	rubor
+biographer	biógrafo
+biography	biografía
+bumper	parachoques
+bandwagon	moda
+bacteria	bacteria
+buffet	bufet
+barn	granero
+bribe	soborno
+bounce	rebotar
+brutish	bestial
+burden	carga
+bulging	abultado
+bicker	discutir
+bid	oferta
+binoculars	binoculares
+bigot	fanático
+blueprint	plano
+baritone	barítono
+brassiere	sujetador
+bandana	bandana
+bewitch	embrujar
+bewitching	fascinante
+bleak	sombrío
+breezy	ventoso
+brood	cría
+bug	insecto
+bulldog	bulldog
+burgeon	florecer
+burrow	madriguera
+bewitched	embrujado
+budgetary	presupuestario
+balmy	templado
+bandage	vendaje
+balustrade	balaustrada
+barnacle	percebes
+bitter	amargo
+boldface	negrita
+brazen	descarado
+breeze	brisa
+broomstick	escoba
+brawny	musculoso
+brood	camada
+baffled	desconcertado
+baked	horneado
+blustery	tempestuoso
+blight	plaga
+bluster	fanfarronear
+bolster	reforzar
+barrister	abogado
+bandstand	escenario
+bibliophile	bibliófilo
+bandwagon	carro de la banda
+banishment	destierro
+betoken	indicar
+birthright	derecho de nacimiento
+ballot	boleta
+baritone	barítono
+bulleted	con viñetas
+bleachers	gradas
+baste	bañar
+botanist	botánico
+beret	boina
+bunches	racimos
+belch	eructar
+bilge	sentina
+bicker	discutir
+bulldoze	arrasar
+basking	tomando el sol
+buxom	corpulenta
+beacon	faro
+barnstorm	hacer un tour
+bachelor	soltero
+backlog	acumulación
+bakery	panadería
+balance	equilibrio
+bald	calvo
+ballet	ballet
+balloon	globo
+ban	prohibición
+bandage	venda
+bang	estallido
+banner	pancarta
+barista	barista
+barter	trueque
+bash	golpear
+bask	tomar el sol
+batch	lote
+beam	rayo
+bear	soportar
+beat	golpear
+beauty	belleza
+beef	carne de res
+beet	remolacha
+beggar	mendigo
+beige	beige
+belch	eructar
+bend	doblar
+benefit	beneficio
+berry	baya
+besiege	sitiar
+bet	apuesta
+bewilder	desconcertar
+bicker	discutir
+bigotry	intolerancia
+bingo	bingo
+biography	biografía
+birdhouse	casa para pájaros
+birthmark	marca de nacimiento
+biscuit	galleta
+bison	bisonte
+blacksmith	herrero
+blend	mezclar
+blessing	bendición
+blizzard	tormenta de nieve
+blob	mancha
+bloodhound	sabueso
+bloom	florecer
+blossom	floración
+blouse	blusa
+blunt	desafilado
+boardwalk	paseo marítimo
+boast	alardear
+bodybuilder	culturista
+bonkers	loco
+bonus	bonificación
+bookend	sujeta libros
+bookmark	marcador
+bookshelf	estante de libros
+bootcamp	campo de entrenamiento
+bore	aburrir
+bossy	mandón
+bottomless	sin fondo
+bounce	rebotar
+bouquet	ramo
+bow	reverencia
+brag	presumir
+breadwinner	sustentador
+breathalyzer	alcoholímetro
+brewmaster	maestro cervecero
+bribe	soborno
+bride	novia
+bridge	puente
+brisk	enérgico
+broom	escoba
+bruise	moretón
+bubble	burbuja
+bucket	cubo
+bud	brote
+budget	presupuesto
+buffet	bufé
+build	construir
+builder	constructor
+bulletin	boletín
+bulb	bombilla
+bullseye	centro de la diana
+bump	golpe
+bundle	paquete
+burden	carga
+burp	eructo
+bury	enterrar
+bushel	fanega
+businessman	empresario
+busybody	metiche
+buzz	zumbido
+bystander	espectador
+bypass	desvío
+button	botón
+buzzword	palabra de moda
+bay	bahía
+balderdash	tonterías
+ballast	lastre
+bark	corteza
+bistro	bistró
+blather	charlar
+bleachers	gradas
+blip	interrupción
+bloat	hinchar
+blockhead	cabezón
+blowhard	presumido
+blueprints	planos
+blush	rubor
+boastful	jactancioso
+brew	preparar
+bristle	cerda
+brocade	brocado
+brook	arroyo
+buckaroo	vaquero
+bucketful	cubo lleno
+butter	mantequilla
+bygone	pasado
+baldness	calvicie
+battalion	batallón
+balk	detenerse
+barrow	montículo
+bigwig	pez gordo
+billow	ondear
+blackmail	extorsión
+blaze	llama
+blister	ampolla
+buoyant	alegre
+bumpy	irregular
+buffoon	bufón
+baffle	desconcertar
+baritone	barítono
+baptism	bautismo
+boldness	audacia
+borehole	pozo
+boobytrap	trampa
+bloodbath	baño de sangre
+bonnet	gorra
+bulletin board	tablón de anuncios
+bottleneck	cuello de botella
+bachelorhood	soltería
+boondoggle	proyecto inútil
+beguile	engañar
+bungler	torpe
+beachhead	cabeza de playa
+bronco	caballo salvaje
+brisket	pecho de res
+backlog	acumulación
+brandish	empuñar
+breakage	rotura
+brand	marca
+braggart	presumido
+billfold	cartera
+brine	salmuera
+bombastic	pomposo
+bargain	ganga
+barnacle	percebes
+beatnik	bohemio
+blinker	intermitente
+bonkers	loco
+boisterous	bullicioso
+bringer	portador
+bundle	paquete
+badge	placa
+bagel	bagel
+balance	saldo
+balmy	templado
+banish	desterrar
+barge	barcaza
+barricade	barricada
+basin	lavabo
+bask	disfrutar del sol
+beacon	señal
+bean	haba
+bear	soportar
+beating	golpe
+belittle	menospreciar
+bellhop	botones
+bemoan	lamentar
+bench	banco
+benefit	utilidad
+bias	sesgo
+bid	oferta
+binder	carpeta
+birdie	pájaro pequeño
+blanket	cobija
+blaze	brillo
+bleat	balar
+blend	combinar
+blight	plaga
+blink	parpadear
+blot	mancha
+bloom	florecimiento
+blossom	brotar
+boast	presumir
+bolt	rayo
+bombshell	noticia explosiva
+boon	beneficio
+border	límite
+bore	perforar
+borrow	tomar prestado
+bounty	generosidad
+bouquet	ramo
+bounce	salto
+brag	jactarse
+brim	borde
+broach	mencionar
+brook	arroyo
+brown	marrón
+buffer	amortiguador
+bulk	volumen
+bungle	estropear
+bunker	búnker
+buoy	boya
+buyout	compra total
+buzz	ruido zumbido
+bylaw	reglamento
+bayou	pantano
+bastion	bastión
+ballot	papeleta
+bandit	bandido
+banter	burlarse
+barricade	barrera
+baritone	voz grave
+barter	trueque
+bask	relajarse
+bathe	bañar
+beacon	faro
+beam	viga
+beatitude	bienaventuranza
+beguile	atraer
+belligerent	agresivo
+belief	convicción
+bellicose	belicoso
+benchmark	referencia
+bend	curva
+benediction	bendición
+benefactor	benefactor
+berate	reprender
+beseech	implorar
+bewilder	confundir
+binder	archivador
+blabber	charlatán
+bleak	desolado
+blend	mezcla
+blink	guiñar
+blur	borroso
+brawl	pelea
+brittle	quebradizo
+broil	asar
+buff	fuerte
+burgeon	florecer
+burly	corpulento
+bustle	bullicio
+buzzard	buitre
+bias	tendencia
+blaze	fogata
+blackout	apagón
+bland	soso
+breakage	ruptura
+breathe	inhalar
+brisk	rápido
+brittle	frágil
+brocade	brocado
+browbeat	intimidar
+buoyant	optimista
+burial	entierro
+butcher	carnicero
+buzzkill	aguafiestas
+bystander	observador
+banter	charla
+bewitch	hechizar
+boisterous	ruidoso
+bigot	intolerante
+bluster	alardear
+braggart	presumido
+barrage	bombardeo
+beanpole	alto y delgado
+beleaguer	acosar
+briskly	rápidamente
+bedridden	postrado
+beeline	línea recta
+beneficiary	beneficiario
+bellicosity	belicosidad
+bemuse	confundir
+bereaved	doliente
+beret	boina
+beseeching	suplicante
+besiege	asediar
+besmirch	manchar
+bewitching	fascinante
+bewildering	desconcertante
+bowler	jugador de bolos
+brood	incubar
+buck	dólar
+burglar	ladrón
+bust	busto
+bushel	medida
+buzzword	palabra clave
+buttonhole	ojal
+bungee	elástico
+burrito	burrito
+bushel	fanega
+baste	mojar
+bureaucrat	burócrata
+barnstorm	hacer giras
+battalion	batallón
+bluff	farol
+bulbous	abultado
+bobtail	cola corta
+bounteous	generoso
+bubble	burbujear
+bumbling	torpe
+buzzworthy	digno de atención
+bizarre	raro
+bulging	hinchado
+ballyhoo	alboroto
+blabbermouth	bocón
+bombastic	grandilocuente
+burlesque	burlesco
+bewilderment	desconcierto
+burrowed	excavar
+bibliophile	bibliófilo
+bluebird	pájaro azul
+bringer	portador
+blushes	sonrojos
+barricaded	bloqueado
+billion	mil millones
+ballot box	urna
+bosom	seno
+brimming	repleto
+babble	balbucear
+backdoor	puerta trasera
+backtrack	retroceder
+backyard	jardín trasero
+badger	acoso
+baggage	equipaje
+balance	saldo
+ballad	balada
+balloon	globo
+balm	bálsamo
+banjo	banjo
+banknote	billete
+barista	barista
+barter	trueque
+bass	bajo
+batch	lote
+beacon	faro
+beam	rayo
+bear	soportar
+bead	cuenta
+beak	pico
+beamish	alegre
+beard	barba
+beckon	llamar
+beefcake	hombre musculoso
+beetroot	remolacha
+beguile	engañar
+beige	beige
+belief	creencia
+belch	eructar
+belligerent	beligerante
+bend	doblar
+beret	boina
+beseech	suplicar
+bestow	otorgar
+bet	apuesta
+bewilder	desconcertar
+bicker	discutir
+bigot	intolerante
+bilge	sentina
+bison	bisonte
+blacksmith	herrero
+blare	estruendo
+blatant	descarado
+bless	bendecir
+blight	plaga
+blimp	dirigible
+blink	parpadear
+blister	ampolla
+blithe	alegre
+bloat	hinchar
+blob	bulto
+blockhead	cabezón
+blot	mancha
+blowtorch	soplete
+blunder	error
+bluff	farol
+boar	jabalí
+bobbin	carrete
+bologna	mortadela
+bolt	perno
+bomb	bomba
+bonanza	bonanza
+bond	vínculo
+bonfire	fogata
+bookworm	ratón de biblioteca
+booth	cabina
+border	frontera
+bough	rama
+bouquet	ramo
+bout	combate
+bowl	cuenco
+boyhood	infancia
+brat	niño travieso
+brave	valiente
+breather	respiro
+bristle	cerda
+brocade	brocado
+brood	camada
+bruise	moretón
+bumble	tartamudear
+buoy	boya
+buzzard	buitre
+bystander	espectador
+bypass	desvío
+buzzword	palabra clave
+bureaucracy	burocracia
+burgeon	florecer
+burrow	madriguera
+bushel	medida
+buttress	contrafuerte
+bamboozle	engañar
+banter	charla
+barracuda	barracuda
+barnstorming	gira de barnstorm
+barbarian	bárbaro
+backhanded	indirecto
+bagpipe	gaita
+bait	cebo
+bakehouse	panadería
+balustrade	balaustrada
+barnstorm	hacer giras
+barometric	barométrico
+baritone	barítono
+battlefront	frente de batalla
+behest	encargo
+behold	contemplar
+benediction	bendición
+benefit	utilidad
+bigwig	pez gordo
+billow	ondear
+binding	vinculante
+biological	biológico
+blather	charlar
+blockbuster	éxito de taquilla
+bloodline	linaje
+boobytrap	trampa
+bodega	bodega
+bombastic	grandilocuente
+boost	impulso
+boycott	boicot
+braggart	jactancioso
+brigade	brigada
+bridal	nupcial
+bridgehead	cabeza de puente
+brilliant	brillante
+brimstone	azufre
+brio	brío
+briskly	rápidamente
+bristle	erguirse
+buccaneer	bucanero
+bulbous	bulboso
+bully	matón
+bustling	bullicioso
+button	botón
+buzz	zumbido
+bylaw	reglamento
+bedbug	chinche
+billfold	billetera
+blockhouse	casa de bloque
+bouquet	ramo
+brave	valeroso
+bridger	puente
+burnish	pulir
+burrito	burrito
+businesslike	profesional
+buyout	compra
+bayonet	bayoneta
+bathtub	bañera
+bedrock	roca madre
+bonbon	bombón
+bookstore	librería
+billboard	cartelera
+blandness	insipidez
+barrow	montículo
+beggar	mendigo
+bruiser	matón
+bombast	pomposidad
+blueprint	plano
+baldness	calvicie
+bashful	tímido
+billboard	cartelera
+brawny	musculoso
+briskness	rapidez
+barnstormer	artista de giras
+bandleader	líder de banda
+bemoan	lamentar
+blemish	mancha
+backpacker	mochilero
+brainchild	criatura del cerebro
+buckaroo	vaquero
+bumpkin	paleto
+bullock	novillo
+backlash	reacción
+boundary	límite
+bedraggled	desaliñado
+braggadocio	fanfarronada
+bigamist	bigamista
+beefcake	hombre musculoso
+beerhouse	cervecería
+birthright	derecho de nacimiento
+bounty	generosidad
+balaclava	pasamontañas
+baseball	béisbol
+billboard	cartel
+bogeyman	hombre del saco
+bygone	pasado
+boondoggle	proyecto inútil
+bygone	pasado
+bulwark	baluarte
+bric-a-brac	chachara
+bemoan	lamentar
+ballroom	salón de baile
+bricklayer	albañil
+bouquet	ramo
+bedazzle	deslumbrar
+backer	patrocinador
+bakery	panadería
+balance	saldo
+balloon	globo
+banish	desterrar
+barber	barbero
+bargain	ganga
+barn	granero
+barrack	cuartel
+barrel	barril
+base	base
+basement	sótano
+bask	disfrutar del sol
+batch	lote
+beacon	señal
+befriend	hacerse amigo
+beige	beige
+belch	eructar
+bell	campana
+bend	doblar
+benefit	beneficio
+bereave	privar
+besiege	asediar
+besmirch	manchar
+beverage	bebida
+bewilder	desconcertar
+bigot	intolerante
+blabber	charlatán
+blend	mezclar
+blink	parpadear
+blister	ampolla
+blot	mancha
+bloat	hinchar
+blush	sonrojar
+boast	alardear
+bodyguard	guardaespaldas
+bolt	perno
+bologna	mortadela
+bolt	rayo
+bomb	bomba
+bombshell	notición explosiva
+bookcase	estante de libros
+bouncer	portero
+bouquet	ramo
+brave	valiente
+breathe	respirar
+brick	ladrillo
+brisk	enérgico
+broil	asar
+broom	escoba
+bruise	moretón
+buffoon	bufón
+budget	presupuesto
+buffer	amortiguador
+bumpkin	paleto
+burden	carga
+buzz	zumbido
+bypass	desvío
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
