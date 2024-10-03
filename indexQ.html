@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+         Quack	Charlatán
+Quail	Codorniz
+Quake	Terremoto
+Qualify	Calificar
+Quality	Calidad
+Quantity	Cantidad
+Quarantine	Cuarentena
+Quarrel	Disputa
+Quarter	Cuarto
+Quench	Saciar
+Query	Consulta
+Quest	Búsqueda
+Question	Pregunta
+Quick	Rápido
+Quicken	Acelerar
+Quiet	Silencioso
+Quip	Broma
+Quirk	Particularidad
+Quirky	Peculiar
+Quotation	Cita
+Quotient	Cociente
+Quasar	Cuásar
+Quagmire	Pantano
+Quenchless	Inextinguible
+Quipster	Humorista
+Quizzical	Cuestionador
+Quarreler	Peleador
+Quenchable	Saciable
+Quodlibet	Quodlibet
+Quietude	Quietud
+Quincunx	Quincuncio
+Quarrelsome	Peleador
+Quincunx	Quincuncio
+Quickening	Aceleración
+Quixotic	Quijotesco
+Quenchable	Saciable
+Quiddity	Cualidad
+Quisling	Traidor
+Quantify	Cuantificar
+Quotation	Cita
+Quicksilver	Mercurio
+Quarantine	Cuarentena
+Quixotry	Quijotismo
+Quibble	Cavilación
+Quasar	Cuásar
+Quirkiness	Peculiaridad
+Quieting	Silenciando
+Quattro	Cuatro
+Quincunx	Quincuncio
+Quasihistorical	Cuasihistórico
+Quip	Broma
+Quicksand	Arena movediza
+Quake	Temblor
+Quiddity	Esencia
+Quantitative	Cuantitativo
+Quarrel	Pelea
+Quirky	Raro
+Quattrocento	Cuattrocento
+Quaker	Cuáquero
+Quasar	Cuásar
+Quizzed	Preguntado
+Quirk	Raro
+Quietly	Silenciosamente
+Quotable	Citable
+Quiver	Temblor
+Quench	Saciar
+Quicksilver	Mercurio
+Quench	Saciar
+Quaint	Anticuado
+Quagmire	Pantano
+Quota	Cuota
+Quipster	Bromista
+Quasiparticle	Cuasipartícula
+Queasy	Mareado
+Quester	Buscador
+Quietness	Quietud
+Qualm	Remordimiento
+Quasi	Cuasi
+Quip	Broma
+Quo	Quo
+Quantitative	Cuantitativo
+Quandary	Dilema
+Quarantine	Cuarentena
+Quaff	Beber a sorbos
+Quercus	Quercus
+Quantifier	Cuantificador
+Quicksilver	Mercurio
+Quench	Saciar
+Quadrant	Cuadrante
+Quisling	Traidor
+Quarreled	Peleado
+Quizzical	Cuestionador
+Quarrelsome	Conflictivo
+Quagmire	Enredo
+Quackery	Charlatanería
+Quirk	Peculiaridad
+Quercetin	Quercetina
+Quicksand	Arena movediza
+Quindecim	Quince
+Quantify	Cuantificar
+Quicker	Más rápido
+Quietude	Quietud
+Quicksilver	Mercurio
+Quarantine	Cuarentena
+Quizzical	Cuestionador
+Quasi	Cuasi
+Quarantine	Cuarentena
+Quaintness	Peculiaridad
+Quotient	Cociente
+Quadrilateral	Cuadrilátero
+Quaffed	Sorbido
+Quercetin	Quercetina
+Quizzes	Cuestionarios
+Quenchable	Saciable
+Quiddity	Esencia
+Quotable	Citable
+Quirkiness	Excentricidad
+Quasiparticle	Cuasipartícula
+Quicksilver	Mercurio
+Quarrels	Peleas
+Quiescent	Quieto
+Quatrain	Cuarteto
+Quicksand	Arena movediza
+Quercus	Quercus
+Quatrain	Cuarteto
+Quirking	Excentricidad
+Quintuple	Quintuple
+Quicksand	Arena movediza
+Quandary	Dilema
+Quagmire	Pantano
+Quota	Cuota
+Quiescent	Quieto
+Quirk	Particularidad
+Quicksand	Arena movediza
+Quibble	Cavilación
+Quizzes	Cuestionarios
+Quantitative	Cuantitativo
+Quota	Cuota
+Quasar	Cuásar
+Quench	Saciar
+Quipster	Humorista
+Quack	Charlatán
+Quaff	Beber a sorbos
+Quid	Libra
+Quagmire	Enredo
+Quasar	Cuásar
+Quietude	Quietud
+Quicksilver	Mercurio
+Quirky	Peculiar
+Quarrel	Disputa
+Quarantine	Cuarentena
+Quirkiness	Peculiaridad
+Quip	Broma
+Quaint	Anticuado
+Quotation	Cita
+Quota	Cuota
+Quicksand	Arena movediza
+Quasar	Cuásar
+Quibble	Cavilación
+Quizzical	Cuestionador
+Quagmire	Pantano
+Quirky	Raro
+Quencher	Saciador
+Quota	Cuota
+Quid	Libra
+Quizzed	Preguntado
+Quarrel	Disputa
+Quarrelsome	Peleador
+Quotient	Cociente
+Quasi	Cuasi
+Quandary	Dilema
+Quizzical	Cuestionador
+Quarrel	Disputa
+Quipster	Humorista
+Quaker	Cuáquero
+Quagmire	Pantano
+Quencher	Saciador
+Quarrel	Disputa
+Quirkiness	Peculiaridad
+Quackery	Charlatanería
+Quandary	Dilema
+Quicksilver	Mercurio
+Quenching	Saciante
+Quipster	Bromista
+Quizzing	Preguntando
+Quincunx	Quincuncio
+Quester	Buscador
+Quarto	Cuarto
+Quizzical	Cuestionador
+Quaker	Cuáquero
+Quietude	Quietud
+Quattro	Cuattro
+Quiescence	Quietud
+Quarrels	Peleas
+Quadrangle	Cuadrángulo
+Quasar	Cuásar
+Quenchable	Saciable
+Quizzically	Cuestionadoramente
+Quasi	Cuasi
+Quindecim	Quince
+Quotation	Cita
+Quagmired	Atrapado
+Quota	Cuota
+Quirkiness	Excentricidad
+Quarantine	Cuarentena
+Quarters	Cuarteles
+Quiddity	Cualidad
+Quickened	Acelerado
+Quicksands	Arenas movedizas
+Quenchers	Saciadores
+Quaintness	Singularidad
+Quixotically	Quijotescamente
+Quotations	Citas
+Quell	Sofocar
+Quizzicality	Cuestionabilidad
+Quenching	Saciante
+Quark	Quark
+Quirk	Raro
+Quakeproof	A prueba de terremotos
+Quasi-mythical	Cuasimítico
+Quasar-like	Similar a cuásar
+Quisling	Traidor
+Quagmire	Pantano
+Quasi-legal	Cuasi-legal
+Quizzicalness	Cuestionabilidad
+Quasi-symmetric	Cuasi-simétrico
+Quicksilvery	Mercurial
+Quasiparticle	Cuasipartícula
+Quartered	Cuadrante
+Quietist	Quietista
+Quenching	Saciante
+Quake-resistant	Resistente a terremotos
+Quotation	Cita
+Quotable	Citable
+Quibble	Cavilación
+Quantitative	Cuantitativo
+Quibbler	Cavilador
+Quasi-experimental	Cuasi-experimental
+Quip	Broma
+Quieten	Calmar
+Quiescent	Quieto
+Quizzed	Preguntado
+Quirks	Rarezas
+Quirked	Raro
+Quizzing	Cuestionando
+Quixotry	Quijotismo
+Quo	Quo
+Quicksilvery	Mercurial
+Quiddity	Esencia
+Quarters	Cuarteles
+Quenchable	Saciable
+Quakerish	Cuáqueresco
+Quota	Cuota
+Quarrel	Pelea
+Quizzical	Cuestionador
+Quintuple	Quintuple
+Quicksand	Arena movediza
+Quarantine	Cuarentena
+Quirkiness	Excentricidad
+Quasar	Cuásar
+Quiver	Temblor
+Quarters	Cuarteles
+Quota	Cuota
+Quirking	Excentricidad
+Quipster	Humorista
+Quicksilver	Mercurio
+Quizzical	Cuestionador
+Quota	Cuota
+Quicker	Más rápido
+Quantify	Cuantificar
+Quarters	Cuarteles
+Quiescent	Quieto
+Quixotic	Quijotesco
+Quirky	Peculiar
+Quagmire	Pantano
+Quicksilvery	Mercurial
+Quizzed	Preguntado
+Quibble	Cavilación
+Quixotry	Quijotismo
+Quaff	Beber a sorbos
+Quakerish	Cuáqueresco
+Quandaries	Dilemas
+Quasars	Cuásares
+Quenching	Saciante
+Quo	Quo
+Quakeproof	A prueba de terremotos
+Quasi-abstract	Cuasi-abstracto
+Quencher	Saciador
+Quarantine	Cuarentena
+Quizzing	Preguntando
+Quirks	Rarezas
+Quenchless	Inextinguible
+Quietening	Calmando
+Quotations	Citas
+Quizzical	Cuestionador
+Quarters	Cuarteles
+Quips	Bromas
+Quaffed	Sorbido
+Quotable	Citable
+Quirkiness	Excentricidad
+Quintupled	Quintuplicado
+Quack	Charlatán
+Quibble	Cavilación
+Quandary	Dilema
+Quota	Cuota
+Quasi-symmetrical	Cuasi-simétrico
+Quirky	Peculiar
+Quarrel	Disputa
+Quenching	Saciante
+Quicksilver	Mercurio
+Quasiparticle	Cuasipartícula
+Quixotry	Quijotismo
+Quixotic	Quijotesco
+Quasars	Cuásares
+Quaking	Temblando
+Quixotically	Quijotescamente
+Quackery	Charlatanería
+Quotient	Cociente
+Quibbler	Cavilador
+Quaintly	Singularmente
+Quarters	Cuarteles
+Quipster	Bromista
+Quizzically	Cuestionadoramente
+Quenched	Saciado
+Quota	Cuota
+Quakes	Temblores
+Quicksand	Arena movediza
+Quibbled	Cavilado
+Quasiparticles	Cuasipartículas
+Quietly	Silenciosamente
+Quasars	Cuásares
+Quizzing	Cuestionando
+Quincunx	Quincuncio
+Quotations	Citas
+Quenchable	Saciable
+Quirking	Excentricidad
+Quirks	Rarezas
+Quietude	Quietud
+Quenchers	Saciadores
+Quadrants	Cuadrantes
+Quasiparticles	Cuasipartículas
+Quail	Codorniz
+Quaintness	Peculiaridad
+Quotable	Citable
+Quests	Búsquedas
+Quirk	Raro
+Quota	Cuota
+Quench	Saciar
+Quirky	Peculiar
+Quagmire	Pantano
+Quasar	Cuásar
+Quicksand	Arena movediza
+Quip	Broma
+Quarantine	Cuarentena
+Quaint	Anticuado
+Quibble	Cavilación
+Quaker	Cuáquero
+Quicksilver	Mercurio
+Quiddity	Esencia
+Quandary	Dilema
+Quasi	Cuasi
+Quester	Buscador
+Quenchless	Inextinguible
+Quixotic	Quijotesco
+Quizzical	Cuestionador
+Quo	Quo
+Quicken	Acelerar
+Quarrel	Pelea
+Quietude	Quietud
+Quiver	Temblor
+Quercus	Quercus
+Quasiparticle	Cuasipartícula
+Quadro	Cuadro
+Quotation	Cita
+Quiescent	Quieto
+Quota	Cuota
+Quarrelsome	Conflictivo
+Quizzing	Preguntando
+Quarrel	Disputa
+Quieting	Silenciando
+Quakerish	Cuáqueresco
+Quadrant	Cuadrante
+Quicksand	Arena movediza
+Quaff	Beber a sorbos
+Quarrel	Disputa
+Quantify	Cuantificar
+Quoted	Citado
+Quaintly	Singularmente
+Quizzed	Preguntado
+Quenchable	Saciable
+Quicksilvery	Mercurial
+Quasihistorical	Cuasihistórico
+Quodlibet	Quodlibet
+Quirkiness	Excentricidad
+Quiddity	Cualidad
+Quasi-symmetrical	Cuasi-simétrico
+Quarreled	Peleado
+Quotation	Cita
+Quizzicality	Cuestionabilidad
+Quotable	Citable
+Quirking	Excentricidad
+Quenchers	Saciadores
+Quiddity	Esencia
+Quirk	Peculiaridad
+Quicksilver	Mercurio
+Quizzical	Cuestionador
+Quagmired	Atrapado
+Quicksilvery	Mercurial
+Quicksands	Arenas movedizas
+Quietly	Silenciosamente
+Quantitative	Cuantitativo
+Quasi-legal	Cuasi-legal
+Quizzing	Cuestionando
+Quasar-like	Similar a cuásar
+Quencher	Saciador
+Quirked	Raro
+Quietness	Quietud
+Quizzicalness	Cuestionabilidad
+Quarrels	Peleas
+Quarters	Cuarteles
+Quasiparticles	Cuasipartículas
+Quandaries	Dilemas
+Quotation	Cita
+Quipster	Bromista
+Quiescence	Quietud
+Quicksand	Arena movediza
+Quagmires	Pantanos
+Quota	Cuota
+Quenching	Saciante
+Quincunx	Quincuncio
+Quibble	Cavilación
+Quarreler	Peleador
+Quizzically	Cuestionadoramente
+Quid	Libra
+Quota	Cuota
+Quicken	Acelerar
+Quarantine	Cuarentena
+Quicker	Más rápido
+Quirky	Peculiar
+Quietude	Quietud
+Quackery	Charlatanería
+Quakerism	Cuáquerismo
+Quaffed	Sorbido
+Quasars	Cuásares
+Quakeproof	A prueba de terremotos
+Quail	Codorniz
+Quirks	Rarezas
+Quarto	Cuarto
+Quasi-mythical	Cuasimítico
+Quirky	Peculiar
+Quench	Saciar
+Quiver	Temblor
+Quirking	Excentricidad
+Quicksilvery	Mercurial
+Quenching	Saciante
+Quindecim	Quince
+Quenching	Saciante
+Quizzes	Cuestionarios
+Quandary	Dilema
+Quotable	Citable
+Quack	Charlatán
+Quasi-experimental	Cuasi-experimental
+Quests	Búsquedas
+Quiver	Temblor
+Quirkiness	Excentricidad
+Quixotry	Quijotismo
+Quizzes	Cuestionarios
+Quiescent	Quieto
+Quoted	Citado
+Quixotic	Quijotesco
+Quill	Pluma
+Quota	Cuota
+Quail	Codorniz
+Quandaries	Dilemas
+Quake	Temblor
+Quark	Quark
+Quorum	Quórum
+Quicksilvery	Mercurial
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
