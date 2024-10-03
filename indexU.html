@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+         umbrella	paraguas
+uncle	tío
+unique	único
+united	unido
+universe	universo
+university	universidad
+up	arriba
+upon	sobre
+use	usar
+used	usado
+usual	habitual
+utility	utilidad
+ultimate	último
+upset	molesto
+urban	urbano
+urge	urgir
+uniform	uniforme
+update	actualizar
+upload	subir
+under	debajo
+understand	entender
+unfriend	eliminar amigo
+unlock	desbloquear
+unkind	cruel
+unwell	enfermo
+unlikely	poco probable
+unused	no utilizado
+unfit	en mala forma
+undo	deshacer
+unarmed	desarmado
+uproar	alboroto
+unit	unidad
+urge	impulso
+update	actualización
+upside	lado positivo
+undertaking	empresa
+unify	unificar
+unhealthy	poco saludable
+unload	descargar
+unlock	abrir
+unnoticeable	imperceptible
+upright	erguido
+uproarious	estruendoso
+unresponsive	no receptivo
+unbreakable	irrompible
+uncharted	inexplorado
+unleash	desatar
+unyielding	inflexible
+unshakable	inquebrantable
+unrecognized	no reconocido
+upsurge	aumento
+uproot	desarraigar
+unbalance	desequilibrio
+unfurl	desplegar
+unearth	desenterrar
+unsuspecting	desprevenido
+unwavering	firme
+undercut	socavar
+unfriendly	poco amigable
+unfit	no apto
+unqualified	no cualificado
+untimely	inoportuno
+ubication	ubicación
+ubiquitous	ubicuo
+ulcer	úlcera
+ultimate	definitivo
+ultimatum	ultimátum
+umpire	árbitro
+unacquainted	desconocido
+unadorned	sin adornos
+unaware	inconsciente
+unbelievable	increíble
+uncharted	inexplorado
+unclean	sucio
+unclear	poco claro
+unclouded	despejado
+uncommitted	no comprometido
+uncontrollable	incontrolable
+uncorrupted	incorrupto
+uncut	sin cortar
+underdog	desvalido
+underprivileged	desfavorecido
+uneducated	no educado
+unending	interminable
+unfair	injusto
+unfit	no apto
+ungrateful	ingrato
+unharmed	ileso
+unhinged	desquiciado
+unholy	impío
+unimportant	poco importante
+uninhabited	deshabitado
+unkempt	desaliñado
+unknown	desconocido
+unloved	no amado
+unmanageable	ingobernable
+unmarked	sin marcar
+unorthodox	poco ortodoxo
+unplanned	no planificado
+unpolished	sin pulir
+unqualified	no calificado
+unreal	irreal
+unrefined	no refinado
+unrestrained	desenfrenado
+unroll	desenrollar
+unscathed	ileso
+unshackled	liberado
+unsteady	inestable
+unsubstantiated	no fundamentado
+untamed	indómito
+untangle	desenredar
+untested	no probado
+unthinkable	impensable
+unworthy	indigno
+upbeat	optimista
+upland	tierras altas
+uphold	mantener
+upper	superior
+uproar	clamor
+upside-down	al revés
+upturn	giro positivo
+urge	urgencia
+unarmed	desarmado
+unyielding	inflexible
+unison	unísono
+unbound	sin límites
+uncharacteristic	poco característico
+unproductive	improductivo
+unremarkable	poco notable
+unrelenting	implacable
+unscrupulous	deshonesto
+unserviceable	fuera de servicio
+unshakable	inquebrantable
+unseasoned	sin sazonar
+unsung	desconocido
+unthinkable	impensable
+unworthy	indigno
+untried	no probado
+untrustworthy	poco confiable
+unyielding	inflexible
+unnoticed	no notado
+uplifting	edificante
+unoccupied	desocupado
+unclaimed	no reclamado
+unbridled	desenfrenado
+unconvincing	poco convincente
+uninvited	no invitado
+unmask	desenmascarar
+unbroken	intacto
+uncontainable	incontenible
+unquestionable	incuestionable
+unblemished	inmaculado
+unfathomable	insondable
+unflinching	imperturbable
+ungracious	grosero
+unkindly	cruelmente
+unlocked	desbloqueado
+unqualified	no calificado
+unrestrained	desenfrenado
+unthreatened	no amenazado
+unviable	inviable
+unwelcomed	no bienvenido
+unwarranted	injustificado
+unwieldy	torpe
+unwritten	no escrito
+uproarious	estruendoso
+unbending	inflexible
+unerring	infalible
+unheeded	ignorado
+unicycle	monociclo
+unfurling	desplegando
+undertow	corriente de fondo
+unmasking	desenmascaramiento
+unabashed	desenfadado
+unbound	sin ataduras
+unbending	inquebrantable
+unshackling	liberación
+ungainly	torpe
+ungoverned	no gobernado
+uninviting	poco acogedor
+unkempt	desaliñado
+unmitigated	absoluto
+unproven	no probado
+unqualified	no calificado
+unrepentant	no arrepentido
+unrestrained	desenfrenado
+unshaken	inquebrantado
+untamed	indómito
+untraceable	irreconocible
+unyielding	inflexible
+unscientific	no científico
+uncritical	no crítico
+unlovable	poco lovable
+unworkable	inviable
+unregistered	no registrado
+uninitiated	no iniciado
+unimpressed	poco impresionado
+unaltered	inalterado
+unproductive	improductivo
+unrepentant	no arrepentido
+unchallenged	no cuestionado
+unsolicited	no solicitado
+unbothered	no molestado
+uninvited	no invitado
+uninhabitable	inhabitable
+unmodified	no modificado
+unrecognizable	irreconocible
+unremarked	no mencionado
+unrelenting	implacable
+unfulfilled	insatisfecho
+underwhelmed	decepcionado
+uncommunicative	poco comunicativo
+undeclared	no declarado
+unblemished	inmaculado
+unapologetic	sin disculpas
+unshackled	liberado
+unessential	no esencial
+unpretentious	sin pretensiones
+untrusting	desconfiado
+unflattering	poco halagador
+unacknowledged	no reconocido
+unyielding	inflexible
+untapped	no explotado
+unreadable	ilegible
+uninviting	poco acogedor
+unquestioned	no cuestionado
+unfocused	desenfocado
+unqualified	no calificado
+uproarious	estruendoso
+untainted	puro
+unburdened	desahogado
+unbounded	ilimitado
+unceremonious	sin ceremonias
+undeniable	innegable
+unwelcoming	poco acogedor
+unrestrained	desenfrenado
+untold	incalculable
+unfulfilled	insatisfecho
+unlisted	no listado
+unclaimed	no reclamado
+unrefined	no refinado
+unmarked	sin marcar
+uncut	sin cortar
+unproven	no comprobado
+untamed	indómito
+unadorned	sin adornos
+unrelenting	implacable
+untrained	no entrenado
+ungracious	grosero
+unkindly	cruelmente
+untrustworthy	poco confiable
+unintentional	involuntario
+unseasoned	sin sazonar
+unspoken	no hablado
+unbridled	desenfrenado
+unbroken	intacto
+uncalled	no solicitado
+unacquainted	desconocido
+unflinching	imperturbable
+unkempt	desaliñado
+unqualified	no calificado
+unwarranted	injustificado
+unnoticed	no notado
+unprecedented	sin precedentes
+unintentional	involuntario
+unflattering	poco halagador
+unexplainable	inexplicable
+unperturbed	imperturbable
+untempered	no atenuado
+untraceable	irreconocible
+unrecognized	no reconocido
+unabashed	sin vergüenza
+unyielding	inflexible
+unlovable	poco amable
+unwavering	firme
+unconvincing	poco convincente
+undisciplined	indisciplinado
+uneducated	no educado
+undecided	indeciso
+unfulfilled	insatisfecho
+undisputed	indiscutible
+unabashed	desenfadado
+unaccountable	no responsable
+unadulterated	puro
+unapproachable	inaccesible
+unarmed	desarmado
+unassuming	modesto
+unbalanced	desequilibrado
+unbounded	ilimitado
+unburdened	desahogado
+uncalled	no solicitado
+uncaring	desinteresado
+uncharted	inexplorado
+uncluttered	ordenado
+unclothed	desnudo
+uncolored	sin color
+uncomely	poco atractivo
+unconcerned	despreocupado
+unconfident	inseguro
+unconsidered	no considerado
+uncontainable	incontenible
+unconvincing	poco convincente
+uncorrupted	incorrupto
+uncreated	no creado
+uncritical	no crítico
+uncurbed	sin freno
+uncut	sin cortar
+uncustomary	poco habitual
+undeclared	no declarado
+undecided	indeciso
+unearned	no ganado
+unearthed	desenterrado
+uneducated	no educado
+unendurable	insoportable
+unenthusiastic	poco entusiasta
+unexceptional	poco excepcional
+unexpended	no gastado
+unexperienced	inexperto
+unfeasible	inviable
+unfeeling	insensible
+unfettered	sin restricciones
+unflattering	poco halagador
+unfocused	desenfocado
+unformatted	sin formatear
+unfree	no libre
+unfriendly	poco amigable
+unfulfilled	insatisfecho
+ungraceful	torpe
+ungrateful	ingrato
+ungrounded	infundado
+unguarded	sin guardia
+uninhabitable	inhabitable
+unintentional	involuntario
+uninvited	no invitado
+unison	unísono
+unkempt	descuidado
+unknown	desconocido
+unloved	no amado
+unmanageable	ingobernable
+unmarked	sin marcar
+unmentioned	no mencionado
+unmissable	imperdible
+unobservant	poco observador
+unorthodox	poco ortodoxo
+unplanned	no planificado
+unpolished	sin pulir
+unqualified	no calificado
+unquiet	inquieto
+unrecognizable	irreconocible
+unrefined	no refinado
+unreliable	poco confiable
+unremitting	incesante
+unscheduled	no programado
+unsightly	antiestético
+unskillful	poco hábil
+unsophisticated	poco sofisticado
+unspoken	no hablado
+unsteady	inestable
+unsupervised	no supervisado
+untamed	indómito
+untested	no probado
+untidy	desordenado
+untimely	inoportuno
+untrustworthy	poco confiable
+untypical	atípico
+unyielding	inflexible
+unzipped	descomprimido
+up-and-coming	prometedor
+upscale	de lujo
+upheaval	conmoción
+uplifting	edificante
+uptight	tenso
+upcoming	próximo
+update	actualización
+uplift	elevar
+uphold	mantener
+upturn	giro positivo
+urinate	orinar
+urge	instar
+utilization	utilización
+utensil	utensilio
+utter	total
+utility	utilidad
+utopia	utopía
+uxorial	marital
+unaccompanied	no acompañado
+unavailability	indisponibilidad
+unanticipated	no anticipado
+unappreciated	poco apreciado
+unapproachable	inaccesible
+unattached	no adjunto
+unawareness	falta de conciencia
+unburden	desahogar
+unceremonious	sin ceremonias
+unchained	desencadenado
+uncharmed	desencantado
+unclaimed	no reclamado
+unclouded	despejado
+uncooperative	poco cooperativo
+uncritical	no crítico
+uncurtained	sin cortinas
+unfathomable	insondable
+unfriendly	poco amigable
+ungraceful	torpe
+unhesitating	decidido
+unintentional	involuntario
+uninvited	no invitado
+unkempt	desaliñado
+unkind	cruel
+unladylike	poco femenino
+unlooked	no esperado
+unqualified	no calificado
+unrecognized	no reconocido
+unregulated	no regulado
+unrepentant	no arrepentido
+unremarkable	poco notable
+unremitting	incesante
+unseasonable	poco habitual
+unsaturated	insaturado
+unsolvable	insoluble
+untouchable	intocable
+untrusting	desconfiado
+unyielding	inflexible
+unzipped	descomprimido
+unthreatening	no amenazante
+underdog	desvalido
+unfold	desplegar
+unearth	desenterrar
+untamed	indómito
+unveil	revelar
+unison	unísono
+unyielding	inflexible
+unkempt	desaliñado
+unmarked	sin marcar
+upgrade	mejorar
+unpaid	no pagado
+unison	unísono
+unhelpful	poco útil
+untrustworthy	poco confiable
+undeterred	inquebrantable
+unproductive	improductivo
+uproar	clamor
+unbearable	insoportable
+unflattering	poco halagador
+uplifted	elevado
+unqualified	no calificado
+unease	inquietud
+unprocessed	sin procesar
+uninviting	poco acogedor
+unremarkable	poco notable
+unseasoned	sin sazonar
+unhindered	sin obstáculos
+unbending	inflexible
+unfriendly	poco amistoso
+unfit	no apto
+unravel	desenredar
+unbelievable	increíble
+unbearable	insoportable
+unyielding	inflexible
+uneducated	no educado
+unfiltered	sin filtrar
+untidy	desordenado
+unnoticed	no notado
+unbounded	ilimitado
+unbearable	intolerable
+unwelcoming	poco acogedor
+unembellished	sin embellecer
+unexplainable	inexplicable
+unappreciated	poco apreciado
+uninvited	no invitado
+unending	interminable
+underrepresented	subrepresentado
+underwhelming	decepcionante
+uproarious	estruendoso
+unadorned	sin adornos
+unceremonious	sin ceremonias
+unassuming	modesto
+unanticipated	no anticipado
+unaccompanied	no acompañado
+unapproachable	inaccesible
+undetermined	indeterminado
+unintentional	involuntario
+uncharted	inexplorado
+unimpressive	poco impresionante
+unshakeable	inquebrantable
+unrepentant	no arrepentido
+unproductive	improductivo
+uninhabited	deshabitado
+unimposing	poco imponente
+unbroken	intacto
+untranslatable	intraducible
+untrusting	desconfiado
+unregulated	no regulado
+unapproachable	inaccesible
+unintentional	involuntario
+unworthy	indigno
+unqualified	no calificado
+unaccustomed	no acostumbrado
+unassailable	inatacable
+unbending	inflexible
+unnoticeable	imperceptible
+unfathomable	insondable
+uncaring	desinteresado
+unrelenting	implacable
+unsubstantiated	no fundamentado
+unmanageable	ingobernable
+unendurable	insoportable
+unambiguous	inequívoco
+unflinching	imperturbable
+unadulterated	puro
+uninspired	poco inspirado
+unapproachable	inaccesible
+unbreakable	irrompible
+unhurried	sin prisa
+unkind	cruel
+unfriendly	poco amigable
+unmatched	incomparable
+unflattering	poco halagador
+unmarked	sin marcar
+unpolished	sin pulir
+unregistered	no registrado
+unrecognizable	irreconocible
+unremitting	incesante
+unintentional	involuntario
+uninvited	no invitado
+unprecedented	sin precedentes
+unburdened	desahogado
+unadvised	no aconsejado
+unobtrusive	discreto
+uncooperative	poco cooperativo
+unencumbered	sin cargas
+unflattering	poco favorecedor
+unmarked	sin marcar
+unopened	no abierto
+ungrateful	ingrato
+unbending	inquebrantable
+unprepared	desprevenido
+unsettled	inquieto
+unthinking	irreflexivo
+unachievable	inalcanzable
+unflattering	poco atractivo
+unassuming	modesto
+unyielding	inflexible
+unqualified	no calificado
+unfounded	infundado
+untruthful	poco veraz
+unnoticed	no notado
+unfulfilled	insatisfecho
+unmeasured	no medido
+ungraceful	torpe
+unabashed	desenfadado
+underappreciated	poco apreciado
+unexplainable	inexplicable
+unanticipated	no anticipado
+unrecognizable	irreconocible
+unoccupied	desocupado
+unkindly	cruelmente
+unclaimed	no reclamado
+unsubstantiated	no fundamentado
+unwavering	firme
+unrelenting	implacable
+untempered	no atenuado
+untroubled	despreocupado
+unadventurous	poco aventurero
+unceremonious	sin ceremonias
+unshaken	inquebrantado
+unwilling	reacio
+unseemly	inapropiado
+uncolored	sin color
+unflattering	poco atractivo
+unduly	indebidamente
+ungraspable	incomprensible
+unremarkable	poco notable
+unrelatable	poco relacionable
+unseasoned	sin sazonar
+ululate	ulular
+unaccompanied	no acompañado
+unaccounted	no contabilizado
+unadvised	no aconsejado
+unalloyed	no aleado
+unalterable	inalterable
+unambiguous	inequívoco
+unappealing	poco atractivo
+unapproachable	inaccesible
+unassailable	inatacable
+unassuming	modesto
+unathletic	poco atlético
+unbending	inquebrantable
+unblinking	imperturbable
+unbroken	intacto
+unburdened	desahogado
+uncalled	no solicitado
+uncharted	inexplorado
+unclean	sucio
+unclear	poco claro
+unclouded	despejado
+uncommitted	no comprometido
+uncooperative	poco cooperativo
+uncontested	no disputado
+unconvincing	poco convincente
+uncorrupted	incorrupto
+uncostly	no costoso
+uncritical	no crítico
+uncurbed	sin freno
+uncut	sin cortar
+undeclared	no declarado
+undelivered	no entregado
+undemanding	poco exigente
+underwhelming	decepcionante
+uneducated	no educado
+unencumbered	sin cargas
+unequipped	no equipado
+unfeeling	insensible
+unfriendly	poco amigable
+unfruitful	infructuoso
+ungraceful	torpe
+unguarded	sin guardia
+unhackable	irrompible
+unheeded	ignorado
+uninhabitable	inhabitable
+unintentional	involuntario
+uninviting	poco acogedor
+unkempt	desaliñado
+unknowing	ignorante
+unloved	no amado
+unmanageable	ingobernable
+unmarked	sin marcar
+unmedicated	no medicado
+unmentioned	no mencionado
+unmindful	descuidado
+unmotivated	desmotivado
+unobstructed	sin obstáculos
+unobserved	no observado
+unopposed	no opositor
+unplanned	no planificado
+unpretentious	sin pretensiones
+unprocessed	sin procesar
+unprovoked	no provocado
+unqualified	no calificado
+unreliable	poco confiable
+unremarkable	poco notable
+unrepentant	no arrepentido
+unrestrained	desenfrenado
+unreturnable	no retornable
+unscathed	ileso
+unseasoned	sin sazonar
+unselfish	desinteresado
+unsettled	inquieto
+unsightly	antiestético
+unskilled	poco hábil
+unsolved	sin resolver
+unsophisticated	poco sofisticado
+unspoken	no hablado
+unstated	no declarado
+untamed	indómito
+untested	no probado
+unthinkable	impensable
+untrustworthy	poco confiable
+untypical	atípico
+unyielding	inflexible
+unzipped	descomprimido
+upheaval	conmoción
+unhelpful	poco útil
+unadorned	sin adornos
+uncharted	inexplorado
+undeterred	inquebrantable
+untroubled	despreocupado
+unyieldingly	inflexiblemente
+uninhabited	deshabitado
+unprepared	desprevenido
+unencumbered	libre de cargas
+unexamined	no examinado
+unflattering	poco halagador
+unforgetful	olvidadizo
+ungraspable	incomprensible
+unharmonious	poco armonioso
+uninvited	no invitado
+unkempt	desaliñado
+unlabored	sin esfuerzo
+unlegislated	no legislado
+unlicensed	no licenciado
+unmanageable	ingobernable
+unmitigated	absoluto
+unmovable	inmóvil
+unrecognized	no reconocido
+unrelenting	implacable
+unrequited	no correspondido
+unregulated	no regulado
+unscripted	no escrito
+unsent	no enviado
+unshakeable	inquebrantable
+untranslatable	intraducible
+untrusted	no confiable
+unwieldy	torpe
+unworthy	indigno
+upend	volcar
+uplifted	elevado
+upstart	advenedizo
+uproariously	estruendosamente
+upright	erguido
+uprooted	desarraigado
+unhelpfulness	falta de ayuda
+unavailability	indisponibilidad
+unavoidably	inevitable
+uninhabited	deshabitado
+ungracious	grosero
+unquiet	inquieto
+unperturbed	imperturbable
+unusable	inutilizable
+unbarred	sin barreras
+uncooperative	poco cooperativo
+unpretentious	sin pretensiones
+unexposed	no expuesto
+unreasoned	irrazonado
+unruly	rebelde
+untraced	sin rastrear
+unravel	desenredar
+unadventurous	poco aventurero
+unceasing	incesante
+unintended	involuntario
+unambitious	poco ambicioso
+unappeasable	implacable
+unbreakable	irrompible
+uncharitable	poco caritativo
+unhelped	no ayudado
+unlettered	iletrado
+unmissable	imperdible
+unrepentant	no arrepentido
+unyielding	inflexible
+unchallenged	no cuestionado
+untraceable	irreconocible
+unthought	no pensado
+untried	no probado
+unvarying	invariable
+unfathomed	insondable
+unflinching	imperturbable
+uncomfy	incómodo
+unburied	no enterrado
+unearned	no ganado
+unexpended	no gastado
+unexplored	inexplorado
+unsolicited	no solicitado
+unblemished	inmaculado
+uncheerful	poco alegre
+unchurched	sin iglesia
+uncoiled	desenrollado
+unconfident	inseguro
+uncontested	no disputado
+unchanging	invariable
+unknowing	ignorante
+unshakable	inquebrantable
+unwariness	falta de precaución
+unworked	no trabajado
+unusable	inutilizable
+unworn	no usado
+upbraid	reprender
+updraft	corriente ascendente
+upriver	río arriba
+upset	alterado
+uproar	clamor
+unqualified	no calificado
+unearthed	desenterrado
+unlikelihood	improbabilidad
+unyieldingly	inflexiblemente
+unignorable	innegable
+unwound	desenrollado
+unassuming	modesto
+unshackled	liberado
+unstrung	fuera de control
+unachievable	inalcanzable
+untrustworthy	poco confiable
+unrepentantly	sin arrepentimiento
+underappreciated	poco apreciado
+unimaginative	poco imaginativo
+unthinkingly	sin pensar
+unheeded	ignorado
+unmade	no hecho
+unroasted	no tostado
+unsettled	inquieto
+unsystematic	poco sistemático
+ununified	no unificado
+unpaid	no pagado
+uproarious	estruendoso
+unvarying	invariable
+uncut	sin cortar
+unchanged	inalterado
+unquestioned	no cuestionado
+unbending	inquebrantable
+unresolvable	irresoluble
+unyielding	inflexible
+uninterrupted	ininterrumpido
+untranslatable	intraducible
+unprompted	espontáneo
+uncomplicated	poco complicado
+unapologetic	sin disculpas
+unappetizing	poco apetitoso
+unyielding	inflexible
+unknowing	ignorante
+upstanding	recto
+upkeep	mantenimiento
+upbeat	optimista
+unviable	inviable
+unbeneficial	poco beneficioso
+uncelebrated	no celebrado
+underfoot	debajo de los pies
+unexplainable	inexplicable
+unheard	no oído
+unwavering	inquebrantable
+unknowable	inconocible
+untested	no probado
+unreal	irreal
+unspoiled	no arruinado
+uninvited	no invitado
+unregulated	no regulado
+unheard	no oído
+undesired	no deseado
+unacquainted	no conocido
+unpolished	sin pulir
+unimproved	no mejorado
+unwelcome	no bienvenido
+unbroken	intacto
+unexploited	no explotado
+unusable	inutilizable
+uncovered	descubierto
+unfiltered	sin filtrar
+unwilling	reacio
+uninformative	poco informativo
+unremarked	no comentado
+unrestrained	desenfrenado
+unguarded	desprotegido
+unguarded	desprotegido
+unloved	no amado
+unnoticed	no notado
+unfulfilled	insatisfecho
+unaccompanied	no acompañado
+unambitious	poco ambicioso
+unfurnished	sin amueblar
+uninhabited	deshabitado
+unwashed	no lavado
+unwarranted	injustificado
+unfound	no encontrado
+unspeakable	innombrable
+unyieldingly	inflexiblemente
+uncluttered	despejado
+unspoiled	no arruinado
+untreated	no tratado
+unremembered	no recordado
+unrepentant	no arrepentido
+undaunted	intrepido
+unencumbered	libre de cargas
+ungrateful	ingrato
+unadulterated	puro
+ungoverned	no gobernado
+unsatisfying	insatisfactorio
+unaltered	inalterado
+unlearned	no aprendido
+unyielding	inflexible
+unthinkable	impensable
+untrustworthy	poco confiable
+uphill	cuesta arriba
+undercurrent	corriente subterránea
+unprecedented	sin precedentes
+unscrupulous	sin escrúpulos
+unflattering	poco halagador
+untold	inestimable
+ultimatum	ultimátum
+unexplainable	inexplicable
+underappreciated	poco apreciado
+unauthorized	no autorizado
+unkempt	desaliñado
+untrusting	desconfiado
+unscathed	ileso
+unrepentant	impenitente
+unrelenting	implacable
+uninhabitable	inhabitable
+unplanned	no planificado
+unfurl	desplegar
+unyielding	inflexible
+unbreakable	irrompible
+unremarkable	poco notable
+unrepentantly	sin arrepentimiento
+unthinkable	impensable
+underwhelming	decepcionante
+unaccustomed	no acostumbrado
+unwelcoming	poco acogedor
+unadorned	sin adornos
+unworthy	indigno
+unbelievable	increíble
+unshakeable	inquebrantable
+unassailable	inatacable
+unmitigated	absoluto
+unintentional	involuntario
+unfriendly	poco amigable
+unrecognized	no reconocido
+unending	interminable
+unremarked	no mencionado
+unyieldingly	inflexiblemente
+unapproachable	inaccesible
+unbending	inflexible
+unwarranted	injustificado
+unbearable	insoportable
+unguarded	desprotegido
+untapped	no explotado
+unfulfilled	insatisfecho
+unappealing	poco atractivo
+unaltered	inalterado
+unchained	desencadenado
+unmarked	sin marcar
+unnoticed	no notado
+untethered	sin atar
+unprepared	desprevenido
+unopened	no abierto
+unbothered	sin molestar
+unrefined	no refinado
+unamused	poco divertido
+uneducated	no educado
+unenthusiastic	poco entusiasta
+unblinking	sin parpadear
+unfulfilled	insatisfecho
+unspooled	desenrollado
+unrevealed	no revelado
+unsolved	sin resolver
+unaccountable	no responsable
+unfriendly	poco amistoso
+unscrutinized	sin escrutinio
+unlisted	no listado
+unprocessed	sin procesar
+unshackled	liberado
+unopened	no abierto
+uncrumpled	sin arrugar
+uncommunicative	poco comunicativo
+uninviting	poco acogedor
+unqualified	no calificado
+undisciplined	indisciplinado
+unintentionally	involuntariamente
+unfiltered	sin filtrar
+unexploited	no explotado
+unintentional	involuntario
+unrelenting	implacable
+unregulated	no regulado
+untraceable	irreconocible
+unblemished	inmaculado
+uncharted	inexplorado
+ungainly	torpe
+unsteady	inestable
+unalterable	inalterable
+unexamined	no examinado
+unsustainable	insostenible
+unworkable	inviable
+unseemly	inapropiado
+uninhibited	desinhibido
+uninteresting	poco interesante
+unspooling	desenrollando
+unyielding	inflexible
+unintelligible	incomprensible
+unadvisable	desaconsejable
+unrelieved	sin alivio
+unfulfilled	insatisfecho
+unsubstantiated	no fundamentado
+untried	no probado
+unproductive	improductivo
+unorthodox	poco ortodoxo
+unfit	no apto
+untroubled	despreocupado
+untrustworthy	poco confiable
+unmeasured	no medido
+unholy	impío
+uncaring	desinteresado
+unshaken	inquebrantado
+unflagging	incansable
+unflinching	imperturbable
+unobserved	no observado
+unbending	inflexible
+uncharted	inexplorado
+unmasked	desenmascarado
+unpardonable	imperdonable
+unmade	no hecho
+unopened	no abierto
+uncooperative	poco cooperativo
+unrelenting	implacable
+unraveled	desenredado
+unthinkable	impensable
+unqualified	no calificado
+unfilled	sin llenar
+unprovoked	no provocado
+unbound	sin ataduras
+untraced	sin rastrear
+unquestionable	incuestionable
+unlooked	no esperado
+untamed	indómito
+unpaid	no pagado
+unblemished	inmaculado
+unplanned	no planificado
+unequipped	no equipado
+unguarded	desprotegido
+unaccompanied	no acompañado
+unrefined	no refinado
+unremarkable	poco notable
+unadulterated	puro
+unharassed	sin acoso
+unrestrained	desenfrenado
+unkempt	desaliñado
+unadventurous	poco aventurero
+unbothered	sin molestia
+unnoted	no mencionado
+unspent	no gastado
+untrustworthy	poco confiable
+unshackled	liberado
+unguided	desorientado
+uncelebrated	no celebrado
+unflattering	poco favorecedor
+unmistakable	inconfundible
+unceasing	incesante
+unengaged	desinteresado
+unstructured	desestructurado
+unnoticed	no notado
+unmonitored	no monitoreado
+unrecognized	no reconocido
+untrusting	desconfiado
+unbending	inflexible
+unappeasable	implacable
+unapologetic	sin disculpas
+unfettered	sin restricciones
+unperturbed	imperturbable
+unrushed	sin prisa
+unlocalized	no localizado
+unaccompanied	no acompañado
+unpracticed	no practicado
+uninspected	no inspeccionado
+unabashed	desenfadado
+unyielding	inflexible
+unassailable	inatacable
+unregulated	no regulado
+unremarked	no mencionado
+undemanding	poco exigente
+unmotivated	desmotivado
+undeterred	inquebrantable
+uninitiated	no iniciado
+unmatched	incomparable
+unfulfilled	insatisfecho
+unregretful	sin arrepentimiento
+unwound	desenrollado
+uninterested	desinteresado
+unembellished	sin embellecer
+unhelpful	poco útil
+uncritical	no crítico
+unthinkingly	sin pensar
+unshackled	liberado
+unhindered	sin obstáculos
+uncomprehending	incomprensivo
+unoriginal	no original
+unpaid	no pagado
+unworthy	indigno
+unadvised	desaconsejado
+unruly	indisciplinado
+unwavering	inquebrantable
+unapproving	desaprobador
+unqualified	no calificado
+unadorned	sin adornos
+unperturbed	imperturbable
+unshakeable	inquebrantable
+unhinged	desquiciado
+unintended	no intencionado
+unfocused	desenfocado
+unprepared	desprevenido
+ungrateful	ingrato
+unremarkable	poco notable
+unyielding	inflexible
+unshakable	inquebrantable
+unencumbered	libre de cargas
+unchangeable	inmutable
+unapproachable	inaccesible
+unrelenting	implacable
+unforgivable	imperdonable
+unidentifiable	no identificable
+unorthodox	poco ortodoxo
+undisguised	no disfrazado
+unflattering	poco halagador
+uninformed	desinformado
+unbidden	no solicitado
+unimpeded	sin obstáculos
+unfinished	inacabado
+unrefined	no refinado
+unflinching	imperturbable
+unapologetic	sin disculpas
+unbounded	ilimitado
+unyielding	inflexible
+unflappable	imperturbable
+unassailable	inatacable
+ungracious	poco amable
+ungainly	torpe
+unpretentious	sin pretensiones
+unkempt	desaliñado
+unconvincing	poco convincente
+underwhelmed	decepcionado
+unbroken	entero
+unscathed	ileso
+unnoticed	no notado
+uneventful	sin eventos
+unwarranted	injustificado
+unassuming	modesto
+unrepeatable	irrepetible
+unclaimed	no reclamado
+unprofitable	no rentable
+unflattering	poco favorecedor
+undivided	indivisible
+unpopulated	despoblado
+unorganized	desorganizado
+unreserved	sin reservas
+unresolved	sin resolver
+uncluttered	ordenado
+unbending	inflexible
+unoccupied	desocupado
+unharmonious	disonante
+uninhabited	deshabitado
+unambiguous	inequívoco
+unforgotten	no olvidado
+unrestrained	desenfrenado
+unnoticed	no notado
+unwavering	firme
+uncolored	sin color
+unremarked	no mencionado
+unmeasured	no medido
+unblemished	inmaculado
+unadorned	sin adornos
+unconquered	inconquistado
+untold	inestimable
+unproven	no probado
+uninterrupted	ininterrumpido
+unbending	inflexible
+unquestioned	incuestionado
+unbreakable	irrompible
+unassuming	modesto
+unconcerned	despreocupado
+unapologetically	sin disculpas
+uncooperative	poco cooperativo
+unquestionable	incuestionable
+underprivileged	desfavorecido
+untamed	indómito
+unresolved	sin resolver
+unconventional	poco convencional
+unoccupied	desocupado
+untraceable	irreconocible
+unmeasured	no medido
+unrehearsed	no ensayado
+unneeded	innecesario
+unrecognized	no reconocido
+unfulfilled	insatisfecho
+unheralded	no anunciado
+unfruitful	estéril
+unreadable	ilegible
+ungodly	impío
+unobstructed	despejado
+unmatched	incomparable
+unbending	inflexible
+untamed	indómito
+unquenchable	inextinguible
+unrestrained	desenfrenado
+unpretentious	sin pretensiones
+unbreakable	irrompible
+undisputed	indiscutible
+unblinking	sin parpadear
+unpretentious	sin pretensiones
+unconscionable	injustificable
+unadvised	desaconsejado
+unaffected	no afectado
+unconfident	inseguro
+unerring	infalible
+underwhelming	decepcionante
+unyielding	inflexible
+unburdened	libre de cargas
+unmatched	incomparable
+unwelcoming	poco acogedor
+unthinking	poco pensante
+uninviting	poco acogedor
+unexamined	no examinado
+unspoiled	no estropeado
+unassuming	modesto
+unrelenting	implacable
+unfettered	sin restricciones
+unsparing	despiadado
+unhinged	desquiciado
+unquestionable	incuestionable
+unshakable	inquebrantable
+unexciting	poco emocionante
+unmistakable	inconfundible
+unbroken	entero
+undone	no hecho
+unacquainted	no conocido
+uncontroversial	no controvertido
+unwilling	reacio
+unholy	impío
+unenlightened	no iluminado
+unrepentant	impenitente
+unaltered	inalterado
+uninvited	no invitado
+unabated	sin cesar
+unrepeatable	irrepetible
+unquestioned	incuestionado
+unadorned	sin adornos
+unceasing	incesante
+unwritten	no escrito
+unbroken	entero
+unthinkable	impensable
+unheeded	ignorado
+unsanctioned	no sancionado
+unprescribed	no prescrito
+unwelcoming	poco acogedor
+unfinished	inacabado
+undeterred	inquebrantable
+unscathed	ileso
+unpaid	no pagado
+ungainly	torpe
+unyielding	inflexible
+unnoticed	no notado
+unclaimed	no reclamado
+unimpressive	poco impresionante
+ungrateful	ingrato
+uninterested	desinteresado
+unhurried	sin prisa
+unreported	no reportado
+unquestionable	incuestionable
+unopposed	sin oposición
+uninterested	desinteresado
+unmarked	sin marcar
+unflinching	imperturbable
+unencumbered	libre de cargas
+unfinished	inacabado
+unfathomable	incomprensible
+unchanged	inalterado
+undeniable	innegable
+unyielding	inflexible
+uncomprehending	incomprensivo
+uncelebrated	no celebrado
+unchallenged	no cuestionado
+unaccustomed	no acostumbrado
+unclaimed	no reclamado
+unfinished	inacabado
+uncluttered	ordenado
+unthreatening	no amenazante
+untempered	no templado
+unqualified	no calificado
+unrefined	no refinado
+unambiguous	inequívoco
+untainted	no contaminado
+unspoken	no dicho
+unconfined	no confinado
+unbalanced	desequilibrado
+unperturbed	imperturbable
+unclaimed	no reclamado
+unhurried	sin prisa
+uneventful	sin eventos
+unforseen	no previsto
+unqualified	no calificado
+unmistakable	inconfundible
+unapologetically	sin disculpas
+unshakable	inquebrantable
+untempered	no templado
+uncharmed	sin encanto
+uncompromising	intransigente
+unlovable	poco amoroso
+uncooperative	poco cooperativo
+unkempt	desaliñado
+unfulfilled	insatisfecho
+unlit	sin luz
+unspent	no gastado
+untested	no probado
+unnoticed	no notado
+unopened	no abierto
+unparalleled	sin par
+unbending	inflexible
+unforgiving	implacable
+unadorned	sin adornos
+undiscussed	no discutido
+untroubled	sin preocupaciones
+unpolished	poco pulido
+unperturbed	imperturbable
+unshakable	inquebrantable
+unspoken	no dicho
+uncooperative	poco cooperativo
+unclaimed	no reclamado
+unbridled	desenfrenado
+untroubled	sin preocupaciones
+untrammeled	sin restricciones
+unending	interminable
+unholy	impío
+undone	no hecho
+unaffected	no afectado
+unadulterated	no adulterado
+unrepentant	impenitente
+unaccompanied	sin acompañamiento
+unmatched	incomparable
+unencumbered	libre de cargas
+unmeasured	no medido
+unbridled	desenfrenado
+unyielding	inflexible
+untested	no probado
+underwhelming	decepcionante
+unmentioned	no mencionado
+unrelenting	implacable
+unspoken	no dicho
+unreadable	ilegible
+unneeded	innecesario
+unopposed	sin oposición
+ungainly	torpe
+unexamined	no examinado
+unadorned	sin adornos
+unwelcoming	poco acogedor
+unspoiled	no estropeado
+unrecognized	no reconocido
+unapologetic	sin disculpas
+uninterrupted	ininterrumpido
+unintelligible	incomprensible
+uninvited	no invitado
+unrepentant	impenitente
+unyielding	inflexible
+unconventionally	de manera poco convencional
+unassailable	inatacable
+untraced	no rastreado
+untraceable	irreconocible
+unconcerned	despreocupado
+unexplainable	inexplicable
+unintentionally	involuntariamente
+unbreakable	irrompible
+uncomplicated	sencillo
+undeterred	inquebrantable
+unmotivated	sin motivación
+understated	sutil
+unverified	no verificado
+unanswered	sin respuesta
+unheralded	no anunciado
+uninhibited	desenfrenado
+unsanctioned	no sancionado
+unfulfilled	insatisfecho
+undesired	no deseado
+unadorned	sin adornos
+unidentified	no identificado
+unavoidable	inevitable
+unbridled	desenfrenado
+underrepresented	subrepresentado
+unqualified	no calificado
+unrecognized	no reconocido
+unappreciated	poco apreciado
+unfiltered	no filtrado
+unnoticed	no notado
+unimaginable	inimaginable
+unbending	inflexible
+unglamorous	poco glamuroso
+uncontroversial	no controvertido
+unneeded	innecesario
+unintentional	no intencionado
+unconvincingly	de manera poco convincente
+untarnished	no manchado
+uncritical	no crítico
+unflattering	poco favorecedor
+unaffected	no afectado
+unspooled	desenrollado
+undeclared	no declarado
+unromantic	poco romántico
+unshackled	liberado
+unassuming	modesto
+unromantic	poco romántico
+undeterred	inquebrantable
+unambiguous	inequívoco
+unneeded	innecesario
+unbroken	entero
+unmoored	desanclado
+untrustworthy	poco fiable
+unapologetic	sin disculpas
+unintimidated	sin intimidar
+unshackled	liberado
+unsentimental	poco sentimental
+untrusted	no confiable
+unrestrained	desenfrenado
+unfathomable	incomprensible
+uncompromising	intransigente
+unseen	no visto
+unanswered	sin respuesta
+uninviting	poco acogedor
+unpretentious	sin pretensiones
+untrammeled	sin restricciones
+untouched	intocable
+unbending	inflexible
+unrefined	no refinado
+unmarked	sin marcar
+unchanged	inalterado
+unrewarded	no recompensado
+unchained	desencadenado
+ungodly	impío
+unequipped	sin equipar
+unmeasurable	inmedible
+uneducated	no educado
+unnoteworthy	poco notable
+unforeseen	no previsto
+unshackled	liberado
+unpardonable	imperdonable
+uncharacteristic	poco característico
+unscientific	no científico
+undisciplined	indisciplinado
+unsustainable	insostenible
+unacknowledged	no reconocido
+uncontainable	incontenible
+unnoticed	no notado
+untried	no probado
+unyieldingly	de manera inflexible
+uneducated	no educado
+unrelenting	implacable
+unearned	no ganado
+unglamorous	poco glamuroso
+ungracious	poco amable
+uncooperative	poco cooperativo
+unexceptional	poco excepcional
+unrepentant	impenitente
+unreadable	ilegible
+unwilling	reacio
+unpretentious	sin pretensiones
+unforgiving	implacable
+undisguised	no disfrazado
+unimpressed	poco impresionado
+unfriendly	poco amigable
+unemotional	poco emocional
+untouched	intocable
+unblinking	sin parpadear
+unclaimed	no reclamado
+uninhabited	deshabitado
+unadvised	desaconsejado
+unforeseen	no previsto
+unfulfilled	insatisfecho
+unwarranted	injustificado
+unwelcome	poco acogedor
+unnoticed	no notado
+unspoiled	no estropeado
+unyielding	inflexible
+untainted	no contaminado
+unbroken	entero
+unregarded	no considerado
+uncomplimentary	poco halagador
+unresolved	sin resolver
+unexceptional	poco excepcional
+unafraid	sin miedo
+unconsenting	sin consentimiento
+unprepared	desprevenido
+unfocused	desenfocado
+unrepentant	impenitente
+unexpressed	no expresado
+unforeseen	no previsto
+unshakable	inquebrantable
+unrestrained	desenfrenado
+unlovable	poco amoroso
+untouched	intocable
+unpleased	descontento
+unattended	no atendido
+unrestrained	desenfrenado
+unvoiced	no expresado
+unyielding	inflexible
+unobtrusive	discreto
+unrecorded	no registrado
+uneventful	sin eventos
+unquestionable	incuestionable
+untraceable	irreconocible
+unburdened	libre de cargas
+unfriendly	poco amigable
+unmanageable	inmanejable
+unshakeable	inquebrantable
+unmissable	ineludible
+unheeded	ignorado
+unrelenting	implacable
+unnoticed	no notado
+unbending	inflexible
+unqualified	no calificado
+undiminished	no disminuido
+undone	no hecho
+ungraceful	poco gracioso
+undemanding	poco exigente
+unobstructed	despejado
+unproductive	poco productivo
+unguarded	desprotegido
+unperturbed	imperturbable
+unrefined	no refinado
+unreconcilable	irreconciliable
+unlikable	poco simpático
+unsolicited	no solicitado
+unnoticed	no notado
+unchained	desencadenado
+unsustainable	insostenible
+undeterred	inquebrantable
+unfettered	sin restricciones
+undisciplined	indisciplinado
+unyielding	inflexible
+unforgettable	inolvidable
+unrelatable	poco relacionado
+unappealing	poco atractivo
+uncomplicated	sencillo
+unconvincing	poco convincente
+unnoticed	no notado
+unusable	inutilizable
+unfinished	inacabado
+unobstructed	despejado
+unalterable	inalterable
+unattended	no atendido
+undemanding	poco exigente
+untrained	no entrenado
+unflattering	poco halagador
+unmanageable	inmanejable
+unhurried	sin prisa
+unencumbered	libre de cargas
+unchangeable	inmutable
+untrammeled	sin restricciones
+unprepared	desprevenido
+untested	no probado
+unrecognized	no reconocido
+unforgivable	imperdonable
+unforgettable	inolvidable
+unknowable	incognoscible
+uncooperative	poco cooperativo
+unaffected	no afectado
+uninviting	poco acogedor
+unfiltered	no filtrado
+unfocused	desenfocado
+unwieldy	complicado
+unnoticed	no notado
+unrefined	no refinado
+undeniable	innegable
+unenlightened	no iluminado
+uninspired	poco inspirado
+unforgiving	implacable
+unqualified	no calificado
+unendurable	inaguantable
+unceasing	incesante
+unpersuaded	no convencido
+uninhibited	desenfrenado
+unacceptable	inaceptable
+uncomplicated	sencillo
+unhinged	desquiciado
+unshackled	liberado
+unquestioning	incondicional
+ungraceful	poco gracioso
+unhesitating	decidido
+undecided	indeciso
+uncharted	no cartografiado
+uninhibited	desenfrenado
+unrepentant	impenitente
+unchallenged	no cuestionado
+unrepentantly	sin arrepentirse
+uninitiated	no iniciado
+unqualified	no calificado
+unnoticed	no notado
+unprecedented	sin precedentes
+unamusing	poco divertido
+unapologetically	sin disculpas
+unresolved	sin resolver
+unmistakably	de manera inconfundible
+unencumbered	libre de cargas
+undeclared	no declarado
+ungracious	poco amable
+unregarded	no considerado
+untested	no probado
+unnoticed	no notado
+unfocused	desenfocado
+unfiltered	no filtrado
+uncooperative	poco cooperativo
+uninspired	poco inspirado
+uninhibited	desenfrenado
+unfulfilled	insatisfecho
+unrepentant	impenitente
+unyielding	inflexible
+unbreakable	irrompible
+unmatched	incomparable
+unambiguous	inequívoco
+unexceptional	poco excepcional
+unqualified	no calificado
+unwelcoming	poco acogedor
+unkempt	desaliñado
+ungrateful	ingrato
+unachievable	inalcanzable
+unanswered	sin respuesta
+uncharted	no cartografiado
+unabashed	sin vergüenza
+unfeeling	insensible
+unearthed	desenterrado
+uninterrupted	ininterrumpido
+unending	interminable
+undone	no hecho
+unintelligible	incomprensible
+unfulfilled	insatisfecho
+unshakable	inquebrantable
+unregrettable	no lamentable
+unexamined	no examinado
+unreadable	ilegible
+unquestionable	incuestionable
+uninterested	desinteresado
+unnoticed	no notado
+unchangeable	inmutable
+unshakable	inquebrantable
+uncontained	incontrolado
+unbelievable	increíble
+unexamined	no examinado
+unintelligible	incomprensible
+unprofessional	poco profesional
+unintended	no intencionado
+uncompromising	intransigente
+unrefined	no refinado
+unflinching	imperturbable
+unquestioning	incondicional
+unmistakable	inconfundible
+unreported	no reportado
+unseen	no visto
+unmeasured	no medido
+unwelcome	poco acogedor
+unremarkable	poco notable
+unfulfilled	insatisfecho
+unquestioned	incuestionado
+uninhibited	desenfrenado
+unenthusiastic	poco entusiasta
+unsolicited	no solicitado
+unwelcoming	poco acogedor
+unrefined	no refinado
+unquestioned	incuestionado
+unpunished	no castigado
+ungracious	poco amable
+unrepentant	impenitente
+unlikable	poco simpático
+unholy	impío
+unflattering	poco halagador
+unenlightened	no iluminado
+undisclosed	no revelado
+unbreakable	irrompible
+unnoticed	no notado
+unrecognized	no reconocido
+unrevised	no revisado
+unmarked	sin marcar
+untrustworthy	poco fiable
+unclean	sucio
+unnoticed	no notado
+unapologetic	sin disculpas
+unintimidated	sin intimidar
+undesired	no deseado
+unfiltered	no filtrado
+unchanged	inalterado
+unremarkable	poco notable
+unsanctioned	no sancionado
+unorthodox	poco ortodoxo
+unclaimed	no reclamado
+unabashed	sin vergüenza
+unbending	inflexible
+untested	no probado
+unlit	sin luz
+unrecognizable	irreconocible
+uninterrupted	ininterrumpido
+unwanted	no deseado
+unrestrained	desenfrenado
+uninspired	poco inspirado
+undeterred	inquebrantable
+unopened	no abierto
+uninviting	poco acogedor
+unquestionable	incuestionable
+unmasked	sin máscara
+uninterested	desinteresado
+unfaltering	inquebrantable
+unrelenting	implacable
+unmatched	incomparable
+unreadable	ilegible
+underwhelming	decepcionante
+unremarked	no mencionado
+unimaginable	inimaginable
+unalterable	inalterable
+unproductive	poco productivo
+unfiltered	no filtrado
+unbearable	insoportable
+unexplained	no explicado
+unmatched	incomparable
+unbothered	sin preocuparse
+unmanageable	inmanejable
+unprepared	desprevenido
+untrustworthy	poco fiable
+uninspired	poco inspirado
+unkind	poco amable
+unending	interminable
+unnoticed	no notado
+unforeseen	no previsto
+unmistakable	inconfundible
+uninterested	desinteresado
+uninterested	desinteresado
+uncomplicated	sencillo
+undeterred	inquebrantable
+unfulfilled	insatisfecho
+unmistakably	de manera inconfundible
+unrecognizable	irreconocible
+unutterable	inefable
+unfathomable	incomprensible
+unblemished	sin mancha
+undelivered	no entregado
+unlisted	no listado
+unheard	no oído
+unquestioned	incuestionado
+unforgiven	no perdonado
+unimaginative	poco imaginativo
+unrepentant	impenitente
+uncomplicated	sencillo
+unclaimed	no reclamado
+unresolved	sin resolver
+unwritten	no escrito
+unbroken	entero
+unorthodox	poco ortodoxo
+untraced	no rastreado
+unduly	excesivamente
+unyielding	inflexible
+unquestionable	incuestionable
+undetermined	no determinado
+undeniable	innegable
+unpretentious	sin pretensiones
+uneventful	sin eventos
+unnoticeable	imperceptible
+unbounded	ilimitado
+unforgettable	inolvidable
+uncontainable	incontenible
+unwelcome	poco acogedor
+unquestioned	incuestionado
+unconscionable	inaceptable
+unfiltered	no filtrado
+ungoverned	no gobernado
+unrepentant	impenitente
+unwanted	no deseado
+unbreakable	irrompible
+unwelcoming	poco acogedor
+unheard	no oído
+unbridled	desenfrenado
+unembellished	sin embellecer
+untrusting	desconfiado
+unadulterated	no adulterado
+unending	interminable
+unexplained	no explicado
+unreserved	sin reservas
+unexplained	no explicado
+unremarkable	poco notable
+unlovable	poco amoroso
+unyielding	inflexible
+unbroken	entero
+undemanding	poco exigente
+unavoidable	inevitable
+unflagged	sin marcar
+unsanctioned	no sancionado
+unwilling	reacio
+unstudied	no estudiado
+unquestioning	incondicional
+untried	no probado
+unavoidable	inevitable
+unnoticed	no notado
+untouched	intocable
+unexplained	no explicado
+unabashed	sin vergüenza
+untested	no probado
+unacknowledged	no reconocido
+unqualified	no calificado
+uninterrupted	ininterrumpido
+unbelievable	increíble
+unblemished	sin mancha
+unperceived	no percibido
+unproven	no probado
+unceremonious	sin ceremonias
+underwhelmed	decepcionado
+uncredited	no acreditado
+unexplained	no explicado
+uninterrupted	ininterrumpido
+unanswered	sin respuesta
+unquestionable	incuestionable
+unaltered	inalterado
+unmistakably	de manera inconfundible
+unbidden	no invitado
+unaccompanied	sin acompañamiento
+unambiguous	inequívoco
+unexamined	no examinado
+unrewarding	poco gratificante
+undetermined	no determinado
+unmeasured	no medido
+unshackled	liberado
+unseemly	inadecuado
+uninviting	poco acogedor
+undesirable	indeseable
+unattached	no adjunto
+unhelpful	poco útil
+unexplainable	inexplicable
+unanticipated	no anticipado
+unfulfilled	insatisfecho
+unbound	libre
+unproductive	poco productivo
+unworthy	indigno
+unquestionable	incuestionable
+unencumbered	libre de cargas
+undisturbed	no perturbado
+unbelievable	increíble
+unassuming	modesto
+unflinching	inquebrantable
+uninvited	no invitado
+unnoticed	no notado
+unconquered	inquebrantable
+unrecognized	no reconocido
+unjust	injusto
+unshielded	desprotegido
+unhurried	sin prisa
+unvoiced	no expresado
+unspent	no gastado
+unapologetically	sin disculpas
+uninhabited	deshabitado
+unnoticed	no notado
+unfiltered	no filtrado
+unseen	no visto
+undeniable	innegable
+unmentionable	innombrable
+unacceptable	inaceptable
+uninformative	poco informativo
+untraced	no rastreado
+unharmed	ileso
+unmentioned	no mencionado
+unproven	no probado
+unaccompanied	sin acompañamiento
+unacceptable	inaceptable
+uninvited	no invitado
+undesired	no deseado
+unbearable	insoportable
+uncritical	no crítico
+unrecognizable	irreconocible
+unbounded	ilimitado
+unquestionable	incuestionable
+undone	no hecho
+unnoticed	no notado
+unavoidable	inevitable
+unremarkable	poco notable
+unremarkable	poco notable
+unadorned	sin adornos
+untrusting	desconfiado
+unredeemed	no redimido
+unmanageable	inmanejable
+unshakable	inquebrantable
+unexpected	inesperado
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
