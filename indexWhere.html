@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+         Where are you going?	¿A dónde vas?
+Where do you live?	¿Dónde vives?
+Where can I find a good restaurant?	¿Dónde puedo encontrar un buen restaurante?
+Where did you buy that?	¿Dónde compraste eso?
+Where is the nearest bus stop?	¿Dónde está la parada de autobús más cercana?
+Where do you work?	¿Dónde trabajas?
+Where is the restroom?	¿Dónde está el baño?
+Where did you grow up?	¿Dónde creciste?
+Where can I get more information?	¿Dónde puedo obtener más información?
+Where is the library located?	¿Dónde se encuentra la biblioteca?
+Where do you usually go on vacation?	¿Dónde sueles ir de vacaciones?
+Where are your keys?	¿Dónde están tus llaves?
+Where should we meet?	¿Dónde deberíamos encontrarnos?
+Where is the nearest grocery store?	¿Dónde está el supermercado más cercano?
+Where can I buy tickets?	¿Dónde puedo comprar boletos?
+Where did you find that book?	¿Dónde encontraste ese libro?
+Where is your favorite place to relax?	¿Dónde está tu lugar favorito para relajarte?
+Where are the meeting rooms?	¿Dónde están las salas de reuniones?
+Where did you park the car?	¿Dónde aparcaste el coche?
+Where do you want to go for dinner?	¿Dónde quieres ir a cenar?
+Where is the nearest hospital?	¿Dónde está el hospital más cercano?
+Where can I get a taxi?	¿Dónde puedo conseguir un taxi?
+Where does this road lead?	¿A dónde lleva este camino?
+Where do you see yourself in five years?	¿Dónde te ves en cinco años?
+Where can I find a map?	¿Dónde puedo encontrar un mapa?
+Where did you last see him?	¿Dónde lo viste por última vez?
+Where are you from?	¿De dónde eres?
+Where is the closest airport?	¿Dónde está el aeropuerto más cercano?
+Where did you hear that?	¿Dónde escuchaste eso?
+Where can I get some help?	¿Dónde puedo obtener ayuda?
+Where do you keep your documents?	¿Dónde guardas tus documentos?
+Where is the main entrance?	¿Dónde está la entrada principal?
+Where do you prefer to study?	¿Dónde prefieres estudiar?
+Where is your favorite travel destination?	¿Cuál es tu destino de viaje favorito?
+Where can I find a good book?	¿Dónde puedo encontrar un buen libro?
+Where did you travel last year?	¿A dónde viajaste el año pasado?
+Where are we having the party?	¿Dónde vamos a tener la fiesta?
+Where can I learn more about this topic?	¿Dónde puedo aprender más sobre este tema?
+Where do you like to shop?	¿Dónde te gusta ir de compras?
+Where is the best place to watch the sunset?	¿Dónde es el mejor lugar para ver el atardecer?
+Where do you go for a walk?	¿A dónde vas a pasear?
+Where is the nearest gas station?	¿Dónde está la gasolinera más cercana?
+Where do you usually get your news?	¿Dónde sueles obtener tus noticias?
+Where should I send the package?	¿Dónde debo enviar el paquete?
+Where is the nearest bank?	¿Dónde está el banco más cercano?
+Where do you prefer to spend your weekends?	¿Dónde prefieres pasar tus fines de semana?
+Where can I find a job?	¿Dónde puedo encontrar trabajo?
+Where are the children's toys?	¿Dónde están los juguetes de los niños?
+Where can we go for a hike?	¿Dónde podemos ir a hacer senderismo?
+Where is the best place to take photos?	¿Dónde es el mejor lugar para tomar fotos?
+Where do you usually celebrate New Year's Eve?	¿Dónde sueles celebrar la Nochevieja?
+Where did you get that idea?	¿Dónde obtuviste esa idea?
+Where can I find the train schedule?	¿Dónde puedo encontrar el horario del tren?
+Where is your favorite coffee shop?	¿Dónde está tu cafetería favorita?
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+           Who is your best friend?	¿Quién es tu mejor amigo?
+Who wrote this book?	¿Quién escribió este libro?
+Who is coming to the party?	¿Quién viene a la fiesta?
+Who is responsible for this?	¿Quién es responsable de esto?
+Who can help me with this task?	¿Quién puede ayudarme con esta tarea?
+Who did you meet yesterday?	¿A quién conociste ayer?
+Who is your favorite actor?	¿Quién es tu actor favorito?
+Who are you talking to?	¿Con quién estás hablando?
+Who made this delicious cake?	¿Quién hizo este delicioso pastel?
+Who wants to join us?	¿Quién quiere unirse a nosotros?
+Who is in charge here?	¿Quién está a cargo aquí?
+Who called you last night?	¿Quién te llamó anoche?
+Who is your teacher?	¿Quién es tu profesor?
+Who can I trust?	¿A quién puedo confiar?
+Who took my pen?	¿Quién tomó mi bolígrafo?
+Who lives next door?	¿Quién vive al lado?
+Who is singing that song?	¿Quién está cantando esa canción?
+Who painted this picture?	¿Quién pintó este cuadro?
+Who will help us with the project?	¿Quién nos ayudará con el proyecto?
+Who are the guests at dinner?	¿Quiénes son los invitados a la cena?
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

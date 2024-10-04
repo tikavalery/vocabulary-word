@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+            What is your name?	¿Cuál es tu nombre?
+What do you like to do?	¿Qué te gusta hacer?
+What time is it?	¿Qué hora es?
+What is your favorite food?	¿Cuál es tu comida favorita?
+What are you doing this weekend?	¿Qué haces este fin de semana?
+What is the weather like today?	¿Cómo está el clima hoy?
+What did you say?	¿Qué dijiste?
+What do you think about this?	¿Qué piensas sobre esto?
+What are your plans for tomorrow?	¿Cuáles son tus planes para mañana?
+What do you need?	¿Qué necesitas?
+What is your favorite book?	¿Cuál es tu libro favorito?
+What happened last night?	¿Qué pasó anoche?
+What is your job?	¿Cuál es tu trabajo?
+What can I do to help?	¿Qué puedo hacer para ayudar?
+What do you want to eat?	¿Qué quieres comer?
+What is your opinion on this issue?	¿Cuál es tu opinión sobre este tema?
+What is the best way to learn Spanish?	¿Cuál es la mejor manera de aprender español?
+What is your dream job?	¿Cuál es tu trabajo soñado?
+What are the rules of the game?	¿Cuáles son las reglas del juego?
+What do you enjoy most about your job?	¿Qué disfrutas más de tu trabajo?
+What kind of music do you like?	¿Qué tipo de música te gusta?
+What are your hobbies?	¿Cuáles son tus pasatiempos?
+What is your favorite movie?	¿Cuál es tu película favorita?
+What did you learn today?	¿Qué aprendiste hoy?
+What are you reading right now?	¿Qué estás leyendo ahora?
+What makes you happy?	¿Qué te hace feliz?
+What is the capital of your country?	¿Cuál es la capital de tu país?
+What is your favorite color?	¿Cuál es tu color favorito?
+What do you want to achieve in life?	¿Qué quieres lograr en la vida?
+What are the benefits of exercise?	¿Cuáles son los beneficios del ejercicio?
+What is the most interesting place you’ve visited?	¿Cuál es el lugar más interesante que has visitado?
+What is your biggest fear?	¿Cuál es tu mayor miedo?
+What is your favorite season?	¿Cuál es tu estación favorita?
+What do you think will happen next?	¿Qué crees que pasará después?
+What did you have for breakfast?	¿Qué desayunaste?
+What is your favorite TV show?	¿Cuál es tu programa de televisión favorito?
+What would you do in my situation?	¿Qué harías en mi situación?
+What advice would you give someone?	¿Qué consejo le darías a alguien?
+What is your proudest achievement?	¿Cuál es tu logro del que estás más orgulloso?
+What do you think about social media?	¿Qué piensas sobre las redes sociales?
+What is your favorite sport?	¿Cuál es tu deporte favorito?
+What makes you unique?	¿Qué te hace único?
+What did you do last summer?	¿Qué hiciste el verano pasado?
+What skills do you have?	¿Qué habilidades tienes?
+What is the meaning of this word?	¿Cuál es el significado de esta palabra?
+What is your biggest accomplishment?	¿Cuál es tu mayor logro?
+What would you like to learn?	¿Qué te gustaría aprender?
+What is your favorite animal?	¿Cuál es tu animal favorito?
+What kind of books do you prefer?	¿Qué tipo de libros prefieres?
+What are your thoughts on this topic?	¿Cuáles son tus pensamientos sobre este tema?
+What do you admire most in people?	¿Qué admiras más en las personas?
+What is the strangest thing you've seen?	¿Cuál es la cosa más extraña que has visto?
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+        When is your birthday?	¿Cuándo es tu cumpleaños?
+When do you usually wake up?	¿Cuándo sueles despertarte?
+When are we meeting?	¿Cuándo nos encontramos?
+When did you arrive?	¿Cuándo llegaste?
+When is the next holiday?	¿Cuándo es el próximo día festivo?
+When can we start?	¿Cuándo podemos empezar?
+When will you be back?	¿Cuándo volverás?
+When does the movie start?	¿Cuándo comienza la película?
+When is the deadline?	¿Cuándo es la fecha límite?
+When did you last see her?	¿Cuándo la viste por última vez?
+When will the package arrive?	¿Cuándo llegará el paquete?
+When do you plan to travel?	¿Cuándo planeas viajar?
+When did you graduate?	¿Cuándo te graduaste?
+When is the best time to visit?	¿Cuál es el mejor momento para visitar?
+When do you go to bed?	¿Cuándo te acuestas?
+When will you finish your project?	¿Cuándo terminarás tu proyecto?
+When did you move here?	¿Cuándo te mudaste aquí?
+When do you feel most productive?	¿Cuándo te sientes más productivo?
+When is your favorite time of year?	¿Cuál es tu época favorita del año?
+When will it stop raining?	¿Cuándo dejará de llover?
+When are the tickets going on sale?	¿Cuándo saldrán a la venta las entradas?
+When did you start learning Spanish?	¿Cuándo empezaste a aprender español?
+When are you going on vacation?	¿Cuándo te vas de vacaciones?
+When did you first meet him?	¿Cuándo lo conociste por primera vez?
+When is the last train?	¿Cuándo es el último tren?
+When do you feel happiest?	¿Cuándo te sientes más feliz?
+When does school start?	¿Cuándo comienza la escuela?
+When are we having dinner?	¿Cuándo cenamos?
+When was the last time you laughed?	¿Cuándo fue la última vez que te reíste?
+When did you start your job?	¿Cuándo comenzaste tu trabajo?
+When do you want to meet again?	¿Cuándo quieres volver a encontrarte?
+When did you go on your last trip?	¿Cuándo hiciste tu último viaje?
+When is the best time to call you?	¿Cuál es el mejor momento para llamarte?
+When does the store close?	¿Cuándo cierra la tienda?
+When do you usually eat lunch?	¿Cuándo sueles almorzar?
+When will we know the results?	¿Cuándo sabremos los resultados?
+When did you start this project?	¿Cuándo empezaste este proyecto?
+When can I see you?	¿Cuándo puedo verte?
+When do you go shopping?	¿Cuándo vas de compras?
+When was the last meeting?	¿Cuándo fue la última reunión?
+When do you celebrate Christmas?	¿Cuándo celebras la Navidad?
+When is your next appointment?	¿Cuándo es tu próxima cita?
+When did it happen?	¿Cuándo sucedió?
+When will the weather be nice?	¿Cuándo hará buen tiempo?
+When do you feel most relaxed?	¿Cuándo te sientes más relajado?
+When are you going to start studying?	¿Cuándo vas a empezar a estudiar?
+When is your favorite time to read?	¿Cuál es tu momento favorito para leer?
+When will you make a decision?	¿Cuándo tomarás una decisión?
+When do you think this will end?	¿Cuándo crees que esto terminará?
+When can we discuss this?	¿Cuándo podemos discutir esto?
+When do you plan to retire?	¿Cuándo planeas jubilarte?
+When do you think the problem will be solved?	¿Cuándo crees que se resolverá el problema?
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

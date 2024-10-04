@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+              Which book are you reading?	¿Qué libro estás leyendo?
+Which movie do you recommend?	¿Qué película recomiendas?
+Which color do you prefer?	¿Qué color prefieres?
+Which restaurant do you like best?	¿Cuál es tu restaurante favorito?
+Which shirt should I wear?	¿Qué camisa debo usar?
+Which team won the game?	¿Qué equipo ganó el partido?
+Which city do you want to visit?	¿Qué ciudad quieres visitar?
+Which subject is your favorite?	¿Cuál es tu materia favorita?
+Which train goes to downtown?	¿Qué tren va al centro?
+Which one is yours?	¿Cuál es el tuyo?
+Which website do you use for shopping?	¿Qué sitio web usas para comprar?
+Which day is the meeting scheduled for?	¿Qué día está programada la reunión?
+Which phone do you have?	¿Qué teléfono tienes?
+Which holiday do you celebrate?	¿Qué festividad celebras?
+Which game do you play the most?	¿Qué juego juegas más?
+Which pet do you prefer, cats or dogs?	¿Qué mascota prefieres, gatos o perros?
+Which class do you enjoy the most?	¿Qué clase disfrutas más?
+Which shoes are more comfortable?	¿Qué zapatos son más cómodos?
+Which park do you like to go to?	¿Qué parque te gusta visitar?
+Which teacher has influenced you the most?	¿Qué maestro te ha influenciado más?
+Which music genre do you listen to?	¿Qué género musical escuchas?
+Which gift did you like the most?	¿Qué regalo te gustó más?
+Which season do you prefer?	¿Qué estación prefieres?
+Which festival do you enjoy attending?	¿Qué festival disfrutas asistir?
+Which artwork caught your attention?	¿Qué obra de arte llamó tu atención?
+Which job are you applying for?	¿A qué trabajo estás postulando?
+Which book series do you enjoy?	¿Qué serie de libros disfrutas?
+Which device do you use the most?	¿Qué dispositivo usas más?
+Which style of music makes you happy?	¿Qué estilo de música te hace feliz?
+Which is your favorite ice cream flavor?	¿Cuál es tu sabor de helado favorito?
+Which family member do you look up to?	¿Qué miembro de la familia admiras?
+Which app do you find most useful?	¿Qué aplicación encuentras más útil?
+Which place has the best view?	¿Qué lugar tiene la mejor vista?
+Which project are you working on?	¿En qué proyecto estás trabajando?
+Which car would you like to drive?	¿Qué coche te gustaría conducir?
+Which option do you prefer?	¿Qué opción prefieres?
+Which sport do you like to watch?	¿Qué deporte te gusta ver?
+Which singer do you admire?	¿Qué cantante admiras?
+Which book did you last read?	¿Qué libro leíste por última vez?
+Which photo did you take on vacation?	¿Qué foto tomaste en vacaciones?
+Which tradition is most important to you?	¿Qué tradición es más importante para ti?
+Which historical figure do you find inspiring?	¿Qué figura histórica encuentras inspiradora?
+Which activity do you enjoy doing on weekends?	¿Qué actividad disfrutas hacer los fines de semana?
+Which project was the most challenging?	¿Qué proyecto fue el más desafiante?
+Which trend do you think will last?	¿Qué tendencia crees que perdurará?
+Which language would you like to learn?	¿Qué idioma te gustaría aprender?
+Which memory makes you smile?	¿Qué recuerdo te hace sonreír?
+Which talent do you wish you had?	¿Qué talento desearías tener?
+Which app do you use for social media?	¿Qué aplicación usas para redes sociales?
+Which film genre do you enjoy the most?	¿Qué género de película disfrutas más?
+Which website do you visit daily?	¿Qué sitio web visitas diariamente?
+Which song is your favorite right now?	¿Qué canción es tu favorita en este momento?
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

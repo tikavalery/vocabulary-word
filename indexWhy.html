@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+             Why are you late?	¿Por qué llegaste tarde?
+Why did you choose that book?	¿Por qué elegiste ese libro?
+Why is the sky blue?	¿Por qué es el cielo azul?
+Why do you like this movie?	¿Por qué te gusta esta película?
+Why is he upset?	¿Por qué está molesto?
+Why should I believe you?	¿Por qué debería creerte?
+Why are we meeting here?	¿Por qué nos estamos reuniendo aquí?
+Why did you move to this city?	¿Por qué te mudaste a esta ciudad?
+Why are they arguing?	¿Por qué están discutiendo?
+Why is it important to study?	¿Por qué es importante estudiar?
+Why did you cancel the meeting?	¿Por qué cancelaste la reunión?
+Why are you interested in this topic?	¿Por qué te interesa este tema?
+Why do you want to learn Spanish?	¿Por qué quieres aprender español?
+Why is she smiling?	¿Por qué está sonriendo?
+Why did you start this project?	¿Por qué comenzaste este proyecto?
+Why is he always so cheerful?	¿Por qué siempre está tan alegre?
+Why did they choose that restaurant?	¿Por qué eligieron ese restaurante?
+Why are the lights off?	¿Por qué están apagadas las luces?
+Why do you think he left?	¿Por qué crees que se fue?
+Why are you studying late at night?	¿Por qué estudias tarde en la noche?
+Why is this happening?	¿Por qué está sucediendo esto?
+Why did you wear that outfit?	¿Por qué llevas ese atuendo?
+Why are you so tired?	¿Por qué estás tan cansado?
+Why did you laugh at that?	¿Por qué te reíste de eso?
+Why is it so cold outside?	¿Por qué hace tanto frío afuera?
+Why do you enjoy reading?	¿Por qué disfrutas leer?
+Why was the event canceled?	¿Por qué se canceló el evento?
+Why do you think this is a good idea?	¿Por qué crees que es una buena idea?
+Why is your phone buzzing?	¿Por qué está vibrando tu teléfono?
+Why do we celebrate this holiday?	¿Por qué celebramos esta festividad?
+Why are the kids playing outside?	¿Por qué los niños están jugando afuera?
+Why did you pick that fruit?	¿Por qué elegiste esa fruta?
+Why is this restaurant so popular?	¿Por qué es tan popular este restaurante?
+Why do they need your help?	¿Por qué necesitan tu ayuda?
+Why are you feeling down?	¿Por qué te sientes triste?
+Why is the internet slow today?	¿Por qué está lenta la internet hoy?
+Why do you think he is a good leader?	¿Por qué crees que es un buen líder?
+Why did she apologize?	¿Por qué se disculpó?
+Why are you making that face?	¿Por qué haces esa cara?
+Why is it necessary to save money?	¿Por qué es necesario ahorrar dinero?
+Why do you always forget your keys?	¿Por qué siempre olvidas tus llaves?
+Why are they looking at us?	¿Por qué nos están mirando?
+Why did you decide to go?	¿Por qué decidiste ir?
+Why is this song stuck in my head?	¿Por qué esta canción está pegada en mi cabeza?
+Why do we need to work together?	¿Por qué necesitamos trabajar juntos?
+Why was he chosen for the team?	¿Por qué fue elegido para el equipo?
+Why do you prefer coffee over tea?	¿Por qué prefieres café sobre té?
+Why is this your favorite place?	¿Por qué es este tu lugar favorito?
+Why are we having this discussion?	¿Por qué estamos teniendo esta discusión?
+Why did you change your mind?	¿Por qué cambiaste de opinión?
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

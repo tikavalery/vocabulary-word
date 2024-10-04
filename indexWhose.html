@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+        Whose book is this?	¿De quién es este libro?
+Whose turn is it?	¿De quién es el turno?
+Whose bag did you borrow?	¿De quién es la bolsa que tomaste prestada?
+Whose idea was it?	¿De quién fue la idea?
+Whose car is parked outside?	¿De quién es el coche que está aparcado afuera?
+Whose shoes are those?	¿De quién son esos zapatos?
+Whose house are we visiting?	¿A casa de quién estamos visitando?
+Whose phone is ringing?	¿De quién está sonando el teléfono?
+Whose dog is barking?	¿De quién es el perro que ladra?
+Whose child is playing in the park?	¿De quién es el niño que juega en el parque?
+Whose photo is on the wall?	¿De quién es la foto que está en la pared?
+Whose assignment is due tomorrow?	¿De quién es la tarea que vence mañana?
+Whose friend is coming to visit?	¿De quién es el amigo que viene de visita?
+Whose birthday is next week?	¿De quién es el cumpleaños la próxima semana?
+Whose jacket is this?	¿De quién es esta chaqueta?
+Whose project won the award?	¿De quién es el proyecto que ganó el premio?
+Whose presentation did you like the most?	¿De quién fue la presentación que más te gustó?
+Whose team are you cheering for?	¿De quién es el equipo por el que animas?
+Whose advice did you follow?	¿De quién seguiste el consejo?
+Whose music are you listening to?	¿De quién es la música que estás escuchando?
+Whose wallet is on the table?	¿De quién es la billetera que está en la mesa?
+Whose car keys are these?	¿De quién son estas llaves del coche?
+Whose turn was it to clean?	¿De quién era el turno de limpiar?
+Whose socks are on the floor?	¿De quién son los calcetines que están en el suelo?
+Whose parents are coming to the meeting?	¿De quién son los padres que vienen a la reunión?
+Whose advice do you trust the most?	¿De quién confías más en el consejo?
+Whose name is on the list?	¿De quién es el nombre en la lista?
+Whose pencil is this?	¿De quién es este lápiz?
+Whose dress is hanging in the closet?	¿De quién es el vestido que está colgado en el armario?
+Whose favorite color is blue?	¿De quién es el color favorito azul?
+Whose friend did you meet yesterday?	¿De quién fue el amigo que conociste ayer?
+Whose opinion matters the most to you?	¿De quién es la opinión que más te importa?
+Whose laugh is the loudest?	¿De quién es la risa más fuerte?
+Whose birthday cake did you eat?	¿De quién comiste el pastel de cumpleaños?
+Whose garden are you admiring?	¿De quién es el jardín que estás admirando?
+Whose socks are these?	¿De quién son estos calcetines?
+Whose shoes are under the bed?	¿De quién son los zapatos que están debajo de la cama?
+Whose seat is this?	¿De quién es este asiento?
+Whose decision was it to leave early?	¿De quién fue la decisión de irse temprano?
+Whose bicycle is parked outside?	¿De quién es la bicicleta que está aparcada afuera?
+Whose news article did you read?	¿De quién fue el artículo de noticias que leíste?
+Whose coat is hanging on the chair?	¿De quién es el abrigo que está colgado en la silla?
+Whose class are you taking this semester?	¿De quién es la clase que estás tomando este semestre?
+Whose video did you watch last night?	¿De quién fue el video que viste anoche?
+Whose concert are you going to?	¿De quién es el concierto al que vas?
+Whose laughter makes you happy?	¿De quién es la risa que te hace feliz?
+Whose story are you telling?	¿De quién es la historia que estás contando?
+Whose furniture is in the living room?	¿De quién es el mobiliario que hay en la sala?
+Whose advice helped you the most?	¿De quién fue el consejo que más te ayudó?
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
