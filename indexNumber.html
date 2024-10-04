@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+              One	Uno
+Two	Dos
+Three	Tres
+Four	Cuatro
+Five	Cinco
+Six	Seis
+Seven	Siete
+Eight	Ocho
+Nine	Nueve
+Ten	Diez
+Eleven	Once
+Twelve	Doce
+Thirteen	Trece
+Fourteen	Catorce
+Fifteen	Quince
+Sixteen	Dieciséis
+Seventeen	Diecisiete
+Eighteen	Dieciocho
+Nineteen	Diecinueve
+Twenty	Veinte
+Twenty-one	Veintiuno
+Twenty-two	Veintidós
+Twenty-three	Veintitrés
+Twenty-four	Veinticuatro
+Twenty-five	Veinticinco
+Twenty-six	Veintiséis
+Twenty-seven	Veintisiete
+Twenty-eight	Veintiocho
+Twenty-nine	Veintinueve
+Thirty	Treinta
+Thirty-one	Treinta y uno
+Thirty-two	Treinta y dos
+Thirty-three	Treinta y tres
+Thirty-four	Treinta y cuatro
+Thirty-five	Treinta y cinco
+Thirty-six	Treinta y seis
+Thirty-seven	Treinta y siete
+Thirty-eight	Treinta y ocho
+Thirty-nine	Treinta y nueve
+Forty	Cuarenta
+Forty-one	Cuarenta y uno
+Forty-two	Cuarenta y dos
+Forty-three	Cuarenta y tres
+Forty-four	Cuarenta y cuatro
+Forty-five	Cuarenta y cinco
+Forty-six	Cuarenta y seis
+Forty-seven	Cuarenta y siete
+Forty-eight	Cuarenta y ocho
+Forty-nine	Cuarenta y nueve
+Fifty	Cincuenta
+Fifty-one	Cincuenta y uno
+Fifty-two	Cincuenta y dos
+Fifty-three	Cincuenta y tres
+Fifty-four	Cincuenta y cuatro
+Fifty-five	Cincuenta y cinco
+Fifty-six	Cincuenta y seis
+Fifty-seven	Cincuenta y siete
+Fifty-eight	Cincuenta y ocho
+Fifty-nine	Cincuenta y nueve
+Sixty	Sesenta
+Sixty-one	Sesenta y uno
+Sixty-two	Sesenta y dos
+Sixty-three	Sesenta y tres
+Sixty-four	Sesenta y cuatro
+Sixty-five	Sesenta y cinco
+Sixty-six	Sesenta y seis
+Sixty-seven	Sesenta y siete
+Sixty-eight	Sesenta y ocho
+Sixty-nine	Sesenta y nueve
+Seventy	Setenta
+Seventy-one	Setenta y uno
+Seventy-two	Setenta y dos
+Seventy-three	Setenta y tres
+Seventy-four	Setenta y cuatro
+Seventy-five	Setenta y cinco
+Seventy-six	Setenta y seis
+Seventy-seven	Setenta y siete
+Seventy-eight	Setenta y ocho
+Seventy-nine	Setenta y nueve
+Eighty	Ochenta
+Eighty-one	Ochenta y uno
+Eighty-two	Ochenta y dos
+Eighty-three	Ochenta y tres
+Eighty-four	Ochenta y cuatro
+Eighty-five	Ochenta y cinco
+Eighty-six	Ochenta y seis
+Eighty-seven	Ochenta y siete
+Eighty-eight	Ochenta y ocho
+Eighty-nine	Ochenta y nueve
+Ninety	Noventa
+Ninety-one	Noventa y uno
+Ninety-two	Noventa y dos
+Ninety-three	Noventa y tres
+Ninety-four	Noventa y cuatro
+Ninety-five	Noventa y cinco
+Ninety-six	Noventa y seis
+Ninety-seven	Noventa y siete
+Ninety-eight	Noventa y ocho
+Ninety-nine	Noventa y nueve
+One hundred	Cien
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
