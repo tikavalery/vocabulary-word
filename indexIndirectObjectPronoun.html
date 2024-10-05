@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+    me	me
+you (singular)	te
+him	le
+her	le
+it (for things)	le
+us	nos
+you (plural/formal)	les
+them (for people)	les
+Can you give me the book?	¿Puedes darme el libro?
+I told her a secret.	Le conté un secreto.
+Please send him the documents.	Por favor, envíale los documentos.
+They gave us a surprise party.	Nos dieron una fiesta sorpresa.
+I bought you a gift.	Te compré un regalo.
+She showed them the way.	Les mostró el camino.
+He promised me a ride.	Me prometió un paseo.
+I will make you dinner.	Te haré la cena.
+Can you lend her your pen?	¿Puedes prestarle tu bolígrafo?
+We told you the news.	Te contamos las noticias.
+I sent him an email.	Le envié un correo electrónico.
+She bought us ice cream.	Nos compró helado.
+Please tell them the truth.	Por favor, diles la verdad.
+He showed me his new car.	Me mostró su coche nuevo.
+I owe you a favor.	Te debo un favor.
+They explained it to us clearly.	Nos lo explicaron claramente.
+I will give her a call later.	Le daré una llamada más tarde.
+She taught me how to dance.	Me enseñó a bailar.
+He wrote them a letter.	Les escribió una carta.
+I asked you a question.	Te hice una pregunta.
+Can you get him some water?	¿Puedes conseguirle un poco de agua?
+She sent us a postcard from her trip.	Nos envió una postal de su viaje.
+I told you my plans.	Te conté mis planes.
+He gave her his phone number.	Le dio su número de teléfono.
+We bought them tickets for the concert.	Les compramos entradas para el concierto.
+I promised you the truth.	Te prometí la verdad.
+They will show me their project.	Me mostrarán su proyecto.
+She wrote him a song.	Le escribió una canción.
+Can you show us the way?	¿Puedes mostrarnos el camino?
+I found her a nice dress.	Le encontré un bonito vestido.
+Please explain it to me again.	Por favor, explícamelo de nuevo.
+He brought us coffee.	Nos trajo café.
+I will tell you a story.	Te contaré una historia.
+She gave him a hug.	Le dio un abrazo.
+They asked me for help.	Me pidieron ayuda.
+I bought her some flowers.	Le compré algunas flores.
+Can you give us a hand?	¿Puedes darnos una mano?
+He taught them the lesson.	Les enseñó la lección.
+I will write you a message.	Te escribiré un mensaje.
+She told me about the event.	Me habló del evento.
+They showed us their new house.	Nos mostraron su nueva casa.
+I brought you something special.	Te traje algo especial.
+Can you tell him to call me?	¿Puedes decirle que me llame?
+She explained it to me in detail.	Me lo explicó en detalle.
+He promised us a better future.	Nos prometió un futuro mejor.
+I sent her an invitation.	Le envié una invitación.
+They taught me how to cook.	Me enseñaron a cocinar.
+I owe her an apology.	Le debo una disculpa.
+Please show them your work.	Por favor, muéstrales tu trabajo.
+I will send you the details later.	Te enviaré los detalles más tarde.
+He gave me a reason to smile.	Me dio una razón para sonreír.
+She asked us to wait.	Nos pidió que esperáramos.
+I will tell them about the changes.	Les contaré sobre los cambios.
+He brought her some flowers.	Le trajo algunas flores.
+Can you explain it to her?	¿Puedes explicárselo?
+They sent us the confirmation.	Nos enviaron la confirmación.
+I found you a job opportunity.	Te encontré una oportunidad de trabajo.
+Please remind him of the meeting.	Por favor, recuérdale la reunión.
+She gave them her best advice.	Les dio su mejor consejo.
+I asked you for directions.	Te pedí direcciones.
+He wrote her a poem.	Le escribió un poema.
+We promised you a fun time.	Te prometimos un buen rato.
+She told me to be careful.	Me dijo que tuviera cuidado.
+I will make them a cake.	Les haré un pastel.
+He explained it to us slowly.	Nos lo explicó despacio.
+I bought you a ticket for the show.	Te compré una entrada para el espectáculo.
+Can you show him the project?	¿Puedes mostrarle el proyecto?
+She sent me a reminder.	Me envió un recordatorio.
+They gave us their best wishes.	Nos dieron sus mejores deseos.
+I told her I would help.	Le dije que ayudaría.
+He showed them his skills.	Les mostró sus habilidades.
+Please lend me your pen.	Por favor, préstame tu bolígrafo.
+I will tell you everything tomorrow.	Te diré todo mañana.
+She offered him her support.	Le ofreció su apoyo.
+They brought us gifts from their trip.	Nos trajeron regalos de su viaje.
+I promised her I would be there.	Le prometí que estaría allí.
+Can you give us a summary?	¿Puedes darnos un resumen?
+He explained the situation to them.	Les explicó la situación.
+I sent you a message earlier.	Te envié un mensaje antes.
+She told me she was leaving.	Me dijo que se iba.
+They gave him their full support.	Le dieron su apoyo total.
+I asked her for advice.	Le pedí consejo.
+Can you help me with this problem?	¿Puedes ayudarme con este problema?
+He promised us he would try.	Nos prometió que lo intentaría.
+She gave them some useful tips.	Les dio algunos consejos útiles.
+I will show you the way home.	Te mostraré el camino a casa.
+They told me about the changes.	Me hablaron sobre los cambios.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

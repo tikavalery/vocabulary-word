@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+       This	Este/Esta
+That	Ese/Esa
+These	Estos/Estas
+Those	Esos/Esas
+This is my favorite book.	Este es mi libro favorito.
+That was an amazing concert.	Ese fue un concierto increíble.
+These are the shoes I bought.	Estos son los zapatos que compré.
+Those are my friends over there.	Esos son mis amigos allá.
+This is the best day ever!	¡Este es el mejor día de todos!
+That looks delicious.	Eso se ve delicioso.
+These are the documents you requested.	Estos son los documentos que solicitaste.
+Those were the days!	¡Esos fueron los días!
+This place is beautiful.	Este lugar es hermoso.
+That movie was really funny.	Esa película fue muy divertida.
+These cookies are freshly baked.	Estas galletas están recién horneadas.
+Those mountains are breathtaking.	Esas montañas son impresionantes.
+This pen doesn't work.	Este bolígrafo no funciona.
+That car is really fast.	Ese coche es muy rápido.
+These flowers smell amazing.	Estas flores huelen increíble.
+Those paintings are by a famous artist.	Esas pinturas son de un artista famoso.
+This lesson is very interesting.	Esta lección es muy interesante.
+That song is stuck in my head.	Esa canción está pegada en mi cabeza.
+These games are so much fun.	Estos juegos son muy divertidos.
+Those books are on the shelf.	Esos libros están en la estantería.
+This situation is getting out of hand.	Esta situación se está saliendo de control.
+That joke was hilarious.	Ese chiste fue hilarante.
+These ideas are innovative.	Estas ideas son innovadoras.
+Those challenges are tough.	Esos desafíos son difíciles.
+This problem needs a solution.	Este problema necesita una solución.
+That restaurant serves great food.	Ese restaurante sirve comida excelente.
+These options are all viable.	Estas opciones son viables.
+Those flowers are blooming beautifully.	Esas flores están floreciendo hermosamente.
+This shirt is too tight.	Esta camisa está demasiado ajustada.
+That assignment is due tomorrow.	Esa tarea se entrega mañana.
+These instructions are clear.	Estas instrucciones son claras.
+Those kids are playing outside.	Esos niños están jugando afuera.
+This cup is full of coffee.	Esta taza está llena de café.
+That chair is broken.	Esa silla está rota.
+These notes are important for the exam.	Estas notas son importantes para el examen.
+Those apartments are for rent.	Esos apartamentos están en alquiler.
+This gift is for you.	Este regalo es para ti.
+That bike looks brand new.	Esa bicicleta se ve nueva.
+These walls need a fresh coat of paint.	Estas paredes necesitan una nueva capa de pintura.
+Those students are very talented.	Esos estudiantes son muy talentosos.
+This recipe is easy to follow.	Esta receta es fácil de seguir.
+That event was well-organized.	Ese evento estuvo bien organizado.
+These tools are essential for the job.	Estas herramientas son esenciales para el trabajo.
+Those memories will last a lifetime.	Esos recuerdos durarán toda la vida.
+This project is very exciting.	Este proyecto es muy emocionante.
+That option is the most affordable.	Esa opción es la más asequible.
+These lessons are invaluable.	Estas lecciones son invaluables.
+Those stories are inspiring.	Esas historias son inspiradoras.
+This situation requires careful consideration.	Esta situación requiere una cuidadosa consideración.
+That presentation was impressive.	Esa presentación fue impresionante.
+These results are promising.	Estos resultados son prometedores.
+Those athletes trained hard for the competition.	Esos atletas entrenaron duro para la competencia.
+This view is stunning.	Esta vista es impresionante.
+That noise is distracting.	Ese ruido es una distracción.
+These games promote teamwork.	Estos juegos fomentan el trabajo en equipo.
+Those moments were unforgettable.	Esos momentos fueron inolvidables.
+This investment could pay off.	Esta inversión podría dar frutos.
+That statement was misleading.	Esa declaración fue engañosa.
+These memories are dear to my heart.	Estos recuerdos son queridos para mí.
+Those options seem risky.	Esas opciones parecen arriesgadas.
+This decision will affect many people.	Esta decisión afectará a muchas personas.
+That issue needs to be addressed.	Ese asunto necesita ser abordado.
+These techniques are effective.	Estas técnicas son efectivas.
+Those traditions are worth preserving.	Esas tradiciones valen la pena preservar.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+    mine	mío / mía
+yours	tuyo / tuya
+his	suyo / suya (de él)
+hers	suyo / suya (de ella)
+its	suyo / suya (de eso)
+ours	nuestro / nuestra
+yours (plural/formal)	vuestro / vuestra
+theirs	suyo / suya (de ellos/ellas)
+This book is mine.	Este libro es mío.
+Is that pen yours?	¿Es esa pluma tuya?
+His car is very fast.	Su coche es muy rápido.
+That purse is hers.	Esa bolsa es de ella.
+The dog wagged its tail.	El perro movió su cola.
+Our house is big.	Nuestra casa es grande.
+Is this jacket yours?	¿Es esta chaqueta tuya?
+Their garden is beautiful.	Su jardín es hermoso.
+This is my favorite song.	Esta es mi canción favorita.
+Is that shirt yours?	¿Es esa camisa tuya?
+The children have their toys.	Los niños tienen sus juguetes.
+I think this pencil is mine.	Creo que este lápiz es mío.
+Your idea is interesting.	Tu idea es interesante.
+Her smile is contagious.	Su sonrisa es contagiosa.
+This hat is his.	Este sombrero es de él.
+Our team won the game.	Nuestro equipo ganó el partido.
+Can you borrow my book?	¿Puedes tomar prestado mi libro?
+Is that suitcase hers?	¿Es esa maleta de ella?
+Their project was impressive.	Su proyecto fue impresionante.
+His friends are coming over.	Sus amigos vienen.
+This painting is ours.	Esta pintura es nuestra.
+Is that your phone ringing?	¿Es tu teléfono el que suena?
+Her dress is beautiful.	Su vestido es hermoso.
+My laptop is in the bag.	Mi laptop está en la bolsa.
+Whose book is this?	¿De quién es este libro?
+Our vacation was amazing.	Nuestras vacaciones fueron increíbles.
+This is my favorite place.	Este es mi lugar favorito.
+Their decision surprised everyone.	Su decisión sorprendió a todos.
+His birthday is next week.	Su cumpleaños es la próxima semana.
+That room is ours.	Esa habitación es nuestra.
+Is that your car outside?	¿Es tu coche el de afuera?
+The students presented their projects.	Los estudiantes presentaron sus proyectos.
+My mother loves her garden.	Mi madre ama su jardín.
+This is her favorite coffee shop.	Esta es su cafetería favorita.
+Your response was very helpful.	Tu respuesta fue muy útil.
+That bicycle is mine.	Esa bicicleta es mía.
+Whose jacket is this?	¿De quién es esta chaqueta?
+Their house has a nice view.	Su casa tiene una buena vista.
+His advice was valuable.	Su consejo fue valioso.
+This is my seat.	Este es mi asiento.
+Our plans have changed.	Nuestros planes han cambiado.
+Is that your dog?	¿Es tu perro?
+Her shoes are on the floor.	Sus zapatos están en el suelo.
+My family is coming to visit.	Mi familia viene a visitar.
+Their children are very polite.	Sus hijos son muy educados.
+This homework is mine.	Esta tarea es mía.
+Your opinions matter to me.	Tus opiniones son importantes para mí.
+His books are on the shelf.	Sus libros están en la estantería.
+Is this restaurant yours?	¿Es este restaurante tuyo?
+Our neighbors are very friendly.	Nuestros vecinos son muy amables.
+That trophy is hers.	Ese trofeo es de ella.
+My keys are on the table.	Mis llaves están en la mesa.
+Their opinion is very important.	Su opinión es muy importante.
+This bag is mine, not yours.	Esta bolsa es mía, no tuya.
+Your coat is on the chair.	Tu abrigo está en la silla.
+His hobbies include painting and hiking.	Sus pasatiempos incluyen pintar y hacer senderismo.
+Is that house yours?	¿Es esa casa tuya?
+Our trip was unforgettable.	Nuestro viaje fue inolvidable.
+This notebook is hers.	Este cuaderno es de ella.
+Your laughter brightens my day.	Tu risa ilumina mi día.
+Their plans fell through.	Sus planes se frustraron.
+My friends are waiting for me.	Mis amigos me están esperando.
+Is this your bag?	¿Es esta tu bolsa?
+His talents are undeniable.	Sus talentos son innegables.
+Our achievements should be celebrated.	Nuestros logros deben ser celebrados.
+That pizza is theirs.	Esa pizza es de ellos.
+My favorite movie is playing tonight.	Mi película favorita se estrena esta noche.
+Your help made a difference.	Tu ayuda hizo la diferencia.
+Is this watch hers?	¿Es este reloj de ella?
+Their happiness is contagious.	Su felicidad es contagiosa.
+My goals are achievable.	Mis objetivos son alcanzables.
+Your creativity is impressive.	Tu creatividad es impresionante.
+Is this letter yours?	¿Es esta carta tuya?
+His dedication to the project is admirable.	Su dedicación al proyecto es admirable.
+Our memories will last a lifetime.	Nuestros recuerdos durarán toda la vida.
+This shirt is too big for me.	Esta camisa es demasiado grande para mí.
+Is this address yours?	¿Es esta dirección tuya?
+Their laughter filled the room.	Su risa llenó la habitación.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

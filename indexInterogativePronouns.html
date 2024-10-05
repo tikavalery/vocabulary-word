@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+    who	quién
+whom	a quién
+whose	de quién
+what	qué
+which	cuál
+where	dónde
+when	cuándo
+why	por qué
+how	cómo
+who	quién
+whom	a quién
+whose	de quién
+what	qué
+which	cuál
+where	dónde
+when	cuándo
+why	por qué
+how	cómo
+Who is coming to the party?	¿Quién viene a la fiesta?
+Whom did you invite to the wedding?	¿A quién invitaste a la boda?
+Whose book is this?	¿De quién es este libro?
+What do you want for dinner?	¿Qué quieres para cenar?
+Which dress do you prefer?	¿Cuál vestido prefieres?
+Where are you going for vacation?	¿Dónde vas de vacaciones?
+When will the meeting start?	¿Cuándo comenzará la reunión?
+Why are you late?	¿Por qué llegaste tarde?
+How did you learn to speak Spanish?	¿Cómo aprendiste a hablar español?
+Who called you last night?	¿Quién te llamó anoche?
+Whom should I ask for help?	¿A quién debería pedirle ayuda?
+Whose turn is it to play?	¿De quién es el turno de jugar?
+What time is the concert?	¿A qué hora es el concierto?
+Which movie did you watch?	¿Cuál película viste?
+Where did you find that?	¿Dónde encontraste eso?
+When is your birthday?	¿Cuándo es tu cumpleaños?
+Why did they cancel the event?	¿Por qué cancelaron el evento?
+How can I help you?	¿Cómo puedo ayudarte?
+Who is your best friend?	¿Quién es tu mejor amigo?
+Whom are you going to see?	¿A quién vas a ver?
+Whose car is parked outside?	¿De quién es el coche que está estacionado afuera?
+What is your favorite food?	¿Cuál es tu comida favorita?
+Which team do you support?	¿Cuál equipo apoyas?
+Where do you live?	¿Dónde vives?
+When will you finish your homework?	¿Cuándo terminarás tu tarea?
+Why do you like this book?	¿Por qué te gusta este libro?
+How often do you exercise?	¿Con qué frecuencia haces ejercicio?
+Who is responsible for this project?	¿Quién es responsable de este proyecto?
+Whom did you meet at the conference?	¿A quién conociste en la conferencia?
+Whose idea was it to start the business?	¿De quién fue la idea de iniciar el negocio?
+What do you do for a living?	¿A qué te dedicas?
+Which city would you like to visit?	¿Cuál ciudad te gustaría visitar?
+Where can I buy tickets?	¿Dónde puedo comprar boletos?
+When did you last see her?	¿Cuándo la viste por última vez?
+Why are you studying Spanish?	¿Por qué estás estudiando español?
+How do you make this recipe?	¿Cómo haces esta receta?
+Who can help me with this?	¿Quién puede ayudarme con esto?
+Whom should I contact for more information?	¿A quién debería contactar para más información?
+Whose shoes are these?	¿De quién son estos zapatos?
+What is your favorite color?	¿Cuál es tu color favorito?
+Which book are you reading now?	¿Cuál libro estás leyendo ahora?
+Where did you go last weekend?	¿Dónde fuiste el fin de semana pasado?
+When are we having the next meeting?	¿Cuándo tendremos la próxima reunión?
+Why did you choose that option?	¿Por qué elegiste esa opción?
+How do you know her?	¿Cómo la conoces?
+Who wrote this poem?	¿Quién escribió este poema?
+Whom are you going to ask for advice?	¿A quién le vas a pedir consejo?
+Whose jacket is this?	¿De quién es esta chaqueta?
+What did you think of the movie?	¿Qué pensaste de la película?
+Which place do you recommend?	¿Cuál lugar recomiendas?
+Where is the nearest restaurant?	¿Dónde está el restaurante más cercano?
+When did you start learning English?	¿Cuándo empezaste a aprender inglés?
+Why do you feel that way?	¿Por qué te sientes así?
+How did you find out about the job?	¿Cómo te enteraste del trabajo?
+Who is your favorite author?	¿Quién es tu autor favorito?
+Whom can I trust with this information?	¿A quién puedo confiarle esta información?
+Whose dog is barking?	¿De quién es el perro que está ladrando?
+What are your plans for the weekend?	¿Cuáles son tus planes para el fin de semana?
+Which restaurant do you like best?	¿Cuál restaurante te gusta más?
+Where did you grow up?	¿Dónde creciste?
+When do you usually wake up?	¿Cuándo sueles despertarte?
+Why are you interested in this job?	¿Por qué estás interesado en este trabajo?
+How long have you been studying here?	¿Cuánto tiempo has estado estudiando aquí?
+Who won the game last night?	¿Quién ganó el juego anoche?
+Whom did you see at the party?	¿A quién viste en la fiesta?
+Whose phone is ringing?	¿De quién está sonando el teléfono?
+What time do we need to leave?	¿A qué hora necesitamos salir?
+Which option seems better to you?	¿Cuál opción te parece mejor?
+Where is your favorite vacation spot?	¿Dónde está tu lugar favorito para vacacionar?
+When will you visit us again?	¿Cuándo nos visitarás de nuevo?
+Why do they need to arrive early?	¿Por qué necesitan llegar temprano?
+How much does this cost?	¿Cuánto cuesta esto?
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

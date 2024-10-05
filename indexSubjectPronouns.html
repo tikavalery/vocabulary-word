@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+
+I	Yo
+You (singular)	Tú
+He	Él
+She	Ella
+It	(No direct translation; depends on context)
+We	Nosotros/Nosotras (masculine/feminine)
+You (plural)	Ustedes (formal/informal in Latin America) / Vosotros (informal in Spain)
+They	Ellos/Ellas (masculine/feminine)
+I love to read books.	Me encanta leer libros.
+You are my best friend.	Eres mi mejor amigo/a.
+He plays soccer every weekend.	Él juega al fútbol todos los fines de semana.
+She sings beautifully.	Ella canta hermosamente.
+It is a sunny day.	Es un día soleado.
+We are going to the movies tonight.	Vamos al cine esta noche.
+They enjoy hiking in the mountains.	Ellos disfrutan de hacer senderismo en las montañas.
+I am learning Spanish.	Estoy aprendiendo español.
+You should try this dessert.	Deberías probar este postre.
+He works in a bank.	Él trabaja en un banco.
+She loves painting landscapes.	A ella le encanta pintar paisajes.
+It seems like a good idea.	Parece una buena idea.
+We will finish the project on time.	Terminaremos el proyecto a tiempo.
+They are studying for their exams.	Ellos están estudiando para sus exámenes.
+I want to travel the world.	Quiero viajar por el mundo.
+You have a great sense of humor.	Tienes un gran sentido del humor.
+He is very talented.	Él es muy talentoso.
+She enjoys cooking Italian food.	A ella le gusta cocinar comida italiana.
+It looks like rain today.	Parece que va a llover hoy.
+We need to buy groceries.	Necesitamos comprar víveres.
+They can come over for dinner.	Ellos pueden venir a cenar.
+I have a meeting at noon.	Tengo una reunión al mediodía.
+You should take a break.	Deberías tomarte un descanso.
+He likes to play the guitar.	A él le gusta tocar la guitarra.
+She went to the market yesterday.	Ella fue al mercado ayer.
+It tastes delicious.	Sabe delicioso.
+We are excited for the trip.	Estamos emocionados por el viaje.
+They will join us later.	Ellos se unirán a nosotros más tarde.
+I enjoy watching movies on weekends.	Me gusta ver películas los fines de semana.
+You make me happy.	Me haces feliz.
+He helps his brother with homework.	Él ayuda a su hermano con la tarea.
+She is a great dancer.	Ella es una gran bailarina.
+It was a wonderful experience.	Fue una experiencia maravillosa.
+We should start the project soon.	Deberíamos comenzar el proyecto pronto.
+They are planning a surprise party.	Ellos están planeando una fiesta sorpresa.
+I think this is the right decision.	Creo que esta es la decisión correcta.
+You have beautiful handwriting.	Tienes una hermosa caligrafía.
+He has a lot of friends.	Él tiene muchos amigos.
+She reads a book every month.	Ella lee un libro cada mes.
+It is important to stay healthy.	Es importante mantenerse saludable.
+We love to explore new places.	Nos encanta explorar nuevos lugares.
+They should arrive by six o'clock.	Ellos deberían llegar antes de las seis.
+I want to learn how to cook.	Quiero aprender a cocinar.
+You can do it if you try.	Puedes hacerlo si lo intentas.
+He enjoys playing video games.	A él le gusta jugar videojuegos.
+She takes her dog for a walk every morning.	Ella saca a pasear a su perro cada mañana.
+It is nice to meet you.	Es un placer conocerte.
+We will see you tomorrow.	Te veremos mañana.
+They are very supportive friends.	Ellos son amigos muy comprensivos.
+I feel happy today.	Me siento feliz hoy.
+You always know how to cheer me up.	Siempre sabes cómo animarme.
+He went to the gym yesterday.	Él fue al gimnasio ayer.
+She loves to travel to new countries.	A ella le encanta viajar a nuevos países.
+It is getting late.	Se está haciendo tarde.
+We have to finish this by Friday.	Tenemos que terminar esto para el viernes.
+They are excited about the concert.	Ellos están emocionados por el concierto.
+I believe in you.	Creo en ti.
+You can trust him with that.	Puedes confiar en él con eso.
+He is working on his thesis.	Él está trabajando en su tesis.
+She called her friend for advice.	Ella llamó a su amiga para pedir consejo.
+It is a good opportunity.	Es una buena oportunidad.
+We should meet at the café.	Deberíamos reunirnos en el café.
+They have been friends for years.	Ellos han sido amigos durante años.
+I want to improve my Spanish skills.	Quiero mejorar mis habilidades en español.
+You make a great team.	Haces un gran equipo.
+He wants to visit his family next month.	Él quiere visitar a su familia el próximo mes.
+She loves watching documentaries.	A ella le encanta ver documentales.
+It feels good to relax after a long day.	Se siente bien relajarse después de un largo día.
+We are going to have fun this weekend.	Vamos a divertirnos este fin de semana.
+They are studying for their final exams.	Ellos están estudiando para sus exámenes finales.
+I appreciate your help.	Aprecio tu ayuda.
+You should visit that museum.	Deberías visitar ese museo.
+He enjoys running in the park.	A él le gusta correr en el parque.
+She will finish her project on time.	Ella terminará su proyecto a tiempo.
+It is time to go home.	Es hora de ir a casa.
+We can solve this problem together.	Podemos resolver este problema juntos.
+They have a great plan for the weekend.	Ellos tienen un gran plan para el fin de semana.
+I always try my best.	Siempre doy lo mejor de mí.
+You are doing a great job.	Estás haciendo un gran trabajo.
+He is excited about the new job.	Él está emocionado por el nuevo trabajo.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

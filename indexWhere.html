@@ -70,6 +70,8 @@ Where is your favorite coffee shop?	¿Dónde está tu cafetería favorita?
 
         const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
 
+        console.log(words)
+
         document.getElementById('start').addEventListener('click', () => {
             const outputDiv = document.getElementById('output');
             outputDiv.innerHTML = ''; // Clear previous output

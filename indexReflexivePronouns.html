@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+myself	a mí mismo/a
+yourself	a ti mismo/a
+himself	a él mismo
+herself	a ella misma
+itself	a eso mismo
+ourselves	a nosotros/as
+yourselves	a vosotros/as
+themselves	a ellos/as
+I made this cake myself.	Hice este pastel yo mismo/a.
+Did you enjoy yourself at the party?	¿Te divertiste en la fiesta?
+He cut himself while cooking.	Se cortó mientras cocinaba.
+She bought herself a new dress.	Se compró un vestido nuevo.
+We should treat ourselves to a nice dinner.	Deberíamos darnos un buen almuerzo.
+They finished the project by themselves.	Terminaron el proyecto solos.
+I taught myself how to play the guitar.	Aprendí a tocar la guitarra yo mismo/a.
+You need to believe in yourself.	Necesitas creer en ti mismo/a.
+He looked at himself in the mirror.	Se miró en el espejo.
+She enjoys spending time by herself.	Le gusta pasar tiempo sola.
+We prepared everything by ourselves.	Preparamos todo nosotros/as.
+They congratulated themselves on the achievement.	Se felicitaron por el logro.
+I reminded myself to call her.	Me recordé llamar a ella.
+Did you find yourself in that situation?	¿Te encontraste en esa situación?
+He blamed himself for the mistake.	Se culpó por el error.
+She told herself to stay calm.	Se dijo a sí misma que se mantuviera tranquila.
+We enjoyed ourselves at the concert.	Nos divertimos en el concierto.
+They introduced themselves to everyone.	Se presentaron a todos.
+I fixed the car by myself.	Arreglé el coche yo solo/a.
+Did you teach yourself to swim?	¿Te enseñaste a nadar?
+He caught himself before falling.	Se detuvo antes de caer.
+She made the decision by herself.	Tomó la decisión ella sola.
+We can help ourselves to the food.	Podemos servirnos la comida.
+They found themselves lost in the city.	Se encontraron perdidos en la ciudad.
+I always remind myself to be positive.	Siempre me recuerdo ser positivo/a.
+You should be proud of yourself.	Deberías estar orgulloso/a de ti mismo/a.
+He excused himself from the meeting.	Se excusó de la reunión.
+She told herself she could do it.	Se dijo a sí misma que podía hacerlo.
+We helped ourselves to some drinks.	Nos servimos algunas bebidas.
+They decorated the house themselves.	Decoraron la casa ellos mismos.
+I often treat myself to a spa day.	A menudo me doy un día de spa.
+Did you hurt yourself during the game?	¿Te lastimaste durante el juego?
+He found himself in a difficult position.	Se encontró en una posición difícil.
+She prepared herself for the exam.	Se preparó para el examen.
+We reminded ourselves of the rules.	Nos recordamos las reglas.
+They introduced themselves to the new neighbors.	Se presentaron a los nuevos vecinos.
+I made a promise to myself.	Me hice una promesa a mí mismo/a.
+You should enjoy yourself more often.	Deberías disfrutar más a menudo.
+He told himself not to worry.	Se dijo a sí mismo que no se preocupara.
+She often finds herself in trouble.	A menudo se encuentra en problemas.
+We can manage this by ourselves.	Podemos manejar esto nosotros/as.
+Did you catch yourself making that mistake?	¿Te diste cuenta de que cometiste ese error?
+He prides himself on his work.	Se enorgullece de su trabajo.
+She prepared herself for the presentation.	Se preparó para la presentación.
+We enjoyed ourselves at the festival.	Nos divertimos en el festival.
+They should allow themselves some time to relax.	Deberían darse un tiempo para relajarse.
+I often challenge myself to do better.	A menudo me desafío a hacerlo mejor.
+You need to express yourself more clearly.	Necesitas expresarte más claramente.
+He treated himself to a nice meal.	Se dio un buen almuerzo.
+She found herself thinking about the future.	Se encontró pensando en el futuro.
+We can handle this situation by ourselves.	Podemos manejar esta situación nosotros/as.
+Did you see yourself in that role?	¿Te viste en ese papel?
+He learned to control himself during the game.	Aprendió a controlarse durante el juego.
+She reminded herself of the deadline.	Se recordó la fecha límite.
+We gave ourselves a break from work.	Nos tomamos un descanso del trabajo.
+Did you look at yourself in the mirror today?	¿Te miraste en el espejo hoy?
+He made himself a sandwich for lunch.	Se preparó un sándwich para el almuerzo.
+She taught herself how to play the piano.	Se enseñó a tocar el piano.
+We organized the event by ourselves.	Organizamos el evento nosotros/as.
+They rewarded themselves for their hard work.	Se premiaron por su arduo trabajo.
+I reminded myself to stay focused.	Me recordé mantenerme concentrado/a.
+You should believe in yourself.	Deberías creer en ti mismo/a.
+He hurt himself while playing sports.	Se lastimó mientras jugaba deportes.
+She enjoys treating herself to a spa day.	Le gusta darse un día de spa.
+We often motivate ourselves to work harder.	A menudo nos motivamos para trabajar más duro.
+They introduced themselves to the audience.	Se presentaron a la audiencia.
+I love to pamper myself on weekends.	Me encanta consentirme los fines de semana.
+You must take care of yourself.	Debes cuidar de ti mismo/a.
+He gave himself a pat on the back.	Se dio una palmadita en la espalda.
+She found herself lost in thought.	Se encontró perdida en sus pensamientos.
+We should remind ourselves of our goals.	Deberíamos recordarnos nuestros objetivos.
+They helped themselves to the snacks.	Se sirvieron los aperitivos.
+I treat myself to a good book every month.	Me doy un buen libro cada mes.
+You must express yourself freely.	Debes expresarte libremente.
+He always pushes himself to do better.	Siempre se esfuerza por hacerlo mejor.
+She gave herself some time to relax.	Se dio un tiempo para relajarse.
+We need to remind ourselves to stay positive.	Necesitamos recordarnos mantenernos positivos.
+They found themselves in a difficult situation.	Se encontraron en una situación difícil.
+I often push myself beyond my limits.	A menudo me esfuerzo más allá de mis límites.
+You need to love yourself first.	Necesitas amarte a ti mismo/a primero.
+He prepared himself for the worst.	Se preparó para lo peor.
+She often catches herself daydreaming.	A menudo se pilla soñando despierta.
+We should allow ourselves to make mistakes.	Deberíamos permitirnos cometer errores.
+They enjoyed themselves at the party.	Se divirtieron en la fiesta.
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+        Anyone	Cualquiera
+Everyone	Todos/ Todas
+Someone	Alguien
+No one	Nadie
+Everybody	Todos/ Todas
+Somebody	Alguien
+Anything	Cualquier cosa
+Everything	Todo
+Nothing	Nada
+Each	Cada
+Few	Pocos/Pocas
+Many	Muchos/Muchas
+Several	Varios/Varias
+All	Todos/ Todas
+Any	Cualquier
+Either	Cualquiera de los dos
+Neither	Ninguno de los dos
+One	Uno
+Anyone can join the club.	Cualquiera puede unirse al club.
+Everyone loves a good story.	Todos aman una buena historia.
+Someone left their umbrella here.	Alguien dejó su paraguas aquí.
+No one knows the answer.	Nadie sabe la respuesta.
+Everybody is invited to the party.	Todos están invitados a la fiesta.
+Somebody should call the doctor.	Alguien debería llamar al médico.
+Anything is possible if you try.	Cualquier cosa es posible si lo intentas.
+Everything is ready for the event.	Todo está listo para el evento.
+Nothing can stop us now.	Nada puede detenernos ahora.
+Each person must bring their own lunch.	Cada persona debe traer su propio almuerzo.
+Few people attended the meeting.	Pocas personas asistieron a la reunión.
+Many students passed the exam.	Muchos estudiantes aprobaron el examen.
+Several options are available.	Varios opciones están disponibles.
+All are welcome to participate.	Todos son bienvenidos a participar.
+Any book on the shelf will do.	Cualquier libro en la estantería servirá.
+Either option is fine with me.	Cualquiera de las opciones está bien para mí.
+Neither answer is correct.	Ninguna de las respuestas es correcta.
+One should always be honest.	Uno siempre debería ser honesto.
+Everyone should have a chance to speak.	Todos deberían tener la oportunidad de hablar.
+Someone needs to take charge.	Alguien necesita hacerse cargo.
+No one saw what happened.	Nadie vio lo que pasó.
+Everything will be alright.	Todo estará bien.
+Anyone can make mistakes.	Cualquiera puede cometer errores.
+Somebody has to tell the truth.	Alguien tiene que decir la verdad.
+Many enjoy hiking on weekends.	Muchos disfrutan caminar los fines de semana.
+Each of you is important.	Cada uno de ustedes es importante.
+Few understand the complexities.	Pocos entienden las complejidades.
+Anyone with questions should ask.	Cualquiera con preguntas debería preguntar.
+Everybody needs love and support.	Todos necesitan amor y apoyo.
+Nothing seems to work today.	Nada parece funcionar hoy.
+Each student received a certificate.	Cada estudiante recibió un certificado.
+Somebody left their backpack in the classroom.	Alguien dejó su mochila en el aula.
+Everyone deserves a second chance.	Todos merecen una segunda oportunidad.
+No one is perfect.	Nadie es perfecto.
+Anything you say will be confidential.	Cualquier cosa que digas será confidencial.
+Everything happens for a reason.	Todo pasa por una razón.
+Few of them knew the truth.	Pocos de ellos conocían la verdad.
+Many people are passionate about their work.	Muchas personas son apasionadas por su trabajo.
+Each of these items is on sale.	Cada uno de estos artículos está en oferta.
+Someone should volunteer for the task.	Alguien debería ofrecerse como voluntario para la tarea.
+Everybody has their own story.	Todos tienen su propia historia.
+No one can do it alone.	Nadie puede hacerlo solo.
+Anything you need, just ask.	Cualquier cosa que necesites, solo pregunta.
+Everything is going according to plan.	Todo va según lo planeado.
+Anyone who wants to participate can sign up.	Cualquiera que quiera participar puede inscribirse.
+Somebody left a message for you.	Alguien dejó un mensaje para ti.
+Many students attended the lecture.	Muchos estudiantes asistieron a la conferencia.
+Each child received a gift.	Cada niño recibió un regalo.
+Few noticed the changes.	Pocos notaron los cambios.
+Anyone interested in joining can contact us.	Cualquiera interesado en unirse puede contactarnos.
+Everyone should contribute to the project.	Todos deberían contribuir al proyecto.
+Nothing is more important than health.	Nada es más importante que la salud.
+Each team member played a vital role.	Cada miembro del equipo jugó un papel vital.
+Somebody must have forgotten their keys.	Alguien debió olvidar sus llaves.
+Everybody loves a good meal.	Todos aman una buena comida.
+No one believed the story.	Nadie creyó la historia.
+Anything is better than nothing.	Cualquier cosa es mejor que nada.
+Everything was ready before the deadline.	Todo estaba listo antes de la fecha límite.
+Anyone could have seen it coming.	Cualquiera podría haberlo visto venir.
+Somebody has been waiting for you.	Alguien ha estado esperándote.
+Many have expressed their concerns.	Muchos han expresado sus preocupaciones.
+Each step brings us closer to our goal.	Cada paso nos acerca más a nuestra meta.
+Few can achieve such success.	Pocos pueden lograr tal éxito.
+Anyone who arrives late will miss the start.	Cualquiera que llegue tarde se perderá el inicio.
+Everybody appreciates a helping hand.	Todos aprecian una mano amiga.
+Nothing can replace hard work.	Nada puede reemplazar el trabajo duro.
+Each flower in the garden is unique.	Cada flor en el jardín es única.
+Somebody needs to take responsibility.	Alguien necesita asumir la responsabilidad.
+Many enjoy reading in their free time.	Muchos disfrutan leer en su tiempo libre.
+Each moment counts in life.	Cada momento cuenta en la vida.
+Few people can resist dessert.	Pocas personas pueden resistir el postre.
+Anyone willing to help is welcome.	Cualquiera dispuesto a ayudar es bienvenido.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

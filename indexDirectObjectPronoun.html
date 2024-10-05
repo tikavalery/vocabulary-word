@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+Me	Me
+You (singular)	Te
+Him	Lo
+Her	La
+It	Lo/La (depends on gender)
+Us	Nos
+You (plural)	Los/Las (depends on gender)
+Them	Los/Las (depends on gender)
+I see him every day.	Lo veo todos los días.
+She loves it.	Ella lo ama.
+They called us last night.	Nos llamaron anoche.
+I want her to join us.	La quiero que se una a nosotros.
+We invited them to the party.	Los invitamos a la fiesta.
+Can you help me with this?	¿Puedes ayudarme con esto?
+He found it in the garden.	Lo encontró en el jardín.
+She saw him at the store.	Ella lo vio en la tienda.
+I bought it for you.	Lo compré para ti.
+We need it for the project.	Lo necesitamos para el proyecto.
+Did you finish it?	¿Lo terminaste?
+I like them very much.	Me gustan mucho.
+He will take it with him.	Lo llevará consigo.
+She made it for us.	Ella lo hizo para nosotros.
+I can help you with that.	Puedo ayudarte con eso.
+They enjoy it a lot.	Lo disfrutan mucho.
+Can you see me?	¿Puedes verme?
+She forgot him at the airport.	Ella lo olvidó en el aeropuerto.
+We met them at the restaurant.	Los conocimos en el restaurante.
+I will call you later.	Te llamaré más tarde.
+He bought it yesterday.	Lo compró ayer.
+I don't understand it.	No lo entiendo.
+Did she give you the book?	¿Te dio ella el libro?
+I will tell him the news.	Le diré las noticias.
+They always listen to me.	Siempre me escuchan.
+She is looking for it.	Ella lo está buscando.
+I can't find them anywhere.	No los puedo encontrar en ninguna parte.
+We finished it on time.	Lo terminamos a tiempo.
+He showed it to her.	Se lo mostró a ella.
+Can you explain it to me?	¿Puedes explicármelo?
+She took it with her.	Ella lo llevó consigo.
+I want to buy it.	Quiero comprarlo.
+They called us again.	Nos llamaron de nuevo.
+I need to see it.	Necesito verlo.
+She asked him for help.	Ella le pidió ayuda.
+We can do it together.	Podemos hacerlo juntos.
+He showed us the way.	Nos mostró el camino.
+I told you the truth.	Te dije la verdad.
+Did you remember to bring it?	¿Recuerdas traerlo?
+She enjoyed it very much.	Lo disfrutó mucho.
+I want to see them again.	Quiero verlos de nuevo.
+They will join us later.	Nos acompañarán más tarde.
+Can you bring it here?	¿Puedes traerlo aquí?
+She will finish it by tomorrow.	Ella lo terminará para mañana.
+I saw you at the mall.	Te vi en el centro comercial.
+He bought me a gift.	Me compró un regalo.
+We told them about the plan.	Les contamos sobre el plan.
+I need to tell her something.	Necesito decirle algo.
+Did he give you the money?	¿Te dio él el dinero?
+She will send it to you.	Ella te lo enviará.
+I like to read them.	Me gusta leerlos.
+They haven't seen it yet.	No lo han visto todavía.
+Can you pass me the salt?	¿Puedes pasarme la sal?
+She made it for him.	Ella lo hizo para él.
+I heard them talking.	Los oí hablando.
+He gave it to her yesterday.	Se lo dio a ella ayer.
+We want to keep it safe.	Queremos mantenerlo a salvo.
+I can't remember where I put it.	No puedo recordar dónde lo puse.
+She looked at him.	Ella lo miró.
+They prepared it for the event.	Lo prepararon para el evento.
+I found it in the drawer.	Lo encontré en el cajón.
+Did you receive it?	¿Lo recibiste?
+She borrowed it from me.	Ella me lo pidió prestado.
+I wish I could see it again.	Ojalá pudiera verlo de nuevo.
+He will tell you the story.	Te contará la historia.
+We made it ourselves.	Lo hicimos nosotros mismos.
+Can you explain it in detail?	¿Puedes explicarlo en detalle?
+She watched it twice.	Ella lo vio dos veces.
+I bought it last week.	Lo compré la semana pasada.
+Did you find them at the store?	¿Los encontraste en la tienda?
+He sent it to her last night.	Se lo envió a ella anoche.
+I will show you how to do it.	Te mostraré cómo hacerlo.
+They wanted to know it.	Querían saberlo.
+She enjoyed reading it.	Ella disfrutó leerlo.
+Can you show it to me?	¿Puedes mostrármelo?
+I need to talk to them.	Necesito hablar con ellos.
+He took it home with him.	Lo llevó a casa con él.
+We must finish it today.	Debemos terminarlo hoy.
+I saw her yesterday.	La vi ayer.
+Did he send you the invitation?	¿Te envió él la invitación?
+She forgot to bring it.	Ella olvidó traerlo.
+They listened to it carefully.	Lo escucharon atentamente.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
