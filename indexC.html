@@ -16,6 +16,157 @@
     <script>
         const wordPairs = `
        cabin	cabaña
+cake	pastel
+calm	tranquilo
+camera	cámara
+camp	campamento
+candle	vela
+cap	gorra
+capable	capaz
+captain	capitán
+car	coche
+card	tarjeta
+career	carrera
+careful	cuidadoso
+carefully	cuidadosamente
+carriage	carruaje
+case	caso
+castle	castillo
+cat	gato
+cave	cueva
+ceiling	techo
+cell	celda
+center	centro
+century	siglo
+certain	cierto
+certainly	ciertamente
+chain	cadena
+chair	silla
+challenge	desafío
+chamber	cámara
+chance	oportunidad
+chapter	capítulo
+character	personaje
+charge	cargo
+charm	encanto
+cheek	mejilla
+chest	pecho
+chicken	pollo
+chief	jefe
+child	niño
+childhood	infancia
+chin	barbilla
+Chinese	chino
+choice	elección
+Christ	Cristo
+Christian	cristiano
+Christmas	Navidad
+church	iglesia
+cigarette	cigarrillo
+circle	círculo
+circumstance	circunstancia
+citizen	ciudadano
+city	ciudad
+class	clase
+clean	limpio
+clear	claro
+clearly	claramente
+clerk	empleado
+client	cliente
+clock	reloj
+closely	de cerca
+cloth	tela
+clothes	ropa
+cloud	nube
+coast	costa
+coat	abrigo
+coffee	café
+cold	frío
+college	universidad
+colour	color
+comfort	comodidad
+comfortable	cómodo
+command	comando
+comment	comentario
+common	común
+community	comunidad
+companion	compañero
+company	empresa
+complete	completo
+completely	completamente
+computer	computadora
+conclusion	conclusión
+condition	condición
+confidence	confianza
+confusion	confusión
+connection	conexión
+conscious	consciente
+consciousness	conciencia
+consequence	consecuencia
+contact	contacto
+content	contenido
+control	control
+conversation	conversación
+cool	fresco
+cop	policía
+corner	esquina
+correct	correcto
+corridor	pasillo
+cost	costo
+cottage	cabaña
+couch	sofá
+could	podría
+counter	mostrador
+country	país
+couple	pareja
+courage	coraje
+course	curso
+court	corte
+cousin	primo
+cow	vaca
+crazy	loco
+creature	criatura
+credit	crédito
+crew	tripulación
+crime	crimen
+crowd	multitud
+crown	corona
+culture	cultura
+cup	taza
+curiosity	curiosidad
+curious	curioso
+current	actual
+curtain	cortina
+curve	curva
+custom	costumbre
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+
+
+<!-- 
+cabin	cabaña
 cable	cable
 cactus	cactus
 cake	pastel
@@ -1664,27 +1815,4 @@ critic	crítico
 cross	cruz
 cry	llorar
 cure	curar
-
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+-->

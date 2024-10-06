@@ -12,7 +12,92 @@
 
     <script>
         const wordPairs = `
-Eager	Ansioso
+each	cada
+eager	ansioso
+ear	oído
+early	temprano
+earth	tierra
+easily	fácilmente
+east	este
+easy	fácil
+edge	borde
+education	educación
+effect	efecto
+effort	esfuerzo
+egg	huevo
+eight	ocho
+either	cualquiera
+elbow	codo
+element	elemento
+else	más
+emotion	emoción
+empty	vacío
+end	fin
+enemy	enemigo
+energy	energía
+engine	motor
+England	Inglaterra
+English	inglés
+enormous	enorme
+enough	suficiente
+entire	entero
+entirely	enteramente
+entrance	entrada
+equal	igual
+equally	igualmente
+especially	especialmente
+estate	patrimonio
+Europe	Europa
+even	incluso
+evening	tarde
+event	evento
+eventually	eventualmente
+ever	alguna vez
+every	cada
+everybody	todos
+everyone	todos
+everything	todo
+everywhere	en todas partes
+evidence	evidencia
+evil	malvado
+exactly	exactamente
+example	ejemplo
+excellent	excelente
+except	excepto
+excitement	emoción
+excuse	excusa
+exercise	ejercicio
+existence	existencia
+experience	experiencia
+explanation	explicación
+expression	expresión
+extremely	extremadamente
+eye	ojo
+eyebrow	ceja
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+<!--  Eager	Ansioso
 Ear	Oreja
 Early	Temprano
 Earn	Ganar
@@ -1034,27 +1119,4 @@ Elysium	Elíseo
 Extemporaneous	Espontáneo
 Emergence	Emergencia
 Enamored	Enamorado
-Emancipate	Emancipar
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+Emancipate	Emancipar -->

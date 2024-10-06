@@ -12,7 +12,69 @@
 
     <script>
         const wordPairs = `
-        oak	roble
+        o’clock	en punto
+object	objeto
+obvious	obvio
+obviously	obviamente
+occasion	ocasión
+ocean	océano
+odd	impar
+of	de
+off	apagado
+office	oficina
+officer	oficial
+official	oficial
+often	a menudo
+oil	aceite
+okay	está bien
+old	viejo
+on	en
+once	una vez
+one	uno
+only	solo
+onto	sobre
+opening	apertura
+operation	operación
+opinion	opinión
+opportunity	oportunidad
+opposite	opuesto
+or	o
+order	orden
+ordinary	ordinario
+other	otro
+others	otros
+otherwise	de otro modo
+our	nuestro
+ourselves	nosotros mismos
+out	fuera
+outside	afuera
+over	sobre
+own	propio
+owner	propietario
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+<!-- oak	roble
 ocean	océano
 offer	ofrecer
 office	oficina
@@ -2056,27 +2118,4 @@ observer	observador
 obfuscate	oscurecer
 outside	exterior
 objectification	objetivación
-opportune	oportuno
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+opportune	oportuno -->

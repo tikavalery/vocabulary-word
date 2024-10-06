@@ -12,7 +12,215 @@
 
     <script>
         const wordPairs = `
-         Safe	Seguro
+         sacrifice	sacrificio
+sad	triste
+saddle	silla de montar
+safe	seguro
+safety	seguridad
+sake	motivo
+same	mismo
+sand	arena
+satisfaction	satisfacción
+Saturday	sábado
+scarcely	escasamente
+scene	escena
+scent	aroma
+school	escuela
+science	ciencia
+screen	pantalla
+sea	mar
+season	estación
+seat	asiento
+seated	sentado
+second	segundo
+secret	secreto
+section	sección
+security	seguridad
+sensation	sensación
+sense	sentido
+sentence	oración
+series	serie
+serious	serio
+seriously	seriamente
+servant	sirviente
+service	servicio
+seven	siete
+several	varios
+sex	sexo
+shade	sombra
+shadow	sombra
+shame	vergüenza
+shape	forma
+sharp	afilado
+sharply	agudamente
+she	ella
+sheet	hoja
+shell	concha
+shelter	refugio
+ship	barco
+shirt	camisa
+shit	caca
+shock	choque
+shoe	zapato
+shop	tienda
+shore	costa
+short	corto
+shot	disparo
+should	debería
+shoulder	hombro
+shower	ducha
+sick	enfermo
+side	lado
+sight	vista
+sign	signo
+signal	señal
+silence	silencio
+silent	silencioso
+silently	silenciosamente
+silk	seda
+silly	tonto
+silver	plata
+simple	simple
+simply	simplemente
+sin	pecado
+since	desde
+single	soltero
+sir	señor
+sister	hermana
+situation	situación
+six	seis
+size	tamaño
+skill	habilidad
+skin	piel
+skirt	falda
+sky	cielo
+slave	esclavo
+sleeve	manga
+slight	ligero
+slightly	ligeramente
+slope	pendiente
+slow	lento
+slowly	lentamente
+small	pequeño
+smart	inteligente
+smoke	humo
+smooth	suave
+snow	nieve
+so	así
+society	sociedad
+sofa	sofá
+soft	blando
+softly	suavemente
+soldier	soldado
+solid	sólido
+some	algunos
+somebody	alguien
+somehow	de alguna manera
+someone	alguien
+something	algo
+sometimes	a veces
+somewhat	algo
+somewhere	en alguna parte
+son	hijo
+song	canción
+soon	pronto
+sorrow	tristeza
+sorry	lo siento
+sort	tipo
+soul	alma
+sound	sonido
+source	fuente
+south	sur
+space	espacio
+Spanish	español
+special	especial
+speech	discurso
+speed	velocidad
+spell	deletrear
+spirit	espíritu
+spite	rencor
+spot	mancha
+spring	primavera
+square	cuadrado
+staff	personal
+stage	escenario
+stair	escalera
+standard	estándar
+star	estrella
+state	estado
+statement	declaración
+station	estación
+steady	constante
+steel	acero
+step	paso
+still	todavía
+stock	inventario
+stomach	estómago
+stone	piedra
+store	tienda
+storm	tormenta
+story	historia
+straight	recto
+strange	extraño
+stranger	extraño
+stream	arroyo
+street	calle
+strength	fuerza
+string	cuerda
+stroke	golpe
+strong	fuerte
+structure	estructura
+student	estudiante
+stuff	cosas
+stupid	estúpido
+style	estilo
+subject	sujeto
+success	éxito
+successful	exitoso
+such	tal
+sudden	repentino
+suddenly	de repente
+suggestion	sugerencia
+suit	traje
+sum	suma
+summer	verano
+sun	sol
+Sunday	domingo
+supper	cena
+supply	suministro
+sure	seguro
+surely	seguramente
+surface	superficie
+suspicion	sospecha
+sweat	sudor
+sweet	dulce
+sword	espada
+sympathy	simpatía
+system	sistema
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>   
+ <!-- Safe	Seguro
 Sail	Navegar
 Salt	Sal
 Same	Mismo
@@ -1219,27 +1427,4 @@ Stealthy	Sigiloso
 Spritz	Rociar
 Standoff	Enfrentamiento
 Snow	Nieve
-Stand	De pie
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+Stand	De pie -->

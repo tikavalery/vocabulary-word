@@ -14,6 +14,117 @@
         const wordPairs = `
          face	cara
 fact	hecho
+faint	débil
+fair	justo
+fairly	bastante
+faith	fe
+family	familia
+famous	famoso
+fancy	elegante
+far	lejos
+farm	granja
+farmer	granjero
+fashion	moda
+fast	rápido
+fat	gordo
+fate	destino
+father	padre
+fault	culpa
+favor	favor
+favorite	favorito
+fear	miedo
+feature	característica
+feeling	sentimiento
+fellow	compañero
+female	femenino
+fence	cerca
+few	pocos
+fiction	ficción
+field	campo
+fifteen	quince
+fifty	cincuenta
+figure	figura
+file	archivo
+film	película
+finally	finalmente
+fine	bien
+finger	dedo
+fire	fuego
+firm	firme
+firmly	firmemente
+first	primero
+fish	pez
+fist	puño
+five	cinco
+flame	llama
+flat	plano
+flesh	carne
+flight	vuelo
+flood	inundación
+floor	piso
+flower	flor
+folk	gente
+following	siguiente
+food	comida
+fool	tonto
+foolish	necio
+foot	pie
+for	para
+force	fuerza
+forehead	frente
+foreign	extranjero
+forest	bosque
+forever	para siempre
+form	forma
+former	anterior
+forth	adelante
+fortune	fortuna
+forty	cuarenta
+forward	hacia adelante
+four	cuatro
+frame	marco
+France	Francia
+free	libre
+freedom	libertad
+French	francés
+fresh	fresco
+friend	amigo
+friendly	amistoso
+friendship	amistad
+from	de
+front	frente
+fruit	fruta
+full	lleno
+fully	completamente
+fun	diversión
+funny	divertido
+furniture	muebles
+future	futuro
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+face	cara
+fact	hecho
 fall	caída
 family	familia
 famous	famoso
@@ -1003,26 +1114,3 @@ feisty	combativo
 flushing	sonrojar
 foolproof	a prueba de tontos
 feather	pluma
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>

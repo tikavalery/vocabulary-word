@@ -199,7 +199,128 @@
 
     <script>
         const wordPairs = `
-            able	capaz
+       a	un / una
+ability	habilidad
+able	capaz
+about	sobre
+above	encima
+absence	ausencia
+absolutely	absolutamente
+accident	accidente
+account	cuenta
+across	a través de
+action	acción
+activity	actividad
+actually	en realidad
+advantage	ventaja
+adventure	aventura
+advice	consejo
+affair	asunto
+affection	afecto
+afraid	asustado
+after	después
+afternoon	tarde
+afterwards	después
+again	otra vez
+against	contra
+age	edad
+agent	agente
+ago	hace
+ahead	adelante
+aid	ayuda
+air	aire
+alarm	alarma
+alive	vivo
+all	todo
+almost	casi
+alone	solo
+along	a lo largo
+already	ya
+also	también
+although	aunque
+altogether	en total
+always	siempre
+America	América
+American	estadounidense
+among	entre
+amount	cantidad
+an	un / una
+ancient	antiguo
+and	y
+angel	ángel
+anger	ira
+angry	enojado
+another	otro
+anxiety	ansiedad
+anxious	ansioso
+any	cualquier
+anybody	cualquiera
+anymore	ya no
+anyone	alguien
+anything	cualquier cosa
+anyway	de todos modos
+anywhere	en cualquier lugar
+apart	aparte
+apartment	apartamento
+apparently	aparentemente
+appearance	apariencia
+April	abril
+area	área
+argument	argumento
+arm	brazo
+army	ejército
+around	alrededor
+arrangement	arreglo
+arrival	llegada
+art	arte
+article	artículo
+artist	artista
+as	como
+aside	a un lado
+asleep	dormido
+aspect	aspecto
+ass	burro
+at	en
+attack	ataque
+attempt	intento
+attention	atención
+attitude	actitud
+audience	audiencia
+August	agosto
+aunt	tía
+author	autor
+authority	autoridad
+awake	despierto
+aware	consciente
+away	lejos
+awful	horrible
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+
+<!-- 
+     able	capaz
             about	sobre
             above	encima de
             accept	aceptar
@@ -1370,26 +1491,4 @@ awesome	impresionante
 axis	eje
 azure	azul celeste
 
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+-->

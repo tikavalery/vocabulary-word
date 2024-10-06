@@ -12,7 +12,84 @@
 
     <script>
         const wordPairs = `
-label	etiqueta
+         lack	falta
+lad	chico
+lady	dama
+lake	lago
+lamp	lámpara
+land	tierra
+language	idioma
+lap	regazo
+large	grande
+last	último
+late	tarde
+latter	último
+laughter	risa
+law	ley
+lawyer	abogado
+leader	líder
+least	menos
+leather	cuero
+left	izquierda
+leg	pierna
+length	longitud
+less	menos
+lesson	lección
+letter	carta
+level	nivel
+library	biblioteca
+life	vida
+light	luz
+lightly	ligeramente
+like	como
+likely	probable
+limit	límite
+line	línea
+link	enlace
+lip	labio
+list	lista
+literary	literario
+little	pequeño
+living	vivo
+London	Londres
+lonely	solitario
+long	largo
+loose	suelto
+Lord	Señor
+lord	señor
+loss	pérdida
+lot	mucho
+loud	ruidoso
+lovely	encantador
+lover	amante
+low	bajo
+luck	suerte
+lucky	afortunado
+lunch	almuerzo
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+<!-- label	etiqueta
 labor	trabajo
 ladder	escalera
 lake	lago
@@ -1060,27 +1137,4 @@ lap	vuelta
 loll	holgazanear
 lumpy	grumoso
 lavish	derrochador
-lark	alondra
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+lark	alondra -->

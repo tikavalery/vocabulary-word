@@ -12,7 +12,46 @@
 
     <script>
         const wordPairs = `
-         umbrella	paraguas
+        ugly	feo
+unable	incapaz
+uncle	tío
+under	debajo
+understanding	comprensión
+uniform	uniforme
+unknown	desconocido
+unless	a menos que
+until	hasta
+unusual	inusual
+up	arriba
+upon	sobre
+upper	superior
+upstairs	arriba
+us	nosotros
+usually	generalment
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+ <!-- umbrella	paraguas
 uncle	tío
 unique	único
 united	unido
@@ -1844,27 +1883,4 @@ untrusting	desconfiado
 unredeemed	no redimido
 unmanageable	inmanejable
 unshakable	inquebrantable
-unexpected	inesperado
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+unexpected	inesperado -->

@@ -12,7 +12,85 @@
 
     <script>
         const wordPairs = `
-            Habit	Hábito
+habit	hábito
+hair	cabello
+half	mitad
+hall	pasillo
+hand	mano
+handsome	guapo
+happiness	felicidad
+happy	feliz
+hard	duro
+hardly	apenas
+harm	daño
+hat	sombrero
+he	él
+head	cabeza
+health	salud
+heart	corazón
+heat	calor
+heaven	cielo
+heavily	pesadamente
+heavy	pesado
+heel	talón
+height	altura
+hell	infierno
+her	su
+here	aquí
+hero	héroe
+hers	de ella
+herself	ella misma
+high	alto
+highly	altamente
+hill	colina
+him	él
+himself	él mismo
+hint	insinuación
+hip	cadera
+his	su
+history	historia
+hole	agujero
+home	hogar
+honest	honesto
+honour	honor
+hook	gancho
+horse	caballo
+hot	caliente
+hour	hora
+house	casa
+how	cómo
+however	sin embargo
+huge	enorme
+human	humano
+hundred	cien
+hungry	hambriento
+husband	esposo
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+
+
+            <!-- Habit	Hábito
 Hair	Cabello
 Half	Mitad
 Hall	Pasillo
@@ -2330,29 +2408,4 @@ Highhanded	Altanero
 Humdrum	Monótono
 Heuristic	Heurístico
 Heroine	Heroína
-Helpful	Útil
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
-
-
+Helpful	Útil -->

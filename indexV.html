@@ -12,7 +12,47 @@
 
     <script>
         const wordPairs = `
-                vacation	vacaciones
+           valley	valle
+value	valor
+various	varios
+vast	vasto
+vehicle	vehículo
+version	versión
+very	muy
+vessel	vaso
+victim	víctima
+view	vista
+village	pueblo
+violence	violencia
+virtue	virtud
+vision	visión
+visitor	visitante
+voice	voz
+volume	volumen
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>    
+ <!-- vacation	vacaciones
 valley	valle
 valuable	valioso/a
 value	valor
@@ -352,27 +392,4 @@ vocal	vocal
 volitional	voluntario/a
 vow	juramento
 venerate	venerar
-vigor	vigor
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+vigor	vigor -->

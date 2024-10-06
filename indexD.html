@@ -12,6 +12,108 @@
 
     <script>
         const wordPairs = `
+          dad	papá
+daily	diario
+damage	daño
+damn	maldito
+danger	peligro
+dangerous	peligroso
+dark	oscuro
+darkness	oscuridad
+darling	querido
+date	fecha
+daughter	hija
+dawn	amanecer
+day	día
+dead	muerto
+deal	trato
+dear	querido
+death	muerte
+decision	decisión
+deck	cubierta
+deep	profundo
+deeply	profundamente
+degree	grado
+delay	retraso
+delicate	delicado
+delight	deleite
+department	departamento
+depth	profundidad
+description	descripción
+desert	desierto
+design	diseño
+desire	deseo
+desk	escritorio
+despair	desesperación
+desperate	desesperado
+despite	a pesar de
+detail	detalle
+development	desarrollo
+devil	diablo
+difference	diferencia
+different	diferente
+difficult	difícil
+difficulty	dificultad
+dim	tenue
+dining	comedor
+dinner	cena
+direction	dirección
+directly	directamente
+dirt	suciedad
+dirty	sucio
+discussion	discusión
+distance	distancia
+distant	distante
+dog	perro
+dollar	dólar
+door	puerta
+doorway	umbral
+double	doble
+doubt	duda
+down	abajo
+dozen	docena
+dread	temor
+dream	sueño
+driver	conductor
+drug	droga
+drunk	borracho
+dry	seco
+due	debido
+dull	soso
+during	durante
+dust	polvo
+duty	deber
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+
+
+<!-- 
+list of 300 commonly used English words starting with letter D and their corresponding 
+Spanish translations in table form completely different from these words below, no repeating of words provided in this prompt:   -->
+
+
+<!-- 
 Dabble	Jugar
 Daring	Atrevido
 Dark	Oscuro
@@ -1159,31 +1261,5 @@ Disrespect	Falta de respeto
 Distinctive	Distintivo
 Distracted	Distraído
 Drudgery	Trabajo duro
-        `;
 
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
-
-
-<!-- 
-list of 300 commonly used English words starting with letter D and their corresponding 
-Spanish translations in table form completely different from these words below, no repeating of words provided in this prompt:   -->
+-->

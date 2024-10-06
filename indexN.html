@@ -12,7 +12,68 @@
 
     <script>
         const wordPairs = `
-         name	nombre
+        nail	uña
+naked	desnudo
+name	nombre
+narrow	estrecho
+nation	nación
+native	nativo
+naturally	naturalmente
+nature	naturaleza
+near	cerca
+nearly	casi
+necessary	necesario
+neck	cuello
+neighbor	vecino
+neither	ninguno
+nerve	nervio
+nervous	nervioso
+never	nunca
+new	nuevo
+news	noticias
+newspaper	periódico
+next	siguiente
+nice	agradable
+night	noche
+nine	nueve
+nobody	nadie
+noise	ruido
+none	ninguno
+nor	ni
+north	norte
+nose	nariz
+not	no
+note	nota
+nothing	nada
+notion	noción
+novel	novela
+now	ahora
+number	número
+nurse	enfermera
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html> 
+<!-- name	nombre
 nature	naturaleza
 night	noche
 number	número
@@ -2482,27 +2543,4 @@ nuzzled	acariciado
 no-nonsense	serio
 no-show	ausente
 no-nonsense	serio
-napping	siesta
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+napping	siesta -->

@@ -12,7 +12,68 @@
 
     <script>
         const wordPairs = `
-Ice	Hielo
+I	yo
+ice	hielo
+if	si
+ill	enfermo
+image	imagen
+imagination	imaginación
+immediately	inmediatamente
+importance	importancia
+important	importante
+impossible	imposible
+impression	impresión
+in	en
+inch	pulgada
+incident	incidente
+indeed	de hecho
+Indian	indio
+influence	influencia
+innocent	inocente
+inside	dentro
+instance	instancia
+instant	instante
+instantly	al instante
+instead	en lugar de
+instruction	instrucción
+intelligence	inteligencia
+intention	intención
+interest	interés
+interested	interesado
+interesting	interesante
+interview	entrevista
+into	en
+iron	hierro
+island	isla
+issue	asunto
+it	ello
+Italian	italiano
+its	su
+itself	sí mismo
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+<!-- Ice	Hielo
 Idea	Idea
 Ideal	Ideal
 Identify	Identificar
@@ -2926,27 +2987,4 @@ Ignoring	Ignorando
 Infliction	Infligir
 Imperceptibly	Imperceptiblemente
 Ineffective	Inefectivo
-Individualistic	Individualista
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+Individualistic	Individualista -->

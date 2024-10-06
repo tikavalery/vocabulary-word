@@ -12,7 +12,87 @@
 
     <script>
         const wordPairs = `
-Rabbit	Conejo
+race	carrera
+rage	rabia
+rain	lluvia
+range	rango
+rank	rango
+rapidly	rápidamente
+rare	raro
+rate	tasa
+rather	más bien
+reaction	reacción
+ready	listo
+reality	realidad
+really	realmente
+rear	trasero
+reason	razón
+recent	reciente
+recently	recientemente
+record	récord
+red	rojo
+reflection	reflexión
+relation	relación
+relationship	relación
+relative	relativo
+relief	alivio
+religion	religión
+religious	religioso
+report	informe
+request	solicitud
+research	investigación
+respect	respeto
+response	respuesta
+responsibility	responsabilidad
+responsible	responsable
+rest	descanso
+restaurant	restaurante
+result	resultado
+reward	recompensa
+rich	rico
+right	derecho
+ring	anillo
+risk	riesgo
+river	río
+road	carretera
+robe	túnica
+role	papel
+Roman	romano
+Rome	Roma
+roof	techo
+room	habitación
+root	raíz
+rope	cuerda
+rough	áspero
+round	redondo
+row	fila
+rule	regla
+Russian	ruso
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+<!-- Rabbit	Conejo
 Race	Carrera
 Rack	Estante
 Radio	Radio
@@ -1247,28 +1327,4 @@ Recollection	Recolección
 Repercussive	Repercutivo
 Radicalism	Radicalismo
 Revocation	Revocación
-Righteousness	Rectitud
-
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+Righteousness	Rectitud -->

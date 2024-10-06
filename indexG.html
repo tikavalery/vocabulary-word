@@ -14,6 +14,77 @@
         const wordPairs = `
 game	juego
 garden	jardín
+gate	puerta
+gaze	mirada
+generally	generalmente
+generation	generación
+gentle	suave
+gentleman	caballero
+gently	suavemente
+German	alemán
+gesture	gesto
+ghost	fantasma
+giant	gigante
+gift	regalo
+girl	niña
+glad	contento
+glass	vidrio
+glasses	gafas
+glimpse	vistazo
+glow	resplandor
+God	Dios
+god	dios
+gold	oro
+golden	dorado
+good	bueno
+government	gobierno
+gown	vestido
+grace	gracia
+grand	grandioso
+grandfather	abuelo
+grandmother	abuela
+grass	hierba
+grateful	agradecido
+grave	tumba
+gray	gris
+great	genial
+Greek	griego
+green	verde
+grey	gris
+grief	duelo
+grip	agarre
+ground	suelo
+group	grupo
+guard	guardia
+guest	invitado
+guilty	culpable
+gun	pistola
+guy	tipo
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+<!-- game	juego
+garden	jardín
 gift	regalo
 girl	niña
 glass	vidrio
@@ -2220,27 +2291,4 @@ gathering	reunión
 grimace	mueca
 glee	alegría
 grumble	refunfuñar
-gap	brecha
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+gap	brecha -->

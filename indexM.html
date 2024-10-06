@@ -12,7 +12,108 @@
 
     <script>
         const wordPairs = `
-Machine	Máquina
+      machine	máquina
+mad	loco
+magazine	revista
+magic	magia
+maid	sirvienta
+mail	correo
+main	principal
+major	importante
+male	masculino
+man	hombre
+manner	manera
+many	muchos
+map	mapa
+March	marzo
+market	mercado
+marriage	matrimonio
+mass	misa
+master	maestro
+match	partido
+matter	asunto
+maybe	tal vez
+me	me
+meal	comida
+meaning	significado
+measure	medida
+meat	carne
+medical	médico
+meeting	reunión
+member	miembro
+memory	memoria
+mere	mero
+merely	simplemente
+mess	desorden
+message	mensaje
+method	método
+middle	medio
+mighty	poderoso
+mile	milla
+military	militar
+milk	leche
+million	millón
+mind	mente
+mine	mío
+minister	ministro
+minute	minuto
+mirror	espejo
+Miss	Señorita
+mission	misión
+mistake	error
+mistress	ama
+model	modelo
+modern	moderno
+moment	momento
+money	dinero
+month	mes
+mood	estado de ánimo
+moon	luna
+moral	moral
+more	más
+morning	mañana
+most	la mayoría
+mostly	principalmente
+mother	madre
+motion	movimiento
+mountain	montaña
+mouth	boca
+movement	movimiento
+movie	película
+Mr	Sr.
+Mrs	Sra.
+much	mucho
+murder	asesinato
+muscle	músculo
+music	música
+my	mi
+myself	yo mismo
+mysterious	misterioso
+mystery	misterio
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+<!-- Machine	Máquina
 Magic	Magia
 Magnet	Imán
 Mail	Correo
@@ -1099,27 +1200,4 @@ Magnanimously	Magnánimamente
 Meditative	Meditativo
 Mediator	Mediador
 Mechanically	Mecánicamente
-Macabre	Macabro
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+Macabre	Macabro -->

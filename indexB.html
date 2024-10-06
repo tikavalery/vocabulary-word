@@ -156,6 +156,127 @@
 
     <script>
         const wordPairs = `
+        baby	bebé
+back	espalda
+background	fondo
+bad	malo
+badly	mal
+bag	bolsa
+balance	equilibrio
+ball	pelota
+band	banda
+bank	banco
+bare	desnudo
+barely	apenas
+basket	cesta
+bathroom	baño
+battle	batalla
+beach	playa
+beam	rayo
+beast	bestia
+beautiful	hermoso
+beauty	belleza
+because	porque
+bed	cama
+bedroom	dormitorio
+beer	cerveza
+before	antes
+beginning	comienzo
+behind	detrás
+being	ser
+belief	creencia
+bell	campana
+belly	barriga
+below	debajo
+belt	cinturón
+bench	banco
+beneath	debajo de
+benefit	beneficio
+beside	al lado de
+besides	además
+between	entre
+beyond	más allá
+big	grande
+bill	factura
+bird	pájaro
+birth	nacimiento
+bit	trozo
+bitter	amargo
+black	negro
+blade	hoja
+blanket	manta
+blind	ciego
+block	bloque
+blood	sangre
+bloody	sangriento
+blue	azul
+board	tabla
+boat	bote
+body	cuerpo
+bone	hueso
+book	libro
+boot	bota
+border	frontera
+both	ambos
+bottle	botella
+bottom	fondo
+bound	atado
+bowl	cuenco
+box	caja
+boy	chico
+brain	cerebro
+branch	rama
+brave	valiente
+bread	pan
+breakfast	desayuno
+breast	pecho
+breath	aliento
+breeze	brisa
+bridge	puente
+bright	brillante
+brilliant	brillante
+British	británico
+broad	amplio
+broken	roto
+brother	hermano
+brow	ceño
+brown	marrón
+building	edificio
+bullet	bala
+bus	autobús
+bush	arbusto
+business	negocio
+busy	ocupado
+but	pero
+button	botón
+by	por
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+
+
+<!-- 
 baby	bebé
 back	atrás
 backpack	mochila
@@ -1049,27 +1170,4 @@ bumpkin	paleto
 burden	carga
 buzz	zumbido
 bypass	desvío
-
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+-->
