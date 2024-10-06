@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+a	un / una
+ability	habilidad
+able	capaz
+about	sobre
+above	encima
+absence	ausencia
+absolutely	absolutamente
+accident	accidente
+account	cuenta
+across	a través de
+action	acción
+activity	actividad
+actually	en realidad
+advantage	ventaja
+adventure	aventura
+advice	consejo
+affair	asunto
+affection	afecto
+afraid	asustado
+after	después
+afternoon	tarde
+afterwards	después
+again	otra vez
+against	contra
+age	edad
+agent	agente
+ago	hace
+ahead	adelante
+aid	ayuda
+air	aire
+alarm	alarma
+alive	vivo
+all	todo
+almost	casi
+alone	solo
+along	a lo largo
+already	ya
+also	también
+although	aunque
+altogether	en total
+always	siempre
+America	América
+American	estadounidense
+among	entre
+amount	cantidad
+an	un / una
+ancient	antiguo
+and	y
+angel	ángel
+anger	ira
+angry	enojado
+another	otro
+anxiety	ansiedad
+anxious	ansioso
+any	cualquier
+anybody	cualquiera
+anymore	ya no
+anyone	alguien
+anything	cualquier cosa
+anyway	de todos modos
+anywhere	en cualquier lugar
+apart	aparte
+apartment	apartamento
+apparently	aparentemente
+appearance	apariencia
+April	abril
+area	área
+argument	argumento
+arm	brazo
+army	ejército
+around	alrededor
+arrangement	arreglo
+arrival	llegada
+art	arte
+article	artículo
+artist	artista
+as	como
+aside	a un lado
+asleep	dormido
+aspect	aspecto
+ass	burro
+at	en
+attack	ataque
+attempt	intento
+attention	atención
+attitude	actitud
+audience	audiencia
+August	agosto
+aunt	tía
+author	autor
+authority	autoridad
+awake	despierto
+aware	consciente
+away	lejos
+awful	horrible
+baby	bebé
+back	espalda
+background	fondo
+bad	malo
+badly	mal
+bag	bolsa
+balance	equilibrio
+ball	pelota
+band	banda
+bank	banco
+bare	desnudo
+barely	apenas
+basket	cesta
+bathroom	baño
+battle	batalla
+beach	playa
+beam	rayo
+beast	bestia
+beautiful	hermoso
+beauty	belleza
+because	porque
+bed	cama
+bedroom	dormitorio
+beer	cerveza
+before	antes
+beginning	comienzo
+behind	detrás
+being	ser
+belief	creencia
+bell	campana
+belly	barriga
+below	debajo
+belt	cinturón
+bench	banco
+beneath	debajo de
+benefit	beneficio
+beside	al lado de
+besides	además
+between	entre
+beyond	más allá
+big	grande
+bill	factura
+bird	pájaro
+birth	nacimiento
+bit	trozo
+bitter	amargo
+black	negro
+blade	hoja
+blanket	manta
+blind	ciego
+block	bloque
+blood	sangre
+bloody	sangriento
+blue	azul
+board	tabla
+boat	bote
+body	cuerpo
+bone	hueso
+book	libro
+boot	bota
+border	frontera
+both	ambos
+bottle	botella
+bottom	fondo
+bound	atado
+bowl	cuenco
+box	caja
+boy	chico
+brain	cerebro
+branch	rama
+brave	valiente
+bread	pan
+breakfast	desayuno
+breast	pecho
+breath	aliento
+breeze	brisa
+bridge	puente
+bright	brillante
+brilliant	brillante
+British	británico
+broad	amplio
+broken	roto
+brother	hermano
+brow	ceño
+brown	marrón
+building	edificio
+bullet	bala
+bus	autobús
+bush	arbusto
+business	negocio
+busy	ocupado
+but	pero
+button	botón
+by	por
+cabin	cabaña
+cake	pastel
+calm	tranquilo
+camera	cámara
+camp	campamento
+candle	vela
+cap	gorra
+capable	capaz
+captain	capitán
+car	coche
+card	tarjeta
+career	carrera
+careful	cuidadoso
+carefully	cuidadosamente
+carriage	carruaje
+case	caso
+castle	castillo
+cat	gato
+cave	cueva
+ceiling	techo
+cell	celda
+center	centro
+century	siglo
+certain	cierto
+certainly	ciertamente
+chain	cadena
+chair	silla
+challenge	desafío
+chamber	cámara
+chance	oportunidad
+chapter	capítulo
+character	personaje
+charge	cargo
+charm	encanto
+cheek	mejilla
+chest	pecho
+chicken	pollo
+chief	jefe
+child	niño
+childhood	infancia
+chin	barbilla
+Chinese	chino
+choice	elección
+Christ	Cristo
+Christian	cristiano
+Christmas	Navidad
+church	iglesia
+cigarette	cigarrillo
+circle	círculo
+circumstance	circunstancia
+citizen	ciudadano
+city	ciudad
+class	clase
+clean	limpio
+clear	claro
+clearly	claramente
+clerk	empleado
+client	cliente
+clock	reloj
+closely	de cerca
+cloth	tela
+clothes	ropa
+cloud	nube
+coast	costa
+coat	abrigo
+coffee	café
+cold	frío
+college	universidad
+colour	color
+comfort	comodidad
+comfortable	cómodo
+command	comando
+comment	comentario
+common	común
+community	comunidad
+companion	compañero
+company	empresa
+complete	completo
+completely	completamente
+computer	computadora
+conclusion	conclusión
+condition	condición
+confidence	confianza
+confusion	confusión
+connection	conexión
+conscious	consciente
+consciousness	conciencia
+consequence	consecuencia
+contact	contacto
+content	contenido
+control	control
+conversation	conversación
+cool	fresco
+cop	policía
+corner	esquina
+correct	correcto
+corridor	pasillo
+cost	costo
+cottage	cabaña
+couch	sofá
+could	podría
+counter	mostrador
+country	país
+couple	pareja
+courage	coraje
+course	curso
+court	corte
+cousin	primo
+cow	vaca
+crazy	loco
+creature	criatura
+credit	crédito
+crew	tripulación
+crime	crimen
+crowd	multitud
+crown	corona
+culture	cultura
+cup	taza
+curiosity	curiosidad
+curious	curioso
+current	actual
+curtain	cortina
+curve	curva
+custom	costumbre
+dad	papá
+daily	diario
+damage	daño
+damn	maldito
+danger	peligro
+dangerous	peligroso
+dark	oscuro
+darkness	oscuridad
+darling	querido
+date	fecha
+daughter	hija
+dawn	amanecer
+day	día
+dead	muerto
+deal	trato
+dear	querido
+death	muerte
+decision	decisión
+deck	cubierta
+deep	profundo
+deeply	profundamente
+degree	grado
+delay	retraso
+delicate	delicado
+delight	deleite
+department	departamento
+depth	profundidad
+description	descripción
+desert	desierto
+design	diseño
+desire	deseo
+desk	escritorio
+despair	desesperación
+desperate	desesperado
+despite	a pesar de
+detail	detalle
+development	desarrollo
+devil	diablo
+difference	diferencia
+different	diferente
+difficult	difícil
+difficulty	dificultad
+dim	tenue
+dining	comedor
+dinner	cena
+direction	dirección
+directly	directamente
+dirt	suciedad
+dirty	sucio
+discussion	discusión
+distance	distancia
+distant	distante
+dog	perro
+dollar	dólar
+door	puerta
+doorway	umbral
+double	doble
+doubt	duda
+down	abajo
+dozen	docena
+dread	temor
+dream	sueño
+driver	conductor
+drug	droga
+drunk	borracho
+dry	seco
+due	debido
+dull	soso
+during	durante
+dust	polvo
+duty	deber
+each	cada
+eager	ansioso
+ear	oído
+early	temprano
+earth	tierra
+easily	fácilmente
+east	este
+easy	fácil
+edge	borde
+education	educación
+effect	efecto
+effort	esfuerzo
+egg	huevo
+eight	ocho
+either	cualquiera
+elbow	codo
+element	elemento
+else	más
+emotion	emoción
+empty	vacío
+end	fin
+enemy	enemigo
+energy	energía
+engine	motor
+England	Inglaterra
+English	inglés
+enormous	enorme
+enough	suficiente
+entire	entero
+entirely	enteramente
+entrance	entrada
+equal	igual
+equally	igualmente
+especially	especialmente
+estate	patrimonio
+Europe	Europa
+even	incluso
+evening	tarde
+event	evento
+eventually	eventualmente
+ever	alguna vez
+every	cada
+everybody	todos
+everyone	todos
+everything	todo
+everywhere	en todas partes
+evidence	evidencia
+evil	malvado
+exactly	exactamente
+example	ejemplo
+excellent	excelente
+except	excepto
+excitement	emoción
+excuse	excusa
+exercise	ejercicio
+existence	existencia
+experience	experiencia
+explanation	explicación
+expression	expresión
+extremely	extremadamente
+eye	ojo
+eyebrow	ceja
+face	cara
+fact	hecho
+faint	débil
+fair	justo
+fairly	bastante
+faith	fe
+family	familia
+famous	famoso
+fancy	elegante
+far	lejos
+farm	granja
+farmer	granjero
+fashion	moda
+fast	rápido
+fat	gordo
+fate	destino
+father	padre
+fault	culpa
+favor	favor
+favorite	favorito
+fear	miedo
+feature	característica
+feeling	sentimiento
+fellow	compañero
+female	femenino
+fence	cerca
+few	pocos
+fiction	ficción
+field	campo
+fifteen	quince
+fifty	cincuenta
+figure	figura
+file	archivo
+film	película
+finally	finalmente
+fine	bien
+finger	dedo
+fire	fuego
+firm	firme
+firmly	firmemente
+first	primero
+fish	pez
+fist	puño
+five	cinco
+flame	llama
+flat	plano
+flesh	carne
+flight	vuelo
+flood	inundación
+floor	piso
+flower	flor
+folk	gente
+following	siguiente
+food	comida
+fool	tonto
+foolish	necio
+foot	pie
+for	para
+force	fuerza
+forehead	frente
+foreign	extranjero
+forest	bosque
+forever	para siempre
+form	forma
+former	anterior
+forth	adelante
+fortune	fortuna
+forty	cuarenta
+forward	hacia adelante
+four	cuatro
+frame	marco
+France	Francia
+free	libre
+freedom	libertad
+French	francés
+fresh	fresco
+friend	amigo
+friendly	amistoso
+friendship	amistad
+from	de
+front	frente
+fruit	fruta
+full	lleno
+fully	completamente
+fun	diversión
+funny	divertido
+furniture	muebles
+future	futuro
+game	juego
+garden	jardín
+gate	puerta
+gaze	mirada
+generally	generalmente
+generation	generación
+gentle	suave
+gentleman	caballero
+gently	suavemente
+German	alemán
+gesture	gesto
+ghost	fantasma
+giant	gigante
+gift	regalo
+girl	niña
+glad	contento
+glass	vidrio
+glasses	gafas
+glimpse	vistazo
+glow	resplandor
+God	Dios
+god	dios
+gold	oro
+golden	dorado
+good	bueno
+government	gobierno
+gown	vestido
+grace	gracia
+grand	grandioso
+grandfather	abuelo
+grandmother	abuela
+grass	hierba
+grateful	agradecido
+grave	tumba
+gray	gris
+great	genial
+Greek	griego
+green	verde
+grey	gris
+grief	duelo
+grip	agarre
+ground	suelo
+group	grupo
+guard	guardia
+guest	invitado
+guilty	culpable
+gun	pistola
+guy	tipo
+habit	hábito
+hair	cabello
+half	mitad
+hall	pasillo
+hand	mano
+handsome	guapo
+happiness	felicidad
+happy	feliz
+hard	duro
+hardly	apenas
+harm	daño
+hat	sombrero
+he	él
+head	cabeza
+health	salud
+heart	corazón
+heat	calor
+heaven	cielo
+heavily	pesadamente
+heavy	pesado
+heel	talón
+height	altura
+hell	infierno
+her	su
+here	aquí
+hero	héroe
+hers	de ella
+herself	ella misma
+high	alto
+highly	altamente
+hill	colina
+him	él
+himself	él mismo
+hint	insinuación
+hip	cadera
+his	su
+history	historia
+hole	agujero
+home	hogar
+honest	honesto
+honour	honor
+hook	gancho
+horse	caballo
+hot	caliente
+hour	hora
+house	casa
+how	cómo
+however	sin embargo
+huge	enorme
+human	humano
+hundred	cien
+hungry	hambriento
+husband	esposo
+I	yo
+ice	hielo
+if	si
+ill	enfermo
+image	imagen
+imagination	imaginación
+immediately	inmediatamente
+importance	importancia
+important	importante
+impossible	imposible
+impression	impresión
+in	en
+inch	pulgada
+incident	incidente
+indeed	de hecho
+Indian	indio
+influence	influencia
+innocent	inocente
+inside	dentro
+instance	instancia
+instant	instante
+instantly	al instante
+instead	en lugar de
+instruction	instrucción
+intelligence	inteligencia
+intention	intención
+interest	interés
+interested	interesado
+interesting	interesante
+interview	entrevista
+into	en
+iron	hierro
+island	isla
+issue	asunto
+it	ello
+Italian	italiano
+its	su
+itself	sí mismo
+jacket	chaqueta
+jaw	mandíbula
+Jew	judío
+job	trabajo
+joke	broma
+journey	viaje
+joy	alegría
+judge	juez
+judgment	juicio
+July	julio
+June	junio
+just	justo
+justice	justicia
+key	llave
+kid	niño
+kind	tipo
+king	rey
+kitchen	cocina
+knee	rodilla
+knife	cuchillo
+knight	caballero
+knowledge	conocimiento
+lack	falta
+lad	chico
+lady	dama
+lake	lago
+lamp	lámpara
+land	tierra
+language	idioma
+lap	regazo
+large	grande
+last	último
+late	tarde
+latter	último
+laughter	risa
+law	ley
+lawyer	abogado
+leader	líder
+least	menos
+leather	cuero
+left	izquierda
+leg	pierna
+length	longitud
+less	menos
+lesson	lección
+letter	carta
+level	nivel
+library	biblioteca
+life	vida
+light	luz
+lightly	ligeramente
+like	como
+likely	probable
+limit	límite
+line	línea
+link	enlace
+lip	labio
+list	lista
+literary	literario
+little	pequeño
+living	vivo
+London	Londres
+lonely	solitario
+long	largo
+loose	suelto
+Lord	Señor
+lord	señor
+loss	pérdida
+lot	mucho
+loud	ruidoso
+lovely	encantador
+lover	amante
+low	bajo
+luck	suerte
+lucky	afortunado
+lunch	almuerzo
+machine	máquina
+mad	loco
+magazine	revista
+magic	magia
+maid	sirvienta
+mail	correo
+main	principal
+major	importante
+male	masculino
+man	hombre
+manner	manera
+many	muchos
+map	mapa
+March	marzo
+market	mercado
+marriage	matrimonio
+mass	misa
+master	maestro
+match	partido
+matter	asunto
+maybe	tal vez
+me	me
+meal	comida
+meaning	significado
+measure	medida
+meat	carne
+medical	médico
+meeting	reunión
+member	miembro
+memory	memoria
+mere	mero
+merely	simplemente
+mess	desorden
+message	mensaje
+method	método
+middle	medio
+mighty	poderoso
+mile	milla
+military	militar
+milk	leche
+million	millón
+mind	mente
+mine	mío
+minister	ministro
+minute	minuto
+mirror	espejo
+Miss	Señorita
+mission	misión
+mistake	error
+mistress	ama
+model	modelo
+modern	moderno
+moment	momento
+money	dinero
+month	mes
+mood	estado de ánimo
+moon	luna
+moral	moral
+more	más
+morning	mañana
+most	la mayoría
+mostly	principalmente
+mother	madre
+motion	movimiento
+mountain	montaña
+mouth	boca
+movement	movimiento
+movie	película
+Mr	Sr.
+Mrs	Sra.
+much	mucho
+murder	asesinato
+muscle	músculo
+music	música
+my	mi
+myself	yo mismo
+mysterious	misterioso
+mystery	misterio
+nail	uña
+naked	desnudo
+name	nombre
+narrow	estrecho
+nation	nación
+native	nativo
+naturally	naturalmente
+nature	naturaleza
+near	cerca
+nearly	casi
+necessary	necesario
+neck	cuello
+neighbor	vecino
+neither	ninguno
+nerve	nervio
+nervous	nervioso
+never	nunca
+new	nuevo
+news	noticias
+newspaper	periódico
+next	siguiente
+nice	agradable
+night	noche
+nine	nueve
+nobody	nadie
+noise	ruido
+none	ninguno
+nor	ni
+north	norte
+nose	nariz
+not	no
+note	nota
+nothing	nada
+notion	noción
+novel	novela
+now	ahora
+number	número
+nurse	enfermera
+o’clock	en punto
+object	objeto
+obvious	obvio
+obviously	obviamente
+occasion	ocasión
+ocean	océano
+odd	impar
+of	de
+off	apagado
+office	oficina
+officer	oficial
+official	oficial
+often	a menudo
+oil	aceite
+okay	está bien
+old	viejo
+on	en
+once	una vez
+one	uno
+only	solo
+onto	sobre
+opening	apertura
+operation	operación
+opinion	opinión
+opportunity	oportunidad
+opposite	opuesto
+or	o
+order	orden
+ordinary	ordinario
+other	otro
+others	otros
+otherwise	de otro modo
+our	nuestro
+ourselves	nosotros mismos
+out	fuera
+outside	afuera
+over	sobre
+own	propio
+owner	propietario
+pace	ritmo
+page	página
+pain	dolor
+painting	pintura
+pair	par
+palace	palacio
+pale	pálido
+palm	palma
+paper	papel
+parent	padre/madre
+park	parque
+part	parte
+particular	particular
+particularly	particularmente
+partner	compañero
+party	fiesta
+passage	pasaje
+passenger	pasajero
+passion	pasión
+past	pasado
+path	camino
+patient	paciente
+pattern	patrón
+peace	paz
+pen	pluma
+per	por
+perfect	perfecto
+perfectly	perfectamente
+performance	actuación
+perhaps	quizás
+period	período
+permission	permiso
+person	persona
+phone	teléfono
+photograph	fotografía
+phrase	frase
+physical	físico
+picture	imagen
+piece	pieza
+pile	montón
+pillow	almohada
+pink	rosa
+pipe	tubería
+pistol	pistola
+pity	lástima
+place	lugar
+plain	simple
+plane	avión
+plant	planta
+plate	plato
+pleasant	agradable
+pleasure	placer
+plenty	abundancia
+plot	trama
+pocket	bolsillo
+poem	poema
+poet	poeta
+poetry	poesía
+point	punto
+police	policía
+political	político
+pool	piscina
+poor	pobre
+porch	porche
+position	posición
+possession	posesión
+possibility	posibilidad
+possible	posible
+possibly	posiblemente
+post	publicar
+pot	olla
+pound	libra
+power	poder
+powerful	poderoso
+practice	práctica
+praise	alabanza
+prayer	oración
+precious	precioso
+presence	presencia
+present	presente
+pressure	presión
+pretty	bonito
+previous	anterior
+price	precio
+pride	orgullo
+priest	sacerdote
+prince	príncipe
+principle	principio
+prison	prisión
+prisoner	prisionero
+private	privado
+probably	probablemente
+problem	problema
+process	proceso
+professional	profesional
+progress	progreso
+project	proyecto
+proof	prueba
+proper	adecuado
+property	propiedad
+proud	orgulloso
+public	público
+pure	puro
+purpose	propósito
+purse	bolso
+quality	calidad
+quarter	cuarto
+queen	reina
+question	pregunta
+quick	rápido
+quickly	rápidamente
+quiet	tranquilo
+quietly	silenciosamente
+quite	bastante
+race	carrera
+rage	rabia
+rain	lluvia
+range	rango
+rank	rango
+rapidly	rápidamente
+rare	raro
+rate	tasa
+rather	más bien
+reaction	reacción
+ready	listo
+reality	realidad
+really	realmente
+rear	trasero
+reason	razón
+recent	reciente
+recently	recientemente
+record	récord
+red	rojo
+reflection	reflexión
+relation	relación
+relationship	relación
+relative	relativo
+relief	alivio
+religion	religión
+religious	religioso
+report	informe
+request	solicitud
+research	investigación
+respect	respeto
+response	respuesta
+responsibility	responsabilidad
+responsible	responsable
+rest	descanso
+restaurant	restaurante
+result	resultado
+reward	recompensa
+rich	rico
+right	derecho
+ring	anillo
+risk	riesgo
+river	río
+road	carretera
+robe	túnica
+role	papel
+Roman	romano
+Rome	Roma
+roof	techo
+room	habitación
+root	raíz
+rope	cuerda
+rough	áspero
+round	redondo
+row	fila
+rule	regla
+Russian	ruso
+sacrifice	sacrificio
+sad	triste
+saddle	silla de montar
+safe	seguro
+safety	seguridad
+sake	motivo
+same	mismo
+sand	arena
+satisfaction	satisfacción
+Saturday	sábado
+scarcely	escasamente
+scene	escena
+scent	aroma
+school	escuela
+science	ciencia
+screen	pantalla
+sea	mar
+season	estación
+seat	asiento
+seated	sentado
+second	segundo
+secret	secreto
+section	sección
+security	seguridad
+sensation	sensación
+sense	sentido
+sentence	oración
+series	serie
+serious	serio
+seriously	seriamente
+servant	sirviente
+service	servicio
+seven	siete
+several	varios
+sex	sexo
+shade	sombra
+shadow	sombra
+shame	vergüenza
+shape	forma
+sharp	afilado
+sharply	agudamente
+she	ella
+sheet	hoja
+shell	concha
+shelter	refugio
+ship	barco
+shirt	camisa
+shit	caca
+shock	choque
+shoe	zapato
+shop	tienda
+shore	costa
+short	corto
+shot	disparo
+should	debería
+shoulder	hombro
+shower	ducha
+sick	enfermo
+side	lado
+sight	vista
+sign	signo
+signal	señal
+silence	silencio
+silent	silencioso
+silently	silenciosamente
+silk	seda
+silly	tonto
+silver	plata
+simple	simple
+simply	simplemente
+sin	pecado
+since	desde
+single	soltero
+sir	señor
+sister	hermana
+situation	situación
+six	seis
+size	tamaño
+skill	habilidad
+skin	piel
+skirt	falda
+sky	cielo
+slave	esclavo
+sleeve	manga
+slight	ligero
+slightly	ligeramente
+slope	pendiente
+slow	lento
+slowly	lentamente
+small	pequeño
+smart	inteligente
+smoke	humo
+smooth	suave
+snow	nieve
+so	así
+society	sociedad
+sofa	sofá
+soft	blando
+softly	suavemente
+soldier	soldado
+solid	sólido
+some	algunos
+somebody	alguien
+somehow	de alguna manera
+someone	alguien
+something	algo
+sometimes	a veces
+somewhat	algo
+somewhere	en alguna parte
+son	hijo
+song	canción
+soon	pronto
+sorrow	tristeza
+sorry	lo siento
+sort	tipo
+soul	alma
+sound	sonido
+source	fuente
+south	sur
+space	espacio
+Spanish	español
+special	especial
+speech	discurso
+speed	velocidad
+spell	deletrear
+spirit	espíritu
+spite	rencor
+spot	mancha
+spring	primavera
+square	cuadrado
+staff	personal
+stage	escenario
+stair	escalera
+standard	estándar
+star	estrella
+state	estado
+statement	declaración
+station	estación
+steady	constante
+steel	acero
+step	paso
+still	todavía
+stock	inventario
+stomach	estómago
+stone	piedra
+store	tienda
+storm	tormenta
+story	historia
+straight	recto
+strange	extraño
+stranger	extraño
+stream	arroyo
+street	calle
+strength	fuerza
+string	cuerda
+stroke	golpe
+strong	fuerte
+structure	estructura
+student	estudiante
+stuff	cosas
+stupid	estúpido
+style	estilo
+subject	sujeto
+success	éxito
+successful	exitoso
+such	tal
+sudden	repentino
+suddenly	de repente
+suggestion	sugerencia
+suit	traje
+sum	suma
+summer	verano
+sun	sol
+Sunday	domingo
+supper	cena
+supply	suministro
+sure	seguro
+surely	seguramente
+surface	superficie
+suspicion	sospecha
+sweat	sudor
+sweet	dulce
+sword	espada
+sympathy	simpatía
+system	sistema
+table	mesa
+tail	cola
+tale	cuento
+tall	alto
+tape	cinta
+task	tarea
+taste	gusto
+tea	té
+teacher	profesor
+team	equipo
+tear	lágrima
+telephone	teléfono
+television	televisión
+temple	templo
+ten	diez
+tender	tierno
+tent	tienda de campaña
+term	término
+test	prueba
+text	texto
+than	que
+thanks	gracias
+that	eso
+the	el / la
+thee	tú
+their	su
+them	ellos
+themselves	ellos mismos
+then	entonces
+theory	teoría
+there	allí
+therefore	por lo tanto
+these	estos
+they	ellos
+thick	grueso
+thigh	muslo
+thin	delgado
+thing	cosa
+third	tercero
+thirty	treinta
+this	este
+those	esos
+though	aunque
+thought	pensamiento
+thousand	mil
+threat	amenaza
+three	tres
+throat	garganta
+through	a través de
+throughout	a lo largo de
+thumb	pulgar
+thus	así
+thy	tu
+tight	ajustado
+tightly	firmemente
+till	hasta
+time	tiempo
+tiny	diminuto
+tip	consejo
+title	título
+to	a
+to abandon	abandonar
+to accept	aceptar
+to accompany	acompañar
+to accord	acordar
+to accuse	acusar
+to ache	doler
+to acknowledge	reconocer
+to act	actuar
+to add	añadir
+to address	dirigirse a
+to admire	admirar
+to admit	admitir
+to advance	avanzar
+to affect	afectar
+to afford	permitirse
+to agree	estar de acuerdo
+to aim	apuntar
+to allow	permitir
+to announce	anunciar
+to answer	responder
+to appeal	apelar
+to appear	aparecer
+to apply	aplicar
+to appreciate	apreciar
+to approach	acercarse
+to argue	discutir
+to arise	surgir
+to arrange	organizar
+to arrest	arrestar
+to arrive	llegar
+to ask	preguntar
+to associate	asociar
+to assume	asumir
+to assure	asegurar
+to attach	adjuntar
+to attend	asistir
+to attract	atraer
+to avoid	evitar
+to be	ser
+to bear	soportar
+to beat	golpear
+to become	convertirse
+to beg	suplicar
+to begin	comenzar
+to believe	creer
+to belong	pertenecer
+to bend	doblar
+to bet	apostar
+to betray	traicionar
+to bid	ofertar
+to bite	morder
+to blame	culpar
+to blink	parpadear
+to blow	soplar
+to bore	aburrir
+to bother	molestar
+to bow	inclinarse
+to break	romper
+to breathe	respirar
+to bring	traer
+to brush	cepillar
+to build	construir
+to burn	quemar
+to burst	estallar
+to bury	enterrar
+to buy	comprar
+to call	llamar
+to can	poder
+to capture	capturar
+to care	cuidar
+to carry	llevar
+to cast	lanzar
+to catch	atrapar
+to cause	causar
+to cease	cesar
+to change	cambiar
+to chase	perseguir
+to check	verificar
+to choose	elegir
+to chuckle	reírse suavemente
+to claim	reclamar
+to climb	escalar
+to cling	aferrarse
+to close	cerrar
+to clutch	agarrar
+to collect	coleccionar
+to come	venir
+to commit	comprometer
+to compare	comparar
+to complain	quejarse
+to conceal	ocultar
+to concern	preocupar
+to conclude	concluir
+to conduct	llevar a cabo
+to confess	confesar
+to confirm	confirmar
+to confuse	confundir
+to connect	conectar
+to consider	considerar
+to contain	contener
+to continue	continuar
+to convince	convencer
+to cook	cocinar
+to count	contar
+to cover	cubrir
+to crack	agrietar
+to crash	chocar
+to crawl	gatear
+to create	crear
+to creep	arrastrarse
+to cross	cruzar
+to crush	aplastar
+to cry	llorar
+to curl	rizar
+to curse	maldecir
+to cut	cortar
+to dance	bailar
+to dare	atreverse
+to dash	correr rápidamente
+to decide	decidir
+to declare	declarar
+to defend	defender
+to deliver	entregar
+to demand	exigir
+to deny	negar
+to depart	partir
+to depend	depender
+to descend	descender
+to describe	describir
+to deserve	merecer
+to destroy	destruir
+to determine	determinar
+to develop	desarrollar
+to die	morir
+to dig	cavar
+to direct	dirigir
+to disappear	desaparecer
+to discover	descubrir
+to discuss	discutir
+to display	exhibir
+to disturb	perturbar
+to divide	dividir
+to do	hacer
+to drag	arrastrar
+to draw	dibujar
+to dress	vestirse
+to drift	derivar
+to drink	beber
+to drive	conducir
+to drop	soltar
+to earn	ganar
+to ease	aliviar
+to eat	comer
+to echo	resonar
+to embrace	abrazar
+to emerge	emerger
+to employ	emplear
+to encounter	encontrar
+to encourage	alentar
+to engage	involucrar
+to enjoy	disfrutar
+to enter	entrar
+to escape	escapar
+to establish	establecer
+to examine	examinar
+to exchange	intercambiar
+to excite	excitar
+to exclaim	exclamar
+to exhaust	agotar
+to exist	existir
+to expect	esperar
+to explain	explicar
+to expose	exponer
+to express	expresar
+to extend	extender
+to fade	desvanecerse
+to fail	fallar
+to fall	caer
+to feed	alimentar
+to feel	sentir
+to fight	pelear
+to fill	llenar
+to find	encontrar
+to finish	terminar
+to fit	encajar
+to fix	arreglar
+to flash	parpadear
+to flee	huir
+to fling	arrojar
+to float	flotar
+to flow	fluir
+to fly	volar
+to focus	enfocarse
+to fold	doblar
+to follow	seguir
+to forget	olvidar
+to forgive	perdonar
+to freeze	congelar
+to frighten	asustar
+to frown	fruncir el ceño
+to gain	ganar
+to gasp	jadear
+to gather	reunir
+to get	conseguir
+to give	dar
+to glance	echar un vistazo
+to glare	mirar de forma dura
+to gleam	brillar
+to go	ir
+to grab	agarrar
+to grant	conceder
+to grasp	asir
+to greet	saludar
+to grin	sonreír
+to groan	gemir
+to grow	crecer
+to guess	adivinar
+to guide	guiar
+to halt	detener
+to handle	manejar
+to hang	colgar
+to happen	suceder
+to hate	odiar
+to have	tener
+to hear	oír
+to help	ayudar
+to hesitate	dudar
+to hide	esconder
+to hire	contratar
+to hit	golpear
+to hold	sostener
+to hope	esperar
+to hug	abrazar
+to hunt	cazar
+to hurry	apresurarse
+to hurt	herir
+to identify	identificar
+to ignore	ignorar
+to imagine	imaginar
+to impress	impresionar
+to include	incluir
+to increase	aumentar
+to indicate	indicar
+to inform	informar
+to inquire	preguntar
+to insist	insistir
+to intend	tener la intención
+to interrupt	interrumpir
+to introduce	presentar
+to invite	invitar
+to involve	involucrar
+to jerk	sacudir
+to join	unirse
+to jump	saltar
+to keep	mantener
+to kick	patear
+to kill	matar
+to kiss	besar
+to kneel	arrodillarse
+to knock	golpear
+to know	saber
+to laugh	reír
+to lay	poner
+to lead	liderar
+to lean	inclinarse
+to leap	saltar
+to learn	aprender
+to leave	dejar
+to let	permitir
+to lie	mentir
+to lift	levantar
+to listen	escuchar
+to live	vivir
+to load	cargar
+to lock	cerrar con llave
+to look	mirar
+to lose	perder
+to love	amar
+to lower	bajar
+to maintain	mantener
+to make	hacer
+to manage	gestionar
+to march	marchar
+to mark	marcar
+to marry	casarse
+to may	poder
+to mean	significar
+to meet	conocer
+to mention	mencionar
+to might	podría
+to miss	extrañar
+to mount	montar
+to move	mover
+to murmur	murmurar
+to must	deber
+to mutter	murmurar
+to need	necesitar
+to nod	asentir
+to notice	notar
+to oblige	obligar
+to observe	observar
+to obtain	obtener
+to occupy	ocupar
+to occur	ocurrir
+to offer	ofrecer
+to open	abrir
+to ought	deber
+to owe	deber
+to pack	empacar
+to paint	pintar
+to pass	pasar
+to pat	acariciar
+to pause	pausar
+to pay	pagar
+to peer	mirar de cerca
+to perceive	percibir
+to perform	realizar
+to permit	permitir
+to persuade	persuadir
+to pick	elegir
+to pin	fijar
+to play	jugar
+to please	agradar
+to pop	estallar
+to possess	poseer
+to pour	verter
+to pray	rezar
+to prefer	preferir
+to prepare	preparar
+to press	presionar
+to pretend	pretender
+to prevent	prevenir
+to proceed	proceder
+to produce	producir
+to promise	prometer
+to propose	proponer
+to protect	proteger
+to protest	protestar
+to prove	probar
+to provide	proporcionar
+to pull	tirar
+to pursue	perseguir
+to push	empujar
+to put	poner
+to raise	levantar
+to reach	alcanzar
+to read	leer
+to realize	darse cuenta
+to recall	recordar
+to receive	recibir
+to recognize	reconocer
+to recover	recuperar
+to refer	referirse
+to reflect	reflexionar
+to refuse	rechazar
+to regard	considerar
+to regret	arrepentirse
+to relate	relacionar
+to relax	relajarse
+to release	liberar
+to relieve	aliviar
+to remain	permanecer
+to remark	comentar
+to remember	recordar
+to remind	recordar
+to remove	eliminar
+to render	presentar
+to rent	alquilar
+to repeat	repetir
+to replace	reemplazar
+to reply	responder
+to represent	representar
+to require	requerir
+to rescue	rescatar
+to resist	resistir
+to resolve	resolver
+to respond	responder
+to retreat	retirarse
+to return	regresar
+to reveal	revelar
+to ride	montar
+to rise	elevar
+to roar	rugir
+to roll	rodar
+to rub	frotar
+to ruin	arruinar
+to run	correr
+to rush	apresurarse
+to sail	navegar
+to satisfy	satisfacer
+to save	salvar
+to say	decir
+to scare	asustar
+to scratch	rasguñar
+to scream	gritar
+to search	buscar
+to secure	asegurar
+to see	ver
+to seek	buscar
+to seem	parecer
+to seize	apoderarse
+to sell	vender
+to send	enviar
+to separate	separar
+to serve	servir
+to set	establecer
+to settle	asentarse
+to shake	sacudir
+to shall	deber
+to share	compartir
+to shed	derramar
+to shift	cambiar
+to shine	brillar
+to shiver	temblar
+to shoot	disparar
+to shout	gritar
+to shove	empujar
+to show	mostrar
+to shrug	encoger los hombros
+to shudder	estremecerse
+to shut	cerrar
+to sigh	suspirar
+to sing	cantar
+to sink	hundir
+to sip	sorber
+to sit	sentarse
+to slam	cerrar de golpe
+to slap	abofetear
+to sleep	dormir
+to slide	deslizar
+to slip	resbalar
+to smell	oler
+to smile	sonreír
+to snap	chasquear
+to sob	sollozar
+to spare	ahorrar
+to speak	hablar
+to spend	gastar
+to spin	girar
+to spread	esparcir
+to squeeze	apretar
+to stand	estar de pie
+to stare	mirar fijamente
+to start	empezar
+to startle	asustar
+to stay	quedarse
+to steal	robar
+to stick	pegar
+to stir	revolver
+to stop	detener
+to strain	esforzar
+to stretch	estirar
+to stride	zancada
+to strike	golpear
+to strip	desnudarse
+to struggle	luchar
+to study	estudiar
+to stumble	tropezar
+to succeed	tener éxito
+to suck	chupar
+to suffer	sufrir
+to suggest	sugerir
+to support	apoyar
+to suppose	suponer
+to surprise	sorprender
+to surround	rodear
+to survive	sobrevivir
+to suspect	sospechar
+to swallow	tragar
+to swear	jurar
+to sweep	barrer
+to swell	hinchar
+to swim	nadar
+to swing	balancear
+to switch	cambiar
+to take	tomar
+to talk	hablar
+to tap	golpear suavemente
+to teach	enseñar
+to tell	contar
+to tend	tender
+to thank	agradecer
+to think	pensar
+to threaten	amenazar
+to throw	lanzar
+to thrust	empujar
+to tie	atar
+to tire	cansar
+to toss	lanzar
+to touch	tocar
+to travel	viajar
+to treat	tratar
+to tremble	temblar
+to trust	confiar
+to try	intentar
+to turn	girar
+to twist	torcer
+to understand	entender
+to upset	molestar
+to urge	instar
+to use	usar
+to utter	pronunciar
+to vanish	desaparecer
+to venture	aventurarse
+to visit	visitar
+to wait	esperar
+to wake	despertar
+to walk	caminar
+to wander	vagar
+to want	querer
+to warn	advertir
+to wash	lavar
+to waste	desperdiciar
+to watch	observar
+to wear	llevar puesto
+to weep	llorar
+to whip	azotar
+to whisper	susurrar
+to whistle	silbar
+to will	querer
+to win	ganar
+to wipe	limpiar
+to wish	desear
+to withdraw	retirar
+to wonder	preguntarse
+to work	trabajar
+to worry	preocupar
+to wrap	envolver
+to write	escribir
+to yell	gritar
+today	hoy
+together	juntos
+tomorrow	mañana
+tone	tono
+tongue	lengua
+tonight	esta noche
+too	también
+tooth	diente
+top	cima
+totally	totalmente
+toward	hacia
+towards	hacia
+tower	torre
+town	pueblo
+trace	traza
+track	pista
+trade	comercio
+tradition	tradición
+trail	sendero
+train	tren
+training	entrenamiento
+trap	trampa
+treasure	tesoro
+tree	árbol
+trial	juicio
+trick	truco
+trip	viaje
+trouble	problema
+truck	camión
+truly	verdaderamente
+trunk	tronco
+truth	verdad
+twelve	doce
+twenty	veinte
+twice	dos veces
+two	dos
+type	tipo
+ugly	feo
+unable	incapaz
+uncle	tío
+under	debajo
+understanding	comprensión
+uniform	uniforme
+unknown	desconocido
+unless	a menos que
+until	hasta
+unusual	inusual
+up	arriba
+upon	sobre
+upper	superior
+upstairs	arriba
+us	nosotros
+usually	generalmente
+valley	valle
+value	valor
+various	varios
+vast	vasto
+vehicle	vehículo
+version	versión
+very	muy
+vessel	vaso
+victim	víctima
+view	vista
+village	pueblo
+violence	violencia
+virtue	virtud
+vision	visión
+visitor	visitante
+voice	voz
+volume	volumen
+wagon	vagón
+waist	cintura
+wall	pared
+war	guerra
+warm	cálido
+warmth	calidez
+warning	advertencia
+warrior	guerrero
+water	agua
+wave	ola
+way	camino
+we	nosotros
+weak	débil
+weapon	arma
+weather	clima
+wedding	boda
+week	semana
+weight	peso
+welcome	bienvenido
+well	bien
+west	oeste
+wet	mojado
+what	qué
+whatever	lo que sea
+wheel	rueda
+when	cuándo
+whenever	cada vez que
+where	dónde
+whether	si
+which	cuál
+while	mientras
+white	blanco
+who	quién
+whole	entero
+whom	a quién
+whose	cuyo
+why	por qué
+wide	ancho
+wife	esposa
+wild	salvaje
+willing	dispuesto
+wind	viento
+window	ventana
+wine	vino
+wing	ala
+winter	invierno
+wire	alambre
+wise	sabio
+with	con
+within	dentro
+without	sin
+witness	testigo
+woman	mujer
+wonderful	maravilloso
+wood	madera
+wooden	de madera
+word	palabra
+worker	trabajador
+world	mundo
+worth	valor
+worthy	digno
+wound	herida
+wrist	muñeca
+writer	escritor
+writing	escritura
+wrong	incorrecto
+yard	patio
+year	año
+yellow	amarillo
+yes	sí
+yesterday	ayer
+yet	aún
+you	tú
+young	joven
+your	tu
+yours	tuyo
+yourself	tú mismo
+youth	juventud
+FALSE	FALSO
+TRUE	VERDADERO
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
