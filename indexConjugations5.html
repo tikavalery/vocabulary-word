@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+       imple Present	
+I believe	creo
+You believe	crees
+He/She/It believes	cree
+We believe	creemos
+They believe	creen
+Simple Past	
+I believed	creí
+You believed	creíste
+He/She/It believed	creyó
+We believed	creímos
+They believed	creyeron
+Simple Future	
+I will believe	creeré
+You will believe	creerás
+He/She/It will believe	creerá
+We will believe	creeremos
+They will believe	creerán
+
+Simple Present	
+I speak	hablo
+You speak	hablas
+He/She/It speaks	habla
+We speak	hablamos
+They speak	hablan
+Simple Past	
+I spoke	hablé
+You spoke	hablaste
+He/She/It spoke	habló
+We spoke	hablamos
+They spoke	hablaron
+Simple Future	
+I will speak	hablaré
+You will speak	hablarás
+He/She/It will speak	hablará
+We will speak	hablaremos
+They will speak	hablarán
+
+Simple Present	
+I take	tomo
+You take	tomas
+He/She/It takes	toma
+We take	tomamos
+They take	toman
+Simple Past	
+I took	tomé
+You took	tomaste
+He/She/It took	tomó
+We took	tomamos
+They took	tomaron
+Simple Future	
+I will take	tomaré
+You will take	tomarás
+He/She/It will take	tomará
+We will take	tomaremos
+They will take	tomarán
+
+Simple Present	
+I carry	llevo
+You carry	llevas
+He/She/It carries	lleva
+We carry	llevamos
+They carry	llevan
+Simple Past	
+I carried	llevé
+You carried	llevaste
+He/She/It carried	llevó
+We carried	llevamos
+They carried	llevaron
+Simple Future	
+I will carry	llevaré
+You will carry	llevarás
+He/She/It will carry	llevará
+We will carry	llevaremos
+They will carry	llevarán
+
+Simple Present	
+I leave	dejo
+You leave	dejas
+He/She/It leaves	deja
+We leave	dejamos
+They leave	dejan
+Simple Past	
+I left	dejé
+You left	dejaste
+He/She/It left	dejó
+We left	dejamos
+They left	dejaron
+Simple Future	
+I will leave	dejaré
+You will leave	dejarás
+He/She/It will leave	dejará
+We will leave	dejaremos
+They will leave	dejarán
+
+Simple Present	
+I follow	sigo
+You follow	sigues
+He/She/It follows	sigue
+We follow	seguimos
+They follow	siguen
+Simple Past	
+I followed	seguí
+You followed	seguiste
+He/She/It followed	siguió
+We followed	seguimos
+They followed	siguieron
+Simple Future	
+I will follow	seguiré
+You will follow	seguirás
+He/She/It will follow	seguirá
+We will follow	seguiremos
+They will follow	seguirán
+
+Simple Present	
+I find	encuentro
+You find	encuentras
+He/She/It finds	encuentra
+We find	encontramos
+They find	encuentran
+Simple Past	
+I found	encontré
+You found	encontraste
+He/She/It found	encontró
+We found	encontramos
+They found	encontraron
+Simple Future	
+I will find	encontraré
+You will find	encontrarás
+He/She/It will find	encontrará
+We will find	encontraremos
+They will find	encontrarán
+
+Simple Present	
+I call	llamo
+You call	llamas
+He/She/It calls	llama
+We call	llamamos
+They call	llaman
+Simple Past	
+I called	llamé
+You called	llamaste
+He/She/It called	llamó
+We called	llamamos
+They called	llamaron
+Simple Future	
+I will call	llamaré
+You will call	llamarás
+He/She/It will call	llamará
+We will call	llamaremos
+They will call	llamarán
+
+Simple Present	
+I come	vengo
+You come	vienes
+He/She/It comes	viene
+We come	venimos
+They come	vienen
+Simple Past	
+I came	vine
+You came	viniste
+He/She/It came	vino
+We came	vinimos
+They came	vinieron
+Simple Future	
+I will come	vendré
+You will come	vendrás
+He/She/It will come	vendrá
+We will come	vendremos
+They will come	vendrán
+
+Simple Present	
+I think	pienso
+You think	piensas
+He/She/It thinks	piensa
+We think	pensamos
+They think	piensan
+Simple Past	
+I thought	pensé
+You thought	pensaste
+He/She/It thought	pensó
+We thought	pensamos
+They thought	pensaron
+Simple Future	
+I will think	pensaré
+You will think	pensarás
+He/She/It will think	pensará
+We will think	pensaremos
+They will think	pensarán
+
+Simple Present	
+I leave	dejo
+You leave	dejas
+He/She/It leaves	deja
+We leave	dejamos
+They leave	dejan
+Simple Past	
+I left	dejé
+You left	dejaste
+He/She/It left	dejó
+We left	dejamos
+They left	dejaron
+Simple Future	
+I will leave	dejaré
+You will leave	dejarás
+He/She/It will leave	dejará
+We will leave	dejaremos
+They will leave	dejarán
+
+Simple Present	
+I go out	salgo
+You go out	sales
+He/She/It goes out	sale
+We go out	salimos
+They go out	salen
+Simple Past	
+I went out	salí
+You went out	saliste
+He/She/It went out	salió
+We went out	salimos
+They went out	salieron
+Simple Future	
+I will go out	saldré
+You will go out	saldrás
+He/She/It will go out	saldrá
+We will go out	saldremos
+They will go out	saldrán
+
+Simple Present	
+I return	regreso
+You return	regresas
+He/She/It returns	regresa
+We return	regresamos
+They return	regresan
+Simple Past	
+I returned	regresé
+You returned	regresaste
+He/She/It returned	regresó
+We returned	regresamos
+They returned	regresaron
+Simple Future	
+I will return	regresaré
+You will return	regresarás
+He/She/It will return	regresará
+We will return	regresaremos
+They will return	regresarán
+
+Simple Present	
+I take	tomo
+You take	tomas
+He/She/It takes	toma
+We take	tomamos
+They take	toman
+Simple Past	
+I took	tomé
+You took	tomaste
+He/She/It took	tomó
+We took	tomamos
+They took	tomaron
+Simple Future	
+I will take	tomaré
+You will take	tomarás
+He/She/It will take	tomará
+We will take	tomaremos
+They will take	tomarán
+
+Simple Present	
+I know	sé
+You know	sabes
+He/She/It knows	sabe
+We know	sabemos
+They know	saben
+Simple Past	
+I knew	supe
+You knew	supiste
+He/She/It knew	supo
+We knew	supimos
+They knew	supieron
+Simple Future	
+I will know	sabré
+You will know	sabrás
+He/She/It will know	sabrá
+We will know	sabremos
+They will know	sabrán
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

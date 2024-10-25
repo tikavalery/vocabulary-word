@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+        Simple Present	
+I give	doy
+You give	das
+He/She/It gives	da
+We give	damos
+They give	dan
+Simple Past	
+I gave	di
+You gave	diste
+He/She/It gave	dio
+We gave	dimos
+They gave	dieron
+Simple Future	
+I will give	daré
+You will give	darás
+He/She/It will give	dará
+We will give	daremos
+They will give	darán
+
+Simple Present	
+I know	sé
+You know	sabes
+He/She/It knows	sabe
+We know	sabemos
+They know	saben
+Simple Past	
+I knew	supe
+You knew	supiste
+He/She/It knew	supo
+We knew	supimos
+They knew	supieron
+Simple Future	
+I will know	sabré
+You will know	sabrás
+He/She/It will know	sabrá
+We will know	sabremos
+They will know	sabrán
+
+Simple Present	
+I want	quiero
+You want	quieres
+He/She/It wants	quiere
+We want	queremos
+They want	quieren
+Simple Past	
+I wanted	quise
+You wanted	quisiste
+He/She/It wanted	quiso
+We wanted	quisimos
+They wanted	quisieron
+Simple Future	
+I will want	querré
+You will want	querrás
+He/She/It will want	querrá
+We will want	querremos
+They will want	querrán
+
+Simple Present	
+I arrive	llego
+You arrive	llegas
+He/She/It arrives	llega
+We arrive	llegamos
+They arrive	llegan
+Simple Past	
+I arrived	llegué
+You arrived	llegaste
+He/She/It arrived	llegó
+We arrived	llegamos
+They arrived	llegaron
+Simple Future	
+I will arrive	llegaré
+You will arrive	llegarás
+He/She/It will arrive	llegará
+We will arrive	llegaremos
+They will arrive	llegarán
+
+Simple Present	
+I pass	paso
+You pass	pasas
+He/She/It passes	pasa
+We pass	pasamos
+They pass	pasan
+Simple Past	
+I passed	pasé
+You passed	pasaste
+He/She/It passed	pasó
+We passed	pasamos
+They passed	pasaron
+Simple Future	
+I will pass	pasaré
+You will pass	pasarás
+He/She/It will pass	pasará
+We will pass	pasaremos
+They will pass	pasarán
+
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

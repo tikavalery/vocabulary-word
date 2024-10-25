@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+         Simple Present	
+I do	hago
+You do	haces
+He/She/It does	hace
+We do	hacemos
+They do	hacen
+Simple Past	
+I did	hice
+You did	hiciste
+He/She/It did	hizo
+We did	hicimos
+They did	hicieron
+Simple Future	
+I will do	haré
+You will do	harás
+He/She/It will do	hará
+We will do	haremos
+They will do	harán
+
+Simple Present	
+I can	puedo
+You can	puedes
+He/She/It can	puede
+We can	podemos
+They can	pueden
+Simple Past	
+I could	pude
+You could	pudiste
+He/She/It could	pudo
+We could	pudimos
+They could	pudieron
+Simple Future	
+I will be able to	podré
+You will be able to	podrás
+He/She/It will be able to	podrá
+We will be able to	podremos
+They will be able to	podrán
+
+Simple Present	
+I say	digo
+You say	dices
+He/She/It says	dice
+We say	decimos
+They say	dicen
+Simple Past	
+I said	dije
+You said	dijiste
+He/She/It said	dijo
+We said	dijimos
+They said	dijeron
+Simple Future	
+I will say	diré
+You will say	dirás
+He/She/It will say	dirá
+We will say	diremos
+They will say	dirán
+
+Simple Present	
+I go	voy
+You go	vas
+He/She/It goes	va
+We go	vamos
+They go	van
+Simple Past	
+I went	fui
+You went	fuiste
+He/She/It went	fue
+We went	fuimos
+They went	fueron
+Simple Future	
+I will go	iré
+You will go	irás
+He/She/It will go	irá
+We will go	iremos
+They will go	irán
+
+Simple Present	
+I see	veo
+You see	ves
+He/She/It sees	ve
+We see	vemos
+They see	ven
+Simple Past	
+I saw	vi
+You saw	viste
+He/She/It saw	vio
+We saw	vimos
+They saw	vieron
+Simple Future	
+I will see	veré
+You will see	verás
+He/She/It will see	verá
+We will see	veremos
+They will see	verán
+
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+
+
+

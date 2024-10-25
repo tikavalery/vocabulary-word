@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+       
+Simple Present	
+I should	debería
+You should	deberías
+He/She/It should	debería
+We should	deberíamos
+They should	deberían
+Simple Past	
+I should have	debería haber
+You should have	deberías haber
+He/She/It should have	debería haber
+We should have	deberíamos haber
+They should have	deberían haber
+Simple Future	
+I will should (should be)	debería
+You will should (should be)	deberías
+He/She/It will should (should be)	debería
+We will should (should be)	deberíamos
+They will should (should be)	deberían
+
+Simple Present	
+I put	pongo
+You put	pones
+He/She/It puts	pone
+We put	ponemos
+They put	ponen
+Simple Past	
+I put	puse
+You put	pusiste
+He/She/It put	puso
+We put	pusimos
+They put	pusieron
+Simple Future	
+I will put	pondré
+You will put	pondrás
+He/She/It will put	pondrá
+We will put	pondremos
+They will put	pondrán
+
+Simple Present	
+I seem	parezco
+You seem	pareces
+He/She/It seems	parece
+We seem	parecemos
+They seem	parecen
+Simple Past	
+I seemed	parecí
+You seemed	pareciste
+He/She/It seemed	pareció
+We seemed	parecemos
+They seemed	parecieron
+Simple Future	
+I will seem	pareceré
+You will seem	parecerás
+He/She/It will seem	parecerá
+We will seem	pareceremos
+They will seem	parecerán
+
+Simple Present	
+I remain	permanezco
+You remain	permaneces
+He/She/It remains	permanece
+We remain	permanecemos
+They remain	permanecen
+Simple Past	
+I remained	permanecí
+You remained	permaneciste
+He/She/It remained	permaneció
+We remained	permanecimos
+They remained	permanecieron
+Simple Future	
+I will remain	permaneceré
+You will remain	permanecerás
+He/She/It will remain	permanecerá
+We will remain	permaneceremos
+They will remain	permanecerán
+
+Simple Present	
+I stay	me quedo
+You stay	te quedas
+He/She/It stays	se queda
+We stay	nos quedamos
+They stay	se quedan
+Simple Past	
+I stayed	me quedé
+You stayed	te quedaste
+He/She/It stayed	se quedó
+We stayed	nos quedamos
+They stayed	se quedaron
+Simple Future	
+I will stay	me quedaré
+You will stay	te quedarás
+He/She/It will stay	se quedará
+We will stay	nos quedaremos
+They will stay	se quedarán
+
+
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

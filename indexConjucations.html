@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+Simple Present To Be
+I am	soy
+You are	eres
+He/She/It is	es
+We are	somos
+They are	son
+Simple Past	To Be
+I was	fui
+You were	fuiste
+He/She/It was	fue
+We were	fuimos
+They were	fueron
+Simple Future To Be
+I will be	seré
+You will be	serás
+He/She/It will be	será
+We will be	seremos
+They will be	serán
+Simple Present Temorary Version	
+I am	Estoy
+You are	Estás
+He/She/It is	Está
+We are	Estamos
+They are	Están
+Simple Past	Temporary Version
+I was	Estuve
+You were	Estuviste
+He/She/It was	Estuvo
+We were	Estuvimos
+They were	Estuvieron
+Simple Future Temporay Version
+I will be	Estaré
+You will be	Estarás
+He/She/It will be	Estará
+We will be	Estaremos
+They will be	Estarán
+
+English Conjugation	Spanish Translation
+Simple Present to Have	
+I have	tengo
+You have	tienes
+He/She/It has	tiene
+We have	tenemos
+They have	tienen
+Simple Past	
+I had	tuve
+You had	tuviste
+He/She/It had	tuvo
+We had	tuvimos
+They had	tuvieron
+Simple Future	
+I will have	tendré
+You will have	tendrás
+He/She/It will have	tendrá
+We will have	tendremos
+They will have	tendrán
+
+Simple Present	
+I have	tengo
+You have	tienes
+He/She/It has	tiene
+We have	tenemos
+They have	tienen
+Simple Past	
+I had	tuve
+You had	tuviste
+He/She/It had	tuvo
+We had	tuvimos
+They had	tuvieron
+Simple Future	
+I will have	tendré
+You will have	tendrás
+He/She/It will have	tendrá
+We will have	tendremos
+They will have	tendrán
+
+Simple Present	
+I make	hago
+You make	haces
+He/She/It makes	hace
+We make	hacemos
+They make	hacen
+Simple Past	
+I made	hice
+You made	hiciste
+He/She/It made	hizo
+We made	hicimos
+They made	hicieron
+Simple Future	
+I will make	haré
+You will make	harás
+He/She/It will make	hará
+We will make	haremos
+They will make	harán
+
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
