@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+    Hace muchos años, en un pequeño pueblo, vivía un mecánico llamado Julián.	Many years ago, in a small town, there lived a mechanic named Julián.
+Julián tenía una pasión especial por los autos antiguos.	Julián had a special passion for old cars.
+Cada día, después de trabajar en el taller, restauraba modelos clásicos en su garaje.	Every day, after working in the shop, he restored classic models in his garage.
+Su auto favorito era un Ford Mustang de 1967 que había encontrado oxidado en un campo.	His favorite car was a 1967 Ford Mustang he had found rusted in a field.
+Le dedicó más de dos años a repararlo por completo.	He dedicated more than two years to repairing it completely.
+Cuando finalmente lo encendió, el rugido del motor hizo sonreír a todo el vecindario.	When he finally started it, the roar of the engine made the whole neighborhood smile.
+Julián organizaba exhibiciones de autos todos los veranos para compartir su colección.	Julián organized car shows every summer to share his collection.
+Personas de otros pueblos venían solo para ver sus restauraciones.	People from other towns came just to see his restorations.
+Un día, un joven visitante le pidió aprender el oficio.	One day, a young visitor asked him to learn the trade.
+Julián aceptó encantado, feliz de transmitir su conocimiento a una nueva generación.	Julián gladly accepted, happy to pass on his knowledge to a new generation.
+Así, no solo los autos siguieron vivos, sino también la pasión por ellos.	In this way, not only did the cars live on, but also the passion for them.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
