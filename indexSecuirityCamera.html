@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+      In a bustling metropolis riddled with petty crime and urban unrest, the city council approved a controversial initiative.	En una bulliciosa metrópolis plagada de delitos menores y disturbios urbanos, el ayuntamiento aprobó una iniciativa controvertida.
+They installed thousands of high-definition security cameras in public areas, claiming it would increase safety and deter criminal behavior.	Instalaron miles de cámaras de seguridad de alta definición en áreas públicas, alegando que aumentaría la seguridad y disuadiría el comportamiento delictivo.
+The program, called Project Sentinel, ignited fierce debates about privacy, surveillance, and state overreach.	El programa, llamado Proyecto Centinela, encendió intensos debates sobre la privacidad, la vigilancia y la intromisión del Estado.
+Despite public protests and legal challenges, the cameras were activated across the city within six months.	A pesar de las protestas públicas y los desafíos legales, las cámaras se activaron en toda la ciudad en un plazo de seis meses.
+Each unit was equipped with facial recognition software and connected to a central intelligence system monitored 24/7.	Cada unidad estaba equipada con software de reconocimiento facial y conectada a un sistema central de inteligencia monitoreado las 24 horas.
+Initially, crime rates dropped noticeably, and the public's skepticism began to wane.	Inicialmente, las tasas de criminalidad disminuyeron notablemente y el escepticismo del público comenzó a desvanecerse.
+However, concerns resurfaced when several citizens reported being falsely identified and detained based on flawed data.	Sin embargo, las preocupaciones resurgieron cuando varios ciudadanos informaron haber sido identificados y detenidos erróneamente debido a datos defectuosos.
+An investigative journalist, Camila Torres, launched a deep inquiry into the system’s algorithms and oversight mechanisms.	Una periodista de investigación, Camila Torres, inició una profunda investigación sobre los algoritmos del sistema y sus mecanismos de supervisión.
+Her findings revealed that the software disproportionately targeted individuals from minority neighborhoods.	Sus hallazgos revelaron que el software apuntaba desproporcionadamente a individuos de barrios minoritarios.
+Furthermore, she uncovered that private security firms had unauthorized access to live feeds, which they used for profit-driven surveillance.	Además, descubrió que empresas de seguridad privadas tenían acceso no autorizado a las transmisiones en vivo, que utilizaban para vigilancia con fines lucrativos.
+As the scandal unraveled, trust in the government’s motives plummeted, and calls for reform echoed nationwide.	A medida que se desataba el escándalo, la confianza en los motivos del gobierno se desplomó y los llamados a la reforma resonaron en todo el país.
+Under immense pressure, the mayor suspended the program and appointed an independent commission to audit the entire system.	Bajo una enorme presión, el alcalde suspendió el programa y nombró una comisión independiente para auditar todo el sistema.
+The commission’s report, released months later, recommended stricter ethical guidelines, transparency, and citizen consent.	El informe de la comisión, publicado meses después, recomendó pautas éticas más estrictas, transparencia y consentimiento ciudadano.
+Ultimately, a new framework was adopted, balancing technological advancement with fundamental civil liberties.	Finalmente, se adoptó un nuevo marco que equilibraba el avance tecnológico con las libertades civiles fundamentales.
+Though the city remained under watchful eyes, its people had reclaimed their voice in shaping the scope of surveillance.	Aunque la ciudad seguía bajo ojos vigilantes, su gente había recuperado su voz para moldear el alcance de la vigilancia.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
