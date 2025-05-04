@@ -45,6 +45,7 @@ Though the city remained under watchful eyes, its people had reclaimed their voi
         function speakWord(text, lang) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
+            utterance.rate = 0.75; 
             window.speechSynthesis.speak(utterance);
         }
     </script>
