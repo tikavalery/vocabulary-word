@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+The first tarred road in the region was laid over a century ago, connecting the port town to the inland villages.	La primera carretera asfaltada de la región se construyó hace más de un siglo, conectando la ciudad portuaria con los pueblos del interior.
+At the time, many locals resisted its construction, fearing it would disrupt their traditional way of life.	En aquel entonces, muchos lugareños se opusieron a su construcción, temiendo que alterara su modo de vida tradicional.
+The road cut through forests, farmlands, and sacred grounds, leaving both physical and cultural scars.	La carretera atravesó bosques, tierras de cultivo y terrenos sagrados, dejando cicatrices tanto físicas como culturales.
+Over the decades, however, it became the artery of commerce, bringing goods, ideas, and people from all directions.	Sin embargo, con el paso de las décadas, se convirtió en la arteria del comercio, trayendo mercancías, ideas y personas desde todas partes.
+The tar, once foreign and foul-smelling, became synonymous with progress and possibility.	El asfalto, antes extraño y de olor desagradable, se volvió sinónimo de progreso y posibilidad.
+As vehicles grew faster and trade expanded, more roads branched from the original, weaving a complex web across the land.	A medida que los vehículos se volvían más rápidos y el comercio se expandía, más carreteras surgieron de la original, tejiendo una red compleja por todo el territorio.
+With every kilometer paved, a fragment of wilderness disappeared, replaced by efficiency and noise.	Con cada kilómetro asfaltado, desaparecía un fragmento de naturaleza, reemplazado por eficiencia y ruido.
+Elders spoke of rivers that no longer flowed and animals that had long since fled.	Los ancianos hablaban de ríos que ya no fluían y de animales que hacía mucho habían huido.
+The roads brought not only convenience, but also accidents, pollution, and relentless movement.	Las carreteras trajeron no solo comodidad, sino también accidentes, contaminación y un movimiento implacable.
+Still, no one could deny their importance in shaping the modern identity of the region.	Aun así, nadie podía negar su importancia en la formación de la identidad moderna de la región.
+Today, the oldest part of the road is cracked and faded, but it remains in use.	Hoy en día, la parte más antigua de la carretera está agrietada y descolorida, pero sigue en uso.
+Tourists drive on it unaware of the history beneath their tires.	Los turistas la recorren sin saber la historia que se encuentra bajo sus neumáticos.
+Local children race their bicycles there, just as their grandparents once did on foot.	Los niños del lugar corren en bicicleta por allí, tal como sus abuelos lo hacían a pie.
+A monument now stands at the original construction site, honoring the workers who toiled under the sun.	Un monumento se alza ahora en el sitio original de construcción, en honor a los trabajadores que laboraron bajo el sol.
+Their names are etched in bronze, half forgotten, but forever tied to the road.	Sus nombres están grabados en bronce, medio olvidados, pero ligados para siempre a la carretera.
+Scholars and historians debate whether the road saved the region or fractured it beyond repair.	Académicos e historiadores debaten si la carretera salvó a la región o la fracturó irreparablemente.
+One thing is certain: wherever there is tar, there is transformation.	Una cosa es segura: donde hay asfalto, hay transformación.
+tarred road	carretera asfaltada
+laid	construida / pavimentada
+port town	ciudad portuaria
+inland villages	pueblos del interior
+locals	lugareños
+resisted	se opusieron
+traditional way of life	modo de vida tradicional
+sacred grounds	terrenos sagrados
+physical and cultural scars	cicatrices físicas y culturales
+artery of commerce	arteria del comercio
+goods	mercancías
+synonymous with	sinónimo de
+progress	progreso
+possibility	posibilidad
+vehicles	vehículos
+trade	comercio
+branched	surgieron / se ramificaron
+complex web	red compleja
+wilderness	naturaleza salvaje
+efficiency	eficiencia
+noise	ruido
+elders	ancianos
+fled	huyeron
+convenience	comodidad
+accidents	accidentes
+pollution	contaminación
+relentless movement	movimiento implacable
+shaping identity	formación de la identidad
+cracked	agrietada
+faded	descolorida
+in use	en uso
+unaware	sin saber
+beneath their tires	bajo sus neumáticos
+monument	monumento
+construction site	sitio de construcción
+toiled	laboraron
+etched in bronze	grabados en bronce
+half forgotten	medio olvidados
+scholars	académicos
+historians	historiadores
+debate	debaten
+fractured beyond repair	fracturó irreparablemente
+transformation	transformación
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
