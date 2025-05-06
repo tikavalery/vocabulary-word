@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+        The electric poles arrived one winter morning.	Los postes eléctricos llegaron una mañana de invierno.
+They came by truck, towering and silent.	Llegaron en camiones, imponentes y silenciosos.
+No one had asked for them.	Nadie los había pedido.
+Yet there they stood, planted in rows.	Sin embargo, allí estaban, alineados en filas.
+The villagers watched in silence.	Los aldeanos los miraban en silencio.
+Some feared their presence.	Algunos temían su presencia.
+Others welcomed the light they promised.	Otros daban la bienvenida a la luz que prometían.
+Engineers followed with wires and transformers.	Ingenieros siguieron con cables y transformadores.
+Holes were dug without permission.	Se cavaron agujeros sin permiso.
+Trees were cut to clear paths.	Se cortaron árboles para despejar caminos.
+The mayor signed the papers quietly.	El alcalde firmó los papeles en silencio.
+His office window faced the first pole.	La ventana de su oficina daba al primer poste.
+At night, the poles hummed faintly.	Por la noche, los postes zumbaban levemente.
+Their wires stretched across the hills.	Sus cables se extendían por las colinas.
+Children began calling them “the giants.”	Los niños comenzaron a llamarlos “los gigantes.”
+Birds no longer landed on rooftops.	Las aves ya no se posaban en los tejados.
+They perched on the poles instead.	Se posaban en los postes en su lugar.
+Some poles leaned after heavy storms.	Algunos postes se inclinaban tras tormentas fuertes.
+Workers came and straightened them.	Los trabajadores venían y los enderezaban.
+One day, a pole fell onto a house.	Un día, un poste cayó sobre una casa.
+A family lost their home.	Una familia perdió su hogar.
+Compensation was promised but delayed.	Se prometió compensación, pero fue retrasada.
+Rumors spread of sabotage and neglect.	Circularon rumores de sabotaje y negligencia.
+The electric company denied all fault.	La compañía eléctrica negó toda culpa.
+People began to protest quietly.	La gente empezó a protestar en silencio.
+They tied ribbons around the poles.	Ataron cintas alrededor de los postes.
+Some painted them with symbols.	Algunos los pintaron con símbolos.
+The government sent a formal warning.	El gobierno envió una advertencia formal.
+Cameras were added to the poles.	Se añadieron cámaras a los postes.
+The villagers now walked more carefully.	Los aldeanos ahora caminaban con más cuidado.
+At night, the poles blinked red.	Por la noche, los postes parpadeaban en rojo.
+Children no longer played beneath them.	Los niños ya no jugaban bajo ellos.
+The poles watched, but said nothing.	Los postes observaban, pero no decían nada.
+And the village slowly forgot the sky.	Y el pueblo olvidó lentamente el cielo.
+electric poles	postes eléctricos
+arrived	llegaron
+towering	imponentes
+in rows	en filas
+villagers	aldeanos
+silence	silencio
+feared	temían
+welcomed	daban la bienvenida
+engineers	ingenieros
+wires	cables
+transformers	transformadores
+holes were dug	se cavaron agujeros
+without permission	sin permiso
+trees were cut	se cortaron árboles
+clear paths	despejar caminos
+signed the papers	firmó los papeles
+office window	ventana de su oficina
+hummed	zumbaban
+faintly	levemente
+stretched	se extendían
+hills	colinas
+perched	se posaban
+leaned	se inclinaban
+heavy storms	tormentas fuertes
+straightened	enderezaban
+fell	cayó
+compensation	compensación
+promised	prometió
+delayed	fue retrasada
+rumors	rumores
+sabotage	sabotaje
+neglect	negligencia
+denied all fault	negó toda culpa
+protest quietly	protestar en silencio
+tied ribbons	ataron cintas
+painted with symbols	pintaron con símbolos
+formal warning	advertencia formal
+cameras	cámaras
+blinked red	parpadeaban en rojo
+watched	observaban
+said nothing	no decían nada
+forgot the sky	olvidó el cielo
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
