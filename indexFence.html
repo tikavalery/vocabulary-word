@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+       The fence appeared overnight.	La valla apareció de la noche a la mañana.
+No one saw who built it.	Nadie vio quién la construyó.
+It divided the village in two.	Dividió el pueblo en dos.
+Tall, metallic, and seamless.	Alta, metálica y sin juntas.
+At first, people were confused.	Al principio, la gente estaba confundida.
+They tried to climb it.	Intentaron escalarla.
+It gave off electric shocks.	Emitía descargas eléctricas.
+The mayor called for calm.	El alcalde pidió calma.
+He promised to investigate.	Prometió investigar.
+Days turned into weeks.	Los días se convirtieron en semanas.
+Supplies were running low.	Los suministros empezaban a escasear.
+Families were separated.	Las familias estaban separadas.
+Communication was nearly impossible.	La comunicación era casi imposible.
+Some began to panic.	Algunos empezaron a entrar en pánico.
+A group tried to dig under it.	Un grupo intentó cavar por debajo.
+They found concrete foundations.	Encontraron cimientos de concreto.
+Rumors spread quickly.	Los rumores se difundieron rápidamente.
+Some blamed the government.	Algunos culparon al gobierno.
+Others spoke of foreign powers.	Otros hablaron de potencias extranjeras.
+One old man blamed the stars.	Un anciano culpó a las estrellas.
+Meanwhile, the fence stood still.	Mientras tanto, la valla seguía inmóvil.
+It cast a long shadow at noon.	Proyectaba una larga sombra al mediodía.
+Children stopped playing outside.	Los niños dejaron de jugar afuera.
+Silence replaced laughter.	El silencio reemplazó la risa.
+A scientist arrived from the capital.	Un científico llegó desde la capital.
+He brought instruments and drones.	Trajo instrumentos y drones.
+He studied the fence day and night.	Estudió la valla día y noche.
+He discovered no seams or bolts.	No descubrió juntas ni pernos.
+The material was unknown.	El material era desconocido.
+It resisted all tools and heat.	Resistía todas las herramientas y el calor.
+Then, without warning, it vanished.	Luego, sin previo aviso, desapareció.
+No sound. No light. Just gone.	Sin sonido. Sin luz. Simplemente se fue.
+People stared in disbelief.	La gente miraba incrédula.
+They crossed the empty space slowly.	Cruzaron el espacio vacío lentamente.
+The ground was untouched.	El suelo estaba intacto.
+But things had changed.	Pero las cosas habían cambiado.
+Suspicion lingered.	La sospecha persistía.
+Walls remained in their minds.	Las paredes seguían en sus mentes.
+The fence had left no debris.	La valla no dejó escombros.
+Only questions. And fear.	Solo preguntas. Y miedo.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
