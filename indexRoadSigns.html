@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+         On a winding road that ran through the heart of the countryside, there stood an old metal sign covered in rust.	En un camino serpenteante que atravesaba el corazón del campo, se alzaba un viejo cartel metálico cubierto de óxido.
+It had once read "CAUTION: SHARP TURN AHEAD," but the letters were now barely visible.	Alguna vez decía "PRECAUCIÓN: CURVA PRONUNCIADA ADELANTE", pero las letras ahora eran casi invisibles.
+Most drivers ignored it, relying instead on GPS directions or their own experience.	La mayoría de los conductores lo ignoraban, confiando en las direcciones del GPS o en su propia experiencia.
+But that sign had saved lives—dozens of them—over the years.	Pero ese cartel había salvado vidas—docenas de ellas—a lo largo de los años.
+It stood there like a quiet sentinel, watching over the road as cars sped by.	Estaba allí como un centinela silencioso, vigilando el camino mientras los coches pasaban a toda velocidad.
+Further down the road, a young driver named Lucas was heading to his first job interview.	Más adelante en el camino, un joven conductor llamado Lucas se dirigía a su primera entrevista de trabajo.
+He had left home late and was driving faster than he should.	Había salido tarde de casa y conducía más rápido de lo debido.
+As he approached the old turn, his phone lost signal and the GPS froze.	Al acercarse a la vieja curva, su teléfono perdió la señal y el GPS se congeló.
+Confused and distracted, he nearly missed the warning from the faded sign.	Confundido y distraído, casi no vio la advertencia del cartel descolorido.
+At the last second, he saw the curve and swerved hard, managing to stay on the road.	En el último segundo, vio la curva y giró bruscamente, logrando mantenerse en el camino.
+He stopped the car, breathing heavily, realizing how close he had come to disaster.	Detuvo el coche, respirando con dificultad, dándose cuenta de lo cerca que estuvo del desastre.
+Slowly, he got out and walked back to look at the sign.	Lentamente, salió del coche y caminó de regreso para mirar el cartel.
+Though weathered and nearly illegible, it had done its job.	Aunque desgastado y casi ilegible, había cumplido su función.
+“Thank you,” he whispered to the post, feeling both foolish and grateful.	“Gracias,” susurró al poste, sintiéndose a la vez tonto y agradecido.
+Across the region, signs like this one dotted the landscape.	Por toda la región, carteles como ese salpicaban el paisaje.
+Some warned of falling rocks, others of school crossings, or hidden driveways.	Algunos advertían sobre caída de rocas, otros sobre pasos escolares o entradas ocultas.
+Each sign told a silent story, a message from those who had driven there before.	Cada cartel contaba una historia silenciosa, un mensaje de quienes ya habían conducido por allí.
+Yet many people never really saw them—they were just part of the background.	Sin embargo, mucha gente nunca los veía de verdad—eran solo parte del fondo.
+Years later, Lucas became a road safety engineer.	Años después, Lucas se convirtió en ingeniero de seguridad vial.
+He traveled across the country inspecting road signs and placing new ones.	Viajaba por todo el país inspeccionando señales de tráfico y colocando nuevas.
+Wherever he went, he paid special attention to the old signs.	Dondequiera que iba, prestaba especial atención a los carteles antiguos.
+He believed they deserved respect, even if they looked forgotten.	Creía que merecían respeto, incluso si parecían olvidados.
+In a small town near the coast, he found a broken sign that once marked a dangerous intersection.	En un pequeño pueblo cerca de la costa, encontró un cartel roto que alguna vez marcó una intersección peligrosa.
+The townspeople had driven past it for so long they no longer noticed it.	Los habitantes del pueblo pasaban junto a él desde hacía tanto tiempo que ya no lo notaban.
+Lucas replaced it with a new one, but kept the old sign and hung it in his office.	Lucas lo reemplazó por uno nuevo, pero guardó el cartel viejo y lo colgó en su oficina.
+Above it, he placed a plaque that read: “They speak without words, but they save lives.”	Encima, colocó una placa que decía: “Hablan sin palabras, pero salvan vidas.”
+As technology advanced, more people depended on navigation apps and real-time maps.	A medida que avanzaba la tecnología, más personas dependían de las aplicaciones de navegación y mapas en tiempo real.
+But Lucas always reminded his team: "A sign never loses battery. A sign doesn’t need Wi-Fi."	Pero Lucas siempre recordaba a su equipo: “Una señal nunca se queda sin batería. Una señal no necesita Wi-Fi.”
+When his daughter began learning to drive, he took her on long road trips.	Cuando su hija empezó a aprender a conducir, la llevó en largos viajes por carretera.
+Along the way, they stopped to read old signs and talk about their meanings.	En el camino, se detenían a leer señales antiguas y hablar sobre su significado.
+She began to see them not just as instructions, but as pieces of a human story.	Ella empezó a verlas no solo como instrucciones, sino como partes de una historia humana.
+One evening, as they passed through a mountain road, they saw a new sign placed where an accident had once occurred.	Una tarde, al pasar por una carretera de montaña, vieron una nueva señal colocada donde alguna vez ocurrió un accidente.
+Lucas slowed down and said, “Every sign is there because someone needed it too late.”	Lucas disminuyó la velocidad y dijo: “Cada señal está ahí porque alguien la necesitó demasiado tarde.”
+His daughter nodded, and from that moment, she never ignored a road sign again.	Su hija asintió, y desde ese momento, nunca volvió a ignorar una señal de tráfico.
+The road signs continued their silent work, standing in rain, sun, and snow.	Las señales de tráfico continuaban su trabajo silencioso, de pie bajo la lluvia, el sol y la nieve.
+They never complained, never moved, but always pointed the way forward.	Nunca se quejaban, nunca se movían, pero siempre señalaban el camino hacia adelante.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
