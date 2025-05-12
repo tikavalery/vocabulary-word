@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+         about	sobre / acerca de
+above	encima de / sobre
+across	a través de / al otro lado de
+after	después de
+against	contra
+along	a lo largo de
+among	entre (más de dos)
+around	alrededor de
+at	en / a
+before	antes de
+behind	detrás de
+below	debajo de
+beneath	bajo / debajo de
+beside	al lado de
+between	entre (dos)
+beyond	más allá de
+by	por / junto a
+despite	a pesar de
+down	hacia abajo / por
+during	durante
+except	excepto
+for	para / por
+from	de / desde
+in	en / dentro de
+inside	dentro de
+into	en / dentro de
+near	cerca de
+of	de
+off	fuera de / bajado de
+on	en / sobre
+onto	sobre / encima de
+out	fuera de
+outside	fuera de
+over	sobre / encima de
+since	desde
+through	a través de
+throughout	por todo / a lo largo de
+till	hasta
+to	a / hasta
+toward(s)	hacia
+under	debajo de
+underneath	debajo de
+until	hasta
+up	arriba / hacia arriba
+upon	sobre / encima de
+with	con
+within	dentro de
+without	sin
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
