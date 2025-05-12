@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+            In the center of a quiet town stood an old clock shop with dusty windows and a wooden sign that read “Tiempo Eterno.”	En el centro de un pueblo tranquilo había una antigua relojería con ventanas polvorientas y un cartel de madera que decía “Tiempo Eterno.”
+The shop was owned by Señor Calderón, a mysterious man who had lived there longer than anyone could remember.	La tienda era propiedad del Señor Calderón, un hombre misterioso que había vivido allí más tiempo del que cualquiera podía recordar.
+His hair was silver, his glasses always foggy, and his hands moved with delicate precision.	Su cabello era plateado, sus gafas siempre empañadas, y sus manos se movían con delicada precisión.
+Inside the shop, hundreds of clocks ticked in harmony, filling the air with a soft, rhythmic hum.	Dentro de la tienda, cientos de relojes marcaban el tiempo en armonía, llenando el aire con un suave zumbido rítmico.
+There were wall clocks, pocket watches, grandfather clocks, and strange ones shaped like birds and moons.	Había relojes de pared, relojes de bolsillo, relojes de pie y otros extraños con forma de aves y lunas.
+Most people came only to look, but some whispered that Señor Calderón could fix time itself.	La mayoría venía solo a mirar, pero algunos susurraban que el Señor Calderón podía arreglar el tiempo mismo.
+One rainy afternoon, a boy named Mateo entered the shop carrying a broken alarm clock.	Una tarde lluviosa, un niño llamado Mateo entró en la tienda con un despertador roto.
+“It belonged to my grandfather,” he said. “It stopped the day he died.”	“Pertenecía a mi abuelo,” dijo. “Se detuvo el día que murió.”
+Señor Calderón took the clock gently and examined it under a warm lamp.	El Señor Calderón tomó el reloj con cuidado y lo examinó bajo una lámpara cálida.
+“Not every clock stops because it is broken,” he murmured.	“No todos los relojes se detienen porque están rotos,” murmuró.
+Mateo watched in silence as the old man opened the clock and began working.	Mateo observaba en silencio mientras el anciano abría el reloj y comenzaba a trabajar.
+Tiny gears, springs, and screws lay scattered like puzzle pieces.	Pequeños engranajes, resortes y tornillos yacían esparcidos como piezas de un rompecabezas.
+As the hands of the shop’s clocks moved forward, the past seemed to come alive.	Mientras las manecillas de los relojes de la tienda avanzaban, el pasado parecía cobrar vida.
+“Your grandfather came here once, many years ago,” Señor Calderón said.	“Tu abuelo vino aquí una vez, hace muchos años,” dijo el Señor Calderón.
+“He left something behind, something you must find.”	“Dejó algo atrás, algo que debes encontrar.”
+He pointed to a dusty drawer at the bottom of a tall cabinet.	Señaló un cajón polvoriento en la parte inferior de un gabinete alto.
+Mateo opened it and found a small golden key, warm to the touch.	Mateo lo abrió y encontró una pequeña llave dorada, cálida al tacto.
+“This opens a special clock,” Calderón explained. “But only when you’re ready.”	“Esto abre un reloj especial,” explicó Calderón. “Pero solo cuando estés listo.”
+Years passed, and Mateo grew into a young man, never forgetting the key.	Pasaron los años, y Mateo se convirtió en un joven, sin olvidar nunca la llave.
+After Señor Calderón passed away, Mateo inherited the shop.	Después de que el Señor Calderón falleció, Mateo heredó la tienda.
+The clocks continued to tick, as if nothing had changed.	Los relojes seguían marcando el tiempo, como si nada hubiera cambiado.
+One night, while cleaning the workshop, he discovered a hidden door behind a shelf.	Una noche, mientras limpiaba el taller, descubrió una puerta oculta detrás de una estantería.
+Using the golden key, he unlocked the door and entered a room filled with clocks that had no hands.	Usando la llave dorada, abrió la puerta y entró en una habitación llena de relojes sin manecillas.
+In the center stood a single clock, larger than the rest, with a glowing face.	En el centro había un solo reloj, más grande que los demás, con una cara resplandeciente.
+As Mateo approached, the clock began to tick.	Cuando Mateo se acercó, el reloj comenzó a marcar.
+He felt memories rushing through him—his grandfather’s laughter, his childhood games, the moment he first entered the shop.	Sintió cómo los recuerdos lo atravesaban—la risa de su abuelo, sus juegos de infancia, el momento en que entró por primera vez a la tienda.
+The clock wasn’t counting seconds—it was measuring moments.	El reloj no contaba segundos—medía momentos.
+From then on, Mateo used the shop not just to fix timepieces, but to help people remember.	Desde entonces, Mateo usaba la tienda no solo para reparar relojes, sino para ayudar a las personas a recordar.
+He repaired the watch of a woman who missed her son, and the broken clock of a man who had forgotten how to smile.	Reparó el reloj de una mujer que extrañaba a su hijo, y el reloj roto de un hombre que había olvidado cómo sonreír.
+Each time he turned a gear, something inside them turned too.	Cada vez que giraba un engranaje, algo dentro de ellos también giraba.
+People began calling him “El nuevo relojero de los recuerdos.”	La gente comenzó a llamarlo “El nuevo relojero de los recuerdos.”
+And just like Señor Calderón, Mateo said little, but listened closely to time.	Y al igual que el Señor Calderón, Mateo hablaba poco, pero escuchaba atentamente al tiempo.
+Outside, the town grew busier and louder, but inside the shop, time moved softly.	Afuera, el pueblo se volvía más ocupado y ruidoso, pero dentro de la tienda, el tiempo se movía suavemente.
+One day, a small girl entered, holding a broken pocket watch.	Un día, una niña pequeña entró, sosteniendo un reloj de bolsillo roto.
+“It stopped when my grandma passed,” she whispered.	“Se detuvo cuando murió mi abuela,” susurró.
+Mateo smiled gently and said, “Let’s see what we can do.”	Mateo sonrió con dulzura y dijo: “Veamos qué podemos hacer.”
+And so the legacy of the clockmaker continued, one tick at a time.	Y así continuó el legado del relojero, un tic a la vez.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
