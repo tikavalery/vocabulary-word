@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+          In the midst of the sprawling, ancient village, there existed a peculiar tradition that revolved around a set of weathered, iron buckets.	En medio del vasto y antiguo pueblo, existía una tradición peculiar que giraba en torno a un conjunto de cubos de hierro envejecidos.
+These buckets, though ordinary in appearance, had been passed down through generations, each bearing an imprint of history that none could quite decipher.	Estos cubos, aunque ordinarios en apariencia, habían sido transmitidos a través de generaciones, cada uno llevando una huella de historia que nadie lograba descifrar.
+The villagers spoke of them as if they were sacred relics, their presence intertwined with the very fabric of their lives.	Los aldeanos hablaban de ellos como si fueran reliquias sagradas, cuya presencia estaba entrelazada con el mismo tejido de sus vidas.
+It was said that the first bucket, forged by the hands of an enigmatic blacksmith, had been the vessel for the very first harvest in the village.	Se decía que el primer cubo, forjado por las manos de un enigmático herrero, había sido el recipiente para la primera cosecha en el pueblo.
+From that moment on, every bucket created thereafter was believed to carry with it a fragment of that original magic, a blessing of prosperity and protection.	A partir de ese momento, se creía que cada cubo creado después llevaba consigo un fragmento de esa magia original, una bendición de prosperidad y protección.
+Yet, as the years wore on, a sense of foreboding began to surround the buckets, a murmur of discomfort growing among the villagers.	Sin embargo, con el paso de los años, una sensación de presagio comenzó a rodear los cubos, un murmullo de incomodidad creciendo entre los aldeanos.
+Some claimed to have seen the buckets move on their own, their metal rims scraping against the ground as if alive with some ancient, restless spirit.	Algunos afirmaban haber visto los cubos moverse por sí mismos, sus bordes metálicos rozando el suelo como si estuvieran vivos con algún espíritu antiguo e inquieto.
+Others whispered that the buckets had begun to lose their shine, their once-glorious surfaces now tarnished and streaked with an eerie, unexplainable stain.	Otros susurraban que los cubos habían comenzado a perder su brillo, sus superficies antes gloriosas ahora empañadas y surcadas con una mancha extraña e inexplicable.
+One day, a young girl named Isabela, driven by curiosity and an unexplainable connection to the buckets, ventured into the village’s forgotten barn.	Un día, una joven llamada Isabela, impulsada por la curiosidad y una conexión inexplicable con los cubos, se aventuró en el granero olvidado del pueblo.
+There, amid the cobwebs and dust, stood the oldest bucket, its iron frame twisted and gnarled, as if shaped by a force beyond human comprehension.	Allí, entre las telarañas y el polvo, se encontraba el cubo más antiguo, su estructura de hierro retorcida y nudosa, como si hubiera sido modelada por una fuerza más allá de la comprensión humana.
+Isabela reached out to touch it, her fingers brushing the cold, tarnished metal, and in that instant, a sharp, distant whisper seemed to echo through the barn.	Isabela extendió la mano para tocarlo, sus dedos rozando el metal frío y empañado, y en ese instante, un susurro agudo y lejano pareció resonar a través del granero.
+The voice was faint but unmistakable—words long forgotten by time, words that beckoned her to unlock the bucket’s hidden secret.	La voz era tenue pero inconfundible—palabras olvidadas por el tiempo, palabras que la llamaban a desbloquear el secreto oculto del cubo.
+Heart racing, Isabela, though trembling, lifted the bucket from its resting place and felt an undeniable pull toward the village’s well.	Con el corazón acelerado, Isabela, aunque temblorosa, levantó el cubo de su lugar de reposo y sintió una atracción irrefutable hacia el pozo del pueblo.
+The moment she arrived, the well’s water began to churn, ripples spreading outward as though reacting to the very presence of the bucket.	En el momento en que llegó, el agua del pozo comenzó a agitarse, las ondas extendiéndose hacia afuera como si reaccionaran a la mera presencia del cubo.
+As she lowered the bucket into the depths, she could feel an intense energy coursing through the rope, pulling her deeper into something she was not yet ready to understand.	Al bajar el cubo a las profundidades, pudo sentir una intensa energía recorriendo la cuerda, arrastrándola más profundo hacia algo que aún no estaba lista para comprender.
+Suddenly, a surge of light erupted from the well, blinding Isabela and causing the earth beneath her feet to tremble.	De repente, una explosión de luz surgió del pozo, cegando a Isabela y haciendo que la tierra bajo sus pies temblara.
+When the light subsided, Isabela found herself in a realm unlike any she had ever known—a vast, ethereal landscape stretching beyond the horizon.	Cuando la luz se disipó, Isabela se encontró en un reino como ningún otro que hubiera conocido, un vasto paisaje etéreo que se extendía más allá del horizonte.
+Before her, the ancient blacksmith stood, his face obscured by shadows, holding the very first bucket that had started it all.	Ante ella, el antiguo herrero estaba de pie, su rostro oscurecido por las sombras, sosteniendo el primer cubo que lo había comenzado todo.
+"You have unlocked the truth," he intoned, his voice resonating like the clang of metal on an anvil.	"Has desbloqueado la verdad," dijo él, con su voz resonando como el sonido del metal golpeando un yunque.
+"These buckets were never just tools—they are the vessels of fate, carriers of the burdens and blessings of the village’s soul."	"Estos cubos nunca fueron solo herramientas—son los recipientes del destino, portadores de las cargas y bendiciones del alma del pueblo."
+Isabela, standing before the blacksmith, now understood that the buckets were not mere artifacts, but keys to a hidden, mystical balance.	Isabela, de pie ante el herrero, comprendió ahora que los cubos no eran meros artefactos, sino llaves de un equilibrio místico y oculto.
+And with that knowledge, she realized her task was not to destroy the buckets, but to protect them, preserving the fragile harmony they sustained.	Y con ese conocimiento, se dio cuenta de que su tarea no era destruir los cubos, sino protegerlos, preservando la frágil armonía que mantenían.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
