@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+           In a quiet coastal town, there was a small shop that sold only towels.	En un tranquilo pueblo costero, había una pequeña tienda que vendía solo toallas.
+The shop was owned by an elderly woman named Marta, who had lived by the sea her entire life.	La tienda era propiedad de una anciana llamada Marta, que había vivido junto al mar toda su vida.
+Each towel in the shop was handmade, carefully woven with bright threads and delicate patterns.	Cada toalla en la tienda era hecha a mano, tejida cuidadosamente con hilos brillantes y patrones delicados.
+Marta believed that towels should not just dry the body, but also warm the spirit.	Marta creía que las toallas no solo debían secar el cuerpo, sino también calentar el espíritu.
+Many travelers came from faraway places just to buy one of her special towels.	Muchos viajeros venían desde lugares lejanos solo para comprar una de sus toallas especiales.
+One rainy morning, a young man named Daniel entered the shop, dripping wet and shivering.	Una mañana lluviosa, un joven llamado Daniel entró en la tienda, empapado y tiritando.
+Marta offered him a soft blue towel and a seat by the small fireplace in the corner.	Marta le ofreció una toalla azul suave y un asiento junto a la pequeña chimenea en la esquina.
+As he dried himself, Daniel noticed a towel hanging on the wall, unlike any he had seen before.	Mientras se secaba, Daniel notó una toalla colgada en la pared, diferente a cualquier otra que hubiera visto.
+It had silver threads woven through it and a symbol stitched in the center that looked like a rising sun.	Tenía hilos plateados tejidos a través de ella y un símbolo bordado en el centro que parecía un sol naciente.
+“That towel is not for sale,” Marta said, her eyes soft but firm.	"Esa toalla no está en venta", dijo Marta, con los ojos suaves pero firmes.
+“It was made by my mother during the hardest winter of her life.”	“La hizo mi madre durante el invierno más duro de su vida.”
+Daniel asked if he could hear the story behind it, and Marta nodded slowly.	Daniel preguntó si podía escuchar la historia detrás de ella, y Marta asintió lentamente.
+She spoke of a year when the sea had frozen at the shore and no fish could be caught.	Habló de un año en que el mar se había congelado en la orilla y no se podía pescar.
+Her family had little to eat, and her mother kept them warm using towels she wove from scraps of old cloth.	Su familia tenía poco para comer, y su madre los mantenía calientes con toallas que tejía de restos de telas viejas.
+That silver-threaded towel had been a symbol of hope during that cold, hopeless time.	Aquella toalla con hilos plateados había sido un símbolo de esperanza durante ese tiempo frío y sin esperanzas.
+Marta had kept it ever since, never letting it be touched by anyone else.	Marta la había guardado desde entonces, sin permitir que nadie más la tocara.
+Daniel listened with respect and gratitude, understanding that some towels were more than fabric.	Daniel escuchó con respeto y gratitud, entendiendo que algunas toallas eran más que tela.
+Before leaving, he bought a red towel with golden edges, promising to take good care of it.	Antes de irse, compró una toalla roja con bordes dorados, prometiendo cuidarla bien.
+Marta smiled and wrapped it carefully, saying, “A towel carries more than water—it carries memory.”	Marta sonrió y la envolvió con cuidado, diciendo: “Una toalla lleva más que agua—lleva memoria.”
+As Daniel walked back into the rain, the towel kept him dry, but the story kept him warm.	Mientras Daniel salía de nuevo a la lluvia, la toalla lo mantenía seco, pero la historia lo mantenía cálido. 
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
