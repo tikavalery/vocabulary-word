@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+             The phone rang with an unfamiliar cadence, echoing through the dusty corridors of the abandoned mansion.	El teléfono sonó con una cadencia desconocida, resonando por los polvorientos pasillos de la mansión abandonada.
+Despite the decay and silence, the device gleamed unnaturally, as though untouched by time.	A pesar de la decadencia y el silencio, el aparato brillaba de forma antinatural, como si el tiempo no lo hubiera tocado.
+Elena hesitated before approaching, her fingers trembling with the weight of unspoken fears.	Elena vaciló antes de acercarse, con los dedos temblorosos por el peso de miedos no expresados.
+She picked up the receiver, half-expecting the line to be dead, but instead, a voice as smooth as velvet whispered her name.	Levantó el auricular, esperando que la línea estuviera muerta, pero en su lugar, una voz suave como el terciopelo susurró su nombre.
+"You finally came," it said, the tone both intimate and accusatory, sending shivers down her spine.	"Por fin viniste," dijo, con un tono tanto íntimo como acusador, provocándole escalofríos.
+Her memories, long buried beneath layers of denial, surged forth like a broken dam.	Sus recuerdos, enterrados bajo capas de negación, surgieron como una presa rota.
+She remembered the pact, the blood, and the voice that had once promised her everything—at a price.	Recordó el pacto, la sangre y la voz que una vez le prometió todo—a un precio.
+"What do you want from me?" she asked, her voice barely audible above the crackle of static.	"¿Qué quieres de mí?" preguntó, con la voz apenas audible sobre el chisporroteo de la estática.
+The voice chuckled, low and bitter, like the wind through dead leaves.	La voz se rió, baja y amarga, como el viento entre hojas muertas.
+"To finish what you started, Elena. The phone was never meant to be silent forever."	"Terminar lo que comenzaste, Elena. El teléfono nunca fue destinado a estar en silencio para siempre."
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
