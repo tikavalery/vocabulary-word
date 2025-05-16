@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+            In a small town surrounded by hills, there lived a quiet boy named Leo who had trouble seeing clearly.	En un pequeño pueblo rodeado de colinas, vivía un niño tranquilo llamado Leo que tenía problemas para ver con claridad.
+At school, he often squinted at the blackboard and had headaches after reading.	En la escuela, a menudo entrecerraba los ojos para ver el pizarrón y tenía dolores de cabeza después de leer.
+His teacher, Miss Clara, noticed this and recommended that he visit an eye doctor.	Su maestra, la señorita Clara, notó esto y le recomendó que visitara a un oculista.
+Leo’s parents took him to an old optician’s shop on Maple Street.	Los padres de Leo lo llevaron a una antigua óptica en la calle Maple.
+The shop was filled with hundreds of glasses, all shapes and colors.	La tienda estaba llena de cientos de gafas, de todas las formas y colores.
+In the corner, Leo saw a dusty wooden box with a strange symbol carved into it.	En la esquina, Leo vio una caja de madera polvorienta con un símbolo extraño tallado en ella.
+“What’s this?” Leo asked the optician, an old man with a silver mustache.	“¿Qué es esto?” preguntó Leo al óptico, un anciano con un bigote plateado.
+The man smiled and said, “Ah, those are very special glasses. They once belonged to a famous inventor.”	El hombre sonrió y dijo: “Ah, esas son unas gafas muy especiales. Pertenecieron a un inventor famoso.”
+Curious, Leo tried them on. Instantly, the world looked sharper and brighter.	Curioso, Leo se las puso. Al instante, el mundo se veía más nítido y brillante.
+But something strange happened—the glasses began to glow.	Pero algo extraño ocurrió: las gafas empezaron a brillar.
+Suddenly, Leo could see things others couldn’t—tiny fairies flying in the trees, hidden messages on signs, and people’s emotions as colors.	De repente, Leo podía ver cosas que otros no podían: hadas diminutas volando en los árboles, mensajes ocultos en los letreros y las emociones de las personas como colores.
+Amazed, he asked the optician what was going on.	Asombrado, preguntó al óptico qué estaba pasando.
+“These glasses were designed to reveal the hidden layers of the world,” he said.	“Estas gafas fueron diseñadas para revelar las capas ocultas del mundo,” dijo.
+From that day on, Leo wore the glasses everywhere he went.	Desde ese día, Leo usó las gafas a dondequiera que iba.
+He discovered a whole new world full of magic and mystery.	Descubrió un mundo completamente nuevo lleno de magia y misterio.
+He helped a lost cat find its way home by following glowing paw prints.	Ayudó a un gato perdido a encontrar su hogar siguiendo huellas brillantes.
+He even warned a friend about a hidden danger when he saw a dark shadow around his backpack.	Incluso advirtió a un amigo sobre un peligro oculto cuando vio una sombra oscura alrededor de su mochila.
+Leo became known in town as “the boy who sees more.”	Leo se hizo conocido en el pueblo como “el niño que ve más.”
+But soon, the glasses began to change. They grew heavier, and Leo started seeing sad memories and painful truths.	Pero pronto, las gafas comenzaron a cambiar. Se volvieron más pesadas y Leo empezó a ver recuerdos tristes y verdades dolorosas.
+One night, he saw an old man sitting alone on a bench, surrounded by gray fog.	Una noche, vio a un anciano sentado solo en un banco, rodeado de niebla gris.
+Leo sat beside him and shared a story, making the fog lift just a little.	Leo se sentó a su lado y compartió una historia, haciendo que la niebla se disipara un poco.
+He realized the glasses weren’t just about seeing magic—they were about understanding others.	Se dio cuenta de que las gafas no eran solo para ver magia, sino para comprender a los demás.
+Eventually, Leo returned to the optician’s shop to say thank you.	Finalmente, Leo regresó a la óptica para dar las gracias.
+But when he arrived, the shop was gone, replaced by an empty lot.	Pero cuando llegó, la tienda había desaparecido, reemplazada por un terreno vacío.
+Only a small plaque remained, reading: “To those who choose to see beyond.”	Solo quedaba una pequeña placa que decía: “Para aquellos que eligen ver más allá.”
+Leo kept the glasses, but now he used them less, choosing when to see the hidden truths.	Leo conservó las gafas, pero ahora las usaba menos, eligiendo cuándo ver las verdades ocultas.
+And each time he put them on, he remembered the importance of kindness, empathy, and vision.	Y cada vez que se las ponía, recordaba la importancia de la bondad, la empatía y la visión.
+Though he still had trouble with math and sometimes forgot his lunch, Leo had learned something far greater.	Aunque todavía tenía problemas con las matemáticas y a veces olvidaba su almuerzo, Leo había aprendido algo mucho más grande.
+He had learned to see with his heart, not just with his eyes.	Había aprendido a ver con el corazón, no solo con los ojos.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
