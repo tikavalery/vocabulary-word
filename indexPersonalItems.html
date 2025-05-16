@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+         It was a rainy Monday morning when Sofia realized she had forgotten her bag on the bus.	Era una lluviosa mañana de lunes cuando Sofía se dio cuenta de que había olvidado su bolsa en el autobús.
+She had been in such a hurry that she left it on the seat next to the window.	Había tenido tanta prisa que la dejó en el asiento junto a la ventana.
+That bag had everything: her wallet, keys, and smartphone.	Esa bolsa tenía todo: su cartera, llaves y teléfono inteligente.
+Her ID card was inside, along with her favorite sunglasses.	Su tarjeta de identificación estaba dentro, junto con sus gafas de sol favoritas.
+Even her face mask and a small bottle of hand sanitizer were in there.	Incluso su mascarilla y una botellita de gel antibacterial estaban allí.
+Sofia felt panic rising in her chest as the bus disappeared down the street.	Sofía sintió el pánico subirle al pecho mientras el autobús desaparecía por la calle.
+She ran back to the stop, hoping someone had seen it.	Corrió de vuelta a la parada, esperando que alguien la hubiera visto.
+An old man sitting on the bench said, “I saw the driver pick it up and place it behind his seat.”	Un anciano sentado en el banco dijo: “Vi al conductor recogerla y colocarla detrás de su asiento.”
+Relieved, Sofia quickly called the bus company using her friend’s phone.	Aliviada, Sofía llamó rápidamente a la empresa de autobuses usando el teléfono de su amiga.
+While waiting for an answer, she noticed her wrist felt light—she had also left her watch in the bag.	Mientras esperaba una respuesta, notó que su muñeca se sentía ligera: también había dejado su reloj en la bolsa.
+“It’s like I left half of myself on that bus,” she said, laughing nervously.	“Es como si hubiera dejado la mitad de mí en ese autobús,” dijo, riendo nerviosamente.
+At last, the company confirmed that her bag had been found.	Por fin, la empresa confirmó que su bolsa había sido encontrada.
+They said she could pick it up at the main station in the afternoon.	Dijeron que podía recogerla en la estación principal por la tarde.
+Sofia spent the day feeling strange without her usual items.	Sofía pasó el día sintiéndose rara sin sus objetos habituales.
+She had to borrow her friend’s lip balm because her lips were dry.	Tuvo que pedirle bálsamo labial a su amiga porque tenía los labios secos.
+She used a plastic bag to carry her lunch, since her purse was missing.	Usó una bolsa de plástico para llevar su almuerzo, ya que su bolso estaba perdido.
+In the afternoon, she arrived at the station with an umbrella in hand.	Por la tarde, llegó a la estación con un paraguas en la mano.
+It was still raining, and her hair was a mess because she had no brush or comb.	Aún llovía, y su cabello estaba desordenado porque no tenía cepillo ni peine.
+At the lost and found desk, the clerk smiled and handed her the familiar bag.	En el mostrador de objetos perdidos, el empleado sonrió y le entregó la bolsa familiar.
+Sofia opened it immediately and checked for all her items.	Sofía la abrió de inmediato y revisó todos sus objetos.
+Everything was there—her wallet, smartphone, face mask, and keys.	Todo estaba allí: su cartera, teléfono, mascarilla y llaves.
+She even found her favorite earrings and a small necklace she thought she had lost.	Incluso encontró sus aretes favoritos y un collar pequeño que pensó que había perdido.
+“Thank goodness,” she whispered, hugging the bag close.	“Gracias a Dios,” susurró, abrazando la bolsa con fuerza.
+She walked out of the station, feeling whole again.	Salió de la estación sintiéndose completa otra vez.
+From that day on, she always double-checked before leaving any place.	Desde ese día, siempre revisaba dos veces antes de salir de cualquier lugar.
+And she never underestimated the importance of her personal items again.	Y nunca volvió a subestimar la importancia de sus objetos personales.
+rainy	lluviosa
+Monday	lunes
+morning	mañana
+Sofia	Sofía
+realized	se dio cuenta
+forgotten	olvidado
+bag	bolsa
+bus	autobús
+hurry	prisa
+seat	asiento
+window	ventana
+wallet	cartera
+keys	llaves
+smartphone	teléfono inteligente
+ID card	tarjeta de identificación
+sunglasses	gafas de sol
+face mask	mascarilla
+hand sanitizer	gel antibacterial
+panic	pánico
+chest	pecho
+street	calle
+stop	parada
+old man	anciano
+bench	banco
+driver	conductor
+seat (again)	asiento
+relieved	aliviada
+company	empresa
+phone	teléfono
+friend	amiga
+wrist	muñeca
+light	ligera
+watch	reloj
+laughing	riendo
+nervously	nerviosamente
+confirmed	confirmó
+main station	estación principal
+afternoon	tarde
+day	día
+strange	rara
+usual items	objetos habituales
+lip balm	bálsamo labial
+lips	labios
+dry	secos
+plastic bag	bolsa de plástico
+lunch	almuerzo
+purse	bolso
+missing	perdido
+umbrella	paraguas
+hair	cabello
+mess	desordenado
+brush	cepillo
+comb	peine
+lost and found desk	mostrador de objetos perdidos
+clerk	empleado
+smiled	sonrió
+handed	entregó
+familiar	familiar
+opened	abrió
+immediately	de inmediato
+checked	revisó
+everything	todo
+earrings	aretes
+necklace	collar
+lost (again)	perdido
+thank goodness	gracias a Dios
+hugged	abrazando
+walked out	salió
+whole	completa
+double-checked	revisaba dos veces
+leaving	salir
+underestimated	subestimar
+importance	importancia
+personal items	objetos personales
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+            Ethan was packing for a weekend camping trip in the mountains with his friends.	Ethan estaba empacando para un viaje de campamento de fin de semana en las montañas con sus amigos.
+He made a checklist to make sure he didn't forget anything important.	Hizo una lista de verificación para asegurarse de no olvidar nada importante.
+Sleeping bag? Check. Food? Check. Flashlight? Check.	¿Saco de dormir? Listo. ¿Comida? Listo. ¿Linterna? Listo.
+But when it came to toiletries, he rushed and tossed a few things into a small bag.	Pero cuando se trató de los artículos de aseo, se apresuró y arrojó algunas cosas en una bolsa pequeña.
+The next morning, the group drove off in high spirits, singing songs and enjoying the view.	A la mañana siguiente, el grupo partió de buen ánimo, cantando canciones y disfrutando del paisaje.
+That night, at the campsite, Ethan realized he had forgotten most of his personal care items.	Esa noche, en el campamento, Ethan se dio cuenta de que había olvidado la mayoría de sus artículos de cuidado personal.
+He reached into his bag and found only a toothbrush and half a tube of toothpaste.	Metió la mano en su bolsa y encontró solo un cepillo de dientes y medio tubo de pasta dental.
+"At least I can brush my teeth," he muttered.	"Al menos puedo cepillarme los dientes," murmuró.
+But there was no floss, which he usually used every night.	Pero no había hilo dental, que normalmente usaba cada noche.
+He also forgot his shampoo and conditioner, and his hair was already feeling greasy from the hike.	También olvidó su champú y acondicionador, y su cabello ya se sentía grasoso por la caminata.
+His friend Mia offered him some soap and a bit of body wash.	Su amiga Mia le ofreció un poco de jabón y un poco de gel de baño.
+"Thanks! I smell like campfire and sweat," he laughed.	"¡Gracias! Huelo a fogata y sudor," se rió.
+When it was time to shave, he realized he had no razor or shaving cream.	Cuando llegó el momento de afeitarse, se dio cuenta de que no tenía rasuradora ni crema de afeitar.
+Ethan looked into the mirror on his phone and sighed.	Ethan miró en el espejo de su teléfono y suspiró.
+“I’m going to look like a bear by Sunday,” he joked.	“Voy a parecer un oso para el domingo,” bromeó.
+The next morning, he searched his bag for deodorant, but it was missing too.	A la mañana siguiente, buscó en su bolsa su desodorante, pero también faltaba.
+Mia again came to the rescue and shared her extra stick.	Mia volvió al rescate y le prestó su desodorante extra.
+After a cold stream bath, Ethan’s skin felt dry and he wished he had brought lotion.	Después de un baño en un arroyo frío, la piel de Ethan se sentía seca y deseaba haber traído loción.
+He usually used hair gel to keep his curls in place, but that was forgotten too.	Normalmente usaba gel para el cabello para mantener sus rizos en su lugar, pero eso también lo olvidó.
+His hair stood up in wild directions all weekend.	Su cabello estuvo parado en direcciones locas todo el fin de semana.
+On Saturday night, his nail broke while setting up a tent.	El sábado por la noche, se le rompió una uña mientras armaba una tienda de campaña.
+He asked everyone, but no one had a nail clipper.	Preguntó a todos, pero nadie tenía un cortaúñas.
+“Lesson learned,” he said. “Next time, I’ll make a better list.”	“Lección aprendida,” dijo. “La próxima vez, haré una mejor lista.”
+He did find a few cotton swabs at the bottom of his bag, which made him smile.	Encontró algunos hisopos de algodón en el fondo de su bolsa, lo que le hizo sonreír.
+By Sunday morning, everyone was using shared supplies and laughing about Ethan’s missing toiletries.	Para el domingo por la mañana, todos estaban usando artículos compartidos y riéndose de los artículos olvidados de Ethan.
+Before packing up, Ethan grabbed one of the towels hanging on a tree and dried his face.	Antes de empacar, Ethan agarró una de las toallas colgadas en un árbol y se secó la cara.
+“Next time, I’ll be the one lending everyone their missing stuff,” he promised.	“La próxima vez, yo seré quien le preste a todos lo que les falte,” prometió.
+Ethan	Ethan
+packing	empacando
+weekend	fin de semana
+camping trip	viaje de campamento
+mountains	montañas
+friends	amigos
+checklist	lista de verificación
+forget	olvidar
+important	importante
+sleeping bag	saco de dormir
+food	comida
+flashlight	linterna
+toiletries	artículos de aseo
+rushed	se apresuró
+tossed	arrojó
+small bag	bolsa pequeña
+group	grupo
+high spirits	buen ánimo
+campsite	campamento
+personal care items	artículos de cuidado personal
+toothbrush	cepillo de dientes
+toothpaste	pasta dental
+brush teeth	cepillar los dientes
+floss	hilo dental
+shampoo	champú
+conditioner	acondicionador
+hair	cabello
+greasy	grasoso
+hike	caminata
+friend	amiga
+Mia	Mia
+soap	jabón
+body wash	gel de baño
+smell	oler
+campfire	fogata
+sweat	sudor
+shave	afeitarse
+razor	rasuradora
+shaving cream	crema de afeitar
+mirror	espejo
+phone	teléfono
+sighed	suspiró
+bear	oso
+Sunday	domingo
+searched	buscó
+deodorant	desodorante
+rescue	rescate
+stick (deodorant stick)	barra (de desodorante)
+cold stream	arroyo frío
+skin	piel
+dry	seca
+lotion	loción
+hair gel	gel para el cabello
+curls	rizos
+forgot	olvidó
+wild directions	direcciones locas
+Saturday night	sábado por la noche
+nail	uña
+tent	tienda de campaña
+nail clipper	cortaúñas
+lesson learned	lección aprendida
+list	lista
+cotton swabs	hisopos de algodón
+bottom	fondo
+shared supplies	artículos compartidos
+missing toiletries	artículos olvidados
+packing up	empacar
+towels	toallas
+tree	árbol
+dried	se secó
+face	cara
+lending	prestar
+stuff	cosas
+promised	prometió
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
