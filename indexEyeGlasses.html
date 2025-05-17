@@ -59,6 +59,7 @@ He had learned to see with his heart, not just with his eyes.	Había aprendido a
         function speakWord(text, lang) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
+            utterance.rate = 0.8; 
             window.speechSynthesis.speak(utterance);
         }
     </script>

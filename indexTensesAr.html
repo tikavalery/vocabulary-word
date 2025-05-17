@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+   Spanish Conjugation 	English Translation
+Presente	
+yo abandono	I abandon / I am abandoning
+tú abandonas	you abandon / you are abandoning (informal)
+él/ella/usted abandona	he/she/you abandon(s)
+nosotros/nosotras abandonamos	we abandon
+vosotros/vosotras abandonáis	you all abandon (Spain)
+ellos/ellas/ustedes abandonan	they/you all abandon
+Pretérito	
+yo abandoné	I abandoned
+tú abandonaste	you abandoned (informal)
+él/ella/usted abandonó	he/she/you abandoned
+nosotros/nosotras abandonamos	we abandoned
+vosotros/vosotras abandonasteis	you all abandoned (Spain)
+ellos/ellas/ustedes abandonaron	they/you all abandoned
+Imperfecto	
+yo abandonaba	I used to abandon / was abandoning
+tú abandonabas	you used to abandon
+él/ella/usted abandonaba	he/she/you used to abandon
+nosotros/nosotras abandonábamos	we used to abandon
+vosotros/vosotras abandonabais	you all used to abandon (Spain)
+ellos/ellas/ustedes abandonaban	they/you all used to abandon
+Futuro	
+yo abandonaré	I will abandon
+tú abandonarás	you will abandon
+él/ella/usted abandonará	he/she/you will abandon
+nosotros/nosotras abandonaremos	we will abandon
+vosotros/vosotras abandonaréis	you all will abandon (Spain)
+ellos/ellas/ustedes abandonarán	they/you all will abandon
+Condicional	
+yo abandonaría	I would abandon
+tú abandonarías	you would abandon
+él/ella/usted abandonaría	he/she/you would abandon
+nosotros/nosotras abandonaríamos	we would abandon
+vosotros/vosotras abandonaríais	you all would abandon (Spain)
+ellos/ellas/ustedes abandonarían	they/you all would abandon
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
