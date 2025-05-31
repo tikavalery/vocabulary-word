@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+        On a quiet hillside, there was a colorful farm where many animals lived happily together.	En una colina tranquila, había una granja colorida donde muchos animales vivían felices juntos.
+A smart dog named Bruno was in charge of keeping the animals safe and waking the farmer each morning.	Un perro inteligente llamado Bruno estaba encargado de mantener a los animales seguros y despertar al granjero cada mañana.
+The cat, Bella, liked to climb the haystacks and nap in the sun, purring softly all day long.	La gata, Bella, le gustaba trepar los montones de heno y dormir al sol, ronroneando suavemente todo el día.
+Each day, the cow, Margarita, walked to the pasture where she munched on grass and watched the clouds.	Cada día, la vaca, Margarita, caminaba hacia el pasto donde masticaba hierba y miraba las nubes.
+A strong horse named Relámpago helped the farmer pull carts full of hay and vegetables to the market.	Un caballo fuerte llamado Relámpago ayudaba al granjero a tirar de carretas llenas de heno y verduras al mercado.
+Nearby, a cheerful pig named Rosita splashed in the muddy puddles and rolled on her back.	Cerca, una cerda alegre llamada Rosita salpicaba en los charcos de barro y se revolcaba de espaldas.
+A flock of sheep wandered near the orchard, bleating gently as they looked for fallen apples.	Un rebaño de ovejas vagaba cerca del huerto, balando suavemente mientras buscaban manzanas caídas.
+The goat, Pablo, was known for escaping his pen and standing proudly on the barn roof.	La cabra, Pablo, era conocida por escapar de su corral y pararse orgullosamente en el techo del granero.
+The donkey, Tomas, was stubborn but loyal, and he carried baskets of vegetables during harvest time.	El burro, Tomás, era terco pero leal, y cargaba cestas de verduras durante la cosecha.
+Luna, a fluffy rabbit, had her own burrow under the apple tree where she stored carrots and lettuce.	Luna, una coneja esponjosa, tenía su propia madriguera bajo el manzano donde guardaba zanahorias y lechuga.
+Inside the farmhouse, two guinea pigs named Coco and Lili chirped excitedly when they heard footsteps.	Dentro de la casa de campo, dos cobayas llamadas Coco y Lili chillaban emocionadas al oír pasos.
+A quick ferret named Rayo darted under the furniture, often stealing socks and hiding them in corners.	Un hurón veloz llamado Rayo corría bajo los muebles, a menudo robando calcetines y escondiéndolos en rincones.
+In a small glass tank, a hamster called Maní ran endlessly on his wheel each night.	En un pequeño tanque de vidrio, un hámster llamado Maní corría sin parar en su rueda cada noche.
+The gerbil twins, Nino and Nani, dug tunnels through shredded paper and built cozy nests together.	Los gemelos jerbos, Nino y Nani, cavaban túneles entre papel triturado y construían nidos acogedores juntos.
+A clever rat named Sombra figured out how to open a cabinet and sneak snacks from the pantry.	Una rata lista llamada Sombra descubrió cómo abrir un armario y robar bocadillos de la despensa.
+The smallest of them all was Pip, a shy mouse who loved to sit on the windowsill during sunset.	El más pequeño de todos era Pip, un ratoncito tímido que adoraba sentarse en el alféizar al atardecer.
+One morning, the animals woke up to a strange sound coming from the woods beyond the fence.	Una mañana, los animales se despertaron con un sonido extraño que venía del bosque más allá de la cerca.
+Bruno, the dog, barked to alert the others, and the animals gathered near the gate, curious but cautious.	Bruno, el perro, ladró para alertar a los demás, y los animales se reunieron cerca de la verja, curiosos pero cautelosos.
+Bella the cat climbed a tree to get a better view and saw a fox sneaking through the tall grass.	Bella, la gata, trepó a un árbol para tener una mejor vista y vio un zorro colándose entre la hierba alta.
+Quickly, the horse galloped toward the gate, and the pig squealed loudly to warn the farmer.	Rápidamente, el caballo galopó hacia la verja, y la cerda chilló fuertemente para avisar al granjero.
+The farmer came running, chased away the fox, and praised all the animals for working together.	El granjero vino corriendo, ahuyentó al zorro y elogió a todos los animales por trabajar juntos.
+That evening, the animals shared stories in the barn, proud of how they protected their home.	Esa tarde, los animales compartieron historias en el granero, orgullosos de cómo protegieron su hogar.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
