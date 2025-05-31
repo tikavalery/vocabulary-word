@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+         In a quiet forest on the edge of a small town, a curious squirrel named Nibbles lived high in an old oak tree.	En un bosque tranquilo al borde de un pequeño pueblo, vivía una ardilla curiosa llamada Nibbles en lo alto de un viejo roble.
+Nibbles loved to collect acorns, and she spent her mornings leaping from branch to branch in search of the biggest ones.	A Nibbles le encantaba recolectar bellotas, y pasaba sus mañanas saltando de rama en rama en busca de las más grandes.
+One sunny afternoon, while climbing down the tree, she saw a tiny mouse struggling to carry a crumb twice his size.	Una tarde soleada, mientras bajaba del árbol, vio a un pequeño ratón luchando por cargar una miga del doble de su tamaño.
+The mouse, whose name was Pip, had come from the meadow looking for food to bring back to his family.	El ratón, que se llamaba Pip, había venido del prado buscando comida para llevar a su familia.
+Nibbles hopped over and offered to help Pip carry the crumb to a safer place under the bushes.	Nibbles saltó y se ofreció a ayudar a Pip a llevar la miga a un lugar más seguro bajo los arbustos.
+Grateful for the help, Pip invited Nibbles to visit his home, which was hidden beneath a pile of rocks near a stream.	Agradecido por la ayuda, Pip invitó a Nibbles a visitar su hogar, que estaba escondido bajo un montón de rocas cerca de un arroyo.
+As they approached the stream, a large rat appeared from behind a log, blocking their path.	Al acercarse al arroyo, una gran rata apareció desde detrás de un tronco, bloqueando su camino.
+The rat, named Grizzle, was known throughout the forest for being grumpy but not dangerous.	La rata, llamada Grizzle, era conocida en todo el bosque por ser gruñona pero no peligrosa.
+“Where are you two going with that crumb?” Grizzle asked, sniffing the air suspiciously.	—¿A dónde van con esa miga? —preguntó Grizzle, olfateando el aire con sospecha.
+Pip nervously explained that it was for his little brothers and sisters, who hadn’t eaten since the night before.	Pip explicó nerviosamente que era para sus hermanitos, que no habían comido desde la noche anterior.
+Grizzle looked at the crumb, then at Pip, and finally stepped aside with a grunt.	Grizzle miró la miga, luego a Pip, y finalmente se hizo a un lado con un gruñido.
+“Go on, then,” she said. “But be careful near the water—some creatures don’t care who they steal from.”	—Adelante entonces —dijo—. Pero tengan cuidado cerca del agua; algunas criaturas no les importa a quién roban.
+Nibbles and Pip thanked her and continued along the path until they reached the mouse’s cozy home.	Nibbles y Pip le dieron las gracias y continuaron por el sendero hasta llegar al acogedor hogar del ratón.
+Inside, several tiny mice squeaked with joy as Pip shared the crumb and introduced Nibbles.	Dentro, varios ratoncitos chillaron de alegría mientras Pip compartía la miga y presentaba a Nibbles.
+That night, Nibbles stayed for dinner and listened to the stories Pip’s family told about life underground.	Esa noche, Nibbles se quedó a cenar y escuchó las historias que la familia de Pip contaba sobre la vida bajo tierra.
+She had never realized how different life was for the mice who lived below instead of in the trees.	Nunca se había dado cuenta de cuán diferente era la vida para los ratones que vivían abajo en lugar de en los árboles.
+The next day, she invited Pip and even Grizzle to visit her treetop home and try some roasted acorns.	Al día siguiente, invitó a Pip e incluso a Grizzle a visitar su hogar en la copa del árbol y probar algunas bellotas tostadas.
+Climbing was difficult for them, but with Nibbles’ help, they managed to reach the top safely.	Subir fue difícil para ellos, pero con la ayuda de Nibbles lograron llegar a la cima con seguridad.
+From that day on, the squirrel, the mouse, and the rat often visited each other, sharing stories, food, and laughter.	Desde ese día, la ardilla, el ratón y la rata se visitaban a menudo, compartiendo historias, comida y risas.
+The forest, once quiet and divided, became a place where friendships grew between creatures big and small.	El bosque, antes tranquilo y dividido, se convirtió en un lugar donde crecían amistades entre criaturas grandes y pequeñas.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

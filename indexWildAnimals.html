@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+         Deep in the heart of a vast African savannah, a wise elephant named Tembo led a peaceful herd.	En el corazón de una vasta sabana africana, un sabio elefante llamado Tembo lideraba una manada pacífica.
+Tembo was known for his calm presence and incredible memory, guiding the group to water during dry months.	Tembo era conocido por su presencia tranquila y su increíble memoria, guiando al grupo hacia el agua durante los meses secos.
+Not far from the elephant herd, a tall giraffe named Zuri nibbled on the highest leaves of the acacia trees.	No muy lejos de la manada de elefantes, una alta jirafa llamada Zuri mordisqueaba las hojas más altas de los árboles de acacia.
+Zuri could see far across the grasslands and often acted as a lookout for the smaller animals.	Zuri podía ver a lo lejos por las praderas y a menudo actuaba como vigía para los animales más pequeños.
+Near a muddy riverbank, a massive hippopotamus named Moyo cooled off in the water with his family.	Cerca de la orilla fangosa de un río, un enorme hipopótamo llamado Moyo se refrescaba en el agua con su familia.
+Despite their size, Moyo and the other hippos moved silently through the water like floating boulders.	A pesar de su tamaño, Moyo y los otros hipopótamos se movían silenciosamente por el agua como rocas flotantes.
+A strong and proud rhinoceros named Jabari often wandered alone but kept close enough to the others.	Un fuerte y orgulloso rinoceronte llamado Jabari a menudo vagaba solo pero permanecía lo suficientemente cerca de los demás.
+Jabari’s thick skin and powerful horn made him one of the most respected animals in the region.	La piel gruesa y el cuerno poderoso de Jabari lo convertían en uno de los animales más respetados de la región.
+Farther north, a herd of bison moved slowly across the plains, grazing quietly in the early morning.	Más al norte, una manada de bisontes se movía lentamente por las llanuras, pastando tranquilamente en la madrugada.
+The leader of the bison was an old male with a deep scar on his shoulder from a past battle.	El líder de los bisontes era un macho viejo con una cicatriz profunda en el hombro de una batalla pasada.
+Across the great river, a group of buffalo gathered near a muddy watering hole to drink and bathe.	Al otro lado del gran río, un grupo de búfalos se reunía cerca de un pozo fangoso para beber y bañarse.
+Although buffaloes often seemed calm, they could charge quickly if they sensed danger nearby.	Aunque los búfalos parecían tranquilos, podían embestir rápidamente si sentían peligro cerca.
+In the shaded woods beyond the plains, a family of deer moved gracefully between the trees.	En los bosques sombreados más allá de las llanuras, una familia de ciervos se movía con gracia entre los árboles.
+The youngest deer, a curious fawn named Nia, liked to explore the forest floor while her mother watched carefully.	La cierva más joven, una curiosa cervatilla llamada Nia, le gustaba explorar el suelo del bosque mientras su madre la observaba con cuidado.
+One day, a strong wind swept across the savannah, stirring dust and sending animals into hiding.	Un día, un viento fuerte barrió la sabana, levantando polvo y haciendo que los animales se escondieran.
+Tembo raised his trunk high and trumpeted a signal, calling the herd to stay close and calm.	Tembo levantó su trompa y lanzó un fuerte barrito, llamando a la manada a mantenerse cerca y tranquila.
+Zuri bent her long neck to help shelter a group of young antelopes beneath her towering legs.	Zuri inclinó su largo cuello para ayudar a proteger a un grupo de antílopes jóvenes bajo sus altas patas.
+Moyo and the hippos submerged themselves completely, leaving only their eyes and ears above the water.	Moyo y los hipopótamos se sumergieron completamente, dejando solo sus ojos y orejas por encima del agua.
+Jabari stood like a statue beside a large tree, ready to defend any creature that came too close.	Jabari se quedó como una estatua junto a un gran árbol, listo para defender a cualquier criatura que se acercara demasiado.
+As the wind settled, the animals slowly returned to their routines, grateful for the peace that followed.	Cuando el viento se calmó, los animales regresaron lentamente a sus rutinas, agradecidos por la paz que siguió.
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

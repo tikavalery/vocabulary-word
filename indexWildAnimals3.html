@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+       In a vast and peaceful wildlife sanctuary, a young human named Leo was learning about animals from all around the world.	En un vasto y pacífico santuario de vida silvestre, un joven humano llamado Leo estaba aprendiendo sobre animales de todo el mundo.
+His first encounter was with a colony of bats that hung upside down in a dark cave, chirping softly to one another.	Su primer encuentro fue con una colonia de murciélagos que colgaban boca abajo en una cueva oscura, piando suavemente entre ellos.
+Outside the cave, a chimpanzee was using a stick to pull termites from a log, showing surprising intelligence.	Fuera de la cueva, un chimpancé usaba un palo para sacar termitas de un tronco, mostrando una inteligencia sorprendente.
+Not far away, a huge gorilla sat calmly beneath a tree, gently grooming another member of his group.	No muy lejos, un enorme gorila se sentaba tranquilamente bajo un árbol, acicalando con cuidado a otro miembro de su grupo.
+Nearby, a noisy troop of baboons raced through the tall grass, chasing one another and calling loudly.	Cerca, una ruidosa tropa de babuinos corría por la hierba alta, persiguiéndose y gritando fuertemente.
+Leo laughed as a curious monkey climbed onto his shoulder, trying to steal a piece of fruit from his bag.	Leo se rió cuando un mono curioso se subió a su hombro, intentando robar un pedazo de fruta de su bolsa.
+Later, in the grasslands, Leo watched a kangaroo bounce across the field, carrying a joey in her pouch.	Más tarde, en las praderas, Leo observó a un canguro saltar por el campo, llevando una cría en su bolsa.
+Along the riverbank, a dolphin leapt gracefully out of the water, playing with others in a cheerful pod.	A lo largo de la orilla del río, un delfín saltaba graciosamente fuera del agua, jugando con otros en una alegre manada.
+In deeper waters, a majestic whale surfaced and exhaled a great spray from its blowhole before diving again.	En aguas más profundas, una majestuosa ballena emergió y exhaló un gran chorro de agua por su espiráculo antes de sumergirse nuevamente.
+On a nearby farm within the sanctuary, a cow grazed peacefully in the field, occasionally mooing at her calf.	En una granja cercana dentro del santuario, una vaca pastaba tranquilamente en el campo, mugiendo de vez en cuando a su ternero.
+In the same field, a cheerful pig rolled in the mud, snorting happily as she cooled off.	En el mismo campo, una cerda alegre se revolcaba en el barro, gruñendo felizmente mientras se refrescaba.
+A flock of sheep wandered slowly through the meadow, their wool thick and soft from months of growth.	Un rebaño de ovejas vagaba lentamente por el prado, con su lana gruesa y suave tras meses de crecimiento.
+A curious goat climbed on a pile of rocks, trying to reach the last leaves of a tall bush.	Una cabra curiosa trepaba por un montón de rocas, intentando alcanzar las últimas hojas de un arbusto alto.
+In the shaded part of the forest, a family of deer stepped lightly through the trees, alert to every sound.	En la parte sombreada del bosque, una familia de ciervos caminaba suavemente entre los árboles, alerta a cada sonido.
+Beyond the trees, a giraffe stretched her long neck to nibble the topmost leaves of an acacia tree.	Más allá de los árboles, una jirafa estiraba su largo cuello para mordisquear las hojas más altas de un árbol de acacia.
+In a nearby pond, a hippopotamus yawned wide and then sank slowly under the muddy water.	En un estanque cercano, un hipopótamo bostezó ampliamente y luego se hundió lentamente bajo el agua lodosa.
+At the edge of the plain, a graceful antelope dashed across the field, moving faster than Leo could follow.	Al borde de la llanura, un antílope elegante corría por el campo, moviéndose más rápido de lo que Leo podía seguir.
+A horse galloped past, its mane flying in the wind as it headed toward the open hills.	Un caballo galopaba cerca, con su crin volando en el viento mientras se dirigía hacia las colinas abiertas.
+Close behind trotted a donkey, slower but determined, carrying supplies on its sturdy back.	Cerca trotababa un burro, más lento pero decidido, llevando provisiones en su fuerte lomo.
+Near the watering hole, a group of zebras stood together, their black and white stripes shimmering in the sun.	Cerca del abrevadero, un grupo de cebras estaba reunido, con sus rayas blancas y negras brillando al sol.
+Last of all, a rhinoceros emerged from the trees, powerful and calm, as birds flew from his back into the sky.	Por último, un rinoceronte emergió de los árboles, poderoso y tranquilo, mientras aves volaban de su lomo hacia el cielo.
+As the sun began to set, Leo sat quietly, feeling amazed by the variety of creatures he had met in one day.	Cuando el sol comenzó a ponerse, Leo se sentó en silencio, maravillado por la variedad de criaturas que había conocido en un solo día.
+He realized that every animal, big or small, wild or tame, had a story worth listening to.	Se dio cuenta de que cada animal, grande o pequeño, salvaje o domesticado, tenía una historia que valía la pena escuchar.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+         In a vast and remote wildlife reserve, the king of the plains, a mighty lion named Kazi, ruled with strength and wisdom.	En una vasta y remota reserva natural, el rey de las llanuras, un poderoso león llamado Kazi, gobernaba con fuerza y sabiduría.
+Kazi often rested under a tree while keeping an eye on his pride and the distant movements of prey.	Kazi descansaba a menudo bajo un árbol mientras vigilaba a su manada y los movimientos lejanos de las presas.
+Not far away, a fierce tiger named Raj prowled through the dense jungle, his stripes blending perfectly with the shadows.	No muy lejos, un tigre feroz llamado Raj merodeaba por la densa selva, sus rayas se mezclaban perfectamente con las sombras.
+Raj preferred to hunt alone, using patience and power to bring down even the strongest animals.	Raj prefería cazar solo, usando paciencia y fuerza para derribar incluso a los animales más fuertes.
+On a rocky hillside, a sleek leopard watched silently from the trees, her eyes fixed on a group of antelope.	En una ladera rocosa, una ágil leoparda observaba en silencio desde los árboles, con sus ojos fijos en un grupo de antílopes.
+She was fast and agile, able to leap between branches and disappear in seconds.	Era rápida y ágil, capaz de saltar entre ramas y desaparecer en segundos.
+Across the open plains, a cheetah named Saba prepared to sprint, her body low to the ground and eyes locked on her target.	Al otro lado de las llanuras abiertas, una gueparda llamada Saba se preparaba para correr, su cuerpo bajo al suelo y sus ojos fijos en su objetivo.
+Saba was the fastest animal on land, able to catch prey before it had time to react.	Saba era el animal terrestre más rápido, capaz de atrapar a sus presas antes de que pudieran reaccionar.
+Deep in the rainforest, a jaguar called Luna crept through the thick undergrowth, silent as a shadow.	En lo profundo de la selva tropical, una jaguar llamada Luna se deslizaba por la espesa vegetación, silenciosa como una sombra.
+She was powerful enough to crush bones with a single bite and preferred to hunt at night.	Era lo suficientemente fuerte como para romper huesos con una sola mordida y prefería cazar de noche.
+In the mountains to the west, a solitary mountain lion watched from a cliff, scanning the valley below.	En las montañas del oeste, un puma solitario observaba desde un acantilado, escaneando el valle abajo.
+Known also as a cougar, this predator used stealth and strength to survive in the rugged terrain.	También conocido como león de montaña, este depredador usaba sigilo y fuerza para sobrevivir en el terreno escarpado.
+In the northern forests, a group of bears awoke from hibernation, hungry and ready to explore.	En los bosques del norte, un grupo de osos despertaba de la hibernación, hambrientos y listos para explorar.
+The largest of them, a polar bear named Nanuk, searched for seals along the icy coast.	El más grande de ellos, un oso polar llamado Nanuk, buscaba focas a lo largo de la costa helada.
+In the dense woods, a black bear sniffed around for berries and insects, avoiding human paths.	En los bosques densos, un oso negro olfateaba en busca de bayas e insectos, evitando los senderos humanos.
+Farther south, a gentle panda bear named Mei climbed trees slowly to eat bamboo leaves.	Más al sur, una osa panda llamada Mei trepaba árboles lentamente para comer hojas de bambú.
+In the mountains, a gray wolf howled at the moon, calling to its pack scattered through the forest.	En las montañas, un lobo gris aullaba a la luna, llamando a su manada dispersa por el bosque.
+The wolves moved together like shadows, protecting one another as they hunted under the stars.	Los lobos se movían juntos como sombras, protegiéndose mientras cazaban bajo las estrellas.
+In the desert plains, a clever coyote trotted across the sand, looking for food near the rocks.	En las llanuras del desierto, un astuto coyote trotaba por la arena, buscando comida cerca de las rocas.
+The coyote was known for its adaptability and often scavenged what others left behind.	El coyote era conocido por su adaptabilidad y a menudo aprovechaba lo que otros dejaban atrás.
+Near a canyon at dusk, a sly fox emerged from its den to begin the night’s search for mice and rabbits.	Cerca de un cañón al anochecer, un astuto zorro salía de su madriguera para comenzar la búsqueda nocturna de ratones y conejos.
+The fox’s golden fur glowed in the fading light as it slipped quietly through the grass.	El pelaje dorado del zorro brillaba en la luz que se desvanecía mientras se deslizaba silenciosamente por la hierba.
+Finally, under the stars, a pack of laughing hyenas moved across the savannah, cackling and searching for scraps.	Finalmente, bajo las estrellas, una manada de hienas risueñas se movía por la sabana, carcajeándose y buscando restos.
+Though often feared, hyenas played a vital role in nature by cleaning up after other predators.	Aunque a menudo temidas, las hienas cumplían un papel vital en la naturaleza al limpiar después de otros depredadores.
+As night fell completely, all the animals returned to their shelters, ready for another day in the wild.	Al caer completamente la noche, todos los animales regresaron a sus refugios, listos para otro día en la naturaleza.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
