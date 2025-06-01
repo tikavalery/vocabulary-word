@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+ Present (Indicative) to speak hablar
+English	Spanish
+I speak	yo hablo
+You speak	tú hablas
+He/She/You (formal) speak	él/ella/usted habla
+We speak	nosotros hablamos
+You all (Spain) speak	vosotros habláis
+They/You all speak	ellos/ellas/ustedes hablan
+
+ Preterite (Past Simple)
+English	Spanish
+I spoke	yo hablé
+You spoke	tú hablaste
+He/She/You (formal) spoke	él/ella/usted habló
+We spoke	nosotros hablamos
+You all (Spain) spoke	vosotros hablasteis
+They/You all spoke	ellos/ellas/ustedes hablaron
+
+ Imperfect (Past Habitual)
+English	Spanish
+I used to speak / was speaking	yo hablaba
+You used to speak	tú hablabas
+He/She/You (formal) used to speak	él/ella/usted hablaba
+We used to speak	nosotros hablábamos
+You all (Spain) used to speak	vosotros hablabais
+They/You all used to speak	ellos/ellas/ustedes hablaban
+
+Future
+English	Spanish
+I will speak	yo hablaré
+You will speak	tú hablarás
+He/She/You will speak	él/ella/usted hablará
+We will speak	nosotros hablaremos
+You all will speak	vosotros hablaréis
+They/You all will speak	ellos/ellas/ustedes hablarán
+
+Conditional
+English	Spanish
+I would speak	yo hablaría
+You would speak	tú hablarías
+He/She/You would speak	él/ella/usted hablaría
+We would speak	nosotros hablaríamos
+You all would speak	vosotros hablaríais
+They/You all would speak	ellos/ellas/ustedes hablarían
+
+
+Present Perfect
+English	Spanish
+I have spoken	yo he hablado
+You have spoken	tú has hablado
+He/She/You have spoken	él/ella/usted ha hablado
+We have spoken	nosotros hemos hablado
+You all have spoken	vosotros habéis hablado
+They/You all have spoken	ellos/ellas/ustedes han hablado
+
+Past Perfect (Pluperfect)
+English	Spanish
+I had spoken	yo había hablado
+You had spoken	tú habías hablado
+He/She/You had spoken	él/ella/usted había hablado
+We had spoken	nosotros habíamos hablado
+You all had spoken	vosotros habíais hablado
+They/You all had spoken	ellos/ellas/ustedes habían hablado
+
+Future Perfect
+English	Spanish
+I will have spoken	yo habré hablado
+You will have spoken	tú habrás hablado
+He/She/You will have spoken	él/ella/usted habrá hablado
+We will have spoken	nosotros habremos hablado
+You all will have spoken	vosotros habréis hablado
+They/You all will have spoken	ellos/ellas/ustedes habrán hablado
+
+Conditional Perfect
+English	Spanish
+I would have spoken	yo habría hablado
+You would have spoken	tú habrías hablado
+He/She/You would have spoken	él/ella/usted habría hablado
+We would have spoken	nosotros habríamos hablado
+You all would have spoken	vosotros habríais hablado
+They/You all would have spoken	ellos/ellas/ustedes habrían hablado
+
+
+
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
