@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+Present (Indicative)
+English	Spanish
+I eat	yo como
+You eat	tú comes
+He/She/You eats	él/ella/usted come
+We eat	nosotros comemos
+They/You all eat	ellos/ustedes comen
+
+Preterite (Simple Past)
+English	Spanish
+I ate	yo comí
+You ate	tú comiste
+He/She/You ate	él/ella/usted comió
+We ate	nosotros comimos
+They/You all ate	ellos/ustedes comieron
+
+Imperfect (Past Habitual)
+English	Spanish
+I used to eat / was eating	yo comía
+You used to eat	tú comías
+He/She/You used to eat	él/ella/usted comía
+We used to eat	nosotros comíamos
+They/You all used to eat	ellos/ustedes comían
+
+Future
+English	Spanish
+I will eat	yo comeré
+You will eat	tú comerás
+He/She/You will eat	él/ella/usted comerá
+We will eat	nosotros comeremos
+They/You all will eat	ellos/ustedes comerán
+
+Conditional
+English	Spanish
+I would eat	yo comería
+You would eat	tú comerías
+He/She/You would eat	él/ella/usted comería
+We would eat	nosotros comeríamos
+They/You all would eat	ellos/ustedes comerían
+
+Present Perfect
+English	Spanish
+I have eaten	yo he comido
+You have eaten	tú has comido
+He/She/You have eaten	él/ella/usted ha comido
+We have eaten	nosotros hemos comido
+They/You all have eaten	ellos/ustedes han comido
+
+Past Perfect (Pluperfect)
+English	Spanish
+I had eaten	yo había comido
+You had eaten	tú habías comido
+He/She/You had eaten	él/ella/usted había comido
+We had eaten	nosotros habíamos comido
+They/You all had eaten	ellos/ustedes habían comido
+
+Future Perfect
+English	Spanish
+I will have eaten	yo habré comido
+You will have eaten	tú habrás comido
+He/She/You will have eaten	él/ella/usted habrá comido
+We will have eaten	nosotros habremos comido
+They/You all will have eaten	ellos/ustedes habrán comido
+
+Conditional Perfect
+English	Spanish
+I would have eaten	yo habría comido
+You would have eaten	tú habrías comido
+He/She/You would have eaten	él/ella/usted habría comido
+We would have eaten	nosotros habríamos comido
+They/You all would have eaten	ellos/ustedes habrían comido
+
+Present (Indicative)
+English	Spanish
+I drink	yo bebo
+You drink	tú bebes
+He/She/You drinks	él/ella/usted bebe
+We drink	nosotros bebemos
+They/You all drink	ellos/ustedes beben
+
+Preterite (Simple Past)
+English	Spanish
+I drank	yo bebí
+You drank	tú bebiste
+He/She/You drank	él/ella/usted bebió
+We drank	nosotros bebimos
+They/You all drank	ellos/ustedes bebieron
+
+Imperfect (Past Habitual)
+English	Spanish
+I used to drink / was drinking	yo bebía
+You used to drink	tú bebías
+He/She/You used to drink	él/ella/usted bebía
+We used to drink	nosotros bebíamos
+They/You all used to drink	ellos/ustedes bebían
+
+Future
+English	Spanish
+I will drink	yo beberé
+You will drink	tú beberás
+He/She/You will drink	él/ella/usted beberá
+We will drink	nosotros beberemos
+They/You all will drink	ellos/ustedes beberán
+
+Conditional
+English	Spanish
+I would drink	yo bebería
+You would drink	tú beberías
+He/She/You would drink	él/ella/usted bebería
+We would drink	nosotros beberíamos
+They/You all would drink	ellos/ustedes beberían
+
+Present Perfect
+English	Spanish
+I have drunk	yo he bebido
+You have drunk	tú has bebido
+He/She/You have drunk	él/ella/usted ha bebido
+We have drunk	nosotros hemos bebido
+They/You all have drunk	ellos/ustedes han bebido
+
+Past Perfect (Pluperfect)
+English	Spanish
+I had drunk	yo había bebido
+You had drunk	tú habías bebido
+He/She/You had drunk	él/ella/usted había bebido
+We had drunk	nosotros habíamos bebido
+They/You all had drunk	ellos/ustedes habían bebido
+
+Future Perfect
+English	Spanish
+I will have drunk	yo habré bebido
+You will have drunk	tú habrás bebido
+He/She/You will have drunk	él/ella/usted habrá bebido
+We will have drunk	nosotros habremos bebido
+They/You all will have drunk	ellos/ustedes habrán bebido
+
+Conditional Perfect
+English	Spanish
+I would have drunk	yo habría bebido
+You would have drunk	tú habrías bebido
+He/She/You would have drunk	él/ella/usted habría bebido
+We would have drunk	nosotros habríamos bebido
+They/You all would have drunk	ellos/ustedes habrían bebido
+
+
+Present (Indicative)
+English	Spanish
+I learn	yo aprendo
+You learn	tú aprendes
+He/She/You learns	él/ella/usted aprende
+We learn	nosotros aprendemos
+They/You all learn	ellos/ustedes aprenden
+
+Preterite (Simple Past)
+English	Spanish
+I learned	yo aprendí
+You learned	tú aprendiste
+He/She/You learned	él/ella/usted aprendió
+We learned	nosotros aprendimos
+They/You all learned	ellos/ustedes aprendieron
+
+Imperfect (Past Habitual)
+English	Spanish
+I used to learn / was learning	yo aprendía
+You used to learn	tú aprendías
+He/She/You used to learn	él/ella/usted aprendía
+We used to learn	nosotros aprendíamos
+They/You all used to learn	ellos/ustedes aprendían
+
+Future
+English	Spanish
+I will learn	yo aprenderé
+You will learn	tú aprenderás
+He/She/You will learn	él/ella/usted aprenderá
+We will learn	nosotros aprenderemos
+They/You all will learn	ellos/ustedes aprenderán
+
+Conditional
+English	Spanish
+I would learn	yo aprendería
+You would learn	tú aprenderías
+He/She/You would learn	él/ella/usted aprendería
+We would learn	nosotros aprenderíamos
+They/You all would learn	ellos/ustedes aprenderían
+
+
+Present Perfect
+English	Spanish
+I have learned	yo he aprendido
+You have learned	tú has aprendido
+He/She/You have learned	él/ella/usted ha aprendido
+We have learned	nosotros hemos aprendido
+They/You all have learned	ellos/ustedes han aprendido
+
+Past Perfect (Pluperfect)
+English	Spanish
+I had learned	yo había aprendido
+You had learned	tú habías aprendido
+He/She/You had learned	él/ella/usted había aprendido
+We had learned	nosotros habíamos aprendido
+They/You all had learned	ellos/ustedes habían aprendido
+
+Future Perfect
+English	Spanish
+I will have learned	yo habré aprendido
+You will have learned	tú habrás aprendido
+He/She/You will have learned	él/ella/usted habrá aprendido
+We will have learned	nosotros habremos aprendido
+They/You all will have learned	ellos/ustedes habrán aprendido
+
+Conditional Perfect
+English	Spanish
+I would have learned	yo habría aprendido
+You would have learned	tú habrías aprendido
+He/She/You would have learned	él/ella/usted habría aprendido
+We would have learned	nosotros habríamos aprendido
+They/You all would have learned	ellos/ustedes habrían aprendido
+
+
+
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
