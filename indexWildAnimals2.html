@@ -37,6 +37,62 @@ The fox’s golden fur glowed in the fading light as it slipped quietly through 
 Finally, under the stars, a pack of laughing hyenas moved across the savannah, cackling and searching for scraps.	Finalmente, bajo las estrellas, una manada de hienas risueñas se movía por la sabana, carcajeándose y buscando restos.
 Though often feared, hyenas played a vital role in nature by cleaning up after other predators.	Aunque a menudo temidas, las hienas cumplían un papel vital en la naturaleza al limpiar después de otros depredadores.
 As night fell completely, all the animals returned to their shelters, ready for another day in the wild.	Al caer completamente la noche, todos los animales regresaron a sus refugios, listos para otro día en la naturaleza.
+wildlife reserve	reserva natural
+lion	león
+strength	fuerza
+wisdom	sabiduría
+pride (lion group)	manada
+prey	presas
+tiger	tigre
+jungle	selva
+stripes	rayas
+leopard	leoparda
+antelope	antílopes
+agile	ágil
+cheetah	gueparda
+fastest	más rápido
+target	objetivo
+rainforest	selva tropical
+jaguar	jaguar
+undergrowth	vegetación
+bite	mordida
+night	noche
+mountain lion / puma	puma / león de montaña
+cliff	acantilado
+valley	valle
+terrain	terreno
+stealth	sigilo
+bears	osos
+hibernation	hibernación
+polar bear	oso polar
+seal	foca
+coast	costa
+black bear	oso negro
+berries	bayas
+insects	insectos
+panda bear	osa panda
+bamboo	bambú
+wolf	lobo
+howl	aullar
+pack (of wolves)	manada
+forest	bosque
+stars	estrellas
+coyote	coyote
+sand	arena
+scavenged	aprovechaba
+fox	zorro
+den	madriguera
+mice	ratones
+rabbits	conejos
+fur	pelaje
+grass	hierba
+hyenas	hienas
+savannah	sabana
+scraps	restos
+predators	depredadores
+night	noche
+shelters	refugios
+wild	naturaleza
         `;
 
         const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
@@ -55,6 +111,7 @@ As night fell completely, all the animals returned to their shelters, ready for 
         function speakWord(text, lang) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
+            utterance.rate = 0.8; 
             window.speechSynthesis.speak(utterance);
         }
     </script>

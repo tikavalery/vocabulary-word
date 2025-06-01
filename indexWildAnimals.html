@@ -32,6 +32,57 @@ Zuri bent her long neck to help shelter a group of young antelopes beneath her t
 Moyo and the hippos submerged themselves completely, leaving only their eyes and ears above the water.	Moyo y los hipopótamos se sumergieron completamente, dejando solo sus ojos y orejas por encima del agua.
 Jabari stood like a statue beside a large tree, ready to defend any creature that came too close.	Jabari se quedó como una estatua junto a un gran árbol, listo para defender a cualquier criatura que se acercara demasiado.
 As the wind settled, the animals slowly returned to their routines, grateful for the peace that followed.	Cuando el viento se calmó, los animales regresaron lentamente a sus rutinas, agradecidos por la paz que siguió.
+savannah	sabana
+elephant	elefante
+herd	manada
+memory	memoria
+water	agua
+dry months	meses secos
+giraffe	jirafa
+leaves	hojas
+acacia trees	árboles de acacia
+grasslands	praderas
+lookout	vigía
+riverbank	orilla
+hippopotamus	hipopótamo
+family	familia
+floating	flotantes
+boulders	rocas
+rhinoceros	rinoceronte
+horn	cuerno
+thick skin	piel gruesa
+respected	respetados
+bison	bisontes
+plains	llanuras
+grazing	pastando
+scar	cicatriz
+shoulder	hombro
+battle	batalla
+buffalo	búfalos
+watering hole	pozo
+drink	beber
+bathe	bañarse
+charge	embestir
+danger	peligro
+woods	bosques
+deer	ciervos
+fawn	cervatilla
+forest floor	suelo del bosque
+strong wind	viento fuerte
+dust	polvo
+hiding	escondite
+trunk (elephant)	trompa
+trumpet (sound)	barrito
+calm	tranquila
+antelopes	antílopes
+legs	patas
+submerged	se sumergieron
+eyes	ojos
+ears	orejas
+creature	criatura
+tree	árbol
+peace	paz
+routines	rutinas
 
         `;
 
@@ -51,6 +102,7 @@ As the wind settled, the animals slowly returned to their routines, grateful for
         function speakWord(text, lang) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
+            utterance.rate = 0.8; 
             window.speechSynthesis.speak(utterance);
         }
     </script>

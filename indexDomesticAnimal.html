@@ -34,7 +34,66 @@ Bella the cat climbed a tree to get a better view and saw a fox sneaking through
 Quickly, the horse galloped toward the gate, and the pig squealed loudly to warn the farmer.	Rápidamente, el caballo galopó hacia la verja, y la cerda chilló fuertemente para avisar al granjero.
 The farmer came running, chased away the fox, and praised all the animals for working together.	El granjero vino corriendo, ahuyentó al zorro y elogió a todos los animales por trabajar juntos.
 That evening, the animals shared stories in the barn, proud of how they protected their home.	Esa tarde, los animales compartieron historias en el granero, orgullosos de cómo protegieron su hogar.
-        `;
+       farm	granja
+hillside	colina
+animals	animales
+dog	perro
+cat	gata
+haystack	montón de heno
+sun	sol
+cow	vaca
+pasture	pasto
+grass	hierba
+horse	caballo
+cart	carreta
+hay	heno
+vegetables	verduras
+market	mercado
+pig	cerda
+puddle	charco
+mud	barro
+sheep	ovejas
+orchard	huerto
+apples	manzanas
+goat	cabra
+barn	granero
+roof	techo
+donkey	burro
+basket	cesta
+harvest	cosecha
+rabbit	coneja
+burrow	madriguera
+carrot	zanahoria
+lettuce	lechuga
+guinea pig	cobaya
+footsteps	pasos
+ferret	hurón
+socks	calcetines
+corner	rincón
+hamster	hámster
+wheel	rueda
+gerbil	jerbo
+tunnel	túnel
+nest	nido
+rat	rata
+cabinet	armario
+snack	bocadillo
+pantry	despensa
+mouse	ratoncito
+windowsill	alféizar
+sunset	atardecer
+woods	bosque
+fence	cerca
+gate	verja
+fox	zorro
+tall grass	hierba alta
+to gallop	galopar
+to squeal	chillar
+to warn	avisar
+to chase away	ahuyentar
+to praise	elogiar
+to protect	proteger
+home	hogar `;
 
         const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
 
@@ -52,6 +111,7 @@ That evening, the animals shared stories in the barn, proud of how they protecte
         function speakWord(text, lang) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
+            utterance.rate = 0.8; 
             window.speechSynthesis.speak(utterance);
         }
     </script>

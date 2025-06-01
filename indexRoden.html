@@ -32,6 +32,40 @@ The next day, she invited Pip and even Grizzle to visit her treetop home and try
 Climbing was difficult for them, but with Nibbles’ help, they managed to reach the top safely.	Subir fue difícil para ellos, pero con la ayuda de Nibbles lograron llegar a la cima con seguridad.
 From that day on, the squirrel, the mouse, and the rat often visited each other, sharing stories, food, and laughter.	Desde ese día, la ardilla, el ratón y la rata se visitaban a menudo, compartiendo historias, comida y risas.
 The forest, once quiet and divided, became a place where friendships grew between creatures big and small.	El bosque, antes tranquilo y dividido, se convirtió en un lugar donde crecían amistades entre criaturas grandes y pequeñas.
+forest	bosque
+town	pueblo
+squirrel	ardilla
+oak tree	roble
+acorns	bellotas
+branch	rama
+mouse	ratón
+crumb	miga
+meadow	prado
+food	comida
+family	familia
+bushes	arbustos
+rocks	rocas
+stream	arroyo
+rat	rata
+log	tronco
+path	camino / sendero
+air	aire
+brothers and sisters	hermanitos
+water	agua
+creatures	criaturas
+home	hogar
+mice	ratoncitos / ratones
+joy	alegría
+dinner	cena
+underground	bajo tierra
+trees	árboles
+roasted	tostadas
+treetop	copa del árbol
+climbing	subir
+stories	historias
+laughter	risas
+friendship	amistades
+big and small	grandes y pequeñas
         `;
 
         const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
@@ -50,6 +84,7 @@ The forest, once quiet and divided, became a place where friendships grew betwee
         function speakWord(text, lang) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
+            utterance.rate = 0.8; 
             window.speechSynthesis.speak(utterance);
         }
     </script>

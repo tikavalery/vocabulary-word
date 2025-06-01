@@ -35,7 +35,62 @@ Near the watering hole, a group of zebras stood together, their black and white 
 Last of all, a rhinoceros emerged from the trees, powerful and calm, as birds flew from his back into the sky.	Por último, un rinoceronte emergió de los árboles, poderoso y tranquilo, mientras aves volaban de su lomo hacia el cielo.
 As the sun began to set, Leo sat quietly, feeling amazed by the variety of creatures he had met in one day.	Cuando el sol comenzó a ponerse, Leo se sentó en silencio, maravillado por la variedad de criaturas que había conocido en un solo día.
 He realized that every animal, big or small, wild or tame, had a story worth listening to.	Se dio cuenta de que cada animal, grande o pequeño, salvaje o domesticado, tenía una historia que valía la pena escuchar.
-        `;
+human	humano
+sanctuary	santuario
+wildlife	vida silvestre
+animals	animales
+bat	murciélago
+cave	cueva
+chimpanzee	chimpancé
+stick	palo
+termite	termita
+log	tronco
+gorilla	gorila
+tree	árbol
+baboon	babuino
+grass	hierba
+monkey	mono
+shoulder	hombro
+fruit	fruta
+bag	bolsa
+kangaroo	canguro
+joey	cría
+pouch	bolsa (de canguro)
+dolphin	delfín
+pod (of dolphins)	manada
+whale	ballena
+blowhole	espiráculo
+farm	granja
+cow	vaca
+calf	ternero
+pig	cerda
+mud	barro
+sheep	oveja
+wool	lana
+goat	cabra
+rock	roca
+bush	arbusto
+deer	ciervo
+giraffe	jirafa
+neck	cuello
+leaf	hoja
+acacia	acacia
+hippopotamus	hipopótamo
+muddy water	agua lodosa
+antelope	antílope
+horse	caballo
+mane	crin
+hills	colinas
+donkey	burro
+supplies	provisiones
+zebra	cebra
+stripes	rayas
+rhinoceros	rinoceronte
+creature	criatura
+story	historia
+wild	salvaje
+tame	domesticado
+variety	variedad `;
 
         const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
 
@@ -53,6 +108,7 @@ He realized that every animal, big or small, wild or tame, had a story worth lis
         function speakWord(text, lang) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
+            utterance.rate = 0.8; 
             window.speechSynthesis.speak(utterance);
         }
     </script>
