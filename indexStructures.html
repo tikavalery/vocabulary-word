@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+           Long ago, there was a city called Valdoria, known for its grand architecture.	Hace mucho tiempo, había una ciudad llamada Valdoria, conocida por su gran arquitectura.
+People from distant lands came to see its beauty.	Personas de tierras lejanas venían a ver su belleza.
+The city had cozy houses built from stone and wood.	La ciudad tenía casas acogedoras construidas de piedra y madera.
+Each street had a different style of houses, painted with bright colors.	Cada calle tenía un estilo diferente de casas, pintadas con colores brillantes.
+In the center of the city, there were glass skyscrapers that reflected the sun.	En el centro de la ciudad, había rascacielos de cristal que reflejaban el sol.
+These skyscrapers were used as offices and homes for thousands of people.	Estos rascacielos se usaban como oficinas y hogares para miles de personas.
+A network of long bridges connected different parts of the city.	Una red de puentes largos conectaba diferentes partes de la ciudad.
+These bridges crossed rivers, valleys, and deep canyons.	Estos puentes cruzaban ríos, valles y cañones profundos.
+Near the northern mountains, engineers built strong dams.	Cerca de las montañas del norte, los ingenieros construyeron represas fuertes.
+The dams stored water and provided electricity to the whole region.	Las represas almacenaban agua y proporcionaban electricidad a toda la región.
+In the old quarter, there were ancient castles made of gray stone.	En el barrio antiguo, había castillos antiguos hechos de piedra gris.
+These castles once protected the city from invaders.	Estos castillos protegían a la ciudad de los invasores.
+Beside the castles stood beautiful temples with golden roofs.	Al lado de los castillos se alzaban hermosos templos con techos dorados.
+People visited these temples to pray, meditate, and celebrate festivals.	La gente visitaba estos templos para rezar, meditar y celebrar festivales.
+Outside the city walls, there were massive factories.	Fuera de las murallas de la ciudad, había fábricas enormes.
+The factories produced tools, furniture, and flying machines.	Las fábricas producían herramientas, muebles y máquinas voladoras.
+Every day, workers entered the factories early in the morning.	Cada día, los trabajadores entraban a las fábricas temprano en la mañana.
+On the weekends, families gathered in giant stadiums.	Los fines de semana, las familias se reunían en estadios gigantes.
+The stadiums hosted sports, concerts, and even magic shows.	Los estadios albergaban deportes, conciertos e incluso espectáculos de magia.
+Beneath the city, engineers dug tunnels for fast trains.	Debajo de la ciudad, los ingenieros cavaron túneles para trenes rápidos.
+The tunnels connected Valdoria with nearby towns and hidden places.	Los túneles conectaban Valdoria con pueblos cercanos y lugares ocultos.
+As the city grew, it kept its old charm and added new wonders.	A medida que la ciudad crecía, mantenía su antiguo encanto y añadía nuevas maravillas.
+People respected history while embracing modern life.	La gente respetaba la historia mientras aceptaba la vida moderna.
+Valdoria became a symbol of harmony between the past and the future.	Valdoria se convirtió en un símbolo de armonía entre el pasado y el futuro.
+Visitors always left with stories of the houses, castles, and temples.	Los visitantes siempre se iban con historias de las casas, castillos y templos.
+And they never forgot the shining skyscrapers or the long tunnels.	Y nunca olvidaban los rascacielos brillantes ni los largos túneles.
+That is how Valdoria became one of the most admired cities in the world.	Así fue como Valdoria se convirtió en una de las ciudades más admiradas del mundo.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+           utterance.lang = lang;
+            utterance.rate = 0.8; 
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
