@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+       Mia was a young inventor who loved technology.	Mia era una joven inventora que amaba la tecnología.
+Every morning, she checked the news on her smartphone.	Cada mañana, revisaba las noticias en su teléfono inteligente.
+She used her smartphone to control lights and music at home.	Usaba su teléfono inteligente para controlar las luces y la música en casa.
+After breakfast, she worked on her computers in the lab.	Después del desayuno, trabajaba en sus computadoras en el laboratorio.
+She had three powerful computers with colorful lights.	Tenía tres computadoras potentes con luces de colores.
+On her screen, she tracked satellites orbiting Earth.	En su pantalla, rastreaba satélites orbitando la Tierra.
+These satellites sent data to her lab every hour.	Estos satélites enviaban datos a su laboratorio cada hora.
+Mia also built small drones that flew over the forest.	Mia también construía pequeños drones que volaban sobre el bosque.
+The drones had strong cameras to take clear photos.	Los drones tenían cámaras potentes para tomar fotos nítidas.
+She used the cameras to study animal movements.	Usaba las cámaras para estudiar los movimientos de los animales.
+One afternoon, she put on her VR headset to explore a virtual city.	Una tarde, se puso su casco de realidad virtual para explorar una ciudad virtual.
+The VR headset made her feel like she was really there.	El casco de realidad virtual la hacía sentir como si realmente estuviera allí.
+At night, Mia relaxed by watching science shows on her smart TV.	Por la noche, Mia se relajaba viendo programas de ciencia en su televisor inteligente.
+The smart TV had apps, games, and voice control.	El televisor inteligente tenía aplicaciones, juegos y control por voz.
+While watching, she checked her messages on a smartwatch.	Mientras miraba, revisaba sus mensajes en un reloj inteligente.
+Her smartwatch showed health data, steps, and reminders.	Su reloj inteligente mostraba datos de salud, pasos y recordatorios.
+Mia loved how all her devices worked together.	A Mia le encantaba cómo todos sus dispositivos funcionaban juntos.
+She believed technology could improve lives.	Ella creía que la tecnología podía mejorar vidas.
+Every day, she learned something new from her gadgets.	Cada día, aprendía algo nuevo de sus dispositivos.
+Mia dreamed of building even smarter machines one day.	Mia soñaba con construir máquinas aún más inteligentes algún día.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

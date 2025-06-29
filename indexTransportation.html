@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+         Olivia was an explorer who loved all kinds of transportation.	Olivia era una exploradora que amaba todo tipo de transporte.
+She started her day by driving her small car through the countryside.	Comenzó su día conduciendo su pequeño coche por el campo.
+Then, she parked and waited for the next bus into the city.	Luego, aparcó y esperó el próximo autobús hacia la ciudad.
+Inside the city, she took a fast train to the old museum district.	Dentro de la ciudad, tomó un tren rápido hacia el distrito de museos antiguos.
+Outside the station, she rented a motorcycle to ride through the hills.	Fuera de la estación, alquiló una motocicleta para recorrer las colinas.
+After the ride, she switched to a quiet bicycle path by the river.	Después del paseo, cambió a una ruta tranquila de bicicleta junto al río.
+A child passed her riding an electric scooter with bright lights.	Un niño la pasó montado en un patinete eléctrico con luces brillantes.
+Nearby, a delivery truck was unloading boxes at a bakery.	Cerca, un camión de reparto descargaba cajas en una panadería.
+Olivia waved as a streetcar passed slowly in front of her.	Olivia saludó mientras un tranvía pasaba lentamente frente a ella.
+She went underground to catch the metro toward the art gallery.	Bajó al metro para ir hacia la galería de arte.
+Later, she ordered a taxi to take her across town.	Más tarde, pidió un taxi para cruzar la ciudad.
+It was a ride-sharing service like Uber or Lyft.	Era un servicio de transporte como Uber o Lyft.
+That night, she slept in her cozy RV near a mountain lake.	Esa noche, durmió en su acogedora casa rodante cerca de un lago de montaña.
+In the morning, teenagers zoomed by on skateboards and longboards.	Por la mañana, adolescentes pasaban rápidamente en monopatines y longboards.
+One boy was balancing on a Segway near the camping area.	Un chico se equilibraba en un Segway cerca del área de campamento.
+A girl nearby practiced tricks on a hoverboard.	Una niña cerca practicaba trucos en un hoverboard.
+Olivia went to the lake and got into a small boat.	Olivia fue al lago y se subió a un pequeño bote.
+She took a short ferry ride to a nearby island.	Tomó un corto viaje en ferry a una isla cercana.
+On the dock, she saw a giant ship loading cargo.	En el muelle, vio un enorme barco cargando mercancía.
+A fancy yacht floated quietly near the shore.	Un yate elegante flotaba silenciosamente cerca de la orilla.
+She borrowed a canoe and paddled down a narrow stream.	Prestó una canoa y remó por un arroyo estrecho.
+Later, she tried a kayak and went through tiny caves.	Más tarde, probó un kayak y pasó por cuevas pequeñas.
+A friendly sailor let her help sail a small sailboat.	Un marinero amable la dejó ayudar a navegar un pequeño velero.
+Suddenly, a submarine appeared near the reef.	De repente, un submarino apareció cerca del arrecife.
+She saw people on a fast jet ski racing over the waves.	Vio a personas en motos de agua corriendo sobre las olas.
+In the afternoon, Olivia boarded an airplane to another country.	Por la tarde, Olivia abordó un avión hacia otro país.
+From the window, she saw a helicopter flying over the mountains.	Desde la ventana, vio un helicóptero volando sobre las montañas.
+At sunset, a drone flew near the plane capturing video.	Al atardecer, un dron voló cerca del avión grabando video.
+Olivia smiled, excited for her next adventure.	Olivia sonrió, emocionada por su próxima aventura.
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
