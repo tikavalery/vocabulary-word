@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+         English	Español
+In a distant land, there lived a young philosopher named Elena.	En una tierra lejana, vivía una joven filósofa llamada Elena.
+She was fascinated by the mysteries of love, time, and fear.	Estaba fascinada por los misterios del amor, el tiempo y el miedo.
+Every day, she walked through the forest, thinking about justice and ethics.	Cada día, caminaba por el bosque, pensando en la justicia y la ética.
+She believed that knowledge was the light that guided humanity.	Creía que el conocimiento era la luz que guiaba a la humanidad.
+Elena studied ancient texts about culture and language.	Elena estudiaba textos antiguos sobre la cultura y el lenguaje.
+She also loved music, especially the soft tones of the flute.	También amaba la música, especialmente los tonos suaves de la flauta.
+One day, she met an old man who spoke only in math.	Un día, conoció a un anciano que hablaba solo en matemáticas.
+He said numbers held the secrets of the universe.	Dijo que los números contenían los secretos del universo.
+Elena asked him about beliefs and why people hold them so strongly.	Elena le preguntó sobre las creencias y por qué la gente las defendía con tanta fuerza.
+The man replied, “Beliefs are the roots of emotion and identity.”	El hombre respondió: “Las creencias son las raíces de la emoción y la identidad.”
+They sat by the river and talked about emotions for hours.	Se sentaron junto al río y hablaron sobre las emociones durante horas.
+“Emotions shape our perception of the world,” he said.	“Las emociones dan forma a nuestra percepción del mundo,” dijo.
+Elena believed in logic but respected the power of feelings.	Elena creía en la lógica, pero respetaba el poder de los sentimientos.
+She once wrote a poem about the balance between logic and love.	Una vez escribió un poema sobre el equilibrio entre la lógica y el amor.
+Her dream was to live in a world where freedom was sacred.	Su sueño era vivir en un mundo donde la libertad fuera sagrada.
+“Without freedom, there is no true consciousness,” she often said.	“Sin libertad, no hay verdadera conciencia,” solía decir.
+As she grew older, Elena became a teacher of philosophy.	Al envejecer, Elena se convirtió en profesora de filosofía.
+Her students listened carefully to her ideas about time and ethics.	Sus estudiantes escuchaban con atención sus ideas sobre el tiempo y la ética.
+She taught that justice is not just a law, but a way of life.	Enseñaba que la justicia no es solo una ley, sino una forma de vida.
+Elena’s words lived on, even after she was gone.	Las palabras de Elena vivieron, incluso después de su partida.
+Love	Amor
+Time	Tiempo
+Fear	Miedo
+Justice	Justicia
+Knowledge	Conocimiento
+Culture	Cultura
+Music	Música
+Language	Lenguaje
+Math	Matemáticas
+Beliefs	Creencias
+Emotions	Emociones
+Ethics	Ética
+Logic	Lógica
+Freedom	Libertad
+Consciousness	Conciencia
+Philosopher	Filósofa
+Universe	Universo
+Identity	Identidad
+Perception	Percepción
+Teacher	Profesora
+
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+              utterance.lang = lang;
+            utterance.rate = 0.8;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

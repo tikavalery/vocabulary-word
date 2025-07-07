@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+        The government of the country has three branches: executive, legislative, and judiciary.	El gobierno del país tiene tres ramas: ejecutiva, legislativa y judicial.
+The parliament meets every month to discuss new laws.	El parlamento se reúne cada mes para discutir nuevas leyes.
+Political parties compete in elections to represent the people.	Los partidos políticos compiten en elecciones para representar al pueblo.
+The election commission organizes fair and transparent voting.	La comisión electoral organiza votaciones justas y transparentes.
+Local governments manage cities and municipalities.	Los gobiernos locales administran ciudades y municipios.
+Public administration agencies help implement government policies.	Las agencias de administración pública ayudan a implementar las políticas gubernamentales.
+The courts ensure justice is served at every level.	Los tribunales garantizan que se haga justicia en todos los niveles.
+The police enforce laws and protect citizens.	La policía hace cumplir las leyes y protege a los ciudadanos.
+Correctional facilities hold individuals convicted of crimes.	Las instalaciones penitenciarias albergan a personas condenadas por delitos.
+The prosecutor’s office investigates and prosecutes criminal cases.	La fiscalía investiga y procesa casos penales.
+Legal aid organizations provide help to those who cannot afford lawyers.	Las organizaciones de ayuda legal brindan asistencia a quienes no pueden pagar abogados.
+The central bank controls the country's money supply and interest rates.	El banco central controla la oferta monetaria y las tasas de interés del país.
+Commercial banks offer financial services to individuals and businesses.	Los bancos comerciales ofrecen servicios financieros a personas y empresas.
+The stock exchange is where companies trade shares publicly.	La bolsa de valores es donde las empresas negocian acciones públicamente.
+Trade unions protect workers' rights and negotiate with employers.	Los sindicatos protegen los derechos de los trabajadores y negocian con los empleadores.
+Chambers of commerce support business growth and trade.	Las cámaras de comercio apoyan el crecimiento empresarial y el comercio.
+Regulatory bodies oversee finance, trade, and labor standards.	Los organismos reguladores supervisan las finanzas, el comercio y las normas laborales.
+Primary and secondary schools provide education to children and teenagers.	Las escuelas primarias y secundarias ofrecen educación a niños y adolescentes.
+Universities and colleges train students for specialized careers.	Las universidades y colegios forman a estudiantes para carreras especializadas.
+Vocational training centers teach practical skills for various jobs.	Los centros de formación profesional enseñan habilidades prácticas para diversos trabajos.
+Research institutes conduct studies to advance knowledge.	Los institutos de investigación realizan estudios para avanzar en el conocimiento.
+Libraries provide access to books and information for all citizens.	Las bibliotecas ofrecen acceso a libros e información para todos los ciudadanos.
+Hospitals offer medical care to the sick and injured.	Los hospitales ofrecen atención médica a los enfermos y heridos.
+Clinics provide outpatient health services in communities.	Las clínicas ofrecen servicios de salud ambulatorios en las comunidades.
+Public health departments promote disease prevention and health education.	Los departamentos de salud pública promueven la prevención de enfermedades y la educación sanitaria.
+Pharmaceutical agencies regulate the safety of medicines.	Las agencias farmacéuticas regulan la seguridad de los medicamentos.
+Mental health centers support those with psychological illnesses.	Los centros de salud mental apoyan a quienes tienen enfermedades psicológicas.
+Religious organizations serve as places of worship and community support.	Las organizaciones religiosas sirven como lugares de culto y apoyo comunitario.
+Non-governmental organizations (NGOs) work on social and environmental issues.	Las organizaciones no gubernamentales (ONG) trabajan en temas sociales y ambientales.
+Charities and foundations help people in need with donations and programs.	Las organizaciones benéficas y fundaciones ayudan a personas necesitadas con donaciones y programas.
+Community centers offer spaces for social activities and learning.	Los centros comunitarios ofrecen espacios para actividades sociales y aprendizaje.
+Social welfare agencies provide assistance to vulnerable populations.	Las agencias de bienestar social brindan ayuda a poblaciones vulnerables.
+Museums preserve and exhibit cultural and historical artifacts.	Los museos preservan y exhiben artefactos culturales e históricos.
+Theaters host performances of plays, music, and dance.	Los teatros presentan obras de teatro, música y danza.
+Art galleries display paintings and sculptures.	Las galerías de arte exhiben pinturas y esculturas.
+Cultural heritage organizations protect traditions and historical sites.	Las organizaciones de patrimonio cultural protegen tradiciones y sitios históricos.
+Media organizations broadcast news and entertainment through TV, radio, and newspapers.	Las organizaciones mediáticas transmiten noticias y entretenimiento por televisión, radio y periódicos.
+Transportation authorities manage public transit and infrastructure.	Las autoridades de transporte gestionan el tránsito público y la infraestructura.
+Utilities provide essential services like water, electricity, and gas.	Las empresas de servicios públicos proporcionan servicios esenciales como agua, electricidad y gas.
+Postal services deliver mail and packages nationwide.	Los servicios postales entregan correo y paquetes a nivel nacional.
+Emergency services include fire departments and ambulance crews.	Los servicios de emergencia incluyen departamentos de bomberos y equipos de ambulancia.
+The armed forces protect the country’s security and sovereignty.	Las fuerzas armadas protegen la seguridad y soberanía del país.
+The defense ministry oversees military operations and policies.	El ministerio de defensa supervisa las operaciones y políticas militares.
+Intelligence agencies gather and analyze information for national security.	Las agencias de inteligencia recopilan y analizan información para la seguridad nacional.
+Veteran affairs offices support former military personnel.	Las oficinas de asuntos de veteranos apoyan al personal militar retirado.
+
+Government	Gobierno
+Executive branch	Rama ejecutiva
+Legislative branch	Rama legislativa
+Judiciary branch	Rama judicial
+Parliament / Congress	Parlamento / Congreso
+Political party	Partido político
+Election commission	Comisión electoral
+Municipality / Local government	Municipio / Gobierno local
+Public administration	Administración pública
+Court	Tribunal / Corte
+Police	Policía
+Prison	Prisión
+Prosecutor’s office	Fiscalía
+Legal aid	Asistencia legal
+Central bank	Banco central
+Commercial bank	Banco comercial
+Stock exchange	Bolsa de valores
+Trade union	Sindicato
+Chamber of commerce	Cámara de comercio
+Regulatory body	Organismo regulador
+School	Escuela
+University	Universidad
+Vocational training center	Centro de formación profesional
+Research institute	Instituto de investigación
+Library	Biblioteca
+Hospital	Hospital
+Clinic	Clínica
+Public health department	Departamento de salud pública
+Pharmaceutical agency	Agencia farmacéutica
+Mental health center	Centro de salud mental
+Religious organization	Organización religiosa
+NGO	ONG
+Charity	Organización benéfica
+Community center	Centro comunitario
+Social welfare agency	Agencia de bienestar social
+Museum	Museo
+Theater	Teatro
+Art gallery	Galería de arte
+Cultural heritage	Patrimonio cultural
+Media organization	Organización mediática
+Transportation authority	Autoridad de transporte
+Utility	Servicio público
+Postal service	Servicio postal
+Emergency service	Servicio de emergencia
+Armed forces	Fuerzas armadas
+Defense ministry	Ministerio de defensa
+Intelligence agency	Agencia de inteligencia
+Veteran affairs	Asuntos de veteranos
+Fair	Justo /a
+Transparent	Transparente
+Local	Local
+New	Nuevo /a
+Sick	Enfermo /a
+Injured	Herido /a
+Vulnerable	Vulnerable
+Essential	Esencial
+Public	Público /a
+Social	Social
+Cultural	Cultural
+Medical	Médico /a
+Important	Importante
+Protect	Proteger
+Manage	Administrar / Gestionar
+Organize	Organizar
+Implement	Implementar
+Ensure	Asegurar
+Enforce	Hacer cumplir
+Investigate	Investigar
+Provide	Proporcionar / Brindar
+Train	Formar / Entrenar
+Study	Estudiar
+Promote	Promover
+Regulate	Regular
+Support	Apoyar
+Broadcast	Transmitir
+Deliver	Entregar
+Oversee	Supervisar
+Gather	Recopilar
+Analyze	Analizar
+Help	Ayudar
+Fairly	Justamente
+Every	Cada
+With	Con
+Of	De
+For	Para
+To	A
+At	En
+And	Y
+Or	O
+Those	Aquellos /as
+People	Gente / Personas
+Citizens	Ciudadanos
+Individuals	Individuos
+Students	Estudiantes
+Workers	Trabajadores
+Employers	Empleadores
+Former	Ex- / Anterior
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+              utterance.lang = lang;
+            utterance.rate = 0.8;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+

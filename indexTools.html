@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+        In a small town surrounded by mountains, there lived an old inventor named Clara.	En un pequeño pueblo rodeado de montañas, vivía una vieja inventora llamada Clara.
+Clara loved collecting old tools that others had thrown away.	A Clara le encantaba coleccionar herramientas viejas que otros habían tirado.
+Her workshop was full of hammers, saws, drills, and wrenches.	Su taller estaba lleno de martillos, sierras, taladros y llaves inglesas.
+Every day, she would clean and repair the tools carefully.	Cada día, limpiaba y reparaba las herramientas con cuidado.
+One day, she found an abandoned sewing machine behind a market.	Un día, encontró una máquina de coser abandonada detrás de un mercado.
+She took it home and fixed it with a small wrench and a lot of patience.	La llevó a casa y la arregló con una pequeña llave inglesa y mucha paciencia.
+Clara believed that every tool had a story and a purpose.	Clara creía que cada herramienta tenía una historia y un propósito.
+In the evenings, she used microscopes to study insects she found in the garden.	Por las tardes, usaba microscopios para estudiar insectos que encontraba en el jardín.
+At night, she pointed her telescope to the stars and made notes.	Por la noche, apuntaba su telescopio a las estrellas y tomaba notas.
+Her desk was filled with open notebooks and several calculators.	Su escritorio estaba lleno de cuadernos abiertos y varias calculadoras.
+She calculated the distance between stars and compared them to her old maps.	Calculaba la distancia entre las estrellas y las comparaba con sus mapas antiguos.
+One day, a group of children visited her workshop on a school trip.	Un día, un grupo de niños visitó su taller durante una excursión escolar.
+The children were amazed to see the old tools working again.	Los niños estaban asombrados de ver las herramientas viejas funcionando otra vez.
+Clara showed them how to use a saw safely and how to fix a microscope.	Clara les mostró cómo usar una sierra de forma segura y cómo arreglar un microscopio.
+She even let them try the telescope and look at the moon.	Incluso les permitió usar el telescopio y mirar la luna.
+From that day, many children came every week to learn from her.	Desde ese día, muchos niños venían cada semana para aprender de ella.
+Clara became a mentor and a friend to everyone in town.	Clara se convirtió en mentora y amiga de todos en el pueblo.
+She proved that with care, even the oldest tools can be useful again.	Demostró que, con cuidado, incluso las herramientas más viejas pueden ser útiles otra vez.
+Hammers	Martillos
+Saws	Sierras
+Drills	Taladros
+Wrenches	Llaves inglesas
+Sewing machines	Máquinas de coser
+Microscopes	Microscopios
+Telescopes	Telescopios
+Calculators	Calculadoras
+Inventor	Inventora
+Workshop	Taller
+Tools	Herramientas
+Children	Niños
+Garden	Jardín
+Stars	Estrellas
+Distance	Distancia
+Maps	Mapas
+Learn	Aprender
+Friend	Amiga / Amigo
+
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+              utterance.lang = lang;
+            utterance.rate = 0.8;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

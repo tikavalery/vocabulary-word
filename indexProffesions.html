@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+        In a bustling city named Vocaterra, people from every profession lived in harmony.	En una ciudad bulliciosa llamada Vocaterra, personas de todas las profesiones vivían en armonía.
+Every morning, the doctor opened her clinic to help patients.	Cada mañana, la doctora abría su clínica para atender a los pacientes.
+The nurse prepared the medical supplies before anyone arrived.	La enfermera preparaba los suministros médicos antes de que llegara alguien.
+A skilled surgeon performed delicate operations at the city hospital.	Un cirujano hábil realizaba operaciones delicadas en el hospital de la ciudad.
+The pharmacist carefully filled prescriptions for the sick.	El farmacéutico llenaba cuidadosamente las recetas para los enfermos.
+A physical therapist helped injured workers regain movement.	Un fisioterapeuta ayudaba a los trabajadores lesionados a recuperar el movimiento.
+The dentist made sure everyone's smile stayed healthy.	El dentista se aseguraba de que todas las sonrisas se mantuvieran sanas.
+A veterinarian took care of the city’s pets and zoo animals.	Un veterinario cuidaba de las mascotas y los animales del zoológico de la ciudad.
+The radiologic technologist took X-rays for broken bones.	El técnico en radiología tomaba radiografías para huesos rotos.
+Paramedics rushed to emergencies with sirens blaring.	Los paramédicos corrían a las emergencias con sirenas a todo volumen.
+A medical assistant welcomed patients and updated records.	Un asistente médico recibía a los pacientes y actualizaba los registros.
+Nearby, a software developer worked on a health tracking app.	Cerca, un desarrollador de software trabajaba en una aplicación de salud.
+A data scientist studied city traffic patterns using statistics.	Un científico de datos estudiaba los patrones de tráfico de la ciudad usando estadísticas.
+The IT support specialist helped teachers fix their laptops.	El especialista de soporte técnico ayudaba a los maestros a arreglar sus computadoras.
+A cybersecurity analyst protected city records from hackers.	Un analista de ciberseguridad protegía los registros de la ciudad contra hackers.
+The web developer designed the town's public portal.	El desarrollador web diseñaba el portal público del pueblo.
+The network engineer made sure the internet never failed.	El ingeniero de redes se aseguraba de que el internet nunca fallara.
+An AI/ML engineer created smart robots to assist elders.	Un ingeniero de IA/ML creaba robots inteligentes para asistir a los ancianos.
+The systems administrator kept everything running smoothly.	El administrador de sistemas mantenía todo funcionando sin problemas.
+A UX/UI designer tested the hospital’s new app with users.	Un diseñador UX/UI probaba la nueva app del hospital con los usuarios.
+The database administrator managed thousands of health records.	El administrador de bases de datos gestionaba miles de registros de salud.
+Across the city, a teacher taught math in a colorful classroom.	Al otro lado de la ciudad, un maestro enseñaba matemáticas en un aula colorida.
+The professor gave a lecture on ethics at the university.	El profesor daba una conferencia sobre ética en la universidad.
+A school counselor helped students manage stress.	Un consejero escolar ayudaba a los estudiantes a manejar el estrés.
+The librarian kept the library quiet and organized.	La bibliotecaria mantenía la biblioteca tranquila y organizada.
+The principal visited each classroom with a warm smile.	La directora visitaba cada aula con una sonrisa amable.
+An instructional designer created new lessons for online learning.	Un diseñador instruccional creaba nuevas lecciones para el aprendizaje en línea.
+A special education teacher supported children with learning needs.	Un maestro de educación especial apoyaba a niños con necesidades de aprendizaje.
+A tutor helped teens prepare for their final exams.	Un tutor ayudaba a los adolescentes a prepararse para sus exámenes finales.
+In the business district, the accountant balanced books for local shops.	En el distrito comercial, el contador equilibraba los libros de las tiendas locales.
+A financial analyst reviewed company reports daily.	Un analista financiero revisaba informes de empresas diariamente.
+An investment banker guided clients through market risks.	Un banquero de inversiones guiaba a los clientes a través de los riesgos del mercado.
+The marketing manager launched a campaign for a new café.	El gerente de marketing lanzó una campaña para un nuevo café.
+A sales representative visited stores to present new products.	Un representante de ventas visitaba tiendas para presentar nuevos productos.
+The human resources manager hired new workers for the factory.	El gerente de recursos humanos contrataba nuevos empleados para la fábrica.
+A project manager coordinated the building of a new bridge.	Un gerente de proyectos coordinaba la construcción de un nuevo puente.
+A business consultant advised small companies on strategy.	Un consultor de negocios aconsejaba a pequeñas empresas sobre estrategia.
+A real estate agent showed apartments to young couples.	Un agente inmobiliario mostraba apartamentos a parejas jóvenes.
+An entrepreneur opened a new eco-friendly clothing store.	Un emprendedor abrió una nueva tienda de ropa ecológica.
+The lawyer prepared documents for a civil case.	El abogado preparaba documentos para un caso civil.
+A paralegal helped organize the evidence.	Un asistente legal ayudaba a organizar las pruebas.
+The judge listened carefully before making a decision.	El juez escuchaba atentamente antes de tomar una decisión.
+A legal assistant scheduled court dates and appointments.	Un asistente jurídico programaba fechas judiciales y citas.
+The court reporter typed every word during trials.	El taquígrafo judicial escribía cada palabra durante los juicios.
+At a construction site, the civil engineer inspected foundations.	En una obra, el ingeniero civil inspeccionaba las cimentaciones.
+A mechanical engineer repaired machines for the plant.	Un ingeniero mecánico reparaba máquinas para la planta.
+The electrical engineer designed a new power grid.	El ingeniero eléctrico diseñaba una nueva red eléctrica.
+A chemical engineer created eco-friendly cleaning products.	Un ingeniero químico creaba productos de limpieza ecológicos.
+The aerospace engineer worked on drones for deliveries.	El ingeniero aeroespacial trabajaba en drones para entregas.
+An environmental engineer tested the river’s water quality.	Un ingeniero ambiental probaba la calidad del agua del río.
+The industrial engineer optimized factory workflows.	El ingeniero industrial optimizaba los flujos de trabajo de la fábrica.
+An electrician fixed streetlights on Main Avenue.	Un electricista arreglaba farolas en la Avenida Principal.
+A plumber repaired a broken pipe in the school.	Un plomero reparaba una tubería rota en la escuela.
+A carpenter built bookshelves for the local library.	Un carpintero construía estanterías para la biblioteca local.
+The welder connected metal beams at the bridge site.	El soldador conectaba vigas metálicas en el sitio del puente.
+An HVAC technician installed air conditioners in the hotel.	Un técnico de climatización instalaba aires acondicionados en el hotel.
+The auto mechanic changed oil and tires at the garage.	El mecánico de autos cambiaba aceite y llantas en el taller.
+A construction worker mixed cement for a new sidewalk.	Un obrero de construcción mezclaba cemento para una nueva acera.
+The graphic designer created posters for the school fair.	El diseñador gráfico creaba carteles para la feria escolar.
+A photographer captured moments at a wedding in the park.	Un fotógrafo capturaba momentos en una boda en el parque.
+A writer published a novel about life in Vocaterra.	Un escritor publicó una novela sobre la vida en Vocaterra.
+The journalist interviewed the mayor about education.	El periodista entrevistaba al alcalde sobre educación.
+An actor rehearsed lines for a local theater play.	Un actor ensayaba líneas para una obra de teatro local.
+A musician played guitar in the evening market.	Un músico tocaba la guitarra en el mercado nocturno.
+A filmmaker recorded a documentary about city workers.	Un cineasta grababa un documental sobre los trabajadores de la ciudad.
+The video editor cut scenes for the school news broadcast.	El editor de video cortaba escenas para el noticiero escolar.
+An art director guided the visual style of a museum exhibit.	Un director de arte guiaba el estilo visual de una exposición en el museo.
+The animator created colorful characters for a cartoon.	El animador creaba personajes coloridos para una caricatura.
+A police officer directed traffic during a festival.	Un oficial de policía dirigía el tráfico durante un festival.
+The firefighter put out a fire in the bakery.	El bombero apagaba un incendio en la panadería.
+A social worker helped a family find housing.	Un trabajador social ayudaba a una familia a encontrar vivienda.
+A military service member returned home from duty.	Un miembro de las fuerzas armadas regresaba a casa del servicio.
+A mail carrier delivered letters in the rain.	Un cartero entregaba cartas bajo la lluvia.
+The city planner proposed new bike lanes.	El urbanista proponía nuevos carriles para bicicletas.
+A chef prepared a delicious soup with fresh herbs.	Un chef preparaba una sopa deliciosa con hierbas frescas.
+The waiter carried plates to a table of tourists.	El camarero llevaba platos a una mesa de turistas.
+A bartender mixed drinks with skill and speed.	Un barman mezclaba bebidas con habilidad y rapidez.
+The hotel manager welcomed guests with a smile.	El gerente del hotel recibía a los huéspedes con una sonrisa.
+An event planner organized the city’s spring festival.	Un organizador de eventos organizaba el festival de primavera de la ciudad.
+A travel agent booked flights for a honeymoon couple.	Un agente de viajes reservaba vuelos para una pareja de luna de miel.
+The housekeeper cleaned the rooms early each morning.	El ama de llaves limpiaba las habitaciones cada mañana.
+A farmer brought vegetables to the weekend market.	Un agricultor traía verduras al mercado del fin de semana.
+An agricultural technician studied crop health.	Un técnico agrícola estudiaba la salud de los cultivos.
+The environmental scientist tested soil samples.	El científico ambiental analizaba muestras de suelo.
+A forester watched over the city’s forests.	Un guardabosques vigilaba los bosques de la ciudad.
+The park ranger led a hike through the mountains.	El guardaparques dirigía una caminata por las montañas.
+City	Ciudad
+Profession	Profesión
+Clinic	Clínica
+Hospital	Hospital
+Patient	Paciente
+Prescription	Receta médica
+Injury	Lesión
+Smile	Sonrisa
+Pet	Mascota
+Emergency	Emergencia
+Records	Registros
+App (Application)	Aplicación
+Traffic	Tráfico
+Statistics	Estadísticas
+Hacker	Hacker
+Internet	Internet
+Robot	Robot
+Classroom	Aula
+University	Universidad
+Student	Estudiante
+Stress	Estrés
+Library	Biblioteca
+Learning	Aprendizaje
+Exam	Examen
+District	Distrito
+Shop	Tienda
+Market	Mercado
+Risk	Riesgo
+Strategy	Estrategia
+Apartment	Apartamento
+Store	Tienda / Almacén
+Document	Documento
+Court	Corte / Tribunal
+Trial	Juicio
+Foundation	Cimentación
+Machine	Máquina
+Power Grid	Red eléctrica
+Product	Producto
+Drone	Dron
+Pollution	Contaminación
+Pipe	Tubería
+Beam	Viga
+Cement	Cemento
+Poster	Cartel
+Novel	Novela
+Interview	Entrevista
+Play (Theater)	Obra de teatro
+Guitar	Guitarra
+Documentary	Documental
+Cartoon	Caricatura / Dibujo animado
+Fire	Incendio
+Housing	Vivienda
+Letter	Carta
+Bike Lane	Carril para bicicletas
+Soup	Sopa
+Tourist	Turista
+Drink	Bebida
+Guest	Huésped
+Festival	Festival
+Flight	Vuelo
+Room	Habitación
+Vegetable	Verdura
+Crop	Cultivo
+Soil	Suelo
+Forest	Bosque
+Mountain	Montaña
+Help	Ayudar
+Prepare	Preparar
+Perform	Realizar
+Fill	Llenar
+Study	Estudiar
+Design	Diseñar
+Fix	Arreglar / Reparar
+Create	Crear
+Manage	Gestionar
+Teach	Enseñar
+Support	Apoyar
+Hire	Contratar
+Advise	Aconsejar
+Show	Mostrar
+Interview	Entrevistar
+Build	Construir
+Direct	Dirigir
+Clean	Limpiar
+Lead (a hike, etc.)	Guiar / Liderar
+Busy	Ocupado/a
+Healthy	Saludable
+Smart	Inteligente
+Broken	Roto/a
+Delicate	Delicado/a
+Eco-friendly	Ecológico/a
+Organized	Organizado/a
+Colorful	Colorido/a
+New	Nuevo/a
+Friendly	Amable
+Helpful	Útil / Servicial
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+              utterance.lang = lang;
+            utterance.rate = 0.8;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
