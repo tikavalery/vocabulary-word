@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+              Two hundred	Doscientos
+Two hundred one	Doscientos uno
+Two hundred two	Doscientos dos
+Two hundred three	Doscientos tres
+Two hundred four	Doscientos cuatro
+Two hundred five	Doscientos cinco
+Two hundred six	Doscientos seis
+Two hundred seven	Doscientos siete
+Two hundred eight	Doscientos ocho
+Two hundred nine	Doscientos nueve
+Two hundred ten	Doscientos diez
+Two hundred eleven	Doscientos once
+Two hundred twelve	Doscientos doce
+Two hundred thirteen	Doscientos trece
+Two hundred fourteen	Doscientos catorce
+Two hundred fifteen	Doscientos quince
+Two hundred sixteen	Doscientos dieciséis
+Two hundred seventeen	Doscientos diecisiete
+Two hundred eighteen	Doscientos dieciocho
+Two hundred nineteen	Doscientos diecinueve
+Two hundred twenty	Doscientos veinte
+Two hundred twenty-one	Doscientos veintiuno
+Two hundred twenty-two	Doscientos veintidós
+Two hundred twenty-three	Doscientos veintitrés
+Two hundred twenty-four	Doscientos veinticuatro
+Two hundred twenty-five	Doscientos veinticinco
+Two hundred twenty-six	Doscientos veintiséis
+Two hundred twenty-seven	Doscientos veintisiete
+Two hundred twenty-eight	Doscientos veintiocho
+Two hundred twenty-nine	Doscientos veintinueve
+Two hundred thirty	Doscientos treinta
+Two hundred thirty-one	Doscientos treinta y uno
+Two hundred thirty-two	Doscientos treinta y dos
+Two hundred thirty-three	Doscientos treinta y tres
+Two hundred thirty-four	Doscientos treinta y cuatro
+Two hundred thirty-five	Doscientos treinta y cinco
+Two hundred thirty-six	Doscientos treinta y seis
+Two hundred thirty-seven	Doscientos treinta y siete
+Two hundred thirty-eight	Doscientos treinta y ocho
+Two hundred thirty-nine	Doscientos treinta y nueve
+Two hundred forty	Doscientos cuarenta
+Two hundred forty-one	Doscientos cuarenta y uno
+Two hundred forty-two	Doscientos cuarenta y dos
+Two hundred forty-three	Doscientos cuarenta y tres
+Two hundred forty-four	Doscientos cuarenta y cuatro
+Two hundred forty-five	Doscientos cuarenta y cinco
+Two hundred forty-six	Doscientos cuarenta y seis
+Two hundred forty-seven	Doscientos cuarenta y siete
+Two hundred forty-eight	Doscientos cuarenta y ocho
+Two hundred forty-nine	Doscientos cuarenta y nueve
+Two hundred fifty	Doscientos cincuenta
+Two hundred fifty-one	Doscientos cincuenta y uno
+Two hundred fifty-two	Doscientos cincuenta y dos
+Two hundred fifty-three	Doscientos cincuenta y tres
+Two hundred fifty-four	Doscientos cincuenta y cuatro
+Two hundred fifty-five	Doscientos cincuenta y cinco
+Two hundred fifty-six	Doscientos cincuenta y seis
+Two hundred fifty-seven	Doscientos cincuenta y siete
+Two hundred fifty-eight	Doscientos cincuenta y ocho
+Two hundred fifty-nine	Doscientos cincuenta y nueve
+Two hundred sixty	Doscientos sesenta
+Two hundred sixty-one	Doscientos sesenta y uno
+Two hundred sixty-two	Doscientos sesenta y dos
+Two hundred sixty-three	Doscientos sesenta y tres
+Two hundred sixty-four	Doscientos sesenta y cuatro
+Two hundred sixty-five	Doscientos sesenta y cinco
+Two hundred sixty-six	Doscientos sesenta y seis
+Two hundred sixty-seven	Doscientos sesenta y siete
+Two hundred sixty-eight	Doscientos sesenta y ocho
+Two hundred sixty-nine	Doscientos sesenta y nueve
+Two hundred seventy	Doscientos setenta
+Two hundred seventy-one	Doscientos setenta y uno
+Two hundred seventy-two	Doscientos setenta y dos
+Two hundred seventy-three	Doscientos setenta y tres
+Two hundred seventy-four	Doscientos setenta y cuatro
+Two hundred seventy-five	Doscientos setenta y cinco
+Two hundred seventy-six	Doscientos setenta y seis
+Two hundred seventy-seven	Doscientos setenta y siete
+Two hundred seventy-eight	Doscientos setenta y ocho
+Two hundred seventy-nine	Doscientos setenta y nueve
+Two hundred eighty	Doscientos ochenta
+Two hundred eighty-one	Doscientos ochenta y uno
+Two hundred eighty-two	Doscientos ochenta y dos
+Two hundred eighty-three	Doscientos ochenta y tres
+Two hundred eighty-four	Doscientos ochenta y cuatro
+Two hundred eighty-five	Doscientos ochenta y cinco
+Two hundred eighty-six	Doscientos ochenta y seis
+Two hundred eighty-seven	Doscientos ochenta y siete
+Two hundred eighty-eight	Doscientos ochenta y ocho
+Two hundred eighty-nine	Doscientos ochenta y nueve
+Two hundred ninety	Doscientos noventa
+Two hundred ninety-one	Doscientos noventa y uno
+Two hundred ninety-two	Doscientos noventa y dos
+Two hundred ninety-three	Doscientos noventa y tres
+Two hundred ninety-four	Doscientos noventa y cuatro
+Two hundred ninety-five	Doscientos noventa y cinco
+Two hundred ninety-six	Doscientos noventa y seis
+Two hundred ninety-seven	Doscientos noventa y siete
+Two hundred ninety-eight	Doscientos noventa y ocho
+Two hundred ninety-nine	Doscientos noventa y nueve
+Three hundred	Trescientos
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8; 
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

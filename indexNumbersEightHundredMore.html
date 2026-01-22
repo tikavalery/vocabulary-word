@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+Eight hundred	Ochocientos
+Eight hundred one	Ochocientos uno
+Eight hundred two	Ochocientos dos
+Eight hundred three	Ochocientos tres
+Eight hundred four	Ochocientos cuatro
+Eight hundred five	Ochocientos cinco
+Eight hundred six	Ochocientos seis
+Eight hundred seven	Ochocientos siete
+Eight hundred eight	Ochocientos ocho
+Eight hundred nine	Ochocientos nueve
+Eight hundred ten	Ochocientos diez
+Eight hundred eleven	Ochocientos once
+Eight hundred twelve	Ochocientos doce
+Eight hundred thirteen	Ochocientos trece
+Eight hundred fourteen	Ochocientos catorce
+Eight hundred fifteen	Ochocientos quince
+Eight hundred sixteen	Ochocientos dieciséis
+Eight hundred seventeen	Ochocientos diecisiete
+Eight hundred eighteen	Ochocientos dieciocho
+Eight hundred nineteen	Ochocientos diecinueve
+Eight hundred twenty	Ochocientos veinte
+Eight hundred twenty-one	Ochocientos veintiuno
+Eight hundred twenty-two	Ochocientos veintidós
+Eight hundred twenty-three	Ochocientos veintitrés
+Eight hundred twenty-four	Ochocientos veinticuatro
+Eight hundred twenty-five	Ochocientos veinticinco
+Eight hundred twenty-six	Ochocientos veintiséis
+Eight hundred twenty-seven	Ochocientos veintisiete
+Eight hundred twenty-eight	Ochocientos veintiocho
+Eight hundred twenty-nine	Ochocientos veintinueve
+Eight hundred thirty	Ochocientos treinta
+Eight hundred thirty-one	Ochocientos treinta y uno
+Eight hundred thirty-two	Ochocientos treinta y dos
+Eight hundred thirty-three	Ochocientos treinta y tres
+Eight hundred thirty-four	Ochocientos treinta y cuatro
+Eight hundred thirty-five	Ochocientos treinta y cinco
+Eight hundred thirty-six	Ochocientos treinta y seis
+Eight hundred thirty-seven	Ochocientos treinta y siete
+Eight hundred thirty-eight	Ochocientos treinta y ocho
+Eight hundred thirty-nine	Ochocientos treinta y nueve
+Eight hundred forty	Ochocientos cuarenta
+Eight hundred forty-one	Ochocientos cuarenta y uno
+Eight hundred forty-two	Ochocientos cuarenta y dos
+Eight hundred forty-three	Ochocientos cuarenta y tres
+Eight hundred forty-four	Ochocientos cuarenta y cuatro
+Eight hundred forty-five	Ochocientos cuarenta y cinco
+Eight hundred forty-six	Ochocientos cuarenta y seis
+Eight hundred forty-seven	Ochocientos cuarenta y siete
+Eight hundred forty-eight	Ochocientos cuarenta y ocho
+Eight hundred forty-nine	Ochocientos cuarenta y nueve
+Eight hundred fifty	Ochocientos cincuenta
+Eight hundred fifty-one	Ochocientos cincuenta y uno
+Eight hundred fifty-two	Ochocientos cincuenta y dos
+Eight hundred fifty-three	Ochocientos cincuenta y tres
+Eight hundred fifty-four	Ochocientos cincuenta y cuatro
+Eight hundred fifty-five	Ochocientos cincuenta y cinco
+Eight hundred fifty-six	Ochocientos cincuenta y seis
+Eight hundred fifty-seven	Ochocientos cincuenta y siete
+Eight hundred fifty-eight	Ochocientos cincuenta y ocho
+Eight hundred fifty-nine	Ochocientos cincuenta y nueve
+Eight hundred sixty	Ochocientos sesenta
+Eight hundred sixty-one	Ochocientos sesenta y uno
+Eight hundred sixty-two	Ochocientos sesenta y dos
+Eight hundred sixty-three	Ochocientos sesenta y tres
+Eight hundred sixty-four	Ochocientos sesenta y cuatro
+Eight hundred sixty-five	Ochocientos sesenta y cinco
+Eight hundred sixty-six	Ochocientos sesenta y seis
+Eight hundred sixty-seven	Ochocientos sesenta y siete
+Eight hundred sixty-eight	Ochocientos sesenta y ocho
+Eight hundred sixty-nine	Ochocientos sesenta y nueve
+Eight hundred seventy	Ochocientos setenta
+Eight hundred seventy-one	Ochocientos setenta y uno
+Eight hundred seventy-two	Ochocientos setenta y dos
+Eight hundred seventy-three	Ochocientos setenta y tres
+Eight hundred seventy-four	Ochocientos setenta y cuatro
+Eight hundred seventy-five	Ochocientos setenta y cinco
+Eight hundred seventy-six	Ochocientos setenta y seis
+Eight hundred seventy-seven	Ochocientos setenta y siete
+Eight hundred seventy-eight	Ochocientos setenta y ocho
+Eight hundred seventy-nine	Ochocientos setenta y nueve
+Eight hundred eighty	Ochocientos ochenta
+Eight hundred eighty-one	Ochocientos ochenta y uno
+Eight hundred eighty-two	Ochocientos ochenta y dos
+Eight hundred eighty-three	Ochocientos ochenta y tres
+Eight hundred eighty-four	Ochocientos ochenta y cuatro
+Eight hundred eighty-five	Ochocientos ochenta y cinco
+Eight hundred eighty-six	Ochocientos ochenta y seis
+Eight hundred eighty-seven	Ochocientos ochenta y siete
+Eight hundred eighty-eight	Ochocientos ochenta y ocho
+Eight hundred eighty-nine	Ochocientos ochenta y nueve
+Eight hundred ninety	Ochocientos noventa
+Eight hundred ninety-one	Ochocientos noventa y uno
+Eight hundred ninety-two	Ochocientos noventa y dos
+Eight hundred ninety-three	Ochocientos noventa y tres
+Eight hundred ninety-four	Ochocientos noventa y cuatro
+Eight hundred ninety-five	Ochocientos noventa y cinco
+Eight hundred ninety-six	Ochocientos noventa y seis
+Eight hundred ninety-seven	Ochocientos noventa y siete
+Eight hundred ninety-eight	Ochocientos noventa y ocho
+Eight hundred ninety-nine	Ochocientos noventa y nueve
+Nine hundred	Novecientos
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8; 
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

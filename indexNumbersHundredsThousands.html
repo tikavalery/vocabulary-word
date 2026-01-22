@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+One hundred thousand	Cien mil
+Two hundred thousand	Doscientos mil
+Three hundred thousand	Trescientos mil
+Four hundred thousand	Cuatrocientos mil
+Five hundred thousand	Quinientos mil
+Six hundred thousand	Seiscientos mil
+Seven hundred thousand	Setecientos mil
+Eight hundred thousand	Ochocientos mil
+Nine hundred thousand	Novecientos mil
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8; 
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

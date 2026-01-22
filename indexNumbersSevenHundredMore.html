@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+Seven hundred	Setecientos
+Seven hundred one	Setecientos uno
+Seven hundred two	Setecientos dos
+Seven hundred three	Setecientos tres
+Seven hundred four	Setecientos cuatro
+Seven hundred five	Setecientos cinco
+Seven hundred six	Setecientos seis
+Seven hundred seven	Setecientos siete
+Seven hundred eight	Setecientos ocho
+Seven hundred nine	Setecientos nueve
+Seven hundred ten	Setecientos diez
+Seven hundred eleven	Setecientos once
+Seven hundred twelve	Setecientos doce
+Seven hundred thirteen	Setecientos trece
+Seven hundred fourteen	Setecientos catorce
+Seven hundred fifteen	Setecientos quince
+Seven hundred sixteen	Setecientos dieciséis
+Seven hundred seventeen	Setecientos diecisiete
+Seven hundred eighteen	Setecientos dieciocho
+Seven hundred nineteen	Setecientos diecinueve
+Seven hundred twenty	Setecientos veinte
+Seven hundred twenty-one	Setecientos veintiuno
+Seven hundred twenty-two	Setecientos veintidós
+Seven hundred twenty-three	Setecientos veintitrés
+Seven hundred twenty-four	Setecientos veinticuatro
+Seven hundred twenty-five	Setecientos veinticinco
+Seven hundred twenty-six	Setecientos veintiséis
+Seven hundred twenty-seven	Setecientos veintisiete
+Seven hundred twenty-eight	Setecientos veintiocho
+Seven hundred twenty-nine	Setecientos veintinueve
+Seven hundred thirty	Setecientos treinta
+Seven hundred thirty-one	Setecientos treinta y uno
+Seven hundred thirty-two	Setecientos treinta y dos
+Seven hundred thirty-three	Setecientos treinta y tres
+Seven hundred thirty-four	Setecientos treinta y cuatro
+Seven hundred thirty-five	Setecientos treinta y cinco
+Seven hundred thirty-six	Setecientos treinta y seis
+Seven hundred thirty-seven	Setecientos treinta y siete
+Seven hundred thirty-eight	Setecientos treinta y ocho
+Seven hundred thirty-nine	Setecientos treinta y nueve
+Seven hundred forty	Setecientos cuarenta
+Seven hundred forty-one	Setecientos cuarenta y uno
+Seven hundred forty-two	Setecientos cuarenta y dos
+Seven hundred forty-three	Setecientos cuarenta y tres
+Seven hundred forty-four	Setecientos cuarenta y cuatro
+Seven hundred forty-five	Setecientos cuarenta y cinco
+Seven hundred forty-six	Setecientos cuarenta y seis
+Seven hundred forty-seven	Setecientos cuarenta y siete
+Seven hundred forty-eight	Setecientos cuarenta y ocho
+Seven hundred forty-nine	Setecientos cuarenta y nueve
+Seven hundred fifty	Setecientos cincuenta
+Seven hundred fifty-one	Setecientos cincuenta y uno
+Seven hundred fifty-two	Setecientos cincuenta y dos
+Seven hundred fifty-three	Setecientos cincuenta y tres
+Seven hundred fifty-four	Setecientos cincuenta y cuatro
+Seven hundred fifty-five	Setecientos cincuenta y cinco
+Seven hundred fifty-six	Setecientos cincuenta y seis
+Seven hundred fifty-seven	Setecientos cincuenta y siete
+Seven hundred fifty-eight	Setecientos cincuenta y ocho
+Seven hundred fifty-nine	Setecientos cincuenta y nueve
+Seven hundred sixty	Setecientos sesenta
+Seven hundred sixty-one	Setecientos sesenta y uno
+Seven hundred sixty-two	Setecientos sesenta y dos
+Seven hundred sixty-three	Setecientos sesenta y tres
+Seven hundred sixty-four	Setecientos sesenta y cuatro
+Seven hundred sixty-five	Setecientos sesenta y cinco
+Seven hundred sixty-six	Setecientos sesenta y seis
+Seven hundred sixty-seven	Setecientos sesenta y siete
+Seven hundred sixty-eight	Setecientos sesenta y ocho
+Seven hundred sixty-nine	Setecientos sesenta y nueve
+Seven hundred seventy	Setecientos setenta
+Seven hundred seventy-one	Setecientos setenta y uno
+Seven hundred seventy-two	Setecientos setenta y dos
+Seven hundred seventy-three	Setecientos setenta y tres
+Seven hundred seventy-four	Setecientos setenta y cuatro
+Seven hundred seventy-five	Setecientos setenta y cinco
+Seven hundred seventy-six	Setecientos setenta y seis
+Seven hundred seventy-seven	Setecientos setenta y siete
+Seven hundred seventy-eight	Setecientos setenta y ocho
+Seven hundred seventy-nine	Setecientos setenta y nueve
+Seven hundred eighty	Setecientos ochenta
+Seven hundred eighty-one	Setecientos ochenta y uno
+Seven hundred eighty-two	Setecientos ochenta y dos
+Seven hundred eighty-three	Setecientos ochenta y tres
+Seven hundred eighty-four	Setecientos ochenta y cuatro
+Seven hundred eighty-five	Setecientos ochenta y cinco
+Seven hundred eighty-six	Setecientos ochenta y seis
+Seven hundred eighty-seven	Setecientos ochenta y siete
+Seven hundred eighty-eight	Setecientos ochenta y ocho
+Seven hundred eighty-nine	Setecientos ochenta y nueve
+Seven hundred ninety	Setecientos noventa
+Seven hundred ninety-one	Setecientos noventa y uno
+Seven hundred ninety-two	Setecientos noventa y dos
+Seven hundred ninety-three	Setecientos noventa y tres
+Seven hundred ninety-four	Setecientos noventa y cuatro
+Seven hundred ninety-five	Setecientos noventa y cinco
+Seven hundred ninety-six	Setecientos noventa y seis
+Seven hundred ninety-seven	Setecientos noventa y siete
+Seven hundred ninety-eight	Setecientos noventa y ocho
+Seven hundred ninety-nine	Setecientos noventa y nueve
+Eight hundred	Ochocientos
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8; 
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

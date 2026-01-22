@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+Six hundred	Seiscientos
+Six hundred one	Seiscientos uno
+Six hundred two	Seiscientos dos
+Six hundred three	Seiscientos tres
+Six hundred four	Seiscientos cuatro
+Six hundred five	Seiscientos cinco
+Six hundred six	Seiscientos seis
+Six hundred seven	Seiscientos siete
+Six hundred eight	Seiscientos ocho
+Six hundred nine	Seiscientos nueve
+Six hundred ten	Seiscientos diez
+Six hundred eleven	Seiscientos once
+Six hundred twelve	Seiscientos doce
+Six hundred thirteen	Seiscientos trece
+Six hundred fourteen	Seiscientos catorce
+Six hundred fifteen	Seiscientos quince
+Six hundred sixteen	Seiscientos dieciséis
+Six hundred seventeen	Seiscientos diecisiete
+Six hundred eighteen	Seiscientos dieciocho
+Six hundred nineteen	Seiscientos diecinueve
+Six hundred twenty	Seiscientos veinte
+Six hundred twenty-one	Seiscientos veintiuno
+Six hundred twenty-two	Seiscientos veintidós
+Six hundred twenty-three	Seiscientos veintitrés
+Six hundred twenty-four	Seiscientos veinticuatro
+Six hundred twenty-five	Seiscientos veinticinco
+Six hundred twenty-six	Seiscientos veintiséis
+Six hundred twenty-seven	Seiscientos veintisiete
+Six hundred twenty-eight	Seiscientos veintiocho
+Six hundred twenty-nine	Seiscientos veintinueve
+Six hundred thirty	Seiscientos treinta
+Six hundred thirty-one	Seiscientos treinta y uno
+Six hundred thirty-two	Seiscientos treinta y dos
+Six hundred thirty-three	Seiscientos treinta y tres
+Six hundred thirty-four	Seiscientos treinta y cuatro
+Six hundred thirty-five	Seiscientos treinta y cinco
+Six hundred thirty-six	Seiscientos treinta y seis
+Six hundred thirty-seven	Seiscientos treinta y siete
+Six hundred thirty-eight	Seiscientos treinta y ocho
+Six hundred thirty-nine	Seiscientos treinta y nueve
+Six hundred forty	Seiscientos cuarenta
+Six hundred forty-one	Seiscientos cuarenta y uno
+Six hundred forty-two	Seiscientos cuarenta y dos
+Six hundred forty-three	Seiscientos cuarenta y tres
+Six hundred forty-four	Seiscientos cuarenta y cuatro
+Six hundred forty-five	Seiscientos cuarenta y cinco
+Six hundred forty-six	Seiscientos cuarenta y seis
+Six hundred forty-seven	Seiscientos cuarenta y siete
+Six hundred forty-eight	Seiscientos cuarenta y ocho
+Six hundred forty-nine	Seiscientos cuarenta y nueve
+Six hundred fifty	Seiscientos cincuenta
+Six hundred fifty-one	Seiscientos cincuenta y uno
+Six hundred fifty-two	Seiscientos cincuenta y dos
+Six hundred fifty-three	Seiscientos cincuenta y tres
+Six hundred fifty-four	Seiscientos cincuenta y cuatro
+Six hundred fifty-five	Seiscientos cincuenta y cinco
+Six hundred fifty-six	Seiscientos cincuenta y seis
+Six hundred fifty-seven	Seiscientos cincuenta y siete
+Six hundred fifty-eight	Seiscientos cincuenta y ocho
+Six hundred fifty-nine	Seiscientos cincuenta y nueve
+Six hundred sixty	Seiscientos sesenta
+Six hundred sixty-one	Seiscientos sesenta y uno
+Six hundred sixty-two	Seiscientos sesenta y dos
+Six hundred sixty-three	Seiscientos sesenta y tres
+Six hundred sixty-four	Seiscientos sesenta y cuatro
+Six hundred sixty-five	Seiscientos sesenta y cinco
+Six hundred sixty-six	Seiscientos sesenta y seis
+Six hundred sixty-seven	Seiscientos sesenta y siete
+Six hundred sixty-eight	Seiscientos sesenta y ocho
+Six hundred sixty-nine	Seiscientos sesenta y nueve
+Six hundred seventy	Seiscientos setenta
+Six hundred seventy-one	Seiscientos setenta y uno
+Six hundred seventy-two	Seiscientos setenta y dos
+Six hundred seventy-three	Seiscientos setenta y tres
+Six hundred seventy-four	Seiscientos setenta y cuatro
+Six hundred seventy-five	Seiscientos setenta y cinco
+Six hundred seventy-six	Seiscientos setenta y seis
+Six hundred seventy-seven	Seiscientos setenta y siete
+Six hundred seventy-eight	Seiscientos setenta y ocho
+Six hundred seventy-nine	Seiscientos setenta y nueve
+Six hundred eighty	Seiscientos ochenta
+Six hundred eighty-one	Seiscientos ochenta y uno
+Six hundred eighty-two	Seiscientos ochenta y dos
+Six hundred eighty-three	Seiscientos ochenta y tres
+Six hundred eighty-four	Seiscientos ochenta y cuatro
+Six hundred eighty-five	Seiscientos ochenta y cinco
+Six hundred eighty-six	Seiscientos ochenta y seis
+Six hundred eighty-seven	Seiscientos ochenta y siete
+Six hundred eighty-eight	Seiscientos ochenta y ocho
+Six hundred eighty-nine	Seiscientos ochenta y nueve
+Six hundred ninety	Seiscientos noventa
+Six hundred ninety-one	Seiscientos noventa y uno
+Six hundred ninety-two	Seiscientos noventa y dos
+Six hundred ninety-three	Seiscientos noventa y tres
+Six hundred ninety-four	Seiscientos noventa y cuatro
+Six hundred ninety-five	Seiscientos noventa y cinco
+Six hundred ninety-six	Seiscientos noventa y seis
+Six hundred ninety-seven	Seiscientos noventa y siete
+Six hundred ninety-eight	Seiscientos noventa y ocho
+Six hundred ninety-nine	Seiscientos noventa y nueve
+Seven hundred	Setecientos
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8; 
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

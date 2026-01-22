@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+ Nine hundred	Novecientos
+Nine hundred one	Novecientos uno
+Nine hundred two	Novecientos dos
+Nine hundred three	Novecientos tres
+Nine hundred four	Novecientos cuatro
+Nine hundred five	Novecientos cinco
+Nine hundred six	Novecientos seis
+Nine hundred seven	Novecientos siete
+Nine hundred eight	Novecientos ocho
+Nine hundred nine	Novecientos nueve
+Nine hundred ten	Novecientos diez
+Nine hundred eleven	Novecientos once
+Nine hundred twelve	Novecientos doce
+Nine hundred thirteen	Novecientos trece
+Nine hundred fourteen	Novecientos catorce
+Nine hundred fifteen	Novecientos quince
+Nine hundred sixteen	Novecientos dieciséis
+Nine hundred seventeen	Novecientos diecisiete
+Nine hundred eighteen	Novecientos dieciocho
+Nine hundred nineteen	Novecientos diecinueve
+Nine hundred twenty	Novecientos veinte
+Nine hundred twenty-one	Novecientos veintiuno
+Nine hundred twenty-two	Novecientos veintidós
+Nine hundred twenty-three	Novecientos veintitrés
+Nine hundred twenty-four	Novecientos veinticuatro
+Nine hundred twenty-five	Novecientos veinticinco
+Nine hundred twenty-six	Novecientos veintiséis
+Nine hundred twenty-seven	Novecientos veintisiete
+Nine hundred twenty-eight	Novecientos veintiocho
+Nine hundred twenty-nine	Novecientos veintinueve
+Nine hundred thirty	Novecientos treinta
+Nine hundred thirty-one	Novecientos treinta y uno
+Nine hundred thirty-two	Novecientos treinta y dos
+Nine hundred thirty-three	Novecientos treinta y tres
+Nine hundred thirty-four	Novecientos treinta y cuatro
+Nine hundred thirty-five	Novecientos treinta y cinco
+Nine hundred thirty-six	Novecientos treinta y seis
+Nine hundred thirty-seven	Novecientos treinta y siete
+Nine hundred thirty-eight	Novecientos treinta y ocho
+Nine hundred thirty-nine	Novecientos treinta y nueve
+Nine hundred forty	Novecientos cuarenta
+Nine hundred forty-one	Novecientos cuarenta y uno
+Nine hundred forty-two	Novecientos cuarenta y dos
+Nine hundred forty-three	Novecientos cuarenta y tres
+Nine hundred forty-four	Novecientos cuarenta y cuatro
+Nine hundred forty-five	Novecientos cuarenta y cinco
+Nine hundred forty-six	Novecientos cuarenta y seis
+Nine hundred forty-seven	Novecientos cuarenta y siete
+Nine hundred forty-eight	Novecientos cuarenta y ocho
+Nine hundred forty-nine	Novecientos cuarenta y nueve
+Nine hundred fifty	Novecientos cincuenta
+Nine hundred fifty-one	Novecientos cincuenta y uno
+Nine hundred fifty-two	Novecientos cincuenta y dos
+Nine hundred fifty-three	Novecientos cincuenta y tres
+Nine hundred fifty-four	Novecientos cincuenta y cuatro
+Nine hundred fifty-five	Novecientos cincuenta y cinco
+Nine hundred fifty-six	Novecientos cincuenta y seis
+Nine hundred fifty-seven	Novecientos cincuenta y siete
+Nine hundred fifty-eight	Novecientos cincuenta y ocho
+Nine hundred fifty-nine	Novecientos cincuenta y nueve
+Nine hundred sixty	Novecientos sesenta
+Nine hundred sixty-one	Novecientos sesenta y uno
+Nine hundred sixty-two	Novecientos sesenta y dos
+Nine hundred sixty-three	Novecientos sesenta y tres
+Nine hundred sixty-four	Novecientos sesenta y cuatro
+Nine hundred sixty-five	Novecientos sesenta y cinco
+Nine hundred sixty-six	Novecientos sesenta y seis
+Nine hundred sixty-seven	Novecientos sesenta y siete
+Nine hundred sixty-eight	Novecientos sesenta y ocho
+Nine hundred sixty-nine	Novecientos sesenta y nueve
+Nine hundred seventy	Novecientos setenta
+Nine hundred seventy-one	Novecientos setenta y uno
+Nine hundred seventy-two	Novecientos setenta y dos
+Nine hundred seventy-three	Novecientos setenta y tres
+Nine hundred seventy-four	Novecientos setenta y cuatro
+Nine hundred seventy-five	Novecientos setenta y cinco
+Nine hundred seventy-six	Novecientos setenta y seis
+Nine hundred seventy-seven	Novecientos setenta y siete
+Nine hundred seventy-eight	Novecientos setenta y ocho
+Nine hundred seventy-nine	Novecientos setenta y nueve
+Nine hundred eighty	Novecientos ochenta
+Nine hundred eighty-one	Novecientos ochenta y uno
+Nine hundred eighty-two	Novecientos ochenta y dos
+Nine hundred eighty-three	Novecientos ochenta y tres
+Nine hundred eighty-four	Novecientos ochenta y cuatro
+Nine hundred eighty-five	Novecientos ochenta y cinco
+Nine hundred eighty-six	Novecientos ochenta y seis
+Nine hundred eighty-seven	Novecientos ochenta y siete
+Nine hundred eighty-eight	Novecientos ochenta y ocho
+Nine hundred eighty-nine	Novecientos ochenta y nueve
+Nine hundred ninety	Novecientos noventa
+Nine hundred ninety-one	Novecientos noventa y uno
+Nine hundred ninety-two	Novecientos noventa y dos
+Nine hundred ninety-three	Novecientos noventa y tres
+Nine hundred ninety-four	Novecientos noventa y cuatro
+Nine hundred ninety-five	Novecientos noventa y cinco
+Nine hundred ninety-six	Novecientos noventa y seis
+Nine hundred ninety-seven	Novecientos noventa y siete
+Nine hundred ninety-eight	Novecientos noventa y ocho
+Nine hundred ninety-nine	Novecientos noventa y nueve
+One thousand	Mil
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8; 
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

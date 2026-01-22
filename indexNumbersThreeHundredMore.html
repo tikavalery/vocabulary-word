@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+Three hundred	Trescientos
+Three hundred one	Trescientos uno
+Three hundred two	Trescientos dos
+Three hundred three	Trescientos tres
+Three hundred four	Trescientos cuatro
+Three hundred five	Trescientos cinco
+Three hundred six	Trescientos seis
+Three hundred seven	Trescientos siete
+Three hundred eight	Trescientos ocho
+Three hundred nine	Trescientos nueve
+Three hundred ten	Trescientos diez
+Three hundred eleven	Trescientos once
+Three hundred twelve	Trescientos doce
+Three hundred thirteen	Trescientos trece
+Three hundred fourteen	Trescientos catorce
+Three hundred fifteen	Trescientos quince
+Three hundred sixteen	Trescientos dieciséis
+Three hundred seventeen	Trescientos diecisiete
+Three hundred eighteen	Trescientos dieciocho
+Three hundred nineteen	Trescientos diecinueve
+Three hundred twenty	Trescientos veinte
+Three hundred twenty-one	Trescientos veintiuno
+Three hundred twenty-two	Trescientos veintidós
+Three hundred twenty-three	Trescientos veintitrés
+Three hundred twenty-four	Trescientos veinticuatro
+Three hundred twenty-five	Trescientos veinticinco
+Three hundred twenty-six	Trescientos veintiséis
+Three hundred twenty-seven	Trescientos veintisiete
+Three hundred twenty-eight	Trescientos veintiocho
+Three hundred twenty-nine	Trescientos veintinueve
+Three hundred thirty	Trescientos treinta
+Three hundred thirty-one	Trescientos treinta y uno
+Three hundred thirty-two	Trescientos treinta y dos
+Three hundred thirty-three	Trescientos treinta y tres
+Three hundred thirty-four	Trescientos treinta y cuatro
+Three hundred thirty-five	Trescientos treinta y cinco
+Three hundred thirty-six	Trescientos treinta y seis
+Three hundred thirty-seven	Trescientos treinta y siete
+Three hundred thirty-eight	Trescientos treinta y ocho
+Three hundred thirty-nine	Trescientos treinta y nueve
+Three hundred forty	Trescientos cuarenta
+Three hundred forty-one	Trescientos cuarenta y uno
+Three hundred forty-two	Trescientos cuarenta y dos
+Three hundred forty-three	Trescientos cuarenta y tres
+Three hundred forty-four	Trescientos cuarenta y cuatro
+Three hundred forty-five	Trescientos cuarenta y cinco
+Three hundred forty-six	Trescientos cuarenta y seis
+Three hundred forty-seven	Trescientos cuarenta y siete
+Three hundred forty-eight	Trescientos cuarenta y ocho
+Three hundred forty-nine	Trescientos cuarenta y nueve
+Three hundred fifty	Trescientos cincuenta
+Three hundred fifty-one	Trescientos cincuenta y uno
+Three hundred fifty-two	Trescientos cincuenta y dos
+Three hundred fifty-three	Trescientos cincuenta y tres
+Three hundred fifty-four	Trescientos cincuenta y cuatro
+Three hundred fifty-five	Trescientos cincuenta y cinco
+Three hundred fifty-six	Trescientos cincuenta y seis
+Three hundred fifty-seven	Trescientos cincuenta y siete
+Three hundred fifty-eight	Trescientos cincuenta y ocho
+Three hundred fifty-nine	Trescientos cincuenta y nueve
+Three hundred sixty	Trescientos sesenta
+Three hundred sixty-one	Trescientos sesenta y uno
+Three hundred sixty-two	Trescientos sesenta y dos
+Three hundred sixty-three	Trescientos sesenta y tres
+Three hundred sixty-four	Trescientos sesenta y cuatro
+Three hundred sixty-five	Trescientos sesenta y cinco
+Three hundred sixty-six	Trescientos sesenta y seis
+Three hundred sixty-seven	Trescientos sesenta y siete
+Three hundred sixty-eight	Trescientos sesenta y ocho
+Three hundred sixty-nine	Trescientos sesenta y nueve
+Three hundred seventy	Trescientos setenta
+Three hundred seventy-one	Trescientos setenta y uno
+Three hundred seventy-two	Trescientos setenta y dos
+Three hundred seventy-three	Trescientos setenta y tres
+Three hundred seventy-four	Trescientos setenta y cuatro
+Three hundred seventy-five	Trescientos setenta y cinco
+Three hundred seventy-six	Trescientos setenta y seis
+Three hundred seventy-seven	Trescientos setenta y siete
+Three hundred seventy-eight	Trescientos setenta y ocho
+Three hundred seventy-nine	Trescientos setenta y nueve
+Three hundred eighty	Trescientos ochenta
+Three hundred eighty-one	Trescientos ochenta y uno
+Three hundred eighty-two	Trescientos ochenta y dos
+Three hundred eighty-three	Trescientos ochenta y tres
+Three hundred eighty-four	Trescientos ochenta y cuatro
+Three hundred eighty-five	Trescientos ochenta y cinco
+Three hundred eighty-six	Trescientos ochenta y seis
+Three hundred eighty-seven	Trescientos ochenta y siete
+Three hundred eighty-eight	Trescientos ochenta y ocho
+Three hundred eighty-nine	Trescientos ochenta y nueve
+Three hundred ninety	Trescientos noventa
+Three hundred ninety-one	Trescientos noventa y uno
+Three hundred ninety-two	Trescientos noventa y dos
+Three hundred ninety-three	Trescientos noventa y tres
+Three hundred ninety-four	Trescientos noventa y cuatro
+Three hundred ninety-five	Trescientos noventa y cinco
+Three hundred ninety-six	Trescientos noventa y seis
+Three hundred ninety-seven	Trescientos noventa y siete
+Three hundred ninety-eight	Trescientos noventa y ocho
+Three hundred ninety-nine	Trescientos noventa y nueve
+Four hundred	Cuatrocientos
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8; 
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

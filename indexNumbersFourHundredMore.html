@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+Four hundred	Cuatrocientos
+Four hundred one	Cuatrocientos uno
+Four hundred two	Cuatrocientos dos
+Four hundred three	Cuatrocientos tres
+Four hundred four	Cuatrocientos cuatro
+Four hundred five	Cuatrocientos cinco
+Four hundred six	Cuatrocientos seis
+Four hundred seven	Cuatrocientos siete
+Four hundred eight	Cuatrocientos ocho
+Four hundred nine	Cuatrocientos nueve
+Four hundred ten	Cuatrocientos diez
+Four hundred eleven	Cuatrocientos once
+Four hundred twelve	Cuatrocientos doce
+Four hundred thirteen	Cuatrocientos trece
+Four hundred fourteen	Cuatrocientos catorce
+Four hundred fifteen	Cuatrocientos quince
+Four hundred sixteen	Cuatrocientos dieciséis
+Four hundred seventeen	Cuatrocientos diecisiete
+Four hundred eighteen	Cuatrocientos dieciocho
+Four hundred nineteen	Cuatrocientos diecinueve
+Four hundred twenty	Cuatrocientos veinte
+Four hundred twenty-one	Cuatrocientos veintiuno
+Four hundred twenty-two	Cuatrocientos veintidós
+Four hundred twenty-three	Cuatrocientos veintitrés
+Four hundred twenty-four	Cuatrocientos veinticuatro
+Four hundred twenty-five	Cuatrocientos veinticinco
+Four hundred twenty-six	Cuatrocientos veintiséis
+Four hundred twenty-seven	Cuatrocientos veintisiete
+Four hundred twenty-eight	Cuatrocientos veintiocho
+Four hundred twenty-nine	Cuatrocientos veintinueve
+Four hundred thirty	Cuatrocientos treinta
+Four hundred thirty-one	Cuatrocientos treinta y uno
+Four hundred thirty-two	Cuatrocientos treinta y dos
+Four hundred thirty-three	Cuatrocientos treinta y tres
+Four hundred thirty-four	Cuatrocientos treinta y cuatro
+Four hundred thirty-five	Cuatrocientos treinta y cinco
+Four hundred thirty-six	Cuatrocientos treinta y seis
+Four hundred thirty-seven	Cuatrocientos treinta y siete
+Four hundred thirty-eight	Cuatrocientos treinta y ocho
+Four hundred thirty-nine	Cuatrocientos treinta y nueve
+Four hundred forty	Cuatrocientos cuarenta
+Four hundred forty-one	Cuatrocientos cuarenta y uno
+Four hundred forty-two	Cuatrocientos cuarenta y dos
+Four hundred forty-three	Cuatrocientos cuarenta y tres
+Four hundred forty-four	Cuatrocientos cuarenta y cuatro
+Four hundred forty-five	Cuatrocientos cuarenta y cinco
+Four hundred forty-six	Cuatrocientos cuarenta y seis
+Four hundred forty-seven	Cuatrocientos cuarenta y siete
+Four hundred forty-eight	Cuatrocientos cuarenta y ocho
+Four hundred forty-nine	Cuatrocientos cuarenta y nueve
+Four hundred fifty	Cuatrocientos cincuenta
+Four hundred fifty-one	Cuatrocientos cincuenta y uno
+Four hundred fifty-two	Cuatrocientos cincuenta y dos
+Four hundred fifty-three	Cuatrocientos cincuenta y tres
+Four hundred fifty-four	Cuatrocientos cincuenta y cuatro
+Four hundred fifty-five	Cuatrocientos cincuenta y cinco
+Four hundred fifty-six	Cuatrocientos cincuenta y seis
+Four hundred fifty-seven	Cuatrocientos cincuenta y siete
+Four hundred fifty-eight	Cuatrocientos cincuenta y ocho
+Four hundred fifty-nine	Cuatrocientos cincuenta y nueve
+Four hundred sixty	Cuatrocientos sesenta
+Four hundred sixty-one	Cuatrocientos sesenta y uno
+Four hundred sixty-two	Cuatrocientos sesenta y dos
+Four hundred sixty-three	Cuatrocientos sesenta y tres
+Four hundred sixty-four	Cuatrocientos sesenta y cuatro
+Four hundred sixty-five	Cuatrocientos sesenta y cinco
+Four hundred sixty-six	Cuatrocientos sesenta y seis
+Four hundred sixty-seven	Cuatrocientos sesenta y siete
+Four hundred sixty-eight	Cuatrocientos sesenta y ocho
+Four hundred sixty-nine	Cuatrocientos sesenta y nueve
+Four hundred seventy	Cuatrocientos setenta
+Four hundred seventy-one	Cuatrocientos setenta y uno
+Four hundred seventy-two	Cuatrocientos setenta y dos
+Four hundred seventy-three	Cuatrocientos setenta y tres
+Four hundred seventy-four	Cuatrocientos setenta y cuatro
+Four hundred seventy-five	Cuatrocientos setenta y cinco
+Four hundred seventy-six	Cuatrocientos setenta y seis
+Four hundred seventy-seven	Cuatrocientos setenta y siete
+Four hundred seventy-eight	Cuatrocientos setenta y ocho
+Four hundred seventy-nine	Cuatrocientos setenta y nueve
+Four hundred eighty	Cuatrocientos ochenta
+Four hundred eighty-one	Cuatrocientos ochenta y uno
+Four hundred eighty-two	Cuatrocientos ochenta y dos
+Four hundred eighty-three	Cuatrocientos ochenta y tres
+Four hundred eighty-four	Cuatrocientos ochenta y cuatro
+Four hundred eighty-five	Cuatrocientos ochenta y cinco
+Four hundred eighty-six	Cuatrocientos ochenta y seis
+Four hundred eighty-seven	Cuatrocientos ochenta y siete
+Four hundred eighty-eight	Cuatrocientos ochenta y ocho
+Four hundred eighty-nine	Cuatrocientos ochenta y nueve
+Four hundred ninety	Cuatrocientos noventa
+Four hundred ninety-one	Cuatrocientos noventa y uno
+Four hundred ninety-two	Cuatrocientos noventa y dos
+Four hundred ninety-three	Cuatrocientos noventa y tres
+Four hundred ninety-four	Cuatrocientos noventa y cuatro
+Four hundred ninety-five	Cuatrocientos noventa y cinco
+Four hundred ninety-six	Cuatrocientos noventa y seis
+Four hundred ninety-seven	Cuatrocientos noventa y siete
+Four hundred ninety-eight	Cuatrocientos noventa y ocho
+Four hundred ninety-nine	Cuatrocientos noventa y nueve
+Five hundred	Quinientos
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8; 
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

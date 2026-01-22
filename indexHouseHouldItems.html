@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+        In the living room, there was a large sofa and two armchairs.	En la sala, había un gran sofá y dos sillones.
+A coffee table stood in front of the sofa with some magazines.	Una mesa de café estaba frente al sofá con algunas revistas.
+The TV and entertainment system were placed on the bookshelves.	La televisión y el sistema de entretenimiento estaban sobre las estanterías.
+Lamps and lighting fixtures created a warm atmosphere.	Las lámparas y las luces creaban un ambiente acogedor.
+The rugs covered the wooden floor, and the curtains blocked the sunlight.	Las alfombras cubrían el suelo de madera y las cortinas bloqueaban la luz del sol.
+Decorative items like paintings, vases, and clocks decorated the walls and shelves.	Objetos decorativos como pinturas, jarrones y relojes decoraban las paredes y estantes.
+In the kitchen, the refrigerator was full of fresh food.	En la cocina, el refrigerador estaba lleno de comida fresca.
+The stove and oven were clean and ready for cooking.	La estufa y el horno estaban limpios y listos para cocinar.
+A microwave and dishwasher made life easier.	Un microondas y un lavavajillas facilitaban la vida.
+The sink was full of clean dishes, and the cabinets held all the utensils.	El fregadero estaba lleno de platos limpios, y los armarios guardaban todos los utensilios.
+Countertops were spacious, with a toaster and coffee maker on top.	Las encimeras eran amplias, con una tostadora y una cafetera encima.
+The kitchen table and chairs were perfect for family meals.	La mesa y las sillas de la cocina eran perfectas para las comidas familiares.
+Cookware like pots and pans hung neatly in the cupboards.	Ollas y sartenes colgaban ordenadamente en los armarios.
+Plates and bowls were stored carefully in the dishware cabinet.	Los platos y cuencos se almacenaban cuidadosamente en el armario de vajilla.
+Food storage containers kept leftovers fresh.	Los recipientes para almacenar alimentos mantenían las sobras frescas.
+The dining room had a large table surrounded by dining chairs.	El comedor tenía una mesa grande rodeada de sillas.
+A sideboard held the tableware, including plates, glasses, and cutlery.	Un aparador guardaba la vajilla, incluyendo platos, vasos y cubiertos.
+The centerpiece was a beautiful arrangement of flowers and candles.	El centro de mesa era un hermoso arreglo de flores y velas.
+In the bedroom, the bed had a comfortable frame and mattress.	En el dormitorio, la cama tenía un marco y colchón cómodos.
+Pillows and bedding made the bed inviting and soft.	Las almohadas y la ropa de cama hacían la cama acogedora y suave.
+Nightstands held lamps and an alarm clock for convenience.	Las mesitas de noche tenían lámparas y un despertador para comodidad.
+The wardrobe and dresser provided ample space for clothes.	El armario y la cómoda ofrecían mucho espacio para la ropa.
+A large mirror hung on the wall, reflecting the light.	Un gran espejo colgaba en la pared, reflejando la luz.
+The laundry basket was full, ready to be taken to the laundry room.	El cesto de la ropa estaba lleno, listo para llevar al lavadero.
+The bathroom had a toilet, sink, and a shower with a curtain.	El baño tenía un inodoro, un lavabo y una ducha con cortina.
+A towel rack held bath towels and hand towels neatly.	Un toallero sostenía toallas de baño y de mano ordenadamente.
+The toothbrush holder and soap dispenser were on the sink.	El porta cepillos y el dispensador de jabón estaban sobre el lavabo.
+The medicine cabinet kept all the necessary items organized.	El botiquín mantenía todos los artículos necesarios organizados.
+The home office had a desk and chair with a computer and printer.	La oficina en casa tenía un escritorio y una silla con una computadora e impresora.
+Bookshelves were filled with books and stationery supplies.	Las estanterías estaban llenas de libros y útiles de papelería.
+A filing cabinet stored important documents safely.	Un archivo guardaba documentos importantes de forma segura.
+The desk lamp provided good lighting for work.	La lámpara de escritorio proporcionaba buena iluminación para el trabajo.
+In the laundry room, a washing machine and dryer stood side by side.	En el lavadero, la lavadora y la secadora estaban una al lado de la otra.
+Laundry detergent and an iron with an ironing board were ready to use.	El detergente y la plancha con tabla de planchar estaban listos para usar.
+Clothes racks and hangers were used to dry and organize clothes.	Los tendederos y perchas se usaban para secar y organizar la ropa.
+The hallway had a coat rack, shoe rack, and a console table.	El pasillo tenía un perchero, un zapatero y una consola.
+A mirror hung above the console table next to the welcome mat.	Un espejo colgaba sobre la consola junto al felpudo de bienvenida.
+Outside, the front yard had a lawn with flower beds and trees.	Afuera, el jardín delantero tenía césped con parterres y árboles.
+A pathway led to the mailbox near the fence and gate.	Un camino conducía al buzón cerca de la cerca y la puerta.
+Outdoor lighting illuminated the porch and steps at night.	La iluminación exterior iluminaba el porche y los escalones por la noche.
+The driveway led to the garage, which stored cars and bicycles.	La entrada conducía al garaje, que guardaba autos y bicicletas.
+A tool bench and storage shelves were organized neatly inside the garage.	Un banco de herramientas y estantes de almacenamiento estaban organizados dentro del garaje.
+In the backyard, patio furniture and a grill were ready for gatherings.	En el patio trasero, los muebles y la parrilla estaban listos para reuniones.
+Garden tools like a shovel and rake were kept in the shed.	Herramientas de jardín como pala y rastrillo se guardaban en el cobertizo.
+A swing and playground equipment made the backyard fun for children.	Un columpio y equipo de juego hacían el patio divertido para los niños.
+A garden hose and watering can were used to care for the plants.	Una manguera y regadera se usaban para cuidar las plantas.
+Outdoor decorations such as statues and fountains added beauty.	Decoraciones exteriores como estatuas y fuentes añadían belleza.
+The roof had tiles and gutters to protect the house from rain.	El techo tenía tejas y canaletas para proteger la casa de la lluvia.
+A chimney rose above the roof, completing the house's design.	Una chimenea sobresalía del techo, completando el diseño de la casa.
+Sofa / Couch	Sofá / Couch
+Armchairs	Sillones
+Coffee Table	Mesa de café
+TV / Entertainment System	Televisión / Sistema de entretenimiento
+Bookshelves	Estanterías
+Lamps / Lighting Fixtures	Lámparas / Luces
+Rugs / Carpets	Alfombras
+Curtains / Blinds	Cortinas / Persianas
+Decorative Items	Objetos decorativos
+Refrigerator	Refrigerador
+Stove / Oven	Estufa / Horno
+Microwave	Microondas
+Dishwasher	Lavavajillas
+Sink	Fregadero
+Cabinets / Cupboards	Armarios
+Countertops	Encimeras
+Toaster	Tostadora
+Coffee Maker	Cafetera
+Kitchen Table / Chairs	Mesa / Sillas de cocina
+Utensils	Utensilios
+Cookware	Ollas y sartenes
+Dishware	Vajilla
+Food Storage Containers	Recipientes para alimentos
+Dining Table	Mesa de comedor
+Dining Chairs	Sillas de comedor
+Sideboard / Buffet	Aparador
+Tableware	Vajilla
+Centerpiece	Centro de mesa
+Bed	Cama
+Pillows / Bedding	Almohadas / Ropa de cama
+Nightstands	Mesitas de noche
+Wardrobe / Closet	Armario
+Dressers / Drawers	Cómodas
+Mirror	Espejo
+Alarm Clock	Despertador
+Laundry Basket	Cesto de ropa
+Toilet	Inodoro
+Shower / Bathtub	Ducha / Bañera
+Towel Rack	Toallero
+Soap Dispenser	Dispensador de jabón
+Medicine Cabinet	Botiquín
+Desk	Escritorio
+Chair	Silla
+Computer / Laptop	Computadora / Portátil
+Printer	Impresora
+Filing Cabinet	Archivo
+Washing Machine	Lavadora
+Dryer	Secadora
+Iron / Ironing Board	Plancha / Tabla de planchar
+Coat Rack / Hooks	Perchero / Ganchos
+Shoe Rack	Zapatero
+Console Table	Consola
+Welcome Mat	Felpudo
+Front Yard / Garden	Jardín delantero
+Lawn / Grass	Césped
+Flower Beds / Plants	Parterres / Plantas
+Trees / Shrubs	Árboles / Arbustos
+Pathway / Walkway	Camino / Sendero
+Mailbox	Buzón
+Outdoor Lighting	Iluminación exterior
+Porch / Steps	Porche / Escalones
+Driveway	Entrada / Camino de vehículos
+Fence / Gate	Cerca / Puerta
+Patio Furniture	Muebles de patio
+Grill / Barbecue	Parrilla / Barbacoa
+Garden Tools	Herramientas de jardín
+Swing / Playground Equipment	Columpio / Equipo de juegos
+Shed / Storage	Cobertizo / Almacén
+Garden Hose	Manguera
+Watering Can	Regadera
+Roof Tiles / Shingles	Tejas
+Gutters	Canaletas
+Chimney	Chimenea
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+              utterance.lang = lang;
+            utterance.rate = 0.8;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

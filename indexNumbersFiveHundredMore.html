@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+Five hundred	Quinientos
+Five hundred one	Quinientos uno
+Five hundred two	Quinientos dos
+Five hundred three	Quinientos tres
+Five hundred four	Quinientos cuatro
+Five hundred five	Quinientos cinco
+Five hundred six	Quinientos seis
+Five hundred seven	Quinientos siete
+Five hundred eight	Quinientos ocho
+Five hundred nine	Quinientos nueve
+Five hundred ten	Quinientos diez
+Five hundred eleven	Quinientos once
+Five hundred twelve	Quinientos doce
+Five hundred thirteen	Quinientos trece
+Five hundred fourteen	Quinientos catorce
+Five hundred fifteen	Quinientos quince
+Five hundred sixteen	Quinientos dieciséis
+Five hundred seventeen	Quinientos diecisiete
+Five hundred eighteen	Quinientos dieciocho
+Five hundred nineteen	Quinientos diecinueve
+Five hundred twenty	Quinientos veinte
+Five hundred twenty-one	Quinientos veintiuno
+Five hundred twenty-two	Quinientos veintidós
+Five hundred twenty-three	Quinientos veintitrés
+Five hundred twenty-four	Quinientos veinticuatro
+Five hundred twenty-five	Quinientos veinticinco
+Five hundred twenty-six	Quinientos veintiséis
+Five hundred twenty-seven	Quinientos veintisiete
+Five hundred twenty-eight	Quinientos veintiocho
+Five hundred twenty-nine	Quinientos veintinueve
+Five hundred thirty	Quinientos treinta
+Five hundred thirty-one	Quinientos treinta y uno
+Five hundred thirty-two	Quinientos treinta y dos
+Five hundred thirty-three	Quinientos treinta y tres
+Five hundred thirty-four	Quinientos treinta y cuatro
+Five hundred thirty-five	Quinientos treinta y cinco
+Five hundred thirty-six	Quinientos treinta y seis
+Five hundred thirty-seven	Quinientos treinta y siete
+Five hundred thirty-eight	Quinientos treinta y ocho
+Five hundred thirty-nine	Quinientos treinta y nueve
+Five hundred forty	Quinientos cuarenta
+Five hundred forty-one	Quinientos cuarenta y uno
+Five hundred forty-two	Quinientos cuarenta y dos
+Five hundred forty-three	Quinientos cuarenta y tres
+Five hundred forty-four	Quinientos cuarenta y cuatro
+Five hundred forty-five	Quinientos cuarenta y cinco
+Five hundred forty-six	Quinientos cuarenta y seis
+Five hundred forty-seven	Quinientos cuarenta y siete
+Five hundred forty-eight	Quinientos cuarenta y ocho
+Five hundred forty-nine	Quinientos cuarenta y nueve
+Five hundred fifty	Quinientos cincuenta
+Five hundred fifty-one	Quinientos cincuenta y uno
+Five hundred fifty-two	Quinientos cincuenta y dos
+Five hundred fifty-three	Quinientos cincuenta y tres
+Five hundred fifty-four	Quinientos cincuenta y cuatro
+Five hundred fifty-five	Quinientos cincuenta y cinco
+Five hundred fifty-six	Quinientos cincuenta y seis
+Five hundred fifty-seven	Quinientos cincuenta y siete
+Five hundred fifty-eight	Quinientos cincuenta y ocho
+Five hundred fifty-nine	Quinientos cincuenta y nueve
+Five hundred sixty	Quinientos sesenta
+Five hundred sixty-one	Quinientos sesenta y uno
+Five hundred sixty-two	Quinientos sesenta y dos
+Five hundred sixty-three	Quinientos sesenta y tres
+Five hundred sixty-four	Quinientos sesenta y cuatro
+Five hundred sixty-five	Quinientos sesenta y cinco
+Five hundred sixty-six	Quinientos sesenta y seis
+Five hundred sixty-seven	Quinientos sesenta y siete
+Five hundred sixty-eight	Quinientos sesenta y ocho
+Five hundred sixty-nine	Quinientos sesenta y nueve
+Five hundred seventy	Quinientos setenta
+Five hundred seventy-one	Quinientos setenta y uno
+Five hundred seventy-two	Quinientos setenta y dos
+Five hundred seventy-three	Quinientos setenta y tres
+Five hundred seventy-four	Quinientos setenta y cuatro
+Five hundred seventy-five	Quinientos setenta y cinco
+Five hundred seventy-six	Quinientos setenta y seis
+Five hundred seventy-seven	Quinientos setenta y siete
+Five hundred seventy-eight	Quinientos setenta y ocho
+Five hundred seventy-nine	Quinientos setenta y nueve
+Five hundred eighty	Quinientos ochenta
+Five hundred eighty-one	Quinientos ochenta y uno
+Five hundred eighty-two	Quinientos ochenta y dos
+Five hundred eighty-three	Quinientos ochenta y tres
+Five hundred eighty-four	Quinientos ochenta y cuatro
+Five hundred eighty-five	Quinientos ochenta y cinco
+Five hundred eighty-six	Quinientos ochenta y seis
+Five hundred eighty-seven	Quinientos ochenta y siete
+Five hundred eighty-eight	Quinientos ochenta y ocho
+Five hundred eighty-nine	Quinientos ochenta y nueve
+Five hundred ninety	Quinientos noventa
+Five hundred ninety-one	Quinientos noventa y uno
+Five hundred ninety-two	Quinientos noventa y dos
+Five hundred ninety-three	Quinientos noventa y tres
+Five hundred ninety-four	Quinientos noventa y cuatro
+Five hundred ninety-five	Quinientos noventa y cinco
+Five hundred ninety-six	Quinientos noventa y seis
+Five hundred ninety-seven	Quinientos noventa y siete
+Five hundred ninety-eight	Quinientos noventa y ocho
+Five hundred ninety-nine	Quinientos noventa y nueve
+Six hundred	Seiscientos
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8; 
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

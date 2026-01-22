@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Translator</title>
+</head>
+<body>
+    <h1>Word Translator</h1>
+    <button id="start">Start Translation</button>
+    <div id="output"></div>
+
+    <script>
+        const wordPairs = `
+              One hundred one	Ciento uno
+One hundred two	Ciento dos
+One hundred three	Ciento tres
+One hundred four	Ciento cuatro
+One hundred five	Ciento cinco
+One hundred six	Ciento seis
+One hundred seven	Ciento siete
+One hundred eight	Ciento ocho
+One hundred nine	Ciento nueve
+One hundred ten	Ciento diez
+One hundred eleven	Ciento once
+One hundred twelve	Ciento doce
+One hundred thirteen	Ciento trece
+One hundred fourteen	Ciento catorce
+One hundred fifteen	Ciento quince
+One hundred sixteen	Ciento dieciséis
+One hundred seventeen	Ciento diecisiete
+One hundred eighteen	Ciento dieciocho
+One hundred nineteen	Ciento diecinueve
+One hundred twenty	Ciento veinte
+One hundred twenty-one	Ciento veintiuno
+One hundred twenty-two	Ciento veintidós
+One hundred twenty-three	Ciento veintitrés
+One hundred twenty-four	Ciento veinticuatro
+One hundred twenty-five	Ciento veinticinco
+One hundred twenty-six	Ciento veintiséis
+One hundred twenty-seven	Ciento veintisiete
+One hundred twenty-eight	Ciento veintiocho
+One hundred twenty-nine	Ciento veintinueve
+One hundred thirty	Ciento treinta
+One hundred thirty-one	Ciento treinta y uno
+One hundred thirty-two	Ciento treinta y dos
+One hundred thirty-three	Ciento treinta y tres
+One hundred thirty-four	Ciento treinta y cuatro
+One hundred thirty-five	Ciento treinta y cinco
+One hundred thirty-six	Ciento treinta y seis
+One hundred thirty-seven	Ciento treinta y siete
+One hundred thirty-eight	Ciento treinta y ocho
+One hundred thirty-nine	Ciento treinta y nueve
+One hundred forty	Ciento cuarenta
+One hundred forty-one	Ciento cuarenta y uno
+One hundred forty-two	Ciento cuarenta y dos
+One hundred forty-three	Ciento cuarenta y tres
+One hundred forty-four	Ciento cuarenta y cuatro
+One hundred forty-five	Ciento cuarenta y cinco
+One hundred forty-six	Ciento cuarenta y seis
+One hundred forty-seven	Ciento cuarenta y siete
+One hundred forty-eight	Ciento cuarenta y ocho
+One hundred forty-nine	Ciento cuarenta y nueve
+One hundred fifty	Ciento cincuenta
+One hundred fifty-one	Ciento cincuenta y uno
+One hundred fifty-two	Ciento cincuenta y dos
+One hundred fifty-three	Ciento cincuenta y tres
+One hundred fifty-four	Ciento cincuenta y cuatro
+One hundred fifty-five	Ciento cincuenta y cinco
+One hundred fifty-six	Ciento cincuenta y seis
+One hundred fifty-seven	Ciento cincuenta y siete
+One hundred fifty-eight	Ciento cincuenta y ocho
+One hundred fifty-nine	Ciento cincuenta y nueve
+One hundred sixty	Ciento sesenta
+One hundred sixty-one	Ciento sesenta y uno
+One hundred sixty-two	Ciento sesenta y dos
+One hundred sixty-three	Ciento sesenta y tres
+One hundred sixty-four	Ciento sesenta y cuatro
+One hundred sixty-five	Ciento sesenta y cinco
+One hundred sixty-six	Ciento sesenta y seis
+One hundred sixty-seven	Ciento sesenta y siete
+One hundred sixty-eight	Ciento sesenta y ocho
+One hundred sixty-nine	Ciento sesenta y nueve
+One hundred seventy	Ciento setenta
+One hundred seventy-one	Ciento setenta y uno
+One hundred seventy-two	Ciento setenta y dos
+One hundred seventy-three	Ciento setenta y tres
+One hundred seventy-four	Ciento setenta y cuatro
+One hundred seventy-five	Ciento setenta y cinco
+One hundred seventy-six	Ciento setenta y seis
+One hundred seventy-seven	Ciento setenta y siete
+One hundred seventy-eight	Ciento setenta y ocho
+One hundred seventy-nine	Ciento setenta y nueve
+One hundred eighty	Ciento ochenta
+One hundred eighty-one	Ciento ochenta y uno
+One hundred eighty-two	Ciento ochenta y dos
+One hundred eighty-three	Ciento ochenta y tres
+One hundred eighty-four	Ciento ochenta y cuatro
+One hundred eighty-five	Ciento ochenta y cinco
+One hundred eighty-six	Ciento ochenta y seis
+One hundred eighty-seven	Ciento ochenta y siete
+One hundred eighty-eight	Ciento ochenta y ocho
+One hundred eighty-nine	Ciento ochenta y nueve
+One hundred ninety	Ciento noventa
+One hundred ninety-one	Ciento noventa y uno
+One hundred ninety-two	Ciento noventa y dos
+One hundred ninety-three	Ciento noventa y tres
+One hundred ninety-four	Ciento noventa y cuatro
+One hundred ninety-five	Ciento noventa y cinco
+One hundred ninety-six	Ciento noventa y seis
+One hundred ninety-seven	Ciento noventa y siete
+One hundred ninety-eight	Ciento noventa y ocho
+One hundred ninety-nine	Ciento noventa y nueve
+Two hundred	Doscientos
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.8; 
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
